@@ -24,7 +24,11 @@ const check = (cond, msg) => (cond ? ok.push(msg) : fail.push(msg));
   page.on("console", (m) => { if (m.type() === "error") errors.push("console: " + m.text()); });
 
   await page.goto(URL, { waitUntil: "networkidle" });
-  await page.waitForTimeout(1200);
+  await page.waitForTimeout(700);
+  if (await page.locator("#firstRunModal.open").count()) {
+    await page.click("#frSkip");
+    await page.waitForTimeout(200);
+  }
 
   /* 1 — icon hydration ---------------------------------------------------- */
   const icons = await page.evaluate(() => {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%235B8CFF'/%3E%3Cpath d='M8 22V10l12 6-12 6z' fill='%23fff'/%3E%3C/svg%3E" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2355e5c5'/%3E%3Cpath d='M8 22V10l12 6-12 6z' fill='%230a0d0f'/%3E%3C/svg%3E" />
     <title>AiFilmora — AI Video Editor Suite</title>
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/app.css" />
@@ -20,7 +20,7 @@
           <div class="brand-mark" aria-hidden="true"></div>
           <span>
             AiFilmora
-            <small>Windows AI Video Suite</small>
+            <small>Filmora-inspired editor</small>
           </span>
         </div>
         <nav class="filmora-menu" aria-label="Main menu">
@@ -492,7 +492,7 @@
             <div class="spacer"></div>
             <span style="font-size:11px;color:var(--muted)">Seq <span id="seqDuration">00:00:00</span></span>
             <button class="transport-btn" id="btnFullscreen" title="Fullscreen preview (F)" aria-label="Fullscreen">⛶</button>
-            <button class="btn primary" id="btnExport">Export</button>
+              <button class="btn primary export-pill" id="btnExport">Export</button>
           </div>
         </main>
 
@@ -1486,19 +1486,20 @@
         <section class="timeline-panel" id="timelinePanel">
           <div class="tl-toolbar">
             <strong style="font-size:12px;margin-right:8px">Timeline</strong>
-            <button class="btn sm" id="btnUndo" title="Ctrl+Z">Undo</button>
-            <button class="btn sm" id="btnRedo" title="Ctrl+Y">Redo</button>
+            <button class="btn sm" id="btnUndo" title="Undo (Ctrl+Z)">Undo</button>
+            <button class="btn sm" id="btnRedo" title="Redo (Ctrl+Y)">Redo</button>
             <button class="btn sm" id="btnMuteClip" aria-pressed="false" title="Mute / unmute selected clip">Mute Clip</button>
             <button class="btn sm" id="btnTrimStart" title="Trim clip start to playhead">Trim Start</button>
             <button class="btn sm" id="btnTrimEnd" title="Trim clip end to playhead">Trim End</button>
-            <button class="btn sm" id="btnSplit">Split <span class="help-kbd">S</span></button>
+            <button class="btn sm" id="btnSplit" title="Split at playhead (S)">Split</button>
             <button class="btn sm" id="btnDetachAudio" title="Split audio to A1">Detach Audio</button>
             <button class="btn sm accent" id="btnBeatSync" title="Detect beats on the selected audio clip">Beat Sync</button>
             <button class="btn sm" id="btnBeatOptions" title="Filmora Beat Options: highlight frequency / offset">Beat Options</button>
             <button class="btn sm" id="btnClearBeats" title="Remove beat markers from selected clip">Clear Beats</button>
             <button class="btn sm danger" id="btnDeleteClip">Delete</button>
             <button class="btn sm" id="btnCrop" title="Crop selected clip on the preview">Crop</button>
-            <button class="btn sm active" id="btnSnap" aria-pressed="true">Snap</button>
+            <button class="btn sm" id="btnMarker" title="Add marker at playhead">Marker</button>
+            <button class="btn sm active" id="btnSnap" aria-pressed="true" title="Magnetic snap (Filmora)">Snap</button>
             <div class="spacer"></div>
             <span style="font-size:11px;color:var(--muted)" title="Drag the ruler to zoom · click the ruler to seek · Ctrl+wheel also zooms · double-click slider to reset">Zoom</span>
             <label class="sr-only" for="tlZoom">Timeline zoom</label>
@@ -1540,12 +1541,19 @@
     <!-- First-run chooser -->
     <div class="modal-backdrop" id="firstRunModal" role="dialog" aria-modal="true" aria-label="Welcome">
       <div class="modal">
-        <h3>Welcome to AiFilmora</h3>
-        <p>Choose how you want to start. You can change this anytime.</p>
+        <h3>Create Project</h3>
+        <p>Filmora-style start. Pick an aspect ratio, then open a blank timeline or the demo cut.</p>
+        <div class="fr-aspects">
+          <span>Aspect ratio:</span>
+          <button type="button" class="fr-chip active" data-fr-aspect="16:9" title="Widescreen">16:9</button>
+          <button type="button" class="fr-chip" data-fr-aspect="9:16" title="Portrait / Shorts">9:16</button>
+          <button type="button" class="fr-chip" data-fr-aspect="1:1" title="Square">1:1</button>
+          <button type="button" class="fr-chip" data-fr-aspect="21:9" title="Cinema">21:9</button>
+        </div>
         <div class="preset-grid">
           <button type="button" class="preset" id="frEmpty">
-            <strong>Empty project</strong>
-            <span>Start clean and import media</span>
+            <strong>+ New Project</strong>
+            <span>Empty timeline — import media and edit</span>
           </button>
           <button type="button" class="preset" id="frDemo">
             <strong>Demo cut</strong>

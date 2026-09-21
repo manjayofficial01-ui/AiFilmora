@@ -20,9 +20,13 @@ http.createServer((req, res) => {
     const file = path.join(ROOT, ...p.split("/"));
     if (!file.startsWith(ROOT)) { res.writeHead(403); return res.end(); }
     const data = fs.readFileSync(file);
-    res.writeHead(200, { "Content-Type": MIME[path.extname(file).toLowerCase()] || "application/octet-stream" });
+    res.writeHead(200, {
+      "Content-Type": MIME[path.extname(file).toLowerCase()] || "application/octet-stream",
+      "Access-Control-Allow-Origin": "*",
+      "Cache-Control": "no-cache",
+    });
     res.end(data);
   } catch {
     res.writeHead(404); res.end("not found");
   }
-}).listen(8765, "127.0.0.1", () => console.log("serving on http://127.0.0.1:8765"));
+}).listen(8765, "0.0.0.0", () => console.log("serving on http://0.0.0.0:8765"));

@@ -815,8 +815,8 @@ function escapeAttr(s) {
   return escapeHtml(s).replace(/'/g, "&#39;");
 }
 
-function toast(msg) {
-  window.dispatchEvent(new CustomEvent("aifimora:toast", { detail: { msg } }));
+function toast(msg, kind) {
+  window.dispatchEvent(new CustomEvent("aifimora:toast", { detail: { msg, kind } }));
 }
 
 export { toast, escapeHtml, formatDur, drawThumb };

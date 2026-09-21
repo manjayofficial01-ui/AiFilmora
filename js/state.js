@@ -1167,6 +1167,7 @@ function sanitizeProject(data) {
           duration: Math.max(0.1, Number(m.duration) || 4),
           color: m.color || "#3d6fd4",
           generated: !!m.generated,
+          synthetic: !!m.synthetic || (!m.url && !m.fileType && !m.generated),
           thumb: m.thumb || null,
           url: typeof m.url === "string" ? m.url : null,
           fileType: m.fileType || null,

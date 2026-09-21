@@ -341,14 +341,16 @@ function bindTimelineChrome() {
     renderTimeline();
   });
 
-  document.getElementById("btnSplit")?.addEventListener("click", () => {
+  const doSplit = () => {
     const t = playerRef?.getTime() || 0;
     const n = store.splitAtPlayhead(t);
     if (n > 0) toast(n > 1 ? `Split ${n} selected clips` : "Split selected clip", "ok");
     else toast(store._lastSplitReason || "Nothing to split at playhead");
-  });
+  };
+  document.getElementById("btnSplit")?.addEventListener("click", doSplit);
+  window.addEventListener("aifimora:split", doSplit);
 
-  document.getElementById("btnTrimStart")?.addEventListener("click", () => {
+  const doTrimStart = () => {
     const id = store.get().selectedClipId;
     if (!id) return toast("Select a clip first");
     const t = playerRef?.getTime() || 0;
@@ -356,9 +358,8 @@ function bindTimelineChrome() {
     if (!res.ok) return toast(res.reason, "err");
     toast("Trimmed start to playhead", "ok");
     window.dispatchEvent(new CustomEvent("aifimora:timeline-dirty"));
-  });
-
-  document.getElementById("btnTrimEnd")?.addEventListener("click", () => {
+  };
+  const doTrimEnd = () => {
     const id = store.get().selectedClipId;
     if (!id) return toast("Select a clip first");
     const t = playerRef?.getTime() || 0;
@@ -366,23 +367,32 @@ function bindTimelineChrome() {
     if (!res.ok) return toast(res.reason, "err");
     toast("Trimmed end to playhead", "ok");
     window.dispatchEvent(new CustomEvent("aifimora:timeline-dirty"));
-  });
-
-  document.getElementById("btnDeleteClip")?.addEventListener("click", () => {
+  };
+  const doDelete = () => {
     const ids = store.selectedClipIdList();
     if (!ids.length) return toast("Select a clip first — or drag a marquee over clips");
     const res = store.removeClips(ids);
     toast(res.removed > 1 ? `${res.removed} clips removed` : "Clip removed");
-  });
+  };
+  document.getElementById("btnTrimStart")?.addEventListener("click", doTrimStart);
+  document.getElementById("btnTrimEnd")?.addEventListener("click", doTrimEnd);
+  document.getElementById("btnDeleteClip")?.addEventListener("click", doDelete);
+  window.addEventListener("aifimora:trim-start", doTrimStart);
+  window.addEventListener("aifimora:trim-end", doTrimEnd);
+  window.addEventListener("aifimora:delete-clip", doDelete);
 
-  document.getElementById("btnUndo")?.addEventListener("click", () => {
+  const doUndo = () => {
     const label = store.undo();
     toast(label ? `Undo: ${label}` : "Nothing to undo");
-  });
-  document.getElementById("btnRedo")?.addEventListener("click", () => {
+  };
+  const doRedo = () => {
     const label = store.redo();
     toast(label ? `Redo: ${label}` : "Nothing to redo");
-  });
+  };
+  document.getElementById("btnUndo")?.addEventListener("click", doUndo);
+  document.getElementById("btnRedo")?.addEventListener("click", doRedo);
+  window.addEventListener("aifimora:undo", doUndo);
+  window.addEventListener("aifimora:redo", doRedo);
 
   const syncUndoUI = () => {
     const u = document.getElementById("btnUndo");
@@ -941,6 +951,12 @@ function buildClipEl(clip, totalWidth) {
     e.stopPropagation();
     e.preventDefault();
     const handle = e.target.dataset?.handle;
+    // Filmora: clicking a clip parks the playhead at the click (so Split / Trim hit the right frame).
+    if (!handle && !e.target.closest(".tl-vol")) {
+      const rect = el.getBoundingClientRect();
+      const t = clip.start + Math.max(0, Math.min(clip.duration, ((e.clientX - rect.left) / Math.max(1, rect.width)) * clip.duration));
+      playerRef?.seek(t);
+    }
     // Multi-select: Ctrl/Cmd toggles membership; plain click on an
     // already-grouped clip keeps the group for a group-move.
     if (e.ctrlKey || e.metaKey) {

@@ -34,8 +34,8 @@ const TAB_ICONS = {
 const TAB_TITLES = {
   media: "Media", assets: "Installed stock + asset packs", audio: "Audio effects",
   textpresets: "Text presets", transitions: "Transitions", effects: "Effects & AI tools",
-  filters: "LUTs & color grades", shapes: "Stickers & shapes", templates: "Project templates",
-  tools: "AI tools",
+  filters: "LUTs & color grades", shapes: "Stickers & shapes",
+  templates: "Project templates", tools: "AI tools",
 };
 
 /* ---------------- helpers ---------------------------------------------------------- */

@@ -87,11 +87,15 @@ textarea:focus-visible,
 }
 
 .brand-mark {
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
-  background: linear-gradient(135deg, var(--accent), var(--gen));
-  box-shadow: 0 0 12px rgba(91, 140, 255, 0.45);
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #2de0c5 0%, #3ddcff 48%, #55e5c5 100%);
+  clip-path: polygon(50% 6%, 94% 50%, 50% 94%, 6% 50%);
+  box-shadow: 0 0 14px rgba(85, 229, 197, 0.5);
+}
+.brand span small {
+  display: none;
 }
 
 .brand span small {
@@ -715,7 +719,7 @@ input::placeholder {
   position: absolute;
   pointer-events: auto;
   cursor: move;
-  border: 1.5px dashed rgba(91, 140, 255, 0.85);
+  border: 1.5px dashed color-mix(in srgb, var(--accent) 85%, transparent);
   border-radius: 4px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.35);
   display: flex;
@@ -762,7 +766,7 @@ input::placeholder {
 }
 .canvas-edit-text[contenteditable="true"] {
   cursor: text;
-  background: rgba(91, 140, 255, 0.12);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
   border-radius: 2px;
 }
 /* 8 resize handles */
@@ -834,7 +838,7 @@ input::placeholder {
 }
 .badge.ai {
   color: var(--accent-strong);
-  border-color: rgba(91, 140, 255, 0.45);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
 }
 
 .transport {
@@ -1163,7 +1167,7 @@ input::placeholder {
 .msg.user {
   align-self: flex-end;
   background: var(--accent-soft);
-  border: 1px solid rgba(91, 140, 255, 0.3);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
 }
 .msg.bot {
   align-self: stretch;
@@ -1305,7 +1309,7 @@ input::placeholder {
 }
 .t-line.selected {
   background: var(--accent-soft);
-  border-color: rgba(91, 140, 255, 0.35);
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
 }
 .t-line .t {
   font-family: var(--mono);
@@ -1633,6 +1637,58 @@ input::placeholder {
 .modal-backdrop.wide .modal {
   width: min(760px, calc(100vw - 32px));
 }
+
+/* Filmora start page — aspect chips + New Project gradient card */
+#firstRunModal .modal {
+  width: min(640px, calc(100vw - 32px));
+}
+.fr-aspects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 0 0 14px;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.fr-aspects .fr-chip {
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--stroke-1);
+  background: var(--surface-1);
+  color: var(--ink-body);
+  font-weight: 600;
+  font-size: 12px;
+}
+.fr-aspects .fr-chip:hover { border-color: var(--accent); color: var(--ink-strong); }
+.fr-aspects .fr-chip.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+#frEmpty.preset {
+  background: linear-gradient(135deg, #2de0c5 0%, #3ddcff 55%, #55e5c5 100%);
+  border-color: transparent;
+  color: #0a0d0f;
+  min-height: 92px;
+}
+#frEmpty.preset strong { color: #0a0d0f; font-size: 16px; }
+#frEmpty.preset span { color: rgba(10, 13, 15, 0.72); }
+#frEmpty.preset:hover { filter: brightness(1.05); }
+.split-grid { display: grid; gap: 8px; }
+.split-card .template-ico { font-size: 16px; }
+
+.tl-toolbar .btn.sm {
+  min-height: 24px;
+  padding: 3px 8px;
+}
+.tl-toolbar .tl-tool {
+  gap: 4px;
+}
+.tl-toolbar .tl-tool .ico svg {
+  width: 13px;
+  height: 13px;
+}
 .settings-body {
   display: grid;
   grid-template-columns: 180px 1fr;
@@ -1813,8 +1869,8 @@ input::placeholder {
 .media-select-wrap { position: relative; }
 .media-marquee {
   position: absolute; z-index: 5; pointer-events: none;
-  border: 1px solid var(--accent); background: rgba(91,140,255,0.18);
-  box-shadow: 0 0 0 1px rgba(91,140,255,0.35);
+  border: 1px solid var(--accent); background: color-mix(in srgb, var(--accent) 18%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 /* ============================================================
@@ -2387,6 +2443,10 @@ input[type="range"]:disabled {
 .tb-ico:active {
   background: var(--surface-3);
 }
+.tb-ico:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
 
 /* Quick-action icon toolbar in the titlebar. */
 .tb-tools {
@@ -2406,12 +2466,21 @@ input[type="range"]:disabled {
   flex: 0 0 auto;
 }
 
-.export-pill {
+.export-pill,
+.btn.primary.export-pill {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   min-height: var(--ctl-h);
-  padding: 0 10px;
+  padding: 0 14px;
+  background: linear-gradient(180deg, #6ff0d4, #55e5c5) !important;
+  border-color: #3dd4b5 !important;
+  color: #0a0d0f !important;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 11px;
+  box-shadow: 0 2px 10px rgba(85, 229, 197, 0.28);
 }
 .export-pill .ico svg {
   width: 14px;
@@ -2493,7 +2562,7 @@ input[type="range"]:disabled {
 :root[data-theme="dark"] body {
   background:
     radial-gradient(1200px 600px at 20% -10%, rgba(61, 220, 255, 0.05), transparent 60%),
-    radial-gradient(900px 500px at 100% 0%, rgba(91, 140, 255, 0.05), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(85, 229, 197, 0.06), transparent 55%),
     var(--bg);
 }
 :root[data-theme="dark"] .panel {
@@ -2504,7 +2573,11 @@ input[type="range"]:disabled {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.07));
 }
 :root[data-theme="dark"] .btn.primary {
-  box-shadow: 0 2px 10px rgba(91, 140, 255, 0.28);
+  box-shadow: 0 2px 10px var(--accent-glow);
+}
+:root[data-theme="dark"] .export-pill,
+:root[data-theme="dark"] .btn.primary.export-pill {
+  box-shadow: 0 2px 12px rgba(85, 229, 197, 0.35);
 }
 
 /* Thinner, unobtrusive scrollbars everywhere in dark mode. */
