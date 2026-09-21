@@ -42,6 +42,7 @@ import {
 import { hydrateIcons } from "./icons.js";
 import { initLibraryWorkspace } from "./library-workspace.js";
 import { initMediaMenu } from "./media-menu.js";
+import { initFilmoraParity, renderSourceMonitor as paintSource } from "./filmora-parity.js";
 
 function $(sel) {
   return document.querySelector(sel);
@@ -60,7 +61,7 @@ function toast(msg, kind) {
   setTimeout(() => el.remove(), 2800);
 }
 
-window.addEventListener("aifimora:toast", (e) => toast(e.detail.msg));
+window.addEventListener("aifimora:toast", (e) => toast(e.detail.msg, e.detail.kind));
 
 function bindTabs() {
   document.querySelectorAll("[data-sidebar]").forEach((btn) => {
@@ -250,7 +251,7 @@ function bindFilmoraMenus() {
     "export-srt": () => window.dispatchEvent(new CustomEvent("aifimora:export-srt")),
     "export-chapters": () => window.dispatchEvent(new CustomEvent("aifimora:export-chapters")),
     thumbnail: () => window.dispatchEvent(new CustomEvent("aifimora:ai-action", { detail: { id: "thumbnail" } })),
-    about: () => toast("AiFilmora 2.2.1 — Toolbar order · ruler zoom · drag auto-scroll · wrapping tabs · " + (window.__aifimoraStore?.get()?.clips?.length ?? 0) + " clips in project"),
+    about: () => toast("AiFilmora 2.2.2 — Filmora cyan theme · Split Screen · working Source monitor · " + (window.__aifimoraStore?.get()?.clips?.length ?? 0) + " clips in project"),
     docs: () => toast("See research/FILMORA-INSPIRED-REDESIGN.md"),
     "release-notes": () => document.getElementById("releaseNotesModal")?.classList.add("open"),
   };
@@ -341,19 +342,7 @@ function bindPreviewTabs() {
 }
 
 function renderSourceMonitor(canvas) {
-  const ctx = canvas.getContext("2d");
-  const w = canvas.width, h = canvas.height;
-  ctx.fillStyle = "#0b0d10";
-  ctx.fillRect(0, 0, w, h);
-  const sel = store.get().selectedMediaId || store.get().selectedMediaIds?.[0];
-  const m = sel ? store.get().media.find((x) => x.id === sel) : null;
-  ctx.fillStyle = "#aab2bd";
-  ctx.font = "600 18px Segoe UI, sans-serif";
-  ctx.textAlign = "center";
-  ctx.fillText(m ? `Source · ${m.name}` : "Source · select a media item", w / 2, h / 2 - 8);
-  ctx.fillStyle = "#6c7585";
-  ctx.font = "12px Segoe UI";
-  ctx.fillText("(double-click a media thumbnail to load it in Source)", w / 2, h / 2 + 18);
+  paintSource(canvas);
 }
 
 function bindPreviewDropdowns() {
@@ -438,27 +427,21 @@ function bindProjectInfo() {
 function paintThumb() {
   const c = document.getElementById("piThumb");
   if (!c) return;
-  // Re-render program monitor into the small thumb canvas
   const src = document.getElementById("previewCanvas");
   if (!src) return;
   const ctx = c.getContext("2d");
-  ctx.fillStyle = "#0e1116";
+  ctx.fillStyle = "#0a0d0f";
   ctx.fillRect(0, 0, c.width, c.height);
-  // Just draw a labelled tile — mirrors the program monitor size
-  const s = store.get();
-  ctx.fillStyle = "#aab2bd";
-  ctx.font = "600 11px Segoe UI, sans-serif";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText(s.name || "Untitled", c.width / 2, c.height / 2 - 4);
-  ctx.fillStyle = "#6c7585";
-  ctx.font = "10px Segoe UI";
-  ctx.fillText(`${s.width || 1920}×${s.height || 1080} · ${s.fps || 30}fps`, c.width / 2, c.height / 2 + 12);
-  // AI watermark (Filmora-style)
-  ctx.fillStyle = "rgba(91,140,255,0.65)";
-  ctx.font = "700 10px Segoe UI";
-  ctx.textAlign = "right";
-  ctx.fillText("AI", c.width - 6, c.height - 8);
+  try {
+    if (src.width && src.height) ctx.drawImage(src, 0, 0, c.width, c.height);
+  } catch {
+    const s = store.get();
+    ctx.fillStyle = "#c3cad0";
+    ctx.font = "600 11px Segoe UI, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(s.name || "Untitled", c.width / 2, c.height / 2);
+  }
 }
 
 function bindImportBtn() {
@@ -663,6 +646,7 @@ function main() {
   initCreativeTools();
   initLibraryWorkspace();
   initMediaMenu();
+  initFilmoraParity();
 
   // Apply persisted preferences (theme + master volume) at boot
   settings.applyTheme();
@@ -721,8 +705,8 @@ function main() {
   // covering the timeline during automated checks / first paint).
   console.info(
     "%cAiFilmora%c Windows AI video editor suite",
-    "background:#5b8cff;color:#fff;padding:2px 6px;border-radius:3px;font-weight:700",
-    "color:#00d4a0"
+    "background:#55e5c5;color:#0a0d0f;padding:2px 6px;border-radius:3px;font-weight:700",
+    "color:#45f3bf"
   );
 }
 

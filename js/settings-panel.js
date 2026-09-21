@@ -115,7 +115,7 @@ export function initSettingsPanel() {
       // Filmora-derived theme presets (from assets/Skin/filmora_{dark,light}.txt)
       const filmoraThemes = window.__aifimoraThemePresets?.() || [];
       const themePresets = [
-        { id: "dark", label: "Dark (default)", desc: "AiFilmora's blue-accent dark mode.", swatches: ["#0b0d10", "#12151a", "#5b8cff", "#00d4a0"] },
+        { id: "dark", label: "Dark (default)", desc: "Filmora-inspired cyan accent on near-black panels.", swatches: ["#0b0d10", "#14181c", "#55e5c5", "#45f3bf"] },
         ...filmoraThemes,
       ];
       p.appendChild(field("Theme", el("div", { class: "theme-preset-grid" }, themePresets.map((t) => {

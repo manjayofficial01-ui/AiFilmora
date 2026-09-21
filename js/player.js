@@ -408,7 +408,7 @@ export function drawFrame(ctx, w, h, time, opts = {}) {
     ctx.strokeStyle = "rgba(255,255,255,0.18)";
     ctx.strokeRect(w * 0.035, h * 0.035, w * 0.93, h * 0.93);
     // title-safe ~90%
-    ctx.strokeStyle = "rgba(91,140,255,0.35)";
+    ctx.strokeStyle = "rgba(85,229,197,0.4)";
     ctx.strokeRect(w * 0.05, h * 0.05, w * 0.9, h * 0.9);
     ctx.setLineDash([]);
     ctx.fillStyle = "rgba(255,255,255,0.35)";
@@ -481,7 +481,7 @@ function hexToRgb(hex) {
 /** Visual split-screen chrome for the current clip (layout guide + inset). */
 function applySplitScreen(ctx, w, h, mode, clip, localT) {
   ctx.save();
-  ctx.strokeStyle = "rgba(91,140,255,0.55)";
+  ctx.strokeStyle = "rgba(85,229,197,0.55)";
   ctx.lineWidth = 2;
   ctx.setLineDash([8, 6]);
   if (mode === "side") {
@@ -490,7 +490,7 @@ function applySplitScreen(ctx, w, h, mode, clip, localT) {
     const pw = w * 0.28;
     const ph = h * 0.28;
     ctx.strokeRect(w - pw - 16, h - ph - 16, pw, ph);
-    ctx.fillStyle = "rgba(91,140,255,0.08)";
+    ctx.fillStyle = "rgba(85,229,197,0.08)";
     ctx.fillRect(w - pw - 16, h - ph - 16, pw, ph);
   } else if (mode === "grid4") {
     ctx.strokeRect(w / 2 - 1, 4, 2, h - 8);
@@ -503,7 +503,7 @@ function applySplitScreen(ctx, w, h, mode, clip, localT) {
 function drawEmpty(ctx, w, h, time) {
   ctx.fillStyle = "rgba(255,255,255,0.04)";
   ctx.fillRect(0, 0, w, h);
-  ctx.strokeStyle = "rgba(91,140,255,0.35)";
+  ctx.strokeStyle = "rgba(85,229,197,0.4)";
   ctx.lineWidth = 1;
   ctx.strokeRect(w * 0.2, h * 0.28, w * 0.6, h * 0.44);
   ctx.fillStyle = "#6b7589";
@@ -671,7 +671,7 @@ function drawClip(ctx, w, h, time, clip, isBase) {
   }
   // Offline badge for missing files (blob died + no IDB bytes). Synthetic
   // demo placeholders never had a file, so they are not "missing".
-  if ((media?._offline || !media?.url) && media && (media.kind === "video" || media.kind === "audio" || media.kind === "image") && !media.generated && !media.synthetic) {
+  if ((media?._offline || !media?.url) && media && (media.kind === "video" || media.kind === "audio" || media.kind === "image") && !media.generated && !media.synthetic && media.fileType) {
     ctx.save();
     ctx.fillStyle = "rgba(0,0,0,0.55)";
     const label = "FILE MISSING — re-import to relink";
