@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>2B261867-83B9-4559-B62E-BB5FEE211C7B</GUID>
+    <Name>Audio Visualization 17</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 17.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

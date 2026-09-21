@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>06540EAC-C188-426e-952D-7DD97435F6F9</GUID>
+        <Name>Romantic</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Romantic.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

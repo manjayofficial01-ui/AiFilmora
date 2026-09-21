@@ -1,0 +1,17 @@
+{
+    "nodes": [
+        {
+            "type": "_Output_Node",
+            "x": 4959,
+            "y": 4888,
+            "uuid": "e641ad88-a934-45a4-a3aa-3b08db663f25",
+            "sort_index": 0,
+            "m_IsNeedCpuFrame": false,
+            "guid": "3F209260-03B7-49C8-9675-865E00F7D6E9",
+            "name": "Mysterious purple",
+            "effect_type": 0,
+            "effect_platform": 0
+        }
+    ],
+    "connections": []
+}

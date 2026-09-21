@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>13B86CCC-AF64-4B47-BD68-D61D8CA534B7</GUID>
+        <Name>ARFaceDeformation</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>ARFaceDeformation.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

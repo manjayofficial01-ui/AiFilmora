@@ -1,0 +1,14 @@
+{
+    "uuid": "123e4567-e89b-12d3-a456-426655440000",
+    "name": "random style",
+    "effects": [
+      "video/effect/black-white",
+      "video/effect/horizontal_filp",
+      "video/effect/vertical_filp",
+      "video/effect/negative"
+    ],
+    "transitions": [
+      "video/blender/transition-fade",
+      "video/blender/transition-wipe"
+    ]
+}

@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>5C720A04-AC9C-4DF3-811D-EDB3C1B0D14A</GUID>
+        <Name>ColorWheel</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>ColorWheel.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

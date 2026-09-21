@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>BAC37FE1-0A77-4dca-9C45-2FDFE66F3D46</GUID>
+        <Name>Sharp</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Sharp.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

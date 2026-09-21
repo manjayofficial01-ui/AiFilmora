@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "id": "gold-star",
+      "label": "Gold Star",
+      "src": "assets/shapes/gold-star.svg",
+      "kind": "image"
+    },
+    {
+      "id": "heart",
+      "label": "Heart",
+      "src": "assets/shapes/heart.svg",
+      "kind": "image"
+    },
+    {
+      "id": "arrow-right",
+      "label": "Arrow Right",
+      "src": "assets/shapes/arrow-right.svg",
+      "kind": "image"
+    },
+    {
+      "id": "burst",
+      "label": "Burst",
+      "src": "assets/shapes/burst.svg",
+      "kind": "image"
+    },
+    {
+      "id": "badge-circle",
+      "label": "Badge",
+      "src": "assets/shapes/badge-circle.svg",
+      "kind": "image"
+    }
+  ]
+}

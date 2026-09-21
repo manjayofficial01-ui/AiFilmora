@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>EF1C5CED-F4A5-4625-9ABC-155CC0F21CB9</GUID>
+    <Name>BlackWiperSegmentaion</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>BlackWiperSegmentaion.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>138113E7-6F74-4C2E-884C-F19F5B251817</GUID>
+<Name>Heart Mask</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Heart Mask.conf</ConfigFile>
+</GPUFilter>
+</Filter>

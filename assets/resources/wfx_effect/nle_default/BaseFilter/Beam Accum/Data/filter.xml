@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>9307DDCB-3D35-6E93-B108-D38A71A7361F</GUID>
+<Name>Beam Accum</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Accum.conf</ConfigFile>
+</GPUFilter>
+</Filter>

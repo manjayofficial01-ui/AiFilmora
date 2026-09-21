@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>E01DF42D-CF23-4B94-9445-7CC2685E4674</GUID>
+        <Name>Frosted</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Frosted.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

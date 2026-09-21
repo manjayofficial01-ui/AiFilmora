@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>DEE5DFA9-F7FE-4cd1-9871-37A3C7673A1A</GUID>
+        <Name>Willow</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Willow.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

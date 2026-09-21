@@ -1,0 +1,56 @@
+{
+    "GUID": "13692E2A-52B4-4A1E-808B-CBB92E92DF0D",
+    "OPENGL": "Light.frag",
+    "ENCRYPT": "1",
+    "PARAMS": [
+        {
+            "NAME": "u_highLight",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "u_shadow",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "u_whiteLevel",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "u_blackLevel",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "u_exposure",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "u_brightness",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "u_contrast",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        }
+    ]
+}

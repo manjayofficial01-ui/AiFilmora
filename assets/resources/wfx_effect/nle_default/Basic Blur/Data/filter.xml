@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>B9FAA92D-E036-4E8C-9D82-1CE059CBDC37</GUID>
+        <Name>Basic Blur</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Basic Blur.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

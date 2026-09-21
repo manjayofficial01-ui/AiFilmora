@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>20D18E32-E3C0-4063-8F0F-8E7C2DF00F7F</GUID>
+        <Name>Screen</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Screen.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

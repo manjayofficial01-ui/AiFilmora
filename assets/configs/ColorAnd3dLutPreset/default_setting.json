@@ -1,0 +1,57 @@
+[
+    {
+        "type": 16,
+        "title": "CLog 709 Style",
+        "category": "3D LUT",
+        "config": "/CubeLUTFiles/CLog 709 Style.CUBE"
+    }
+	,
+    {
+        "type": 16,
+        "title": "DLog 709 Style",
+        "category": "3D LUT",
+        "config": "/CubeLUTFiles/DLog 709 Style.CUBE"
+    }
+	,
+    {
+        "type": 16,
+        "title": "GPLog 709 Style",
+        "category": "3D LUT",
+        "config": "/CubeLUTFiles/GPLog 709 Style.CUBE"
+    }
+	,
+    {
+        "type": 16,
+        "title": "NLog 709 Cinematic",
+        "category": "3D LUT",
+        "config": "/CubeLUTFiles/NLog 709 Cinematic.CUBE"
+    }
+	,
+    {
+        "type": 16,
+        "title": "NLog 709 Style",
+        "category": "3D LUT",
+        "config": "/CubeLUTFiles/NLog 709 Style.CUBE"
+    }
+	,
+    {
+        "type": 16,
+        "title": "SLog 709 Cinematic",
+        "category": "3D LUT",
+        "config": "/CubeLUTFiles/SLog 709 Cinematic.CUBE"
+    }
+	,
+    {
+        "type": 16,
+        "title": "SLog 709 Style",
+        "category": "3D LUT",
+        "config": "/CubeLUTFiles/SLog 709 Style.CUBE"
+    }
+	,
+    {
+        "type": 16,
+        "title": "VLog 709 Style",
+        "category": "3D LUT",
+        "config": "/CubeLUTFiles/VLog 709 Style.CUBE"
+    }
+]

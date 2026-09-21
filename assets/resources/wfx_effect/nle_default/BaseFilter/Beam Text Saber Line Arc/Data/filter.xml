@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>B15EA5FA-CDA9-4AE5-AB71-136298D4AEF7</GUID>
+<Name>Beam Text Saber Line Arc</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Text Saber Line Arc.conf</ConfigFile>
+</GPUFilter>
+</Filter>

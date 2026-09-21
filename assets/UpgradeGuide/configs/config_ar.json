@@ -1,0 +1,93 @@
+{
+	"title": "ما الجديد في Filmora %1.",
+	"titleByManual": "أنت تستخدم الإصدار الأحدث. تحقق من ميزات الإصدار 1% الجديدة!",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "النص إلى فيديو",
+			"discription": "أطلق العنان لإبداعك مع تحويل النص إلى فيديو واستمتع بسحر Filmora AI",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+        {
+			"id": "image_to_video",
+			"name": "صورة إلى فيديو",
+			"discription": "تحويل الصور إلى فيديو مدعوم الآن بواسطة Veo 3! استمتع بنتائج إنشاء محسّنة بشكل كبير!",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},		
+		{
+			"id": "ai_idea_to_video",
+			"name": "تحويل الفكرة إلى مقطع فيديو بالذكاء الاصطناعي",
+			"discription": "حوِّل أفكارك الأولية إلى مقاطع فيديو احترافية مع الحفاظ على اتساق النمط البصري وضمان استمرارية الشخصيات عبر المشاهد.",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "أداة تصميم صور الذكاء الاصطناعي",
+			"discription": "مُصمم الصور بالذكاء الاصطناعي ‍محسّن! متوفر الآن ضمن تبويب AIGC مع إمكانيات مُحسّنة ومُوسّعة لتصميم الصور.",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "الصوت إلى الفيديو",
+			"discription": "حوّل بسهولة البودكاست الصوتي إلى مقاطع فيديو قصيرة جذابة. حرّر وقصّ وسلّط الضوء على القصص المفضلة لديك.",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "المقاطع القصيرة والذكية",
+			"discription": "حوّل مقاطع الفيديو الطويلة إلى مقاطع فيديو قصيرة جذابة. قم بقص أجمل اللحظات واقتطاعها وتمييزها!",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "قص ذكي لمشهد",
+			"discription": "استخرج المشاهد المميزة ومشاهد الشخصيات لتعزيز كفاءة التحرير.",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "إنشاء موسيقى الخلفية الذكي",
+			"discription": "أنشئ موسيقى خلفية تلقائيًا لتتناسب مع مقطع الفيديو الخاص بك.",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "إعادة التشكيل التلقائي",
+			"discription": "استخدم إعادة التأطير التلقائية لتصدير مقاطع الفيديو التي تتطابق مع نسبة العرض إلى الارتفاع لمواقع التواصل الاجتماعي.",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "ذكاء اصطناعي يفهمك ويساعدك ويعزز تجربتك. مع ميزة AI Mate، يمكنك إنشاء مقاطع فيديو مذهلة أسرع من أي وقت سبق.",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "التحرير في وضع الكاميرات المتعددة",
+			"discription": "استورد لقطات من كاميرات متعددة وبدِّل بسلاسة بين الزوايا المختلفة لتستمتع بتجربة تحرير فعالة ومريحة. بسِّط عمليات التحرير المعقدة وحسِّن سير عملك الإبداعي.",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "الترجمة باستخدام الذكاء الاصطناعي",
+			"discription": "ترجِم مقاطع الفيديو والصوت تلقائيًا إلى أكثر من 20 لغة، وقم بمزامنة الصوت مع حركة شفاه المتحدثين.",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

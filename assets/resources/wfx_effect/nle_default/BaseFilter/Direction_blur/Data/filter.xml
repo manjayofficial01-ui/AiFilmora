@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>3EA656B6-26DD-458D-86FC-411A58336FD4</GUID>
+    <Name>Direction_blur</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Direction_blur.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>9E2DC6CF-BDC2-4368-99DD-DBB8A42A8298</GUID>
+    <Name>Vivid</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Vivid.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

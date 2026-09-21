@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>FB66DCAA-F85E-4be4-9470-9D6771AE26B8</GUID>
+        <Name>FourSeason</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>FourSeason.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

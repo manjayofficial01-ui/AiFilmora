@@ -1,0 +1,7 @@
+{
+	"type" : "audio_transition",
+	"display_name" : "audio transiton constant gain",
+	"unique_name" : "audio/blender/transition-xe-constant-gain",
+	"thumb" : "thumb.png",
+	"video" : "test.mp4"
+}

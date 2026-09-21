@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>B45A98DD-5EEA-14E3-9A2F-BF8BBF715305</GUID>
+<Name>BackGround Queue Accum</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>BackGround Queue Accum.conf</ConfigFile>
+</GPUFilter>
+</Filter>

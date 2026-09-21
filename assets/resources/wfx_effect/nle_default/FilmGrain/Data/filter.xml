@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>6EEFFABB-4894-446c-8187-3D9D9922E3A9</GUID>
+        <Name>FilmGrain</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>FilmGrain.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

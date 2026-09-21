@@ -1,0 +1,141 @@
+/* AiFimora design tokens — Windows NLE instrument panel
+ *
+ * Round 2: the surface hierarchy now mirrors Wondershare Filmora 14, measured from
+ * assets/Skin/filmora_dark.txt (2 348 hex literals) and filmora_light.txt (2 374).
+ *
+ * Filmora builds surfaces with TRANSLUCENT WHITE OVERLAYS on a near-black base rather
+ * than discrete solid greys — that is what gives it the glassy, premium read:
+ *   4%  resting control    14%  selected / pressed
+ *   6%  hover / track      24%  separator
+ *   8%  chip               30% black  input field
+ * See research/FILMORA-THEME-RESEARCH.md for the full extraction.
+ */
+:root {
+  /* --- base surfaces (solid) ---------------------------------------------- */
+  /* Round 4: nudged toward the measured Filmora dark ramp so the shell reads as
+     a deep, cool near-black rather than a blue-grey. Keep the ladder monotonic:
+     bg < bg-elev < panel < card < panel-2 < panel-3. */
+  --bg: #090b0d;
+  --bg-deep: #040506;
+  --bg-elev: #0d1014;
+  --panel: #14181c;
+  --panel-2: #1c2126;
+  --panel-3: #282f36;
+  --elevated: #21282d; /* Filmora's raised surface (timeline) */
+  --card: #191e22; /* Filmora card surface */
+
+  /* --- translucent surface overlays (Filmora's signature) ------------------ */
+  --surface-1: rgba(217, 223, 235, 0.04); /* resting control */
+  --surface-2: rgba(217, 223, 235, 0.06); /* hover / track / tab strip */
+  --surface-3: rgba(199, 212, 224, 0.14); /* selected / pressed */
+  --surface-chip: rgba(154, 179, 202, 0.08); /* tag chip */
+  --field: rgba(0, 0, 0, 0.3); /* input fill */
+
+  /* --- strokes ------------------------------------------------------------- */
+  --border: #262c33;
+  --border-soft: #1b2025;
+  --border-hover: #38414b;
+  --stroke-1: rgba(202, 232, 255, 0.14); /* control border */
+  --stroke-2: rgba(234, 247, 255, 0.06); /* card border */
+  --stroke-3: rgba(255, 255, 255, 0.24); /* separator */
+  --scrollbar: #333b44;
+
+  /* --- text ramp (Filmora's 4 steps) --------------------------------------- */
+  --ink: #e8ecf2;
+  --ink-strong: #f0f8fe; /* Filmora primary text */
+  --ink-body: #c3cad0; /* Filmora body text */
+  --ink-dim: #a8b2c4;
+  --ink-muted: #959ca2; /* Filmora muted / unselected tab */
+  --ink-disabled: #4f575d; /* Filmora disabled text */
+  --muted: #6b7589;
+  --on-accent: #ffffff; /* text on accent fills */
+
+  /* --- accents ------------------------------------------------------------- */
+  --accent: #5b8cff;
+  --accent-soft: rgba(91, 140, 255, 0.16);
+  --accent-strong: #8ab4ff;
+  --accent-ai: #3ddcff; /* Filmora's AI accent (separate from brand) */
+  --accent-glow: 0 2px 10px rgba(91, 140, 255, 0.28);
+  --glow-ai: 0 2px 12px rgba(61, 220, 255, 0.25);
+  --gen: #00d4a0;
+  --gen-soft: rgba(0, 212, 160, 0.14);
+  --warn: #ffb020;
+  --warn-soft: rgba(255, 176, 32, 0.14);
+  --danger: #ff5c7a;
+  --danger-soft: rgba(255, 92, 122, 0.14);
+  --violet: #a78bfa;
+
+  /* --- clip identities ----------------------------------------------------- */
+  --clip-video: #3d6fd4;
+  --clip-audio: #2f9e6b;
+  --clip-text: #c9a227;
+  --clip-ai: #8b5cf6;
+  --clip-gen: #0d9488;
+
+  /* --- chrome -------------------------------------------------------------- */
+  --titlebar-grad: linear-gradient(180deg, #1a1f24 0%, #14181c 100%);
+
+  /* --- metrics ------------------------------------------------------------- */
+  --ctl-h: 24px; /* Filmora standard control height */
+  --radius: 6px;
+  --radius-sm: 4px;
+  --radius-lg: 10px;
+  --shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "Cascadia Code", "Cascadia Mono", Consolas, "SF Mono", monospace;
+
+  /* --- layout -------------------------------------------------------------- */
+  --title-h: 36px;
+  --menu-h: 32px;
+  --toolbar-h: 44px;
+  --status-h: 28px;
+  --sidebar-w: 280px;
+  --inspector-w: 320px;
+  --timeline-h: 280px;
+  --track-h: 48px;
+  --ruler-h: 28px;
+  --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+}
+
+/* =========================================================================
+   Light theme override.
+   `settings.applyTheme()` toggles `.theme-light` on <html>, but until now no
+   rule consumed it — picking "light" only flipped the color-scheme meta tag
+   and left every dark token in place. The app is dark-first, so light is
+   treated as the secondary path, but it must still actually render.
+   ========================================================================= */
+.theme-light {
+  --bg: #f1f4f7;
+  --bg-deep: #e4e9ef;
+  --bg-elev: #ffffff;
+  --panel: #ffffff;
+  --panel-2: #f4f6f9;
+  --panel-3: #e9edf2;
+  --elevated: #ffffff;
+  --card: #ffffff;
+
+  --surface-1: rgba(15, 23, 34, 0.04);
+  --surface-2: rgba(15, 23, 34, 0.06);
+  --surface-3: rgba(15, 23, 34, 0.12);
+  --surface-chip: rgba(15, 23, 34, 0.06);
+  --field: rgba(15, 23, 34, 0.04);
+
+  --border: #d7dde5;
+  --border-soft: #e6eaef;
+  --border-hover: #b9c3d0;
+  --stroke-1: rgba(15, 23, 34, 0.14);
+  --stroke-2: rgba(15, 23, 34, 0.08);
+  --stroke-3: rgba(15, 23, 34, 0.18);
+  --scrollbar: #c3ccd7;
+
+  --ink: #1b2129;
+  --ink-strong: #0f1722;
+  --ink-body: #333c47;
+  --ink-dim: #55606e;
+  --ink-muted: #6b7684;
+  --ink-disabled: #a8b2bd;
+  --muted: #7b8695;
+  --on-accent: #ffffff;
+
+  --titlebar-grad: linear-gradient(180deg, #ffffff 0%, #f5f7fa 100%);
+}

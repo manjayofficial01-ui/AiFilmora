@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>4014114D-3768-4F9E-BF80-A9055E623230</GUID>
+    <Name>Audio Visualization 11</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 11.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

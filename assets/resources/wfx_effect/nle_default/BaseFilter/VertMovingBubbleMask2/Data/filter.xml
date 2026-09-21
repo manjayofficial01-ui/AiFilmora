@@ -1,0 +1,10 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>305E1AC6-A8A4-435F-9F40-ADCCEDBD3104</GUID>
+        <Name>VertMovingBubbleMask2</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>VertMovingBubbleMask2.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>

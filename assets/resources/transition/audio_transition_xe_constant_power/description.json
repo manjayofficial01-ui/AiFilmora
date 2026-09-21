@@ -1,0 +1,7 @@
+{
+	"type" : "audio_transition",
+	"display_name" : "audio transiton constant power",
+	"unique_name" : "audio/blender/transition-xe-constant-power",
+	"thumb" : "thumb.png",
+	"video" : "test.mp4"
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>B4CF1D0F-D10A-1613-6EF4-A4F0D0364978</GUID>
+<Name>HumanSegmentationHairEffect</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>HumanSegmentationHairEffect.conf</ConfigFile>
+</GPUFilter>
+</Filter>

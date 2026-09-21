@@ -1,0 +1,946 @@
+{
+	"models": {
+		"human_segmentation_effect": {
+			"model_path": "/human_segmentation_effect/",
+			"win_x64": [
+				"WM_HumanSegmentEffect_OpenVINO_FP16_2.4.1.1.model"
+			],
+			"mac_x86": [
+				"WM_HumanSegmentEffect_OpenVINO_FP16_2.4.1.1.model"
+			],
+			"mac_arm": [
+				"WM_HumanSegmentEffect_CoreML_FP32_2.4.1.1.model"
+			],
+			"ohos": [
+				"WM_HumanSegmentEffect_HIAI_FP16_2.4.4.1.model"
+			],
+			"win_arm64": [
+				"WM_HumanSegmentEffect_MNN_FP32_2.4.4.1.model"
+			],
+			"ios": [
+				"WM_HumanSegmentEffect_CoreML_FP32_2.4.1.1.model"
+			],
+			"android": [
+				"WM_HumanSegmentEffect_MNN_FP32_2.4.4.1.model"
+			],
+			"min_version_win_x64": "2.4.4",
+			"min_version_mac_x86": "2.4.4",
+			"min_version_mac_arm": "2.4.4",
+			"min_version_ohos": "2.4.5",
+			"min_version_android": "2.4.4",
+			"min_version_ios": "2.4.4",
+			"min_version_win_arm64": "2.4.5"
+		},
+		"human_segmentation_highacc": {
+			"model_path": "/human_segmentation_highacc/",
+			"win_x64": [
+				"WM_HumanSegmentHighAcc_OpenVINO_FP16_3.1.0.4.model"
+			],
+			"mac_x86": [
+				"WM_HumanSegmentHighAcc_OpenVINO_FP16_3.1.0.4.model"
+			],
+			"mac_arm": [
+				"WM_HumanSegmentHighAcc_CoreML_FP16_3.1.0.4.model"
+			],
+			"ohos": [
+				"WM_HumanSegmentHighAcc_HIAI_FP16_3.1.1.4.model"
+			],
+			"win_arm64": [
+				"WM_HumanSegmentHighAcc_MNN_FP32_3.1.1.4.model"
+			],
+			"ios": [
+				"WM_HumanSegmentHighAcc_CoreML_FP16_3.1.0.4.model"
+			],
+			"android": [
+				"WM_HumanSegmentHighAcc_MNN_FP32_3.1.1.4.model"
+			],
+			"min_version_win_x64": "3.1.9",
+			"min_version_mac_x86": "3.1.9",
+			"min_version_mac_arm": "3.1.7",
+			"min_version_ohos": "3.1.8",
+			"min_version_android": "3.1.7",
+			"min_version_ios": "3.1.7",
+			"min_version_win_arm64": "3.1.8"
+		},
+		"face_landmarks_v2": {
+			"model_path": "/face_landmarks_v2/",
+			"ohos": [
+				"WM_FaceLandmarks_HIAI_FP16_3.0.0.5.model"
+			],
+			"min_version_ohos": "3.0.5"
+		},
+		"face_landmarks_v3": {
+			"model_path": "/face_landmarks_v3/",
+			"win_x64": [
+				"WM_FaceLandmarksV3_OpenVINO_FP32_1.0.0.1.model"
+			],
+			"mac_x86": [
+				"WM_FaceLandmarksV3_OpenVINO_FP32_1.0.0.1.model"
+			],
+			"mac_arm": [
+				"WM_FaceLandmarksV3_MNN_FP32_1.0.0.1.model"
+			],
+			"win_arm64": [
+				"WM_FaceLandmarksV3_MNN_FP32_1.0.0.1.model"
+			],
+			"min_version_win_x64": "1.0.0",
+			"min_version_mac_x86": "1.0.0",
+			"min_version_mac_arm": "1.0.0",
+			"min_version_win_arm64": "1.0.0"
+		},
+		"face_pose_estimator": {
+			"model_path": "/face_pose_estimator/",
+			"win_x64": [
+				"WM_FacePoseEstimator_Net_Binary_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_FacePoseEstimator_Net_Binary_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_FacePoseEstimator_Net_Binary_1.0.0.0.model"
+			],
+			"ohos": [
+				"WM_FacePoseEstimator_Net_Binary_1.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_FacePoseEstimator_Net_Binary_1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.1",
+			"min_version_mac_x86": "1.0.1",
+			"min_version_mac_arm": "1.0.1",
+			"min_version_ohos": "1.0.2",
+			"min_version_win_arm64": "1.0.2"
+		},
+		"face_visibility": {
+			"model_path": "/face_visibility/",
+			"win_x64": [
+				"WM_FaceVisibility_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_FaceVisibility_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_FaceVisibility_CoreML_FP32_1.0.0.0.model"
+			],
+			"ohos": [
+				"WM_FaceVisibility_HIAI_FP16_1.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_FaceVisibility_MNN_FP32_1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.5",
+			"min_version_mac_x86": "1.0.5",
+			"min_version_mac_arm": "1.0.5",
+			"min_version_ohos": "1.0.4",
+			"min_version_win_arm64": "1.0.4"
+		},
+		"face_detector": {
+			"model_path": "/face_detector/",
+			"win_x64": [
+				"WM_FaceDetector_OpenVINO_FP32_2.0.0.5.model"
+			],
+			"mac_x86": [
+				"WM_FaceDetector_OpenVINO_FP32_2.0.0.5.model"
+			],
+			"mac_arm": [
+				"WM_FaceDetector_CoreML_FP32_2.0.0.5.model"
+			],
+			"ohos": [
+				"WM_FaceLandmarks_HIAI_FP16_3.0.0.5.model"
+			],
+			"win_arm64": [
+				"WM_FaceDetector_MNN_FP32_2.0.0.5.model"
+			],
+			"min_version_win_x64": "2.0.7",
+			"min_version_mac_x86": "2.0.7",
+			"min_version_mac_arm": "2.0.7",
+			"min_version_ohos": "2.0.7",
+			"min_version_win_arm64": "2.0.7"
+		},
+		"interactive_segment": {
+			"model_path": "/interactive_segment/",
+			"win_x64": [
+				"WM_InteractiveSegment_OpenVINO_FP32_4.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_InteractiveSegment_OpenVINO_FP32_4.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_InteractiveSegment_CoreML_FP32_4.0.0.0.model"
+			],
+			"ohos": [
+				"WM_InteractiveSegment_HIAI_FP16_3.1.2.3.model"
+			],
+			"win_arm64": [
+				"WM_InteractiveSegment_MNN_3.1.7.0.model"
+			],
+			"ios": [
+				"WM_InteractiveSegment_CoreML_FP32_3.1.2.0.model"
+			],
+			"android": [
+				"WM_InteractiveSegment_MNN_3.1.7.0.model"
+			],
+			"min_version_win_x64": "4.0.2",
+			"min_version_mac_x86": "4.0.2",
+			"min_version_mac_arm": "4.0.0",
+			"min_version_ohos": "3.2.3",
+			"min_version_android": "3.2.2",
+			"min_version_ios": "3.2.2",
+			"min_version_win_arm64": "3.2.3"
+		},
+		"mask_propagation": {
+			"model_path": "/mask_propagation/",
+			"win_x64": [
+				"WM_DecodeInfo_OpenVINO_FP32_5.0.0.0.model",
+				"WM_EncodeKey_OpenVINO_FP32_5.0.0.0.model",
+				"WM_EncodeValue_OpenVINO_FP32_5.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_DecodeInfo_OpenVINO_FP32_5.0.0.0.model",
+				"WM_EncodeKey_OpenVINO_FP32_5.0.0.0.model",
+				"WM_EncodeValue_OpenVINO_FP32_5.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_DecodeInfo_CoreML_FP32_5.0.0.0.model",
+				"WM_EncodeKey_CoreML_FP32_5.0.0.0.model",
+				"WM_EncodeValue_CoreML_FP32_5.0.0.0.model",
+				"WM_DecodeInfo_CoreML_FP16_5.0.0.0.model",
+				"WM_EncodeKey_CoreML_FP16_5.0.0.0.model",
+				"WM_EncodeValue_CoreML_FP16_5.0.0.0.model"
+			],
+			"ohos": [
+				"WM_DecodeInfo_HIAI_FP16_5.0.0.0.model",
+				"WM_EncodeKey_HIAI_FP16_5.0.0.0.model",
+				"WM_EncodeValue_HIAI_FP16_5.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_Aggregate_MNN_FP32_1.0.0.0.model",
+				"WM_DecodeInfo_MNN_FP32_1.0.0.0.model",
+				"WM_EncodeKey_MNN_FP32_1.0.0.0.model",
+				"WM_EncodeValue_MNN_FP32_1.0.0.0.model"
+			],
+			"ios": [
+				"WM_Aggregate_CoreML_FP32_4.2.6.0.model",
+				"WM_DecodeInfo_CoreML_FP32_4.2.6.0.model",
+				"WM_EncodeKey_CoreML_FP32_4.2.6.0.model",
+				"WM_EncodeValue_CoreML_FP32_4.2.6.0.model"
+			],
+			"android": [
+				"WM_Aggregate_MNN_FP32_1.0.0.0.model",
+				"WM_DecodeInfo_MNN_FP32_1.0.0.0.model",
+				"WM_EncodeKey_MNN_FP32_1.0.0.0.model",
+				"WM_EncodeValue_MNN_FP32_1.0.0.0.model"
+			],
+			"min_version_win_x64": "5.0.4",
+			"min_version_mac_x86": "5.0.4",
+			"min_version_mac_arm": "5.0.5",
+			"min_version_ohos": "5.0.2",
+			"min_version_android": "4.2.6",
+			"min_version_ios": "4.2.6",
+			"min_version_win_arm64": "4.2.6"
+		},
+		"auto_reframe": {
+			"model_path": "/auto_reframe/",
+			"win_x64": [
+				"WM_AutoReframe_OpenVINO_FP16_1.0.0.0.model",
+				"WM_FaceDetectorScrdf2_5_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_AutoReframe_OpenVINO_FP16_1.0.0.0.model",
+				"WM_FaceDetectorScrdf2_5_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_AutoReframe_CoreML_FP32_1.0.0.0.model",
+				"WM_FaceDetectorScrdf2_5_CoreML_FP32_1.0.0.0.model"
+			],
+			"ohos": [
+				"WM_AutoReframe_MNN_FP32_1.0.0.0.model",
+				"WM_FaceDetectorScrdf2_5_MNN_FP32_1.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_AutoReframe_MNN_FP32_1.0.0.0.model",
+				"WM_FaceDetectorScrdf2_5_MNN_FP32_1.0.0.0.model"
+			],
+			"min_version_win_x64": "2.0.0",
+			"min_version_mac_x86": "2.0.0",
+			"min_version_mac_arm": "2.0.0",
+			"min_version_ohos": "2.0.0",
+			"min_version_win_arm64": "2.0.0"
+		},
+		"speech_enhance": {
+			"model_path": "/speech_enhance/",
+			"win_x64": [
+				"Speech_Enhance_X86_Openvino.model"
+			],
+			"mac_x86": [
+				"Speech_Enhance_X86_Openvino.model"
+			],
+			"mac_arm": [
+				"Speech_Enhance_Arm_Tnn.model"
+			],
+			"min_version_win_x64": "1.0.1",
+			"min_version_mac_x86": "1.0.1",
+			"min_version_mac_arm": "1.0.1"
+		},
+		"video_feature_extraction": {
+			"model_path": "/video_feature_extraction/",
+			"win_x64": [
+				"WM_Video_Feature_Extraction_Openvino_FP16_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_Video_Feature_Extraction_Openvino_FP16_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_Video_Feature_Extraction_Coreml_FP16_1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.1",
+			"min_version_mac_x86": "1.0.1",
+			"min_version_mac_arm": "1.0.1"
+		},
+		"video_frame_interpolation": {
+			"model_path": "/video_frame_interpolation/",
+			"win_x64": [
+				"WM_VideoFrameInterpolation_OpenVINO_MNN_FP16_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_VideoFrameInterpolation_OpenVINO_MNN_FP16_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_VideoFrameInterpolation_OpenVINO_MNN_FP16_1.0.0.0.model"
+			],
+			"ohos": [
+				"WM_VideoFrameInterpolation_OpenVINO_MNN_FP16_1.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_VideoFrameInterpolation_OpenVINO_MNN_FP16_1.0.0.0.model"
+			],
+			"min_version_win_x64": "3.1.3",
+			"min_version_mac_x86": "3.1.3",
+			"min_version_mac_arm": "3.1.3",
+			"min_version_ohos": "3.1.3",
+			"min_version_win_arm64": "3.1.3"
+		},
+		"human_landmarks": {
+			"model_path": "/human_landmarks/",
+			"win_x64": [
+				"WM_HumanLandmarks_OpenVINO_INT32_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_HumanLandmarks_OpenVINO_INT32_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_HumanLandmarks_CoreML_FP32_1.0.0.0.model"
+			],
+			"ohos": [
+				"WM_HumanLandmarks_MNN_INT32_1.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_HumanLandmarks_MNN_FP32_1.0.0.0.model"
+			],
+			"ios": [
+				"WM_HumanLandmarks_CoreML_FP32_1.0.0.0.model"
+			],
+			"android": [
+				"WM_HumanLandmarks_MNN_FP32_1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.4",
+			"min_version_mac_x86": "1.0.4",
+			"min_version_mac_arm": "1.0.4",
+			"min_version_ohos": "1.0.4",
+			"min_version_android": "1.0.2",
+			"min_version_ios": "1.0.2",
+			"min_version_win_arm64": "1.0.2"
+		},
+		"depth_estimate": {
+			"model_path": "/depth_estimate/",
+			"win_x64": [
+				"WM_DepthEstimateAnything_ONNXRuntime_FP32_2.0.1.0.model"
+			],
+			"mac_x86": [
+				"WM_DepthEstimateAnything_CoreML_ONNXRuntime_FP32_2.0.1.0.model"
+			],
+			"mac_arm": [
+				"WM_DepthEstimateAnything_CoreML_FP16_2.0.0.0.model",
+				"WM_DepthEstimateAnything_CoreML_FP32_2.0.0.0.model",
+				"WM_DepthEstimate_MNN_FP32_1.0.0.0.model"
+			],
+			"ohos": [
+				"WM_DepthEstimate_HIAI_FP16_1.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_DepthEstimate_MNN_FP32_1.0.0.0.model"
+			],
+			"ios": [
+				"WM_DepthEstimate_MNN_FP32_1.0.0.0.model"
+			],
+			"android": [
+				"WM_DepthEstimate_MNN_FP32_1.0.0.0.model"
+			],
+			"min_version_win_x64": "2.0.1",
+			"min_version_mac_x86": "2.0.1",
+			"min_version_mac_arm": "2.0.3",
+			"min_version_ohos": "1.0.3",
+			"min_version_android": "1.0.2",
+			"min_version_ios": "1.0.2",
+			"min_version_win_arm64": "1.0.3"
+		},
+		"semantic_segmentation": {
+			"model_path": "/semantic_segmentation/",
+			"win_x64": [
+				"WM_SemanticSegmentation_OpenVINO_FP32_1.0.2.0.model"
+			],
+			"mac_x86": [
+				"WM_SemanticSegmentation_OpenVINO_FP32_1.0.2.0.model"
+			],
+			"mac_arm": [
+				"WM_SemanticSegmentation_CoreML_FP32_1.0.2.0.model"
+			],
+			"ohos": [
+				"WM_SemanticSegmentation_HIAI_FP16_1.0.2.0.model"
+			],
+			"win_arm64": [
+				"WM_SemanticSegmentation_MNN_FP32_1.0.2.0.model"
+			],
+			"min_version_win_x64": "1.0.6",
+			"min_version_mac_x86": "1.0.6",
+			"min_version_mac_arm": "1.0.6",
+			"min_version_ohos": "1.0.5",
+			"min_version_win_arm64": "1.0.5"
+		},
+		"human_skin_segment": {
+			"model_path": "/human_skin_segment/",
+			"win_x64": [
+				"WM_HumanAttributeSegmentSkinSeg_OpenVINO_FP32_2.2.0.0.model"
+			],
+			"mac_x86": [
+				"WM_HumanAttributeSegmentSkinSeg_OpenVINO_FP32_2.2.0.0.model"
+			],
+			"mac_arm": [
+				"WM_HumanAttributeSegmentSkinSeg_CoreML_FP32_2.2.0.0.model"
+			],
+			"ohos": [
+				"WM_HumanAttributeSegmentSkinSeg_HIAI_FP16_3.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_HumanAttributeSegmentSkinSeg_MNN_FP32_2.2.0.0.model"
+			],
+			"min_version_win_x64": "2.2.3",
+			"min_version_mac_x86": "2.2.3",
+			"min_version_mac_arm": "2.2.3",
+			"min_version_ohos": "3.0.0",
+			"min_version_win_arm64": "2.2.3"
+		},
+		"audio_separation_lite": {
+			"model_path": "/audio_separation_lite/",
+			"win_x64": [
+				"WM_AudioSeparationLite_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_AudioSeparationLite_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_AudioSeparationLite_TNN_FP32_1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.1",
+			"min_version_mac_x86": "1.0.1",
+			"min_version_mac_arm": "1.0.1"
+		},
+		"face_cluster": {
+			"model_path": "/face_cluster/",
+			"win_x64": [
+				"WM_FaceDetector_Openvino_FP32_3.0.0.model",
+				"WM_FaceLandmarks_Openvino_FP32_3.0.5.model",
+				"WSPose_v1.2.model",
+				"WM_FaceCluster_Openvino_v2.0.0.model",
+				"WM_FaceVisibility_Online_Openvino_CPU_FP32_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_FaceDetector_Corml_v3.0.0.model",
+				"WM_FaceLandmarks_Corml_3.0.5.model",
+				"WSPose_v1.2.model",
+				"WM_FaceCluster_Coreml_v2.0.0.model",
+				"WM_FaceVisibility_CPU_CoreML_FP32_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_FaceDetector_CoreML_3.0.0.0.model",
+				"WM_FaceLandmarks_CorML_3.0.0.5.model",
+				"WM_FacePoseEstimator_Net_Binary_1.0.0.0.model",
+				"WM_FaceCluster_CoreML_FP32_2.0.0.0.model",
+				"WM_FaceVisibility_CoreML_FP32_1.0.0.0.model"
+			],
+			"ohos": [
+				"WM_FaceDetector_MNN_FP32_3.0.0.0.model",
+				"WM_FaceLandmarks_HIAI_FP16_3.0.0.5.model",
+				"WM_FacePoseEstimator_Net_Binary_1.0.0.0.model",
+				"WM_FaceCluster_HIAI_FP16_2.0.0.0.model",
+				"WM_FaceVisibility_HIAI_FP16_1.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_FaceDetector_MNN_FP32_3.0.0.0.model",
+				"WM_FaceLandmarks_MNN_FP32_3.0.0.5.model",
+				"WM_FacePoseEstimator_Net_Binary_1.0.0.0.model",
+				"WM_FaceCluster_MNN_FP32_2.0.0.0.model",
+				"WM_FaceVisibility_MNN_FP32_1.0.0.0.model"
+			],
+			"min_version_win_x64": "2.0.5",
+			"min_version_mac_x86": "2.0.5",
+			"min_version_mac_arm": "2.0.5",
+			"min_version_ohos": "2.0.5",
+			"min_version_win_arm64": "2.0.5"
+		},
+		"smart_mosaic": {
+			"model_path": "/smart_mosaic/",
+			"win_x64": [
+				"WM_FaceDetectorScrdf2_5_OpenVINO_FP32_1.0.0.0.model",
+				"WM_FacePoseEstimatorV2_OpenVINO_FP32_1.0.0.0.model",
+				"WM_FaceCluster_OpenVINO_FP32_2.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_FaceDetectorScrdf2_5_OpenVINO_FP32_1.0.0.0.model",
+				"WM_FacePoseEstimatorV2_OpenVINO_FP32_1.0.0.0.model",
+				"WM_FaceCluster_OpenVINO_FP32_2.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_FaceDetectorScrdf2_5_CoreML_FP32_1.0.0.0.model",
+				"WM_FacePoseEstimatorV2_CoreML_FP32_1.0.0.0.model",
+				"WM_FaceCluster_CoreML_FP32_2.0.0.0.model"
+			],
+			"ohos": [
+				"WM_FaceCluster_HIAI_FP16_2.0.0.0.model",
+				"WM_FaceDetectorScrdf2_5_HIAI_FP16_1.0.0.0.model",
+				"WM_FacePoseEstimatorV2_HIAI_FP16_1.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_FaceCluster_MNN_FP32_2.0.0.0.model",
+				"WM_FaceDetectorScrdf2_5_MNN_FP32_1.0.0.0.model",
+				"WM_FacePoseEstimatorV2_MNN_FP32_1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.3",
+			"min_version_mac_x86": "1.0.3",
+			"min_version_mac_arm": "1.0.3",
+			"min_version_ohos": "1.0.2",
+			"min_version_win_arm64": "1.0.2"
+		},
+		"human_segmentation_hair": {
+			"model_path": "/human_segmentation_hair/",
+			"win_x64": [
+				"WM_HumanSegmentHair_OpenVINO_FP32_5.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_HumanSegmentHair_OpenVINO_FP32_5.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_HumanSegmentHairH_CoreML_FP32_5.0.0.0.model",
+				"WM_HumanSegmentHairW_CoreML_FP32_5.0.0.0.model"
+			],
+			"ohos": [
+				"WM_HumanSegmentHair_HIAI_FP16_4.0.8.0.model"
+			],
+			"win_arm64": [
+				"WM_HumanSegmentHair_MNN_FP16_4.0.8.0.model"
+			],
+			"ios": [
+				"WM_HumanSegmentHair_CoreML_FP16_4.0.8.0.model"
+			],
+			"android": [
+				"WM_HumanSegmentHair_MNN_FP16_4.0.8.0.model"
+			],
+			"min_version_win_x64": "5.0.2",
+			"min_version_mac_x86": "5.0.2",
+			"min_version_mac_arm": "5.0.1",
+			"min_version_ohos": "4.1.0",
+			"min_version_android": "4.0.9",
+			"min_version_ios": "4.0.9",
+			"min_version_win_arm64": "4.1.0"
+		},
+		"video_denoising_lite": {
+			"model_path": "/video_denoising_lite/",
+			"win_x64": [
+				"WM_VideoDenoisingLite_OpenVINO_MNN_FP16_3.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_VideoDenoisingLite_OpenVINO_MNN_FP16_3.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_VideoDenoisingLite_OpenVINO_MNN_FP16_3.0.0.0.model"
+			],
+			"ohos": [
+				"WM_VideoDenoisingLite_HIAI_FP16_3.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_VideoDenoisingLite_OpenVINO_MNN_FP16_3.0.0.0.model"
+			],
+			"ios": [
+				"WM_VideoDenoisingLite_OpenVINO_MNN_FP16_3.0.0.0.model"
+			],
+			"android": [
+				"WM_VideoDenoisingLite_OpenVINO_MNN_FP16_3.0.0.0.model"
+			],
+			"min_version_win_x64": "3.0.2",
+			"min_version_mac_x86": "3.0.2",
+			"min_version_mac_arm": "3.0.2",
+			"min_version_ohos": "3.0.3",
+			"min_version_android": "3.0.2",
+			"min_version_ios": "3.0.2",
+			"min_version_win_arm64": "3.0.2"
+		},
+		"audio_stt": {
+			"model_path": "/audio_stt/",
+			"win_x64": [
+				"WM_AudioSTT_CPU_Openvino_Fp32_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_AudioSTT_CPU_Openvino_Fp32_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_AudioSTT_CPU_Coreml_Fp32_V1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.1",
+			"min_version_mac_x86": "1.0.1",
+			"min_version_mac_arm": "1.0.1"
+		},
+		"video_search_image": {
+			"model_path": "/video_search_image/",
+			"win_x64": [
+				"WM_ClipImage_X86_Openvino_FP16.model"
+			],
+			"mac_x86": [
+				"WM_ClipImage_X86_Openvino_FP16.model"
+			],
+			"mac_arm": [
+				"WM_ClipImage_X86_Mnn_FP16.model"
+			],
+			"min_version_win_x64": "1.0.0",
+			"min_version_mac_x86": "1.0.0",
+			"min_version_mac_arm": "1.0.0"
+		},
+		"video_search_text": {
+			"model_path": "/video_search_text/",
+			"win_x64": [
+				"WM_ClipText_X86_Openvino_FP16.model"
+			],
+			"mac_x86": [
+				"WM_ClipText_X86_Openvino_FP16.model"
+			],
+			"mac_arm": [
+				"WM_ClipText_X86_Mnn_FP16.model"
+			],
+			"min_version_win_x64": "1.0.0",
+			"min_version_mac_x86": "1.0.0",
+			"min_version_mac_arm": "1.0.0"
+		},
+		"speech_enhance_v3": {
+			"model_path": "/speech_enhance_v3/",
+			"win_x64": [
+				"WM_SpeechEnhanceV3DF_OpenVINO_FP32_1.0.0.1.model",
+				"WM_SpeechEnhanceV3ENC_OpenVINO_FP32_1.0.0.1.model",
+				"WM_SpeechEnhanceV3ERB_OpenVINO_FP32_1.0.0.1.model"
+			],
+			"mac_x86": [
+				"WM_SpeechEnhanceV3DF_OpenVINO_FP32_1.0.0.1.model",
+				"WM_SpeechEnhanceV3ENC_OpenVINO_FP32_1.0.0.1.model",
+				"WM_SpeechEnhanceV3ERB_OpenVINO_FP32_1.0.0.1.model"
+			],
+			"mac_arm": [
+				"WM_SpeechEnhanceV3DF_CoreML_FP32_1.0.0.1.model",
+				"WM_SpeechEnhanceV3ENC_CoreML_FP32_1.0.0.1.model",
+				"WM_SpeechEnhanceV3ERB_CoreML_FP32_1.0.0.1.model"
+			],
+			"ohos": [
+				"WM_SpeechEnhanceV3DF_MNN_FP32_1.0.0.1.model",
+				"WM_SpeechEnhanceV3ENC_MNN_FP32_1.0.0.1.model",
+				"WM_SpeechEnhanceV3ERB_MNN_FP32_1.0.0.1.model"
+			],
+			"win_arm64": [
+				"WM_SpeechEnhanceV3DF_MNN_FP32_1.0.0.1.model",
+				"WM_SpeechEnhanceV3ENC_MNN_FP32_1.0.0.1.model",
+				"WM_SpeechEnhanceV3ERB_MNN_FP32_1.0.0.1.model"
+			],
+			"min_version_win_x64": "1.0.3",
+			"min_version_mac_x86": "1.0.3",
+			"min_version_mac_arm": "1.0.3",
+			"min_version_ohos": "1.0.3",
+			"min_version_win_arm64": "1.0.3"
+		},
+		"speech_enhance_v4": {
+			"model_path": "/speech_enhance_v4/",
+			"win_x64": [
+				"WM_SpeechEnhance_OpenVINO_FP32_4.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_SpeechEnhance_OpenVINO_FP32_4.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_SpeechEnhance_CoreML_FP16_4.0.0.0.model"
+			],
+			"win_arm64": [
+				"WM_SpeechEnhance_MNN_FP32_4.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.2",
+			"min_version_mac_x86": "1.0.2",
+			"min_version_mac_arm": "1.0.2",
+			"min_version_ohos": "1.0.1",
+			"min_version_win_arm64": "1.0.2"
+		},
+		"plane_track": {
+			"model_path": "/plane_track/",
+			"win_x64": [
+				"WM_PlaneTracking_OpenVINO_FP16_1.0.0.3.model"
+			],
+			"mac_x86": [
+				"WM_PlaneTracking_OpenVINO_FP16_1.0.0.3.model"
+			],
+			"mac_arm": [
+				"WM_PlaneTracking_MNN_FP16_1.0.0.3.model"
+			],
+			"ohos": [
+				"WM_PlaneTracking_240X144_HIAI_FP16_1.0.1.0.model",
+				"WM_PlaneTracking_384X224_HIAI_FP16_1.0.1.0.model",
+				"WM_PlaneTracking_640X368_HIAI_FP16_1.0.1.0.model"
+			],
+			"win_arm64": [
+				"WM_PlaneTracking_MNN_FP16_1.0.0.3.model"
+			],
+			"min_version_win_x64": "1.0.6",
+			"min_version_mac_x86": "1.0.6",
+			"min_version_mac_arm": "1.0.6",
+			"min_version_ohos": "1.0.5",
+			"min_version_win_arm64": "1.0.5"
+		},
+		"clip_algorithm": {
+			"model_path": "/clip_algorithm/",
+			"win_x64": [
+				"WM_Clip_CPU_Openvino_Fp32_1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.0"
+		},
+		"ai_wind_denoise_v2": {
+			"model_path": "/ai_wind_denoise_v2/",
+			"win_x64": [
+				"WM_AiWindDenoiseV2_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_AiWindDenoiseV2_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"VM_SpeechEnhanceV4_CoreML_FP16_1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.2",
+			"min_version_mac_x86": "1.0.2",
+			"min_version_mac_arm": "1.0.2"
+		},
+		"large_language_chat": {
+			"model_path": "/DeepSeek-R1-Distill-Qwen-7B/",
+			"win_x64": [
+				""
+			],
+			"min_version_win_x64": "1.0.0"
+		},
+		"stable_diffusion": {
+			"model_path": "/stable_diffusion/",
+			"win_x64": [
+				"dreamshaper_8.safetensors"
+			],
+			"min_version_win_x64": "1.0.0"
+		},
+		"video_scene_segment": {
+			"model_path": "/video_scene_segment/",
+			"ohos": [
+				"WM_VideoSceneSegmentMoonDream_HIAI_FP16_1.0.1.0.model",
+				"WM_VideoSceneSegmentTransNetV2_MNN_FP32_1.0.0.0.model"
+			],
+			"min_version_ohos": "1.0.2"
+		},
+		"cuda_sdk_12_9": {
+			"model_path": "/cuda_sdk_12_9/",
+			"win_x64": [],
+			"min_version_win_x64": "1.0.0"
+		},
+		"video_understanding_hiai": {
+			"model_path": "/video_understanding_hiai/",
+			"ohos": [],
+			"min_version_ohos": "1.0.0"
+		},
+		"video_quality_enhance": {
+			"model_path": "/video_quality_enhance/",
+			"win_x64": [
+				"WM_VideoQualityEnhance_X1_TensorRT_30S_FP16_1.0.0.0.model",
+				"WM_VideoQualityEnhance_X1_TensorRT_40S_FP16_1.0.0.0.model",
+				"WM_VideoQualityEnhance_X1_TensorRT_50S_FP16_1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.1"
+		},
+		"normal_generate": {
+			"model_path": "/normal_generate/",
+			"win_x64": [
+				"WM_NormalGenerate_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_NormalGenerate_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_NormalGenerate_CoreML_FP32_1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.0",
+			"min_version_mac_x86": "1.0.0",
+			"min_version_mac_arm": "1.0.0"
+		},
+		"video_light": {
+			"model_path": "/video_light/",
+			"win_x64": [
+				"WM_VideoLight_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_x86": [
+				"WM_VideoLight_OpenVINO_FP32_1.0.0.0.model"
+			],
+			"mac_arm": [
+				"WM_VideoLight_CoreML_FP32_1.0.0.0.model"
+			],
+			"min_version_win_x64": "1.0.0",
+			"min_version_mac_x86": "1.0.0",
+			"min_version_mac_arm": "1.0.0"
+		},
+		"pipeline_face_landmarks": {
+			"model_path": "/pipeline_face_landmarks/",
+			"win_x64": [
+				"WM_FaceDetector_OpenVINO_FP32_2.0.0.5.model",
+				"WM_FaceLandmarksV3_OpenVINO_FP32_1.0.0.1.model",
+				"WM_FacePoseEstimator_Net_Binary_1.0.0.0.model"
+			],
+			"mac_x86": [],
+			"mac_arm": [],
+			"ohos": [],
+			"win_arm64": [],
+			"ios": [],
+			"android": [],
+			"min_version_win_x64": "1.0.0",
+			"min_version_mac_x86": "1.0.0",
+			"min_version_mac_arm": "1.0.0",
+			"min_version_ohos": "1.0.0",
+			"min_version_android": "1.0.0",
+			"min_version_ios": "1.0.0",
+			"min_version_win_arm64": "1.0.0"
+		}
+	},
+	"modules": {
+		"ai_potrait": [
+			"human_segmentation_effect",
+			"human_segmentation_highacc"
+		],
+		"interactive_segment": [
+			"interactive_segment",
+			"mask_propagation"
+		],
+		"auto_reframe": [
+			"auto_reframe"
+		],
+		"instant_mode": [
+			"face_detector"
+		],
+		"speech_enhance": [
+			"speech_enhance"
+		],
+		"video_feature_extraction": [
+			"video_feature_extraction"
+		],
+		"video_frame_interpolation": [
+			"video_frame_interpolation"
+		],
+		"thumbnail": [
+			"semantic_segmentation"
+		],
+		"ai_mask": [
+			"human_segmentation_highacc",
+			"interactive_segment",
+			"semantic_segmentation"
+		],
+		"toning": [
+			"human_skin_segment"
+		],
+		"audio_separation_lite": [
+			"audio_separation_lite"
+		],
+		"human_segmentation_effect": [
+			"human_segmentation_effect"
+		],
+		"human_segmentation_highacc": [
+			"human_segmentation_highacc"
+		],
+		"depth_estimate": [
+			"depth_estimate"
+		],
+		"pipeline_face_cluster": [
+			"face_cluster"
+		],
+		"pipeline_face_landmarks": [
+			"face_landmarks_v2",
+			"face_landmarks_v3",
+			"face_pose_estimator",
+			"face_visibility",
+			"face_detector"
+		],
+		"pipeline_face_landmarks_v3": [
+			"pipeline_face_landmarks"
+		],
+		"human_landmarks": [
+			"human_landmarks"
+		],
+		"human_segmentation_hair": [
+			"human_segmentation_hair"
+		],
+		"video_denoising_lite": [
+			"video_denoising_lite"
+		],
+		"audio_stt": [
+			"audio_stt"
+		],
+		"video_search_image": [
+			"video_search_image"
+		],
+		"video_search_text": [
+			"video_search_text"
+		],
+		"speech_enhance_v3": [
+			"speech_enhance_v3"
+		],
+		"plane_track": [
+			"plane_track"
+		],
+		"smart_mosaic": [
+			"smart_mosaic"
+		],
+		"clip_algorithm": [
+			"clip_algorithm"
+		],
+		"ai_wind_denoise_v2": [
+			"ai_wind_denoise_v2"
+		],
+		"speech_enhance_v4": [
+			"speech_enhance_v4"
+		],
+		"large_language_chat": [
+			"large_language_chat"
+		],
+		"stable_diffusion": [
+			"stable_diffusion"
+		],
+		"video_scene_segment": [
+			"video_scene_segment"
+		],
+		"cuda_sdk_12_9": [
+			"cuda_sdk_12_9"
+		],
+		"video_understanding_hiai": [
+			"video_understanding_hiai"
+		],
+		"video_quality_enhance": [
+			"video_quality_enhance"
+		],
+		"normal_generate": [
+			"normal_generate"
+		],
+		"video_light": [
+			"video_light"
+		]
+	}
+}

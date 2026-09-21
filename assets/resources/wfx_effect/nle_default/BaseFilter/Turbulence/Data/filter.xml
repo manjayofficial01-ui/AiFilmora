@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>F22B22B7-3214-4DA5-9B4A-B68A36F3B6EB</GUID>
+<Name>Turbulence</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Turbulence.conf</ConfigFile>
+</GPUFilter>
+</Filter>

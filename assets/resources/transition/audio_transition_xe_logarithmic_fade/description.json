@@ -1,0 +1,7 @@
+{
+	"type" : "audio_transition",
+	"display_name" : "audio transiton logarithmic fade",
+	"unique_name" : "audio/blender/transition-xe-logarithmic-fade",
+	"thumb" : "thumb.png",
+	"video" : "test.mp4"
+}

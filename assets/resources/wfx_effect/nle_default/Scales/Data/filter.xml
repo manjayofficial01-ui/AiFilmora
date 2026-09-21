@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>FF366115-B671-4534-B4A9-1E2B15C1B973</GUID>
+        <Name>Scales</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Scales.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

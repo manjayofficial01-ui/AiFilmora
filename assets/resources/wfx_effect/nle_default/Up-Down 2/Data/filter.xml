@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>B84A6B57-861A-4931-815D-4B52E1C5DC46</GUID>
+        <Name>Up-Down 2</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>cameraQuake2.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

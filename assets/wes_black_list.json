@@ -1,0 +1,545 @@
+{
+	"version": "1.0.0.9",
+	"comment1": "opengl opencl codec decode encode direct3d ddraw ",
+	"comment2": "1.name   2.version   3.device   4.vender  5.subsysid 6.nativever ",
+	"comment3": "1.version_and_name  2.device_and_name ",
+	"comment4": "1.name_regx  2.version_regx  3.nativever_regx",
+	"blocklist": [
+		{
+			"type": "for example",
+			"name": "AAA BBB",
+			"name_regx": "",
+			"vender": "0x8086",
+			"version": "VV.VV.VV.VV",
+			"version_regx": "",
+			"device": "0x4102",
+			"subsysid": "0x4102",
+			"version_and_name": "VV.VV.VV.VV, AAA BBB",
+			"device_and_name": "0x4102, AAA BBB",
+			"level": "error",
+			"bug": "old_black_list",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "opencl",
+			"name": "Intel(R) UHD Graphics 630",
+			"vender": "0x8086",
+			"version": "21.20.16.4542",
+			"level": "error",
+			"bug": "old_black_list",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "opencl",
+			"name": "Intel(R) UHD Graphics 620",
+			"vender": "0x8086",
+			"version": "27.20.100.9749",
+			"level": "error",
+			"bug": "Video no longer plays after a few minutes",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "direct3d",
+			"vender": "0x10DE",
+			"device": [
+				"0x0DCE",
+				"0x0DD1",
+				"0x0DE3",
+				"0x0DE9",
+				"0x0DEB",
+				"0x0DED",
+				"0x0DEE",
+				"0x0DF0",
+				"0x0DF2",
+				"0x0DF4",
+				"0x0DF6",
+				"0x0FD1",
+				"0x0FD2",
+				"0x0FD3",
+				"0x0FD4",
+				"0x0FD9",
+				"0x0FDF",
+				"0x0FE3",
+				"0x0FE4",
+				"0x0FF6",
+				"0x1050",
+				"0x1051",
+				"0x105A",
+				"0x1140",
+				"0x1198",
+				"0x1199",
+				"0x119F",
+				"0x11A1",
+				"0x11E0",
+				"0x11E2",
+				"0x11E3",
+				"0x1213",
+				"0x1247",
+				"0x1251",
+				"0x1290",
+				"0x1292",
+				"0x1298",
+				"0x1299",
+				"0x1341",
+				"0x1346",
+				"0x1347",
+				"0x134F",
+				"0x134E",
+				"0x134D",
+				"0x134B",
+				"0x179C",
+				"0x1391",
+				"0x1392",
+				"0x1398",
+				"0x139A",
+				"0x139B",
+				"0x139C",
+				"0x13D7",
+				"0x13D8",
+				"0x13D9",
+				"0x1617",
+				"0x1618",
+				"0x1619"
+			],
+			"nativever_regx": "^(([0-2]\\.\\d+)|((3\\.)([0]?\\d{0,3}|[1-5]\\d{3}|6[0-7]\\d{2}|68[0-7]\\d|6880)))$",
+			"comment": "older than 3.6881",
+			"level": "error",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "direct3d",
+			"vender": "0x10DE",
+			"nativever": [
+				"3.6451",
+				"3.6260",
+				"3.6175",
+				"3.6143"
+			],
+			"level": "error",
+			"subsysid": "0x1043",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "direct3d",
+			"vender": "0x8086",
+			"version": "27.20.100.8935",
+			"level": "error",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "direct3d",
+			"vender": "0x8086",
+			"version_regx": "^(8.15.10.((?!1930)([0]?[0-9]{3}|[1-2][0-9]{3})))$",
+			"comment": "Starts with 8.15.10, older than 8.15.10.3000, but not 8.15.10.1930",
+			"level": "error",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "direct3d",
+			"vender": "0x8086",
+			"version_regx": "^7(\\.\\d+){3}$",
+			"comment": "Starts with 7.",
+			"level": "error",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "opengl",
+			"vender": "0x8086",
+			"version_regx": "^(8.15.10.((?!1930)([0]?[0-9]{3}|[1-2][0-9]{3})))$",
+			"comment": "Starts with 8.15.10, older than 8.15.10.3000, but not 8.15.10.1930",
+			"level": "error",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "opengl",
+			"vender": "0x8086",
+			"version_regx": "^7(\\.\\d+){3}$",
+			"comment": "Starts with 7.3",
+			"level": "error",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "opengl",
+			"name": "Intel(R) HD Graphics 4000",
+			"vender": "0x8086",
+			"level": "error",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "opengl",
+			"vender": "0x8086",
+			"version": [
+				"25.20.100.6326",
+				"25.20.100.6323",
+				"23.20.16.4973"
+			],
+			"level": "error",
+			"bug": "fxlab",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "opengl",
+			"vender": "0x8086",
+			"device": "0x8A56",
+			"level": "error",
+			"bug": "fxlab",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"name": [
+				"AMD RADEON HD 7800",
+				"AMD RADEON(TM) GRAPHICS"
+			]
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"name_regx": [
+				"^(VEGA ([1-9]|1[0-1]) GRAPHICS)$",
+				"^(VEGA ([1-9]|1[0-1]) MOBILE GRAPHICS)$"
+			],
+			"level": "error",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x8086",
+			"device_and_name": [
+				"0x2E5B, GMA 500",
+				"0x8108, GMA 500",
+				"0x8109, GMA 500",
+				"0x4102, GMA 600",
+				"0x0BE0, GMA 3600",
+				"0x0BE1, GMA 3600",
+				"0x0BE2, GMA 3650",
+				"0x0BE3, GMA 3650",
+				"0x08C7, GMA",
+				"0x08C8, GMA",
+				"0x08C9, GMA",
+				"0x08CA, GMA",
+				"0x08CB, GMA",
+				"0x08CC, GMA",
+				"0x08CD, GMA",
+				"0x08CE, GMA",
+				"0x08CF, GMA",
+				"0x1606, HD Graphics",
+				"0x015A, HD Graphics",
+				"0x0152, HD Graphics 2500",
+				"0x0F30, HD Graphics",
+				"0x0F31, HD Graphics",
+				"0x0F32, HD Graphics",
+				"0x0F33, HD Graphics",
+				"0x0155, HD Graphics",
+				"0x0157, HD Graphics",
+				"0x0402, HD Graphics",
+				"0x0406, HD Graphics",
+				"0x040A, HD Graphics",
+				"0x040B, HD Graphics",
+				"0x040E, HD Graphics",
+				"0x0A02, HD Graphics",
+				"0x0A06, HD Graphics",
+				"0x0A0A, HD Graphics",
+				"0x0A0B, HD Graphics",
+				"0x0A0E, HD Graphics",
+				"0x010A, HD Graphics",
+				"0x0102, HD Graphics 2000",
+				"0x0042, HD Graphics",
+				"0x0046, HD Graphics",
+				"0x2972, GMA 3000",
+				"0x2992, GMA 3000",
+				"0x29A2, GMA X3000",
+				"0x2982, GMA X3500",
+				"0x2A02, GMA X3100",
+				"0x2A12, GMA X3100",
+				"0x2E42, GMA 4500",
+				"0x2E92, GMA 4500",
+				"0x2E12, GMA 4500",
+				"0x2E32, GMA X4500",
+				"0x2E22, GMA X4500HD",
+				"0x2A42, GMA 4500MHD",
+				"0x2582, GMA 900",
+				"0x258A, GMA 900",
+				"0x2592, GMA 900",
+				"0x2772, GMA 950",
+				"0x27A2, GMA 950",
+				"0x27AE, GMA 950",
+				"0x29D2, GMA 3100",
+				"0x29B2, GMA 3100",
+				"0x29C2, GMA 3100",
+				"0xA001, GMA 3150",
+				"0xA011, GMA 3150",
+				"0x2562, Extreme Graphics ",
+				"0x3577, Extreme Graphics ",
+				"0x2572, Extreme Graphics 2",
+				"0x3582, Extreme Graphics 2",
+				"0x358E, Extreme Graphics 2",
+				"0x3582, Extreme Graphics 2",
+				"0x7800, Intel740",
+				"0x1240, 752",
+				"0x7121, 3D graphics with Direct AGP",
+				"0x7123, 3D graphics with Direct AGP",
+				"0x7125, 3D graphics with Direct AGP",
+				"0x1132, 3D graphics with Direct AGP"
+			],
+			"level": "error",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"version": [
+				"31.0.12029.10015",
+				"31.0.12027.9001"
+			],
+			"level": "error",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"version_and_name": [
+				"31.0.21912.14, Radeon RX550/550 Series",
+				"31.0.21902.5, RADEON RX 570 SERIES",
+				"31.0.14057.2005, RADEON RX 570 SERIES",
+				"31.0.12044.3, AMD Radeon(TM) Graphics ",
+				"31.0.12044.24003, AMD Radeon(TM) Vega 8 Graphics",
+				"31.0.12044.13002, Radeon(TM) RX 550",
+				"31.0.12044.13002, RADEON(TM) RX 550",
+				"27.20.20913.2000, AMD RADEON R9 200 SERIES",
+				"27.20.20913.2000, AMD Radeon (TM) R9 380 Series",
+				"27.20.20913.2000, AMD Radeon(TM) R7 Graphics",
+				"27.20.20913.2000, AMD RADEON R7 250 SERIES",
+				"27.20.20913.2000, AMD Radeon (TM) R7 370 Series",
+				"27.20.20913.2000, AMD Radeon(TM) R5 240",
+				"27.20.20912.1002, AMD Radeon(TM) R5 340X",
+				"27.20.20912.1002, AMD Radeon R9 200 Series",
+				"27.20.20912.1002, AMD Radeon(TM) R7 Graphics",
+				"27.20.20906.6, AMD Radeon R7 200 Series",
+				"27.20.2001.13001, AMD Radeon RX 580 2048SP",
+				"27.20.2001.13001, Radeon RX550/550 Series",
+				"27.20.14540.4003, AMD Radeon R7 200 Series",
+				"27.20.14501.28009, Radeon 520",
+				"27.20.14501.18003, AMD Radeon (TM) R9 200 Series",
+				"27.20.14501.18003, AMD RADEON R9 200 SERIES",
+				"27.20.14501.18003, AMD Radeon R9 200 Series",
+				"27.20.1034.6, AMD Radeon R9 200 Series",
+				"27.20.1034.6, AMD Radeon R7 Series / HD 9000 Series",
+				"27.20.1034.6, AMD Radeon R7 Graphics",
+				"27.20.1034.6, AMD Radeon (TM) R5 340",
+				"27.20.1034.6, AMD Radeon(TM) R4 Graphics",
+				"27.20.1034.6, Radeon (TM) RX 480 Graphics",
+				"27.20.1034.6, Radeon RX 560 Series",
+				"27.20.1034.6, Radeon RX 580 Series ",
+				"27.20.1028.1, AMD Radeon(TM) Vega 8 Graphics",
+				"27.20.1028.1, Radeon RX 560X Series",
+				"26.20.14054.0, AMD Radeon(TM) Graphics",
+				"26.20.14054.0, AMD Radeon(TM) Graphics",
+				"26.20.14038.2009, Radeon(TM) RX 550",
+				"26.20.14030.2002, AMD Radeon(TM) Graphics",
+				"26.20.12036.4002, AMD Radeon(TM) Vega 8 Graphics",
+				"26.20.12028.2, Radeon RX 570 Series",
+				"26.20.12028.2, AMD Radeon R7 200 Series",
+				"25.20.15006.9, Radeon RX Vega M GL Graphics",
+				"24.20.11028.1004, AMD Radeon R7 Graphics",
+				"24.20.11016.8001, Radeon Pro 555X",
+				"23.20.768.12, AMD Radeon (TM) RX 580",
+				"22.19.172.769, AMD Radeon(TM) R9 270"
+			],
+			"level": "error",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"name": [
+				"AMD RADEON(TM)",
+				"GRAPHICS AMD RADEON(TM)",
+				"Vega 8 GRAPHICS"
+			],
+			"version": [
+				"31.0.21902.5",
+				"31.0.12044.3",
+				"31.0.12044.24003",
+				"30.0.13014.8",
+				"30.0.13024.4"
+			],
+			"level": "error",
+			"bug": "",
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"version_and_name": [
+				"27.20.20913.2000, AMD Radeon R9 200 / HD 7900 Series",
+				"27.20.20913.2000, AMD RADEON R9 M390",
+				"27.20.20913.2000, AMD Radeon R7 Series / HD 9000 Series",
+				"26.20.15029.27017, AMD Radeon RX 5700 XT",
+				"26.20.15029.27017, Radeon RX 580 Series",
+				"26.20.15019.19000, Radeon RX 560 Series",
+				"26.20.15029.27017, Radeon RX 5500 XT",
+				"26.20.15032.2015, AMD Radeon Pro 5500 XT"
+			],
+			"level": "error",
+			"bug": [
+				"p7_44650",
+				"p7_45404"
+			],
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x10DE",
+			"version": [
+				"31.0.15.5161"
+			],
+			"level": "error",
+			"bug": [
+				"p7_45406"
+			],
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x10DE",
+			"version_and_name": [
+				"31.0.15.2879, NVIDIA GeForce RTX 3050 Laptop GPU"
+			],
+			"level": "error",
+			"bug": [
+				"p7_45406"
+			],
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"version_and_name": [
+				"27.20.14540.14002, Radeon 520"
+			],
+			"level": "error",
+			"bug": [],
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"version": [
+				"27.20.1023.1001",
+				"27.20.1034.6",
+				"32.0.11002.2000"
+			],
+			"level": "error",
+			"bug": [],
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"version_and_name": [
+				"27.20.1034.6, AMD Radeon R7 240 Series",
+				"30.0.13023.4001, Radeon RX550/550 Series",
+				"31.0.21912.14, Radeon RX550/550 Series",
+				"31.0.21906.6, Radeon RX550/550 Series",
+				"31.0.21910.5, Radeon RX550/550 Series",
+				"32.0.11029.1008, AMD Radeon RX 7600",
+				"32.0.11029.1008, AMD Radeon RX 7800 XT",
+				"27.20.14540.14002, Radeon RX 560",
+				"31.0.14051.5006, Radeon RX 570 Series",
+				"27.20.1034.6, AMD Radeon R7 Graphics",
+				"15.200.1062.1004, AMD Radeon HD 6670",
+				"22.19.162.4, AMD Radeon R7 200 Series",
+				"27.20.20913.2000, AMD Radeon (TM) R9 370 Series",
+				"22.19.162.4, AMD Radeon R7 200 Series",
+				"31.0.21910.5, AMD Radeon RX 580 2048SP",
+				"22.19.162.4, AMD Radeon R7 200 Series",
+				"31.0.21912.14, AMD Radeon(TM) RX 560 Series",
+				"27.20.20913.2000, AMD Radeon R7 200 Series"
+			],
+			"level": "error",
+			"bug": [
+				"AMDBLACKLIST.txt"
+			],
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"version": [
+				"32.0.11002.2000"
+			],
+			"level": "error",
+			"bug": [
+				"AMDBLACKLIST.txt"
+			],
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"version_and_name": [
+				"31.0.24027.1012, AMD Radeon RX 5500 XT"
+			],
+			"level": "error",
+			"bug": [
+				"p63_11909"
+			],
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"version_and_name": [
+				"26.20.14038.2009, AMD Radeon (TM) RX 550",
+				"26.20.14038.2009, AMD Radeon (TM) RX 580"
+			],
+			"level": "error",
+			"bug": [
+				"p7_63064"
+			],
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x1002",
+			"version_and_name": [
+				"26.20.13001.53002, Radeon Pro 555",
+				"27.20.14540.4003, AMD Radeon (TM) R9 200 Series",
+				"27.20.20903.8001, AMD Radeon R7 Graphics",
+				"31.0.21921.1000, Radeon RX550/550 Series",
+				"30.0.13023.4001, Radeon RX550/550 Series",
+				"31.0.21923.1000, Radeon RX550/550 Series"
+			],
+			"level": "error",
+			"bug": [
+				"zhuyu"
+			],
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		},
+		{
+			"type": "codec",
+			"vender": "0x8086",
+			"version_and_name": [
+				"32.0.101.6647, Intel(R) UHD Graphics 750"
+			],
+			"level": "error",
+			"bug": [
+				"p63_28295"
+			],
+			"url": "https://filmora.wondershare.com/system-hardware-requirements.html"
+		}
+	]
+}

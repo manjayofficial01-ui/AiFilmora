@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WhiteList>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 630</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.1 NEO</DeviceVersion>
+	<DriverVersion>25.20.100.6373</DriverVersion>
+  </Item>
+  <Item>
+	<VID>4318</VID>
+	<DeviceName>GeForce GTX 1050 Ti</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2 CUDA</DeviceVersion>
+	<DriverVersion>411.30</DriverVersion>
+  </Item>
+  
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 530</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.1</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.1 NEO</DeviceVersion>
+	<DriverVersion>23.20.16.4973</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 530</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.0</DeviceVersion>
+	<DriverVersion>21.20.16.4590</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 530</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.0</DeviceVersion>
+	<DriverVersion>20.19.15.4501</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 4600</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2</DeviceVersion>
+	<DriverVersion>20.19.15.4835</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 4600</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2</DeviceVersion>
+	<DriverVersion>20.19.15.4531</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 4600</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2</DeviceVersion>
+	<DriverVersion>10.18.14.4889</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>[NG]Intel(R) HD Graphics 620</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.1 NEO</DeviceVersion>
+	<DriverVersion>25.20.100.6472</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 615</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.1</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.1 NEO</DeviceVersion>
+	<DriverVersion>23.20.16.4974</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>[NG]Intel(R) HD Graphics 5500</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.0</DeviceVersion>
+	<DriverVersion>20.19.15.4835</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 630</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.1</DeviceVersion>
+	<DriverVersion>23.20.16.4849</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 630</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.1 NEO</DeviceVersion>
+	<DriverVersion>23.20.16.4982</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 630</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.1</DeviceVersion>
+	<DriverVersion>21.20.16.4627</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 630</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.1 NEO</DeviceVersion>
+	<DriverVersion>24.20.100.6286</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) HD Graphics 630</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.1 NEO</DeviceVersion>
+	<DriverVersion>25.20.100.6374</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>[NG]Intel(R) HD Graphics 4400</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2</DeviceVersion>
+	<DriverVersion>10.18.14.4432</DriverVersion>
+  </Item>
+
+  <Item>
+	<VID>4318</VID>
+	<DeviceName>[NG]GeForce 920M</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2 CUDA</DeviceVersion>
+	<DriverVersion>391.25</DriverVersion>
+  </Item>
+  <Item>
+	<VID>4318</VID>
+	<DeviceName>GeForce GTX 1060</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2 CUDA</DeviceVersion>
+	<DriverVersion>391.4</DriverVersion>
+  </Item>
+  <Item>
+	<VID>4318</VID>
+	<DeviceName>[NG]GeForce GT 730</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2 CUDA</DeviceVersion>
+	<DriverVersion>398.72</DriverVersion>
+  </Item>
+  <Item>
+	<VID>4318</VID>
+	<DeviceName>GeForce GTX 970</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2 CUDA</DeviceVersion>
+	<DriverVersion>417.3</DriverVersion>
+  </Item>
+  <Item>
+	<VID>4318</VID>
+	<DeviceName>[NG]GeForce GT 730</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2 CUDA</DeviceVersion>
+	<DriverVersion>417.22</DriverVersion>
+  </Item>
+  <Item>
+	<VID>4318</VID>
+	<DeviceName>GeForce GTX 1660 Ti</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2 CUDA</DeviceVersion>
+	<DriverVersion>430.64</DriverVersion>
+  </Item>
+  <Item>
+	<VID>4318</VID>
+	<DeviceName>GeForce RTX 2080</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2 CUDA</DeviceVersion>
+	<DriverVersion>417.22</DriverVersion>
+  </Item>
+  
+  <Item>
+	<VID>4098</VID>
+	<DeviceName>[NG]Tahiti</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2</OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2 AMD-APP (2442.9)</DeviceVersion>
+	<DriverVersion>2442.9</DriverVersion>
+  </Item>
+  <Item>
+	<VID>4098</VID>
+	<DeviceName>Tonga</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.0 AMD-APP (2527.10)</DeviceVersion>
+	<DriverVersion>2527.1</DriverVersion>
+  </Item>
+  <Item>
+	<VID>4098</VID>
+	<DeviceName>[NG]Baffin</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.0 AMD-APP (2766.5)</DeviceVersion>
+	<DriverVersion>2766.5</DriverVersion>
+  </Item>
+  <Item>
+	<VID>4098</VID>
+	<DeviceName>gfx906</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.0 AMD-APP (2841.5)</DeviceVersion>
+	<DriverVersion>2841.5 (PAL,HSAIL)</DriverVersion>
+  </Item>
+  <Item>
+	<VID>4098</VID>
+	<DeviceName>[NG]gfx900</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.0 AMD-APP (2841.5)</DeviceVersion>
+	<DriverVersion>2841.5 (PAL,HSAIL)</DriverVersion>
+  </Item>
+</WhiteList>

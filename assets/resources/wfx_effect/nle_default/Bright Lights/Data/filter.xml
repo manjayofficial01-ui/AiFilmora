@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>740E5BD0-1BAD-4688-AF49-946FAE0F2E7A</GUID>
+    <Name>Bright Lights</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Bright Lights.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

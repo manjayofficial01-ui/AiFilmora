@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>FCE566DB-A60A-4123-993D-52446A3A9A74</GUID>
+        <Name>Ripple 1</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Ripple 1.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

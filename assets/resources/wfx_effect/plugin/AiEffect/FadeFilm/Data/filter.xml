@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>131973D4-7098-4009-A8FC-9F479DC23BDF</GUID>
+    <Name>FadeFilm</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>FadeFilm.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

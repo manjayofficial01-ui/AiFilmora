@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>79202789-16FF-4579-8CE1-7FAA22FF32E8</GUID>
+        <Name>Bilateral Filter</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+        <ConfigFile>Bilateral Filter.conf</ConfigFile>
+        </GPUFilter>
+        </Filter>

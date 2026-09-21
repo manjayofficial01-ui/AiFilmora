@@ -1,0 +1,14 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>7D946E50-6D30-4BB6-B2ED-0F18E9E75192</GUID>
+    <Name>Human_Noise</Name>
+    <Transition>1</Transition>
+    <HumanSegment>
+        <GPUFilter>
+            <ConfigFile>Human_Noise.conf</ConfigFile>
+        </GPUFilter>
+    </HumanSegment>
+    
+	</Filter>
+	

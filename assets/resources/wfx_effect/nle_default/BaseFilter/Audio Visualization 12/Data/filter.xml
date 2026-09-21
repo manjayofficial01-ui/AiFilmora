@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>94CE6649-AE47-4F52-8B83-7C56435D49FA</GUID>
+    <Name>Audio Visualization 12</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 12.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

@@ -1,0 +1,1087 @@
+<NLECaption>
+	<Animations>
+		<item name="No Animation" thumbnail="/Base/No Animation.png" type="0">
+			<AnimationPath></AnimationPath>
+		</item>
+		<item name="Wavy style" thumbnail="/Base/wavy - style.png" type="1">
+			<AnimationPath>/Base/Wavy Style.xml</AnimationPath>
+		</item>
+		<item name="Type Writer" thumbnail="/Base/type-writer.png" type="1">
+			<AnimationPath>/Base/Type Writer.xml</AnimationPath>
+		</item>
+		<item name="Cinema style" thumbnail="/Base/cinema-style.png" type="1">
+			<AnimationPath>/Base/Cinema Style.xml</AnimationPath>
+		</item>
+		<item name="Doomo Design" thumbnail="/Base/doomo.png" type="1">
+			<AnimationPath>/Base/Doomo Design.xml</AnimationPath>
+		</item>
+		<item name="String Blur" thumbnail="/Base/string-Blur.png" type="1">
+			<AnimationPath>/Base/String Blur.xml</AnimationPath>
+		</item>
+		<item name="RichTick" thumbnail="/Base/richtick.png" type="1">
+			<AnimationPath>/Base/Rich Tick.xml</AnimationPath>
+		</item>
+		<item name="Radom" thumbnail="/Base/radom.png" type="1">
+			<AnimationPath>/Base/Random.xml</AnimationPath>
+		</item>
+		<item name="Random 2" thumbnail="/Base/Random 2.png" type="1">
+			<AnimationPath>/Base/Random 2.xml</AnimationPath>
+		</item>
+		<item name="Up Insert" thumbnail="/AnimationWithGUID/Up Insert_An.png" type="8">
+			<Guid>09913F15-9C83-438F-A226-0EB26E8B8F7A</Guid>
+		</item>	
+		<item name="Down Insert" thumbnail="/AnimationWithGUID/Down Insert_An.png" type="8">
+			<Guid>7A5B04FB-9AE0-46e7-B6CC-62BA64D8E16D</Guid>
+		</item>	
+		<item name="Up Dir Insert" thumbnail="/AnimationWithGUID/Up Dir Insert.png" type="8">
+			<Guid>C6163B42-A2C4-45E2-8D5F-347A0CCC2631</Guid>
+		</item>	
+		<item name="Left Dir Insert" thumbnail="/AnimationWithGUID/left Dir Insert.png" type="8">
+			<Guid>0A6EE4AB-01BC-4D82-AA52-03FFA6F708DC</Guid>
+		</item>	
+		<item name="Right Dir Insert" thumbnail="/AnimationWithGUID/Right Dir Insert.png" type="8">
+			<Guid>13C68E5A-746D-4645-8A84-52CBBB7F113B</Guid>
+		</item>	
+		<item name="Down Dir Insert" thumbnail="/AnimationWithGUID/Down Dir Insert.png" type="8">
+			<Guid>8C3B822D-8C59-4A7B-AF96-56E280CFB7C0</Guid>
+		</item>	
+		<item name="Up Roll" thumbnail="/AnimationWithGUID/Up-Roll.png" type="8">
+			<Guid>953621CC-6153-4BFD-850D-CA26E32E4E23</Guid>
+		</item>	
+		<item name="Down Roll" thumbnail="/AnimationWithGUID/Down Roll_An.png" type="8">
+			<Guid>6EEB6D91-A237-473c-9DCF-C754DE365085</Guid>
+		</item>	
+		<item name="Left Roll" thumbnail="/AnimationWithGUID/Left Roll_An.png" type="8">
+			<Guid>B5B513BD-D6FF-4142-8265-0850B6BC4C16</Guid>
+		</item>	
+		<item name="Right Roll" thumbnail="/AnimationWithGUID/Right Roll_An.png" type="8">
+			<Guid>F2A199F6-44FE-48b3-84D0-D58DA2624421</Guid>
+		</item>
+		<item name="Drop1" thumbnail="/AnimationWithGUID/drop.png" type="2">
+			<Guid>136D4AD9-F8E6-44ef-8485-730F0F269FFD</Guid>
+		</item>
+		<item name="Pixelate" thumbnail="/AnimationWithGUID/pixelate.png" type="2">
+			<Guid>0FBDABAD-9BC5-42e7-9596-EC20AC763806</Guid>
+		</item>
+		<item name="Pinwheel" thumbnail="/AnimationWithGUID/pinwheel.png" type="2">
+			<Guid>668D3D30-43B8-41ef-A222-86E7912A497E</Guid>
+		</item>
+		<item name="Erase" thumbnail="/AnimationWithGUID/erase.png" type="2">
+			<Guid>667A322D-7351-44fd-AACC-17B0F766DA5F</Guid>
+		</item>
+		<item name="Crosszoom" thumbnail="/AnimationWithGUID/crosszoom.png" type="2">
+			<Guid>A679E80D-8647-4028-A366-6BFFEE34715A</Guid>
+		</item>
+		<item name="Doorway" thumbnail="/AnimationWithGUID/doorway.png" type="2">
+			<Guid>976B2502-3B22-4dd4-AEB4-0AAA2C1E5AC8</Guid>
+		</item>
+		<item name="Roll clockwise" thumbnail="/AnimationWithGUID/roll_clockwise.png" type="2">
+			<Guid>1EE81222-189E-4159-A917-D15EE518D2FF</Guid>
+		</item>
+		<item name="Round zoom out" thumbnail="/AnimationWithGUID/rounde_zoom_out.png" type="2">
+			<Guid>97D5B991-903E-43bc-9B03-A808F74692D3</Guid>
+		</item>
+		<item name="Twrl" thumbnail="/AnimationWithGUID/twrl.png" type="2">
+			<Guid>664A7041-693D-47c1-81CB-DFAA211D485B</Guid>
+		</item>	
+		<item name="LinearWipe" thumbnail="/AnimationWithGUID/linear wipe.png" type="2">
+			<Guid>FD4A4891-4E1C-4e05-B290-8195CC55E8C5</Guid>
+		</item>	
+		<item name="Push" thumbnail="/AnimationWithGUID/push.png" type="2">
+			<Guid>925C36FB-9EE1-4fca-899F-549D8328F2DC</Guid>
+		</item>	
+		<item name="Skew right split" thumbnail="/AnimationWithGUID/skew_right_split.png" type="2">
+			<Guid>2D4099D2-9B28-437f-8FEB-2A7E25C0B549</Guid>
+		</item>	
+		<item name="Evaporate" thumbnail="/AnimationWithGUID/Evaporate 1.png" type="2">
+			<Guid>Evaporate 1</Guid>
+		</item>	
+		<item name="Fade1" thumbnail="/AnimationWithGUID/Fade_An.png" type="2">
+			<Guid>0CAA397E-6EB2-4e51-9DF7-B7DDB338EB22</Guid>
+		</item>				
+		<item name="Boom!" thumbnail="/Motion/Boom!.png" type="4">
+			<AnimationPath>/Motion/Boom!.xml</AnimationPath>
+		</item>		
+		<item name="Bounce to zoom in 1" thumbnail="/Motion/Bounce to zoom in 1.png" type="4">
+			<AnimationPath>/Motion/Bounce to zoom in 1.xml</AnimationPath>
+		</item>
+		<item name="Bounce to zoom in 2" thumbnail="/Motion/Bounce to zoom in 2.png" type="4">
+			<AnimationPath>/Motion/Bounce to zoom in 2.xml</AnimationPath>
+		</item>
+		<item name="Bounce to zoom out 1" thumbnail="/Motion/Bounce to zoom out 1.png" type="4">
+			<AnimationPath>/Motion/Bounce to zoom out 1.xml</AnimationPath>
+		</item>
+		<item name="Clockwise rotate to zoom in 1" thumbnail="/Motion/Clockwise rotate to zoom in 1.png" type="4">
+			<AnimationPath>/Motion/Clockwise rotate to zoom in 1.xml</AnimationPath>
+		</item>
+		<item name="Clockwise rotate to zoom in 2" thumbnail="/Motion/Clockwise rotate to zoom in 2.png" type="4">
+			<AnimationPath>/Motion/Clockwise rotate to zoom in 2.xml</AnimationPath>
+		</item>
+		<item name="Clockwise rotate" thumbnail="/Motion/Clockwise rotate.png" type="4">
+			<AnimationPath>/Motion/Clockwise rotate.xml</AnimationPath>
+		</item>
+		<item name="Counter clockwise rotate" thumbnail="/Motion/Counter clockwise rotate.png" type="4">
+			<AnimationPath>/Motion/Counter clockwise rotate.xml</AnimationPath>
+		</item>
+		<item name="Down Up 1" thumbnail="/Motion/Down Up 1.png" type="4">
+			<AnimationPath>/Motion/Down Up 1.xml</AnimationPath>
+		</item>
+		<item name="Down Up 2" thumbnail="/Motion/Down Up 2.png" type="4">
+			<AnimationPath>/Motion/Down Up 2.xml</AnimationPath>
+		</item>
+		<item name="Fade Slide 1" thumbnail="/Motion/Fade Slide 1.png" type="4">
+			<AnimationPath>/Motion/Fade Slide 1.xml</AnimationPath>
+		</item>
+		<item name="Fade Slide 2" thumbnail="/Motion/Fade Slide 2.png" type="4">
+			<AnimationPath>/Motion/Fade Slide 2.xml</AnimationPath>
+		</item>
+		<item name="Fade Slide 3" thumbnail="/Motion/Fade Slide 3.png" type="4">
+			<AnimationPath>/Motion/Fade Slide 3.xml</AnimationPath>
+		</item>
+		<item name="Fade Slide 4" thumbnail="/Motion/Fade Slide 4.png" type="4">
+			<AnimationPath>/Motion/Fade Slide 4.xml</AnimationPath>
+		</item>
+		<item name="Fade Zoom In" thumbnail="/Motion/Fade Zoom In.png" type="4">
+			<AnimationPath>/Motion/Fade Zoom In.xml</AnimationPath>
+		</item>
+		<item name="Fade Zoom Out" thumbnail="/Motion/Fade Zoom Out.png" type="4">
+			<AnimationPath>/Motion/Fade Zoom Out.xml</AnimationPath>
+		</item>
+		<item name="Fade2" thumbnail="/Motion/Fade.png" type="4">
+			<AnimationPath>/Motion/Fade.xml</AnimationPath>
+		</item>
+		<item name="Flip Down1" thumbnail="/Motion/Flip Down1.png" type="4">
+			<AnimationPath>/Motion/Flip Down1.xml</AnimationPath>
+		</item>
+		<item name="Flip Down2" thumbnail="/Motion/Flip Down2.png" type="4">
+			<AnimationPath>/Motion/Flip Down2.xml</AnimationPath>
+		</item>
+		<item name="Flip Up1" thumbnail="/Motion/Flip Up1.png" type="4">
+			<AnimationPath>/Motion/Flip Up1.xml</AnimationPath>
+		</item>
+		<item name="Flip Up2" thumbnail="/Motion/Flip Up2.png" type="4">
+			<AnimationPath>/Motion/Flip Up2.xml</AnimationPath>
+		</item>
+		<item name="Fly to zoom in" thumbnail="/Motion/Fly to zoom in.png" type="4">
+			<AnimationPath>/Motion/Fly to zoom in.xml</AnimationPath>
+		</item>
+		<item name="Grow Shrink" thumbnail="/Motion/Grow Shrink.png" type="4">
+			<AnimationPath>/Motion/Grow Shrink.xml</AnimationPath>
+		</item>
+		<item name="Move to bottom" thumbnail="/Motion/Move to bottom.png" type="4">
+			<AnimationPath>/Motion/Move to bottom.xml</AnimationPath>
+		</item>
+		<item name="Move to left" thumbnail="/Motion/Move to left.png" type="4">
+			<AnimationPath>/Motion/Move to left.xml</AnimationPath>
+		</item>
+		<item name="Move to lower left" thumbnail="/Motion/Move to lower left.png" type="4">
+			<AnimationPath>/Motion/Move to lower left.xml</AnimationPath>
+		</item>
+		<item name="Move to lower right" thumbnail="/Motion/Move to lower right.png" type="4">
+			<AnimationPath>/Motion/Move to lower right.xml</AnimationPath>
+		</item>
+		<item name="Move to right" thumbnail="/Motion/Move to right.png" type="4">
+			<AnimationPath>/Motion/Move to right.xml</AnimationPath>
+		</item>
+		<item name="Move to top" thumbnail="/Motion/Move to top.png" type="4">
+			<AnimationPath>/Motion/Move to top.xml</AnimationPath>
+		</item>
+		<item name="Move to upper left" thumbnail="/Motion/Move to upper left.png" type="4">
+			<AnimationPath>/Motion/Move to upper left.xml</AnimationPath>
+		</item>
+		<item name="Move to upper right and zoom in" thumbnail="/Motion/Move to upper right and zoom in.png" type="4">
+			<AnimationPath>/Motion/Move to upper right and zoom in.xml</AnimationPath>
+		</item>
+		<item name="Move to upper right" thumbnail="/Motion/Move to upper right.png" type="4">
+			<AnimationPath>/Motion/Move to upper right.xml</AnimationPath>
+		</item>
+		<item name="Photo Spin 3" thumbnail="/Motion/Photo Spin 3.png" type="4">
+			<AnimationPath>/Motion/Photo Spin 3.xml</AnimationPath>
+		</item>
+		<item name="Photo Spin 4" thumbnail="/Motion/Photo Spin 4.png" type="4">
+			<AnimationPath>/Motion/Photo Spin 4.xml</AnimationPath>
+		</item>
+		<item name="Rotate to zoom in 1" thumbnail="/Motion/Rotate to zoom in 1.png" type="4">
+			<AnimationPath>/Motion/Rotate to zoom in 1.xml</AnimationPath>
+		</item>
+		<item name="Rotate to zoom in 2" thumbnail="/Motion/Rotate to zoom in 2.png" type="4">
+			<AnimationPath>/Motion/Rotate to zoom in 2.xml</AnimationPath>
+		</item>
+		<item name="Spin 1" thumbnail="/Motion/Spin 1.png" type="4">
+			<AnimationPath>/Motion/Spin 1.xml</AnimationPath>
+		</item>
+		<item name="Spin 2" thumbnail="/Motion/Spin 2.png" type="4">
+			<AnimationPath>/Motion/Spin 2.xml</AnimationPath>
+		</item>
+		<item name="Spin 3" thumbnail="/Motion/Spin 3.png" type="4">
+			<AnimationPath>/Motion/Spin 3.xml</AnimationPath>
+		</item>		
+		<item name="Spin 4" thumbnail="/Motion/Spin 4.png" type="4">
+			<AnimationPath>/Motion/Spin 4.xml</AnimationPath>
+		</item>
+		<item name="Stretch in and zoom in 1" thumbnail="/Motion/Stretch in and zoom in 1.png" type="4">
+			<AnimationPath>/Motion/Stretch in and zoom in 1.xml</AnimationPath>
+		</item>
+		<item name="Stretch in and zoom in 2" thumbnail="/Motion/Stretch in and zoom in 2.png" type="4">
+			<AnimationPath>/Motion/Stretch in and zoom in 2.xml</AnimationPath>
+		</item>
+		<item name="Stretch to left" thumbnail="/Motion/Stretch to left.png" type="4">
+			<AnimationPath>/Motion/Stretch to left.xml</AnimationPath>
+		</item>
+		<item name="Stretch to right" thumbnail="/Motion/Stretch to right.png" type="4">
+			<AnimationPath>/Motion/Stretch to right.xml</AnimationPath>
+		</item>
+		<item name="To the Left 1" thumbnail="/Motion/To the Left 1.png" type="4">
+			<AnimationPath>/Motion/To the Left 1.xml</AnimationPath>
+		</item>
+		<item name="To the Left 2" thumbnail="/Motion/To the Left 2.png" type="4">
+			<AnimationPath>/Motion/To the Left 2.xml</AnimationPath>
+		</item>
+		<item name="To the Right 1" thumbnail="/Motion/To the Right 1.png" type="4">
+			<AnimationPath>/Motion/To the Right 1.xml</AnimationPath>
+		</item>
+		<item name="To the Right 2" thumbnail="/Motion/To the Right 2.png" type="4">
+			<AnimationPath>/Motion/To the Right 2.xml</AnimationPath>
+		</item>
+		<item name="Up Down 1" thumbnail="/Motion/Up Down 1.png" type="4">
+			<AnimationPath>/Motion/Up Down 1.xml</AnimationPath>
+		</item>
+		<item name="Up Down 2" thumbnail="/Motion/Up Down 2.png" type="4">
+			<AnimationPath>/Motion/Up Down 2.xml</AnimationPath>
+		</item>
+		<item name="Wham!" thumbnail="/Motion/Wham!.png" type="4">
+			<AnimationPath>/Motion/Wham!.xml</AnimationPath>
+		</item>
+		<item name="Zoom in 1" thumbnail="/Motion/Zoom in 1.png" type="4">
+			<AnimationPath>/Motion/Zoom in 1.xml</AnimationPath>
+		</item>
+		<item name="Zoom in 2" thumbnail="/Motion/Zoom in 2.png" type="4">
+			<AnimationPath>/Motion/Zoom in 2.xml</AnimationPath>
+		</item>
+		<item name="Zoom in 3" thumbnail="/Motion/Zoom in 3.png" type="4">
+			<AnimationPath>/Motion/Zoom in 3.xml</AnimationPath>
+		</item>
+		<item name="Zoom in and out" thumbnail="/Motion/Zoom in and out.png" type="4">
+			<AnimationPath>/Motion/Zoom in and out.xml</AnimationPath>
+		</item>
+		<item name="Zoom in to the bottom" thumbnail="/Motion/Zoom in to the bottom.png" type="4">
+			<AnimationPath>/Motion/Zoom in to the bottom.xml</AnimationPath>
+		</item>
+		<item name="Zoom in to the left" thumbnail="/Motion/Zoom in to the left.png" type="4">
+			<AnimationPath>/Motion/Zoom in to the left.xml</AnimationPath>
+		</item>
+		<item name="Zoom in to the right" thumbnail="/Motion/Zoom in to the right.png" type="4">
+			<AnimationPath>/Motion/Zoom in to the right.xml</AnimationPath>
+		</item>
+		<item name="Zoom in to the top" thumbnail="/Motion/Zoom in to the top.png" type="4">
+			<AnimationPath>/Motion/Zoom in to the top.xml</AnimationPath>
+		</item>
+		<item name="Zoom out 1" thumbnail="/Motion/Zoom out 1.png" type="4">
+			<AnimationPath>/Motion/Zoom out 1.xml</AnimationPath>
+		</item>
+		<item name="Zoom out 2" thumbnail="/Motion/Zoom out 2.png" type="4">
+			<AnimationPath>/Motion/Zoom out 2.xml</AnimationPath>
+		</item>
+		<item name="Zoom out 3" thumbnail="/Motion/Zoom out 3.png" type="4">
+			<AnimationPath>/Motion/Zoom out 3.xml</AnimationPath>
+		</item>
+		<item name="Zoom out to the right" thumbnail="/Motion/Zoom out to the right.png" type="4">
+			<AnimationPath>/Motion/Zoom out to the right.xml</AnimationPath>
+		</item>
+		<item name="Drop" thumbnail="/Motion/Drop_An.png" type="4">
+			<AnimationPath>/Motion/Drop.xml</AnimationPath>
+		</item>
+		<item name="Expansion" thumbnail="/Motion/Expansion.png" type="4">
+			<AnimationPath>/Motion/Expansion.xml</AnimationPath>
+		</item>
+		<item name="Fly in and Fade out" thumbnail="/Motion/Fly in and Fade out.png" type="4">
+			<AnimationPath>/Motion/Fly in and Fade out.xml</AnimationPath>
+		</item>
+		<item name="Fly in and Fly out" thumbnail="/Motion/Fly in and Fly out.png" type="4">
+			<AnimationPath>/Motion/Fly in and Fly out.xml</AnimationPath>
+		</item>
+		<item name="Stretch in and zoom in" thumbnail="/Motion/Stretch in and zoom in.png" type="4">
+			<AnimationPath>/Motion/Stretch in and zoom in.xml</AnimationPath>
+		</item>
+		<item name="Tiny zoom" thumbnail="/Motion/Tiny zoom.png" type="4">
+			<AnimationPath>/Motion/Tiny zoom.xml</AnimationPath>
+		</item>
+		<item name="Zoom in" thumbnail="/Motion/Zoom In.png" type="4">
+			<AnimationPath>/Motion/Zoom in.xml</AnimationPath>
+		</item>
+		<item name="Zoom out" thumbnail="/Motion/Zoom Out.png" type="4">
+			<AnimationPath>/Motion/Zoom out.xml</AnimationPath>
+		</item>
+	</Animations>
+	<TextStyles>
+		<item name="Text style 1" thumbnail="/Preset/Text style 1.png"  type="1">
+			<Font>
+              <Size>100</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-1</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-8355712</Color>
+              <Alpha>121</Alpha>
+              <BlurRadius>7</BlurRadius>
+              <Distance>1</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>0</Size>
+              <Color>4409301</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 2" thumbnail="/Preset/Text style 2.png" type="1">
+			<Font>
+              <Size>100</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-1</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-8355712</Color>
+              <Alpha>255</Alpha>
+              <BlurRadius>6</BlurRadius>
+              <Distance>0</Distance>
+              <Direction>1</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>8</Size>
+              <Color>-16777216</Color>
+              <GradType>0</GradType>
+              <Alpha>191</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>		
+		<item name="Text style 3" thumbnail="/Preset/Text style 3.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>16777215</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>6</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>11919103</Color>
+              <Alpha>255</Alpha>
+              <BlurRadius>5</BlurRadius>
+              <Distance>0</Distance>
+              <Direction>0</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>6</Size>
+              <Color>4494314</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 4" thumbnail="/Preset/Text style 4.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-6018562</Color>
+              <GradType>7</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>2</BlurRadius>
+              <Effect>31</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-4953857</Color>
+              <Alpha>76</Alpha>
+              <BlurRadius>4</BlurRadius>
+              <Distance>1</Distance>
+              <Direction>12</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>1</Size>
+              <Color>-6018562</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>2</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 5" thumbnail="/Preset/Text style 5.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-662790</Color>
+              <GradType>5</GradType>
+              <Alpha>113</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-1</Color>
+              <Alpha>37</Alpha>
+              <BlurRadius>4</BlurRadius>
+              <Distance>19</Distance>
+              <Direction>12</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>2</Size>
+              <Color>-4509981</Color>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>1</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 6" thumbnail="/Preset/Text style 6.png" type="1">
+			 <Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-1277395</Color>
+              <GradType>3</GradType>
+              <Alpha>0</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>26</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-1</Color>
+              <Alpha>37</Alpha>
+              <BlurRadius>2</BlurRadius>
+              <Distance>19</Distance>
+              <Direction>12</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>1</Size>
+              <Color>-1277395</Color>
+              <GradType>0</GradType>
+              <Alpha>160</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 7" thumbnail="/Preset/Text style 7.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>1</ColorType>
+              <Color1>-1</Color1>
+              <Color2>-4144960</Color2>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>36</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-1</Color>
+              <Alpha>37</Alpha>
+              <BlurRadius>2</BlurRadius>
+              <Distance>19</Distance>
+              <Direction>12</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>2</Size>
+              <Color>-16777216</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 8" thumbnail="/Preset/Text style 8.png" type="1">
+			 <Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-11868933</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>2</BlurRadius>
+              <Effect>6</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-16777216</Color>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Distance>2</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>2</Size>
+              <Color>-16777216</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 9" thumbnail="/Preset/Text style 9.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>1</ColorType>
+              <Color1>-16750849</Color1>
+              <Color2>-16711681</Color2>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-4144960</Color>
+              <Alpha>37</Alpha>
+              <BlurRadius>4</BlurRadius>
+              <Distance>19</Distance>
+              <Direction>8</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>2</Size>
+              <Color>-16737793</Color>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 10" thumbnail="/Preset/Text style 10.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>1</ColorType>
+              <Color1>-39373</Color1>
+              <Color2>-256</Color2>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-13159</Color>
+              <Alpha>37</Alpha>
+              <BlurRadius>4</BlurRadius>
+              <Distance>19</Distance>
+              <Direction>8</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>2</Size>
+              <Color>-256</Color>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 11" thumbnail="/Preset/Text style 11.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>1</ColorType>
+              <Color1>-1497711</Color1>
+              <Color2>-8315062</Color2>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-26164</Color>
+              <Alpha>39</Alpha>
+              <BlurRadius>5</BlurRadius>
+              <Distance>1</Distance>
+              <Direction>10</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>1</Size>
+              <Color>-12713922</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 12" thumbnail="/Preset/Text style 12.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>1</ColorType>
+              <Color1>-52</Color1>
+              <Color2>-1</Color2>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>6</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-39373</Color>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Distance>2</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>4</Size>
+              <Color>-2507949</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 13" thumbnail="/Preset/Text style 13.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-1</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-39373</Color>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Distance>1</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>5</Size>
+              <Color>-13312</Color>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 14" thumbnail="/Preset/Text style 14.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-1</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-39373</Color>
+              <Alpha>255</Alpha>
+              <BlurRadius>1</BlurRadius>
+              <Distance>0</Distance>
+              <Direction>7</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>5</Size>
+              <Color>-39373</Color>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 15" thumbnail="/Preset/Text style 15.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>1</ColorType>
+              <Color1>-16724737</Color1>
+              <Color2>-16711681</Color2>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-16777216</Color>
+              <Alpha>138</Alpha>
+              <BlurRadius>6</BlurRadius>
+              <Distance>0</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>5</Size>
+              <Color>-16750849</Color>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 16" thumbnail="/Preset/Text style 16.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>1</ColorType>
+              <Color1>-16737793</Color1>
+              <Color2>-16711681</Color2>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-1</Color>
+              <Alpha>255</Alpha>
+              <BlurRadius>1</BlurRadius>
+              <Distance>1</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>4</Size>
+              <Color>-16777216</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 17" thumbnail="/Preset/Text style 17.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-16777216</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-16777216</Color>
+              <Alpha>181</Alpha>
+              <BlurRadius>7</BlurRadius>
+              <Distance>1</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>5</Size>
+              <Color>-6018562</Color>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 18" thumbnail="/Preset/Text style 18.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-16777216</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>0</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-16777216</Color>
+              <Alpha>181</Alpha>
+              <BlurRadius>7</BlurRadius>
+              <Distance>1</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>5</Size>
+              <Color>-16737793</Color>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 19" thumbnail="/Preset/Text style 19.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>1</ColorType>
+              <Color1>-3368449</Color1>
+              <Color2>-13312</Color2>
+              <GradType>7</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>6</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-16777216</Color>
+              <Alpha>181</Alpha>
+              <BlurRadius>7</BlurRadius>
+              <Distance>1</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>6</Size>
+              <Color>-13312</Color>
+              <GradType>3</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 20" thumbnail="/Preset/Text style 20.png" type="1">
+			<Font>
+              <Size>150</Size>
+              <Bold>0</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial Black</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>1</ColorType>
+              <Color1>-65281</Color1>
+              <Color2>-65536</Color2>
+              <GradType>7</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Effect>7</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-65281</Color>
+              <Alpha>181</Alpha>
+              <BlurRadius>10</BlurRadius>
+              <Distance>1</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>1</Enable>
+              <Size>4</Size>
+              <Color>-13312</Color>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 21" thumbnail="/Preset/Text style 21.png" type="1">
+			<Font>
+              <Size>90</Size>
+              <Bold>1</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>1</ColorType>
+              <Color1>-16776961</Color1>
+              <Color2>-65536</Color2>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>5</BlurRadius>
+              <Effect>19</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-3368449</Color>
+              <Alpha>181</Alpha>
+              <BlurRadius>1</BlurRadius>
+              <Distance>0</Distance>
+              <Direction>1</Direction>
+            </Shadow>
+            <Border>
+              <Enable>0</Enable>
+              <Size>4</Size>
+              <Color>-256</Color>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 22" thumbnail="/Preset/Text style 22.png" type="1">
+			<Font>
+              <Size>90</Size>
+              <Bold>1</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-1017855</Color>
+              <GradType>7</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>3</BlurRadius>
+              <Effect>26</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-32768</Color>
+              <Alpha>181</Alpha>
+              <BlurRadius>1</BlurRadius>
+              <Distance>0</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>0</Enable>
+              <Size>0</Size>
+              <Color>-13312</Color>
+              <GradType>4</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+		<item name="Text style 23" thumbnail="/Preset/Text style 23.png" type="1">
+			 <Font>
+              <Size>90</Size>
+              <Bold>1</Bold>
+              <Italic>0</Italic>
+              <FontName>Arial</FontName>
+            </Font>
+            <Face>
+              <Enable>1</Enable>
+			  <ColorType>0</ColorType>
+              <Color>-1</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>3</BlurRadius>
+              <Effect>9</Effect>
+            </Face>
+            <Shadow>
+              <Enable>1</Enable>
+              <Color>-16777216</Color>
+              <Alpha>100</Alpha>
+              <BlurRadius>0</BlurRadius>
+              <Distance>2</Distance>
+              <Direction>3</Direction>
+            </Shadow>
+            <Border>
+              <Enable>0</Enable>
+              <Size>3</Size>
+              <Color>-14531516</Color>
+              <GradType>0</GradType>
+              <Alpha>255</Alpha>
+              <BlurRadius>0</BlurRadius>
+            </Border>
+		</item>
+	</TextStyles>
+</NLECaption>

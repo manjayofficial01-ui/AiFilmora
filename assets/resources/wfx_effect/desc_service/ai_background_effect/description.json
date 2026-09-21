@@ -1,0 +1,9 @@
+{
+    "type": "video_effect",
+    "display_name": "ai_background_effect",
+    "unique_name": "video/effect/background_effect",
+	"capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "ENCRYPT": "1"
+}

@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>5AA34578-4E28-4903-9AA8-EEE2D7758C20</GUID>
+        <Name>FacetEyeVision</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>FacetEyeVision.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

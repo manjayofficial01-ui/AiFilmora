@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+    <GUID>CBDB8EA2-8726-4077-8594-7F76369364A8</GUID>
+    <Name>HDR_PQD65</Name>
+    <Transition>0</Transition>
+    <LUT>
+        <LutFile>HDR_PQD65.cube</LutFile>
+    </LUT>
+</Filter>

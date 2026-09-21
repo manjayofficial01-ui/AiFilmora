@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>9A17C70E-F5A1-4D56-95EE-323486810462</GUID>
+<Name>ARFaceStretch</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>ARSticker.conf</ConfigFile>
+</GPUFilter>
+</Filter>

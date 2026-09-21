@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>FD40DFF8-3C71-416a-970D-0531586C5DA2</GUID>
+        <Name>Bubble</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Bubble.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

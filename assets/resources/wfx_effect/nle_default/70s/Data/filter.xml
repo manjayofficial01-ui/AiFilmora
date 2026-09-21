@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>1A09570B-8B15-444b-A074-33685EE7E086</GUID>
+        <Name>70s</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>70s.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

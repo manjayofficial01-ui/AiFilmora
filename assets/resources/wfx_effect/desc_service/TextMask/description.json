@@ -1,0 +1,77 @@
+{
+	"type": "video_effect",
+	"display_name": "TextMask",
+	"unique_name": "video/effect/textmask",
+	"capability": ["opencl", "cpu"],
+	"thumb": "thumb.png",
+	"video": "test.mp4",
+	"params": [
+		{
+			"name": "Position_x",
+			"type": 3,
+			"min_value": -1.0,
+			"max_value": 2.0,
+			"default_value": 0.5
+		},
+		{
+			"name": "Position_y",
+			"type": 3,
+			"min_value": -1.0,
+			"max_value": 2.0,
+			"default_value": 0.5
+		},
+		{
+			"name": "Scale",
+			"type": 3,
+			"min_value": 0.01,
+			"max_value": 4.0,
+			"default_value": 1.0
+		},
+		{
+			"name": "Rotation",
+			"type": 3,
+			"min_value": 0,
+			"max_value": 3600,
+			"default_value": 0
+		},
+		{
+			"name": "CharSpace",
+			"type": 5,
+			"min_value": -20,
+			"max_value": 200,
+			"default_value": 0
+		},
+		{
+			"name": "LineSpace",
+			"type": 5,
+			"min_value": -20,
+			"max_value": 200,
+			"default_value": 0
+		},
+		{
+			"name": "InvMask",
+			"type": 1,
+			"min_value": 0,
+			"max_value": 1,
+			"default_value": 0
+		},
+		{
+			"name": "DisplayMask",
+			"type": 1,
+			"min_value": 0,
+			"max_value": 1,
+			"default_value": 0
+		},
+		{
+			"name": "CaptionJson",
+			"type": 6,
+			"ui_type": "Caption",
+			"default_value": "{\"Text\":\"Text Mask\",\"TextData\":[{\"Basic\":{\"Effect\":0,\"Enable\":1,\"FontBold\":1,\"FontItalic\":0,\"FontName\":\"Bodoni MT Poster Compressed\",\"FontSize\":256,\"TextAlpha\":255,\"TextBlurRadius\":0,\"TextColor\":-1},\"Border\":{\"Alpha\":255,\"BlurRadius\":0,\"Color\":-65536,\"Enable\":0,\"Size\":5},\"CharData\":\"Text Mask\",\"CharSpace\":0,\"LineSpace\":0,\"Shadow\":{\"Alpha\":255,\"BlurRadius\":6,\"Color\":-65281,\"Direction\":3,\"Distance\":10,\"Enable\":0}}]}"
+		},
+		{
+			"name": "MotionPath",
+			"type": 6,
+			"default_value": ""
+		}    
+	]
+}

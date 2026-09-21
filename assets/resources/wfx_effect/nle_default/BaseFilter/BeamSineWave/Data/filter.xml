@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>4C18CF6A-29D7-417B-8549-E619AB9828E6</GUID>
+<Name>BeamSineWave</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>BeamSineWave.conf</ConfigFile>
+</GPUFilter>
+</Filter>

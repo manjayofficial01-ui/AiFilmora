@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>01F1E4E8-284D-4763-9382-5D5A98C6C606</GUID>
+    <Name>UFT_NoiseSimplex</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>UFT_NoiseSimplex.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

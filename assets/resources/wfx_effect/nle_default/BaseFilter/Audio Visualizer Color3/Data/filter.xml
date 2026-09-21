@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>E8AF9819-E4EA-4A36-8C44-1D82EF0FD94C</GUID>
+    <Name>Audio Visualizer Color3</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualizer Color3.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

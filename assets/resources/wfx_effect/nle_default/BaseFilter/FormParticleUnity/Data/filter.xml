@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>5A2DD7F4-7D9C-841B-3066-3F4ABEC33C4C</GUID>
+<Name>FormParticleUnity</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>FormParticleUnity.conf</ConfigFile>
+</GPUFilter>
+</Filter>

@@ -1,0 +1,93 @@
+{
+	"title": "Apa yang Baru di Filmora %1. ",
+	"titleByManual": "Anda sedang menggunakan versi terbaru. Periksa fitur %1 yang baru!",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "Teks ke Video",
+			"discription": "Bebaskan kreativitas Anda dengan Teks ke Video dan rasakan keajaiban AI Filmora",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "Gambar ke Video",
+			"discription": "Gambar ke Video Kini Didukung Veo 3! Coba Hasil Pembuatan yang Lebih Sempurna!",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},	
+		{
+			"id": "ai_idea_to_video",
+			"name": "Ide ke Video AI",
+			"discription": "Ubah ide mentah Anda menjadi video pendek profesional dengan mempertahankan konsistensi gaya visual dan memastikan kelanjutan karakter di semua adegan.",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "AI Pengubah Gaya Gambar",
+			"discription": "Pengubah Gaya Gambar AI ‍ditingkatkan! Kini tersedia pada tab AIGC dengan kemampuan pengaturan gaya gambar yang diperluas dan ditingkatkan.",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "Audio ke Video",
+			"discription": "Ubah podcast audio dengan mudah menjadi video singkat yang menarik. Edit, potong, dan soroti kisah favorit Anda.",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "Pengeditan Multi-Kamera",
+			"discription": "Transformasikan video menjadi bentuk pendek yang menarik.Potong, pangkas, dan soroti momen terbaik Anda!",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "Smart Scene Cut",
+			"discription": "Ambil sorotan dan skena karakter untuk memaksimalkan efisiensi pengeditan.",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "Smart BMG Generation",
+			"discription": "Buat musik latar yang sesuai dengan video Anda secara otomatis.",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "Reframe Otomatis",
+			"discription": "Gunakan Auto Reframe untuk mengekspor video yang sesuai dengan rasio aspek platform media sosial.",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "AI yang memahami, mendukung, dan meningkatkan. Dengan AI Mate di sisi Anda, ciptakan video menakjubkan dengan lebih cepat.",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "Pengeditan Multi-Kamera",
+			"discription": "Impor rekaman dari beberapa kamera, dan beralih dengan mulus antar beberapa sudut untuk pengalaman pengeditan yang efisien dan nyaman. Sederhanakan proses pengeditan yang kompleks dan tingkatkan alur kerja kreatif Anda.",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "Terjemahan AI",
+			"discription": "Terjemahkan video dan audio secara otomatis ke dalam lebih dari 20 bahasa, dan sinkronkan audio dengan gerakan bibir pembicara.",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

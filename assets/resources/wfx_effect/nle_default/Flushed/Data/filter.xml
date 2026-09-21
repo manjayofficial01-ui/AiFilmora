@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>6C614395-EEA7-4d86-B3B5-2C475429B4B5</GUID>
+    <Name>Flushed</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Flushed.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

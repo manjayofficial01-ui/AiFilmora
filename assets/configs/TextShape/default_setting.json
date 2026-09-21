@@ -1,0 +1,74 @@
+[
+    {
+        "type": 512,
+        "title": "ArrowRight_22.5_40",
+        "category": "Preset TextShape",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/ArrowRight_22.5_40.conf"
+    },
+    {
+        "type": 512,
+        "title": "Bubble_22.5_40",
+        "category": "Preset TextShape",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Bubble_22.5_40.conf"
+    },
+    {
+        "type": 512,
+        "title": "line_22.5_40",
+        "category": "Preset TextShape",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/line_22.5_40.conf"
+    },
+    {
+        "type": 512,
+        "title": "Round_22.5_40",
+        "category": "Preset TextShape",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Round_22.5_40.conf"
+    },
+    {
+        "type": 512,
+        "title": "RoundBubble_22.5_40",
+        "category": "Preset TextShape",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/RoundBubble_22.5_40.conf"
+    },
+    {
+        "type": 512,
+        "title": "RoundRect2_22.5_20",
+        "category": "Preset TextShape",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/RoundRect2_22.5_20.conf"
+    },
+    {
+        "type": 512,
+        "title": "RoundRect_22.5_30",
+        "category": "Preset TextShape",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/RoundRect_22.5_30.conf"
+    },
+    {
+        "type": 512,
+        "title": "Square_22.5_40",
+        "category": "Preset TextShape",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Square_22.5_40.conf"
+    },
+    {
+        "type": 512,
+        "title": "Triangle_22.5_40",
+        "category": "Preset TextShape",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Triangle_22.5_40.conf"
+    }
+]

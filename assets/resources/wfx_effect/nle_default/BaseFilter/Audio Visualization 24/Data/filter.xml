@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>29277F28-A45F-44FA-8823-125806F349E4</GUID>
+    <Name>Audio Visualization 24</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 24.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

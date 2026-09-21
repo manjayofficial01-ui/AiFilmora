@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>AI-Light-48D27ABF-DB01-4DB9-8D38-11B1E940B898</GUID>
+<Name>Red Purple Stroke</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Red Purple Stroke.conf</ConfigFile>
+</GPUFilter>
+</Filter>

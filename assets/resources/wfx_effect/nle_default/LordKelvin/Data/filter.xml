@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>BB101941-A086-4332-B70F-22DD4B4236BD</GUID>
+    <Name>LordKelvin</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>LordKelvin.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

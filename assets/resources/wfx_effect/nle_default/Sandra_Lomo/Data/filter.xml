@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>2C052C3B-F0BD-4d5c-A8C0-5C86389DD7CB</GUID>
+        <Name>Sandra_Lomo</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>SandraLomo.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

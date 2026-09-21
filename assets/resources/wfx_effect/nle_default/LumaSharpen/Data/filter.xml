@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>56835ED6-EB2E-4FFB-9AEC-281CD0FA9D35</GUID>
+        <Name>LumaSharpen</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>LumaSharpen.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

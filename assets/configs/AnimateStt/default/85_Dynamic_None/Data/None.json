@@ -1,0 +1,40 @@
+{
+    "background": [
+      {
+        "border": {
+          "color": -16777216,
+          "enable": 0,
+          "size": 0
+        },
+        "color": -16777216,
+        "enable": 0,
+        "outsetx": 2,
+        "outsety": 2,
+        "roundAngle": 0,
+        "type": 2
+      }
+    ],
+    "enable": 1,
+    "subtitle": {
+      "charPlayMode": 2,
+      "keepStyle": 0,
+      "punctuationLineBreak": 0,
+      "styles": [
+        {
+          "enable": 1,
+          "textStyle": "{\"Background\":{\"Alpha\":255,\"Border\":{\"Alpha\":255,\"Color\":0,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Size\":0},\"Bottom\":0.0,\"Color\":16777215,\"Enable\":0,\"FillMode\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Left\":50.0,\"Radian\":30,\"Right\":50.0,\"Top\":0.0},\"BasePixel\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Layout\":{\"Angle\":0.0,\"CharSpace\":0,\"LineSpace\":0,\"TextAlign\":\"center\",\"TextAlignMode\":\"horizontal\",\"TextAlignPos\":\"center\",\"Underline\":0,\"UnderlineColor\":-1},\"TextData\":[{\"Basic\":{\"Effect\":0,\"Enable\":1,\"FontBold\":0,\"FontHSize\":24.0,\"FontItalic\":0,\"FontName\":\"Arial\",\"FontSize\":24.0,\"FontVSize\":24.0,\"TextAlpha\":255,\"TextBlurRadius\":0,\"TextColor\":[{\"Color\":16777215}]},\"Border\":{\"Alpha\":255,\"BlurRadius\":0,\"Color\":13977411,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Size\":0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"CharData\":\"\",\"CharSpace\":0,\"LineSpace\":0,\"Shadow\":{\"Alpha\":255,\"BlurRadius\":4,\"Color\":0,\"Direction\":2,\"Distance\":1,\"Enable\":1,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"Underline\":0,\"UnderlineColor\":-1}],\"TextVersion\":3.0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0},\"text\":\"\"}",
+          "type": 0
+        },
+        {
+          "enable": 0,
+          "textStyle": "{\"BasePixel\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Layout\":{\"Angle\":0.0,\"CharSpace\":0,\"LineSpace\":0,\"TextAlign\":\"center\",\"TextAlignMode\":\"horizontal\",\"TextAlignPos\":\"center\",\"Underline\":0,\"UnderlineColor\":-1},\"TextData\":[{\"Basic\":{\"Effect\":0,\"Enable\":1,\"FontBold\":0,\"FontHSize\":40.0,\"FontItalic\":0,\"FontName\":\"Montserrat Bold\",\"FontSize\":40.0,\"FontVSize\":40.0,\"TextAlpha\":255,\"TextBlurRadius\":0,\"TextColor\":[{\"Color\":6052956}]},\"Border\":{\"Alpha\":255,\"BlurRadius\":0,\"Color\":13977411,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Size\":0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"CharData\":\"\",\"CharSpace\":0,\"LineSpace\":0,\"Shadow\":{\"Alpha\":121,\"BlurRadius\":7,\"Color\":8421504,\"Direction\":3,\"Distance\":1,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"Underline\":0,\"UnderlineColor\":-1}],\"TextVersion\":3.0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0},\"text\":\"\"}",
+          "type": 1
+        },
+        {
+          "enable": 0,
+          "textStyle": "{\"BasePixel\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Layout\":{\"Angle\":0.0,\"CharSpace\":0,\"LineSpace\":0,\"TextAlign\":\"center\",\"TextAlignMode\":\"horizontal\",\"TextAlignPos\":\"center\",\"Underline\":0,\"UnderlineColor\":-1},\"TextData\":[{\"Basic\":{\"Effect\":0,\"Enable\":1,\"FontBold\":0,\"FontHSize\":40.0,\"FontItalic\":0,\"FontName\":\"Montserrat Bold\",\"FontSize\":40.0,\"FontVSize\":40.0,\"TextAlpha\":255,\"TextBlurRadius\":0,\"TextColor\":[{\"Color\":6052956}]},\"Border\":{\"Alpha\":255,\"BlurRadius\":0,\"Color\":13977411,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Size\":0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"CharData\":\"\",\"CharSpace\":0,\"LineSpace\":0,\"Shadow\":{\"Alpha\":121,\"BlurRadius\":7,\"Color\":8421504,\"Direction\":3,\"Distance\":1,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"Underline\":0,\"UnderlineColor\":-1}],\"TextVersion\":3.0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0},\"text\":\"\"}",
+          "type": 2
+        }
+      ]
+    }
+  }

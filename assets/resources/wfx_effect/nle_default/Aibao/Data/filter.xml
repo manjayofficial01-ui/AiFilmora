@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>EE53FABA-42CD-486e-AAF7-A3549401CA9E</GUID>
+        <Name>Aibao</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Aibao.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

@@ -1,0 +1,9 @@
+{
+    "type": "video_effect",
+    "display_name": "ai_portrait_effect",
+    "unique_name": "video/effect/aiportrait",
+	"capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "ENCRYPT": "1"
+}

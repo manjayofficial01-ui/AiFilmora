@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>A2BFFA17-14AA-4b46-8B73-9D9439E36666</GUID>
+        <Name>WindowShades</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>WindowShades.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

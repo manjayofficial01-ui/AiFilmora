@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BlackList>
+  <Item>
+	<VID>4318</VID>
+	<DeviceName>Sample Device</DeviceName>
+	<OpenCLCVersion>OpenCL C 1.2 </OpenCLCVersion>
+	<DeviceVersion>OpenCL 1.2 CUDA</DeviceVersion>
+	<DriverVersion>0.0</DriverVersion>
+  </Item>
+  <Item>
+	<VID>32902</VID>
+	<DeviceName>Intel(R) UHD Graphics 630</DeviceName>
+	<OpenCLCVersion>OpenCL C 2.0</OpenCLCVersion>
+	<DeviceVersion>OpenCL 2.1</DeviceVersion>
+	<DriverVersion>21.20.16.4542</DriverVersion>
+  </Item>
+</BlackList>

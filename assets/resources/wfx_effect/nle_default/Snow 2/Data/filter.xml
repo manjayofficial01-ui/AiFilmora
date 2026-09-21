@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>A1080F1E-9F4E-41ee-B0C2-4E9BD4D49B0D</GUID>
+        <Name>Snow 2</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Snow 2.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

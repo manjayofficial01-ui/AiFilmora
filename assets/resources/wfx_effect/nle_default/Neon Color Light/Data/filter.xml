@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>AI-Light-D5F777E4-DD23-41FD-B879-45790F999A8D</GUID>
+<Name>Neon Color Light</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Neon Color Light.conf</ConfigFile>
+</GPUFilter>
+</Filter>

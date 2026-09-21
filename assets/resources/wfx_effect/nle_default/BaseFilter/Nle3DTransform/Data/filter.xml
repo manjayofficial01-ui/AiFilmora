@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>087D905B-2CF2-4928-9184-76BC535D26BC</GUID>
+<Name>Nle3DTransform</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Nle3DTransform.conf</ConfigFile>
+</GPUFilter>
+</Filter>

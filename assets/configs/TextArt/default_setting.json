@@ -1,0 +1,688 @@
+[
+	{
+		"type": 1024,
+		"title": "art_01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_01.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_02",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_02.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_03",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_03.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_04",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_04.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_05",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_05.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_06",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_06.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_07",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_07.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_08",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_08.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_09",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_09.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_10",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_10.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_11",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_11.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_12",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_12.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_13",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_13.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_14",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_14.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_15",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_15.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_16",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_16.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_17",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_17.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_18",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_18.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_19",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_19.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_20",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_20.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_21",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_21.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_22",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_22.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_23",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_23.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_24",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_24.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_25",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_25.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_26",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_26.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_27",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_27.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_28",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_28.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_29",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_29.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_30",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_30.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_31",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_31.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_32",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_32.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_33",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_33.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_34",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_34.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_35",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_35.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_36",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_36.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_37",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_37.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_38",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_38.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_39",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_39.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_40",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_40.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_41",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_41.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_42",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_42.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_43",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_43.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_44",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_44.conf"
+	},
+	{
+		"type": 1024,
+		"title": "art_45",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/art_45.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Cinematic Title 01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Cinematic Title 01.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Cinematic Title 02",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Cinematic Title 02.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Cinematic Title 03",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Cinematic Title 03.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Cinematic Title 04",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Cinematic Title 04.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Cinematic Title 05",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Cinematic Title 05.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Cinematic Title 06",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Cinematic Title 06.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Cinematic Title 07",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Cinematic Title 07.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Cinematic Title 08",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Cinematic Title 08.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Cinematic Title 09",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Cinematic Title 09.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Comic Title 01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Comic Title 01.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Comic Title 02",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Comic Title 02.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Graffiti Title 01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Graffiti Title 01.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Graffiti Title 02",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Graffiti Title 02.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Layers Title 01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Layers Title 01.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Logo Title 01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Logo Title 01.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Logo Title 02",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Logo Title 02.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Metal Title 01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Metal Title 01.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Metal Title 02",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Metal Title 02.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Neon Title 01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Neon Title 01.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Neon Title 02",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Neon Title 02.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Neon Title 03",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Neon Title 03.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Vintage Title 01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Vintage Title 01.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Vintage Title 02",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Vintage Title 02.conf"
+	},
+	{
+		"type": 1024,
+		"title": "ART 11",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/ART 11.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 21",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 21.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 22",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 22.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 23",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 23.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 24",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 24.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 25",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 25.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 26",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 26.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 28",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 28.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 29",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 29.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 30",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 30.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 32",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 32.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 33",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 33.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 34",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 34.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 35",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 35.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Art Title 36",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Art Title 36.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Artist Title 25",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Artist Title 25.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Glitch Title 01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Glitch Title 01.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Glitch Title 05",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Glitch Title 05.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Graffiti Title 10",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Graffiti Title 10.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Graffiti Title 11",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Graffiti Title 11.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Holiday Title 04",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Holiday Title 04.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Holiday Title 12",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Holiday Title 12.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Holiday Title 21",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Holiday Title 21.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Holiday Title 24",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Holiday Title 24.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Neon Title 07",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Neon Title 07.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Neon Title 09",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Neon Title 09.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Pixel Title 02",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Pixel Title 02.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Pixel Title 03",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Pixel Title 03.conf"
+	},
+	{
+		"type": 1024,
+		"title": "Scary Title 01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/Scary Title 01.conf"
+	},
+	{
+		"type": 1024,
+		"title": "VHS Title 01",
+		"category": "Default",
+		"favorate": 0,
+		"config": "/VHS Title 01.conf"
+	}
+]

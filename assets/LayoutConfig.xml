@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MainFrameLayout>
+    <LayoutSize>
+        <item resolution="1920*1080" screen="1080P">
+            <Layout type="Default" id="0">
+                <childmode name="ResourceView">738,568</childmode>
+                <childmode name="PlayerView">737,568</childmode>
+                <childmode name="PropertyView">390,568</childmode>
+                <childmode name="TimelineView">-1,460</childmode>
+            </Layout>
+            <Layout type="Organize" id="1">
+                <childmode name="ResourceView">738,-1</childmode>
+                <childmode name="PlayerView">737,568</childmode>
+                <childmode name="PropertyView">390,568</childmode>
+                <childmode name="TimelineView">1135,460</childmode>
+            </Layout>
+            <Layout default="1" type="Edit" id="2">
+                <childmode name="ResourceView">737,568</childmode>
+                <childmode name="PlayerView">737,568</childmode>
+                <childmode name="PropertyView">390,-1</childmode>
+                <childmode name="TimelineView">1482,460</childmode>
+            </Layout>
+            <Layout type="ShotVideo" id="3">
+                <childmode name="ResourceView">953,568</childmode>
+                <childmode name="PlayerView">522,-1</childmode>
+                <childmode name="PropertyView">390,568</childmode>
+                <childmode name="TimelineView">1351,460</childmode>
+            </Layout>
+            <Layout type="Classic" id="4">
+                <childmode name="ResourceView">939,568</childmode>
+                <childmode name="PlayerView">938,568</childmode>
+                <childmode name="PropertyView">939,568</childmode>
+                <childmode name="TimelineView">-1,430</childmode>
+            </Layout>
+            <Layout type="Dual" id="5">
+                <childmode name="ResourceView">-1,370</childmode>
+                <childmode name="PlayerView">846,-1</childmode>
+                <childmode name="PropertyView">390,-1</childmode>
+                <childmode name="TimelineView">-1,298</childmode>
+            </Layout>
+            <SplitterHandle>8</SplitterHandle>
+            <Margins>8,0,8,0</Margins>
+        </item>
+        <item resolution="1536*864" screen="864P">
+            <Layout type="Default" id="0">
+                <childmode name="ResourceView">734,471</childmode>
+                <childmode name="PlayerView">467,471</childmode>
+                <childmode name="PropertyView">295,471</childmode>
+                <childmode name="TimelineView">-1,345</childmode>
+            </Layout>
+            <Layout type="Organize" id="1">
+                <childmode name="ResourceView">734,-1</childmode>
+                <childmode name="PlayerView">467,471</childmode>
+                <childmode name="PropertyView">295,471</childmode>
+                <childmode name="TimelineView">770,345</childmode>
+            </Layout>
+            <Layout default="1" type="Edit" id="2">
+                <childmode name="ResourceView">734,471</childmode>
+                <childmode name="PlayerView">467,471</childmode>
+                <childmode name="PropertyView">295,-1</childmode>
+                <childmode name="TimelineView">1209,345</childmode>
+            </Layout>
+            <Layout type="ShotVideo" id="3">
+                <childmode name="ResourceView">734,471</childmode>
+                <childmode name="PlayerView">467,-1</childmode>
+                <childmode name="PropertyView">295,471</childmode>
+                <childmode name="TimelineView">1037,345</childmode>
+            </Layout>
+            <Layout type="Classic" id="4">
+                <childmode name="ResourceView">939,568</childmode>
+                <childmode name="PlayerView">938,568</childmode>
+                <childmode name="PropertyView">939,568</childmode>
+                <childmode name="TimelineView">-1,430</childmode>
+            </Layout>
+            <Layout type="Dual" id="5">
+                <childmode name="ResourceView">-1,370</childmode>
+                <childmode name="PlayerView">846,-1</childmode>
+                <childmode name="PropertyView">390,-1</childmode>
+                <childmode name="TimelineView">-1,298</childmode>
+            </Layout>
+            <SplitterHandle>8</SplitterHandle>
+            <Margins>12,0,12,0</Margins>
+        </item>
+        <item resolution="1336*768" screen="768P">
+            <Layout type="Default" id="0">
+                <childmode name="ResourceView">560,369</childmode>
+                <childmode name="PlayerView">475,369</childmode>
+                <childmode name="PropertyView">255,369</childmode>
+                <childmode name="TimelineView">-1,303</childmode>
+            </Layout>
+            <Layout type="Organize" id="1">
+                <childmode name="ResourceView">607,-1</childmode>
+                <childmode name="PlayerView">362,370</childmode>
+                <childmode name="PropertyView">255,370</childmode>
+                <childmode name="TimelineView">625,298</childmode>
+            </Layout>
+            <Layout type="Edit" id="2">
+                <childmode name="ResourceView">607,370</childmode>
+                <childmode name="PlayerView">362,370</childmode>
+                <childmode name="PropertyView">255,-1</childmode>
+                <childmode name="TimelineView">977,298</childmode>
+            </Layout>
+            <Layout type="ShotVideo" id="3">
+                <childmode name="ResourceView">607,370</childmode>
+                <childmode name="PlayerView">362,-1</childmode>
+                <childmode name="PropertyView">255,370</childmode>
+                <childmode name="TimelineView">870,298</childmode>
+            </Layout>
+            <Layout default="1" type="Classic" id="4">
+                <childmode name="ResourceView">618,370</childmode>
+                <childmode name="PlayerView">618,370</childmode>
+                <childmode name="PropertyView">618,370</childmode>
+                <childmode name="TimelineView">-1,298</childmode>
+            </Layout>
+            <Layout type="Dual" id="5">
+                <childmode name="ResourceView">-1,370</childmode>
+                <childmode name="PlayerView">846,-1</childmode>
+                <childmode name="PropertyView">390,-1</childmode>
+                <childmode name="TimelineView">-1,298</childmode>
+            </Layout>
+            <SplitterHandle>8</SplitterHandle>
+            <Margins>8,0,8,0</Margins>
+        </item>
+    </LayoutSize>
+    <MediaLibrary>
+        <TitleBarSpacing>
+            <!-- <item viewwidth="620" spacing="4"/> -->
+            <item viewwidth="720" spacing="12"/>
+        </TitleBarSpacing>
+        <DefaultViewMode>
+            <item default="2" resolution="1920*1080"/>
+            <item default="1" resolution="1336*768"/>
+        </DefaultViewMode>
+    </MediaLibrary>
+    <CustomLayoutSize>
+        <Layout player="1" id="2" screen="1536,864">
+            <childmode name="ResourceView">560,557</childmode>
+            <childmode name="PlayerView">641,557</childmode>
+            <childmode name="PropertyView">295,775</childmode>
+            <childmode name="TimelineView">1209,210</childmode>
+        </Layout>
+    </CustomLayoutSize>
+</MainFrameLayout>

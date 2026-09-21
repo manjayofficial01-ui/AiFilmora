@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>CDE0BEA4-5EEB-4A40-9A88-81B142F3D6D5</GUID>
+        <Name>Gitch1</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Gitch1.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

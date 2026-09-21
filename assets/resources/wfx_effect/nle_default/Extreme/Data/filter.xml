@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>B8345B57-861A-4931-815D-4B52E1C5CA23</GUID>
+        <Name>Extreme</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>cameraWiggle2.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

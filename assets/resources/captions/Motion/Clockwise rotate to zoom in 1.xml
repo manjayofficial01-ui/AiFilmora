@@ -1,0 +1,30 @@
+<NLEMotion>
+<Motion>
+<MotionAlians>Clockwise rotate to zoom in 1</MotionAlians>
+<MotionGUID>{378C0209-1D51-4BB7-8986-78A6F6FECF07}</MotionGUID>
+<MotionResType>0</MotionResType>
+		<MotionTimeConfig>
+			<MaxLength>5</MaxLength>
+			<InKeyIndex>2</InKeyIndex>
+			<OutKeyIndex>-1</OutKeyIndex>
+		</MotionTimeConfig>
+<MotionPositionList>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+</MotionPositionList>
+<MotionEffectList>
+<MotionEffect KeyFrame="0.000000" scaleX="0.400000" scaleY="0.400000" rotate="-45" alpha="100"/>
+<MotionEffect KeyFrame="0.194000" scaleX="1.000000" scaleY="1.000000" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="0.500000" scaleX="1.000000" scaleY="1.000000" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="1.000000" scaleX="1.000000" scaleY="1.000000" rotate="0" alpha="100"/>
+</MotionEffectList>
+</Motion>
+</NLEMotion>

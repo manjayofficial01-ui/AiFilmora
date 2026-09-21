@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>A0C9415F-3BD6-8E5C-E553-BE076A275459</GUID>
+<Name>Beam Edge Flow</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Edge Flow.conf</ConfigFile>
+</GPUFilter>
+</Filter>

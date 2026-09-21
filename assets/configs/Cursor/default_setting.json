@@ -1,0 +1,42 @@
+[
+    {
+        "type": 8192,
+        "title": "Cursor Hightlight",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Cursor Hightlight.conf"
+    },
+    {
+        "type": 8192,
+        "title": "Cursor Spotlight",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Cursor Spotlight.conf"
+    },
+    {
+        "type": 8192,
+        "title": "Cursor Magnify",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Cursor Magnify.conf"
+    },
+    {
+        "type": 8192,
+        "title": "Click Rings",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Click Rings.conf"
+    },
+    {
+        "type": 65536,
+        "title": "Click Sound",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Click Sound.conf"
+    }
+]

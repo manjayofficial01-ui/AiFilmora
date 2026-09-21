@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>9D4FE39F-2DDD-4F97-9675-65F80A51A6EC</GUID>
+        <Name>Blur Bars</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Blur Bars.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>930DB036-5B18-42CD-B8BF-FC6747C8CF40</GUID>
+<Name>Beam Particle Converge</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Particle Converge.conf</ConfigFile>
+</GPUFilter>
+</Filter>

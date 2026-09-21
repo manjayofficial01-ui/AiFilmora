@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>CF98BC25-A214-4E40-931D-52556B8ED39A</GUID>
+        <Name>LensFlare</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>LensFlare.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

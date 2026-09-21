@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>3089700B-E68F-45DA-ACBE-C254739B8B17</GUID>
+        <Name>magnifier</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>magnifier.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

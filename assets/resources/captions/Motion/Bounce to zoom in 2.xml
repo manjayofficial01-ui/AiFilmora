@@ -1,0 +1,34 @@
+<NLEMotion>
+<Motion>
+<MotionAlians>Bounce to zoom in 2</MotionAlians>
+<MotionGUID>{AAA8B260-C9AB-4921-AD7D-B28DF998896C}</MotionGUID>
+<MotionResType>0</MotionResType>
+		<MotionTimeConfig>
+			<MaxLength>5</MaxLength>
+			<InKeyIndex>3</InKeyIndex>
+			<OutKeyIndex>-1</OutKeyIndex>
+		</MotionTimeConfig>
+<MotionPositionList>
+<Point XPos="0.500000" YPos="0.833333"/>
+<Point XPos="0.500000" YPos="-0.125000"/>
+<Point XPos="0.888889" YPos="-0.125000"/>
+<Point XPos="0.888889" YPos="0.833333"/>
+<Point XPos="0.888889" YPos="0.833333"/>
+<Point XPos="0.888889" YPos="0.833333"/>
+<Point XPos="0.888889" YPos="0.833333"/>
+<Point XPos="0.500000" YPos="0.625000"/>
+<Point XPos="0.500000" YPos="0.520833"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+</MotionPositionList>
+<MotionEffectList>
+<MotionEffect KeyFrame="0.000000" scaleX="0.500000" scaleY="0.500000" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="0.200000" scaleX="0.200000" scaleY="0.200000" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="0.286000" scaleX="0.200000" scaleY="0.200000" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="0.500000" scaleX="1.000000" scaleY="1.000000" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="1.000000" scaleX="1.000000" scaleY="1.000000" rotate="0" alpha="100"/>
+</MotionEffectList>
+</Motion>
+</NLEMotion>

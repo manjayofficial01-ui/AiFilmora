@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>08F745E2-8C84-425F-A456-500CFF1C2F84</GUID>
+    <Name>Audio Visualization 25</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 25.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

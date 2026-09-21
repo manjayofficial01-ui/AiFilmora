@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>BC601DF1-0A9B-4BBA-8EDD-F6125912E813</GUID>
+        <Name>TextRayLight</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+        <ConfigFile>TextRayLight.conf</ConfigFile>
+        </GPUFilter>
+        </Filter>

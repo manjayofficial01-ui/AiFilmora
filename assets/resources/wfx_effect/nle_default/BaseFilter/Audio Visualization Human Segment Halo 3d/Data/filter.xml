@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>4A9F80AF-14BA-4361-B435-D801CBA6BA45</GUID>
+    <Name>Audio Visualization Human Segment Halo 3d</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization Human Segment Halo 3d.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>C77E1AF1-B530-44FC-8F67-E573650F07A5</GUID>
+    <Name>Audio Visualization 21</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 21.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

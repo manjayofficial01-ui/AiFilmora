@@ -1,0 +1,60 @@
+{
+    "type": "video_effect",
+    "display_name": "ai_pose_binding",
+    "unique_name": "video/effect/ai_pose_binding",
+	"capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "params": [
+        {
+            "name": "BindingType",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 100,
+            "default_value": 0
+        },
+        {
+            "name": "index1",
+            "type": 5,
+            "min_value": 1,
+            "max_value": 18,
+            "default_value": 0
+        },
+        {
+            "name": "x1",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 1.0,
+            "default_value": 0.5
+        },
+        {
+            "name": "y1",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 1.0,
+            "default_value": 0.5
+        },
+        {
+            "name": "index2",
+            "type": 5,
+            "min_value": 1,
+            "max_value": 18,
+            "default_value": 0
+        },
+        {
+            "name": "x2",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 1.0,
+            "default_value": 0.5
+        },
+        {
+            "name": "y2",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 1.0,
+            "default_value": 0.5
+        }
+    ],
+    "ENCRYPT": "1"
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>FD732419-E8E2-4EE1-A766-94BD787F50D1</GUID>
+<Name>AR2D_Sticker</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>ARSticker.conf</ConfigFile>
+</GPUFilter>
+</Filter>

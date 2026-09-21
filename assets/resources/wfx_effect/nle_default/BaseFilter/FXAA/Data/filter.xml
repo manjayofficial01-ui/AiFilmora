@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>508D116E-422F-4360-843A-034765A6B39B</GUID>
+<Name>FXAA</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>FXAA.conf</ConfigFile>
+</GPUFilter>
+</Filter>

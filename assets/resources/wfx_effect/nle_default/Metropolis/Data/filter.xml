@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>81D46CE2-7D13-4a85-9EE1-DFEE0C44FE3D</GUID>
+        <Name>Metropolis</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Metropolis.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

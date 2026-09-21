@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>83A3EBFF-0A46-465b-B201-1E8A7DD5DA1B</GUID>
+    <Name>Ribbon</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Ribbon.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

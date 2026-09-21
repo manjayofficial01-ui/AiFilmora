@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>57A7F48B-64A1-4D7A-9C30-3FA0617DFB8F</GUID>
+    <Name>DepthEstimation</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>DepthEstimation.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

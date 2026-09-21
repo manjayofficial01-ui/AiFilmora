@@ -1,0 +1,93 @@
+{
+	"title": "เวอร์ชัน Filmora ของคุณคือ: %1 (อัปเดตล่าสุด)",
+	"titleByManual": "คุณกำลังใช้เวอร์ชันล่าสุด ลองดูฟีเจอร์ใหม่ %1 สิ!",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "ข้อความเป็นวิดีโอ",
+			"discription": "ปลดปล่อยความคิดสร้างสรรค์ของคุณด้วยการแปลงข้อความเป็นวิดีโอและสัมผัสกับความมหัศจรรย์ของ Filmora AI",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "ภาพเป็นวิดีโอ",
+			"discription": "เปลี่ยนภาพเป็นวิดีโอด้วยพลังจาก Veo 3! สัมผัสประสบการณ์ผลลัพธ์การสร้างที่เพิ่มขึ้นอย่างมหาศาล!",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},		
+		{
+			"id": "ai_idea_to_video",
+			"name": "การแปลงไอเดียเป็นวิดีโอด้วย AI",
+			"discription": "เปลี่ยนความคิดดิบๆ เป็นวิดีโอสั้นระดับมืออาชีพ พร้อมคงความสม่ำเสมอของสไตล์ภาพและรักษาความต่อเนื่องของตัวละครในทุกฉาก",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "เครื่องมือปรับสไตล์ภาพ AI",
+			"discription": "เครื่องมือปรับแต่งสไตล์ภาพด้วย AI ‍ ได้รับการปรับปรุงแล้ว! พร้อมใช้งานแล้วภายใต้แท็บ AIGC พร้อมด้วยความสามารถในการปรับแต่งรูปภาพที่ถูกขยายและได้รับการปรับปรุง",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "เสียงเป็นวิดีโอ",
+			"discription": "เปลี่ยนพอดแคสต์เสียงให้เป็นวิดีโอสั้นที่น่าดึงดูดได้อย่างง่ายดาย แก้ไข ตัดแต่ง และไฮไลท์เรื่องราวที่คุณชื่นชอบ",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "คลิปสั้นสุดอัจฉริยะ",
+			"discription": "เปลี่ยนวิดีโอขนาดยาวให้เป็นวิดีโอสั้นที่น่าสนใจ ตัด แต่ง และไฮไลท์ช่วงเวลาที่ดีที่สุดของคุณ!",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "การตัดฉากอัจฉริยะ",
+			"discription": "แยกไฮไลต์และฉากตัวละครเพื่อเพิ่มประสิทธิภาพในการแก้ไข",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "ตัวสร้าง BGM อัจฉริยะ",
+			"discription": "สร้างเพลงพื้นหลังที่เข้ากับวิดีโอของคุณโดยอัตโนมัติ",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "จัดเฟรมอัตโนมัติ",
+			"discription": "ให้ใช้การรีเฟรมอัตโนมัติเพื่อส่งออกวิดีโอที่ตรงกับอัตราส่วนภาพของแพลตฟอร์มโซเชียลมีเดีย",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "AI ที่เข้าใจ ช่วยเหลือ และยกระดับการทำงาน เมื่อมี AI Mate อยู่เคียงข้าง คุณก็สามารถสร้างวิดีโอที่น่าทึ่งได้เร็วกว่าที่เคย",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "การตัดต่อแบบหลายกล้อง",
+			"discription": "นำเข้าฟุตเทจจากหลายกล้องและสลับไปมาระหว่างมุมกล้องต่างๆ เพื่อประสบการณ์การตัดต่อที่มีประสิทธิภาพและสะดวกสบาย ลดความซับซ้อนของกระบวนการตัดต่อและเพิ่มประสิทธิภาพเวิร์กโฟลว์ด้านครีเอทีฟของคุณ",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "การแปลด้วย AI",
+			"discription": "แปลวิดีโอและเสียงเป็นภาษาต่างๆ มากกว่า 20 ภาษา และซิงค์เสียงกับการเคลื่อนไหวของริมฝีปากผู้พูด",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

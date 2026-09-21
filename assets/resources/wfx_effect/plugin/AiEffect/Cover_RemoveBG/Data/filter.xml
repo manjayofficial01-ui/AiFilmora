@@ -1,0 +1,14 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>ED7AF4EC-34B3-4FC9-8137-772CF0519A47</GUID>
+        <Name>Cover_BGRemove</Name>
+        <Transition>1</Transition>
+        <HumanSegment>
+            <GPUFilter>
+                <ConfigFile>CoverBGRemove.conf</ConfigFile>
+            </GPUFilter>
+        </HumanSegment>
+        
+    	</Filter>
+    	

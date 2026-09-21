@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>7F80903A-9A2C-1481-96E0-07EBF554A6A9</GUID>
+<Name>SegmentPostProcess</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>SegmentPostProcess.conf</ConfigFile>
+</GPUFilter>
+</Filter>

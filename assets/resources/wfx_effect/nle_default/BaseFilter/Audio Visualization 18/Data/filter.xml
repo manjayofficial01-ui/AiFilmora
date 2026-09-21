@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>3987E94C-E377-45FA-A37D-C6A4047CCB57</GUID>
+    <Name>Audio Visualization 18</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 18.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

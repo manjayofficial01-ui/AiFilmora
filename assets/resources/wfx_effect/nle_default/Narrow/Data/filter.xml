@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>07992914-52E9-4e8f-A022-01BE34F9C4F0</GUID>
+        <Name>Narrow</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Narrow.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

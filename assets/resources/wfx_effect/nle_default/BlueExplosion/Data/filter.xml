@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>4E3B761D-7A15-411a-A2E7-B0832D755F6D</GUID>
+        <Name>BlueExplosion</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>BlueExplosion.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

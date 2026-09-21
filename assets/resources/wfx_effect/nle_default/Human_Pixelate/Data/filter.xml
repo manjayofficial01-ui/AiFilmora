@@ -1,0 +1,14 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>C3B3D563-3E01-4792-B45E-D49F04267148</GUID>
+        <Name>Human_Pixelate</Name>
+        <Transition>1</Transition>
+        <HumanSegment>
+            <GPUFilter>
+                <ConfigFile>Human_Pixelate.conf</ConfigFile>
+            </GPUFilter>
+        </HumanSegment>
+        
+    	</Filter>
+    	

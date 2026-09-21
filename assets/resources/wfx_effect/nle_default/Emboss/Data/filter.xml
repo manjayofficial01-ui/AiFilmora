@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>83BECB59-BA1F-4a4d-9CE1-B918E7F026B0</GUID>
+        <Name>Emboss</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Emboss.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

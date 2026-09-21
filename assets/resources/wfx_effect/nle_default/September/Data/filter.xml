@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>637B6036-9E00-4f91-ACEA-AA1ABF1E82C5</GUID>
+        <Name>September</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>September.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

@@ -1,0 +1,7 @@
+{
+	"type" : "audio_transition",
+	"display_name" : "audio mixer",
+	"unique_name" : "audio/blender/simple-mix",
+	"thumb" : "thumb.png",
+	"video" : "test.mp4"
+}

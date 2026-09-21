@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Animation2DInfos>
+    <AnimationTime Intro="1.5" Outro="1.5" MinValue="0.0" MaxValue="5.0"/>
+    <Animation ID="0"  AliasName="MG_2d_NONE"/>
+    <Animation ID="1"  AliasName="MG_2d_01"/>
+    <Animation ID="2"  AliasName="MG_2d_02"/>
+    <Animation ID="3"  AliasName="MG_2d_04"/>
+    <Animation ID="4"  AliasName="MG_2d_05"/>
+    <Animation ID="5"  AliasName="MG_2d_06"/>
+    <Animation ID="6"  AliasName="MG_2d_07"/>
+    <Animation ID="7"  AliasName="MG_2d_08"/>
+    <Animation ID="8"  AliasName="MG_2d_09"/>
+    <Animation ID="9"  AliasName="MG_2d_10"/>
+    <Animation ID="10" AliasName="MG_2d_11"/>
+    <Animation ID="11" AliasName="MG_2d_12"/>
+    <Animation ID="12" AliasName="MG_2d_13"/>
+    <Animation ID="13" AliasName="MG_2d_14"/>
+    <Animation ID="14" AliasName="MG_2d_15"/>
+    <Animation ID="15" AliasName="MG_2d_16"/>
+    <Animation ID="16" AliasName="MG_2d_17"/>
+    <Animation ID="17" AliasName="MG_2d_18"/>
+    <Animation ID="18" AliasName="MG_2d_19"/>
+    <Animation ID="19" AliasName="MG_2d_20"/>
+    <Animation ID="20" AliasName="MG_2d_21"/>
+    <Animation ID="21" AliasName="MG_2d_22"/>
+    <Animation ID="22" AliasName="MG_2d_23"/>
+    <Animation ID="23" AliasName="MG_2d_24"/>
+    <Animation ID="24" AliasName="MG_2d_25"/>
+    <Animation ID="25" AliasName="MG_2d_26"/>
+    <Animation ID="26" AliasName="MG_2d_27"/>
+    <Animation ID="27" AliasName="MG_2d_28"/>
+    <Animation ID="28" AliasName="MG_2d_29"/>
+    <Animation ID="29" AliasName="MG_2d_32"/>
+    <Animation ID="30" AliasName="MG_2d_33"/>
+    <Animation ID="31" AliasName="MG_2d_34"/>
+    <Animation ID="32" AliasName="MG_2d_35"/>
+    <Animation ID="33" AliasName="MG_2d_36"/>
+    <Animation ID="34" AliasName="MG_2d_37"/>
+    <Animation ID="35" AliasName="MG_2d_38"/>
+    <Animation ID="36" AliasName="MG_2d_40"/>
+    <Animation ID="37" AliasName="MG_2d_41"/>
+    <Animation ID="38" AliasName="MG_2d_42"/>
+    <Animation ID="39" AliasName="MG_2d_43"/>
+</Animation2DInfos>

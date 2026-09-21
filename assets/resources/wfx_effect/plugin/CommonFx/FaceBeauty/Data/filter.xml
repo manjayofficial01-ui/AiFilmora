@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>0252B095-6200-4D5D-A77C-59624C2D45AA</GUID>
+        <Name>FaceBeauty</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>FaceBeauty.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

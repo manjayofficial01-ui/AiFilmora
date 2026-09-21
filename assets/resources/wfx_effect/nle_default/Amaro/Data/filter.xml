@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>BB101941-A016-4332-B70F-22DD4B4236BD</GUID>
+    <Name>Amaro</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Amaro.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

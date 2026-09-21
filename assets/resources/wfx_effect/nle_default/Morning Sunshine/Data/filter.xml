@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>AI-Light-54E292E5-C994-4D66-9487-796DE8B1AA2A</GUID>
+<Name>Morning Sunshine</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Morning Sunshine.conf</ConfigFile>
+</GPUFilter>
+</Filter>

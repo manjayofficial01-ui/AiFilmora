@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>AEA88997-7954-4974-8E58-457073A0BC99</GUID>
+        <Name>AmMosaic</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>AmMosaic.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

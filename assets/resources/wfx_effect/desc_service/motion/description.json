@@ -1,0 +1,53 @@
+{
+    "type": "video_effect",
+    "display_name": "motion",
+    "unique_name": "video/effect/motion",
+	"capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "params": [
+        {
+            "name": "Position_x",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 0.5
+        },
+        {
+            "name": "Position_y",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 0.5
+        },
+        {
+            "name": "Scale_x",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 100.0
+        },
+        {
+            "name": "Scale_y",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 100.0
+        },
+        {
+            "name": "Rotation",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 0.0
+        },
+        {
+            "name": "Opacity",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 100.0,
+            "default_value": 100.0
+        }
+    ],
+    "ENCRYPT": "1"
+}

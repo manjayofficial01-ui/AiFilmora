@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>78226871-9C6D-453B-B259-5FD4B63C05BC</GUID>
+        <Name>Cinema 21_9</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Cinema 21_9.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

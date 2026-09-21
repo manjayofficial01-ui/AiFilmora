@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>842E6F6C-E7C6-415D-8C8B-8B2606FD77F2</GUID>
+    <Name>Audio Visualization 27</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 27.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

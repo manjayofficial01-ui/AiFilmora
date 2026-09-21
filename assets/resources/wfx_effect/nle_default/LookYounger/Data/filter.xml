@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>24950053-F61A-4CC7-99B9-D36879ABA99F</GUID>
+        <Name>LookYounger</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>LookYounger.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

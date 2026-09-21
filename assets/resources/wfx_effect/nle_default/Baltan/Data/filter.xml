@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>E27040D3-6FEE-4708-B95B-384055CE7FDA</GUID>
+        <Name>Baltan</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Baltan.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

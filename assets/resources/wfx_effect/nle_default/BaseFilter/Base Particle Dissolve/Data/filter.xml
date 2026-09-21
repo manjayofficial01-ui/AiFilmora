@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>304A470F-3E9B-490F-8E4F-6CF9A83E2192</GUID>
+<Name>Base Particle Dissolve</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Base Particle Dissolve.conf</ConfigFile>
+</GPUFilter>
+</Filter>

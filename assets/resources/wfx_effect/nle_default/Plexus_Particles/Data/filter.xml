@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>9EF95E66-8A7E-429A-8499-F8AD16375FBE</GUID>
+        <Name>Plexus_Particles</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Plexus_Particles.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

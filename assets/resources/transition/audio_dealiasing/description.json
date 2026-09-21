@@ -1,0 +1,5 @@
+{
+	"type" : "audio_transition",
+	"display_name" : "audio transiton dealiasing",
+	"unique_name" : "audio/blender/transition-dealiasing"
+}

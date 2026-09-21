@@ -1,0 +1,9 @@
+{
+    "type": "video_effect",
+    "display_name": "ai_combine_effect_end",
+    "unique_name": "video/effect/ai_combine_effect_end",
+	"capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "ENCRYPT": "1"
+}

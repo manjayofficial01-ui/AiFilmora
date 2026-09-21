@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+    <GUID>C287E4B6-B604-41FD-8913-5DE549FCA87B</GUID>
+    <Name>HDR_HLGDCI</Name>
+    <Transition>0</Transition>
+    <LUT>
+        <LutFile>HDR_HLGDCI.cube</LutFile>
+    </LUT>
+</Filter>

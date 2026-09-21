@@ -1,0 +1,573 @@
+/* Multi-track magnetic timeline */
+.tl-body {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  overflow: hidden;
+  min-height: 0;
+  background:
+    linear-gradient(180deg, #0c0f14 0%, #0a0c10 100%);
+  user-select: none;
+}
+
+/* Clip lanes scroll both ways; labels column stays put and syncs vertically */
+.tl-scroll {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: auto;
+  min-width: 0;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar) transparent;
+}
+
+.tl-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.tl-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.tl-scroll::-webkit-scrollbar-thumb {
+  background: var(--scrollbar);
+  border-radius: 5px;
+}
+.tl-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+.tl-track-labels {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  height: 100%;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.25);
+}
+
+.tl-labels-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar) transparent;
+}
+
+.tl-labels-foot.track-add-col {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  padding: 6px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-elev);
+  width: 100%;
+  box-sizing: border-box;
+}
+.track-add-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--border);
+  background: var(--panel-2);
+  color: var(--ink-dim);
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.track-add-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+  background: var(--accent-soft);
+}
+.ta-icon {
+  letter-spacing: 0.04em;
+}
+
+.tl-labels-body::-webkit-scrollbar {
+  width: 8px;
+}
+.tl-labels-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.tl-labels-body::-webkit-scrollbar-thumb {
+  background: var(--scrollbar);
+  border-radius: 4px;
+}
+
+.tl-label-spacer {
+  flex: 0 0 var(--ruler-h);
+}
+
+.tl-label-spacer {
+  height: var(--ruler-h);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elev);
+}
+
+.tl-label {
+  height: var(--track-h);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 6px 0 4px;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 11px;
+  color: var(--ink-dim);
+  cursor: grab;
+  user-select: none;
+  position: relative;
+  background: var(--panel);
+}
+.tl-label:active {
+  cursor: grabbing;
+}
+.tl-label.dragging {
+  opacity: 0.55;
+  outline: 1px dashed var(--accent);
+  z-index: 2;
+}
+.tl-label.drop-before {
+  box-shadow: inset 0 2px 0 0 var(--accent);
+}
+.tl-label .grip {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: -2px;
+  line-height: 1;
+  width: 12px;
+  cursor: grab;
+}
+.tl-label strong {
+  color: var(--ink);
+  font-size: 11px;
+}
+.tl-label .kind {
+  margin-left: auto;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.tl-label.is-muted {
+  opacity: 0.55;
+}
+.tl-label.is-muted strong {
+  text-decoration: line-through;
+}
+.track-mute {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+}
+.track-mute:hover {
+  background: var(--panel-3);
+  border-color: var(--border);
+  color: var(--ink);
+}
+.track-mute.on {
+  color: var(--warn);
+  background: var(--warn-soft);
+}
+
+.track-acts {
+  display: flex;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+.track-act {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.track-act:hover {
+  background: var(--panel-3);
+  border-color: var(--border);
+  color: var(--ink);
+}
+.track-act.on {
+  color: var(--accent);
+  background: var(--accent-soft, rgba(91, 140, 255, 0.15));
+  border-color: var(--accent);
+}
+.tl-label.is-locked {
+  opacity: 0.7;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--panel),
+    var(--panel) 4px,
+    var(--panel-2) 4px,
+    var(--panel-2) 8px
+  );
+}
+.tl-label.is-hidden {
+  opacity: 0.4;
+}
+.tl-label.is-solo strong {
+  color: var(--accent);
+}
+
+.tl-lanes {
+  position: relative;
+  min-width: 1200px;
+}
+
+.tl-ruler {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  height: var(--ruler-h);
+  background: var(--bg-elev);
+  border-bottom: 1px solid var(--border);
+  /* 2.2.0: ruler supports scrub (◀▶) + zoom (↕ / Alt+drag). */
+  cursor: ew-resize;
+  touch-action: none;
+}
+.tl-ruler.zooming {
+  cursor: ns-resize;
+}
+
+.ruler-tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 4px 0 0 4px;
+  pointer-events: none;
+}
+
+.tl-track {
+  position: relative;
+  height: var(--track-h);
+  border-bottom: 1px solid var(--border-soft);
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 59px,
+    rgba(255, 255, 255, 0.02) 59px,
+    rgba(255, 255, 255, 0.02) 60px
+  );
+}
+.tl-track:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.015);
+}
+.tl-track.drop-ok {
+  background-color: rgba(91, 140, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(91, 140, 255, 0.45);
+}
+
+.tl-clip {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  cursor: grab;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  min-width: 8px;
+}
+
+.tl-trans {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--ink-dim);
+  font-size: 9px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  z-index: 4;
+  padding: 0;
+  cursor: pointer;
+  transform: rotate(45deg);
+}
+.tl-trans span {
+  transform: rotate(-45deg);
+}
+.tl-trans.has {
+  background: var(--accent);
+  border-color: var(--accent-strong);
+  color: var(--on-accent);
+  box-shadow: 0 0 10px rgba(91, 140, 255, 0.45);
+}
+.tl-trans:hover {
+  filter: brightness(1.15);
+}
+.tl-scroll.panning {
+  cursor: grabbing;
+}
+.tl-clip:active,
+.tl-clip.dragging {
+  cursor: grabbing;
+}
+.tl-clip.dragging {
+  z-index: 5;
+  opacity: 0.92;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+.tl-clip.selected {
+  border-color: var(--on-accent);
+  box-shadow: 0 0 0 1px var(--on-accent), 0 4px 14px rgba(0, 0, 0, 0.45);
+  z-index: 2;
+}
+.tl-clip .fill {
+  position: absolute;
+  inset: 0;
+  opacity: 0.92;
+}
+.tl-clip .label {
+  position: relative;
+  z-index: 1;
+  padding: 4px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--on-accent);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+.tl-clip .sub {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 3px;
+  z-index: 1;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.75);
+  pointer-events: none;
+}
+.tl-clip[data-type="video"] .fill {
+  background: linear-gradient(135deg, var(--clip-video), color-mix(in srgb, var(--clip-video) 55%, #000));
+}
+.tl-clip[data-type="audio"] .fill {
+  background: linear-gradient(135deg, var(--clip-audio), color-mix(in srgb, var(--clip-audio) 55%, #000));
+}
+.tl-clip[data-type="text"] .fill {
+  background: linear-gradient(135deg, var(--clip-text), color-mix(in srgb, var(--clip-text) 55%, #000));
+}
+.tl-clip[data-type="ai"] .fill {
+  background: linear-gradient(135deg, var(--clip-ai), color-mix(in srgb, var(--clip-ai) 55%, #000));
+}
+.tl-clip[data-type="gen"] .fill {
+  background: linear-gradient(135deg, var(--clip-gen), color-mix(in srgb, var(--clip-gen) 55%, #000));
+}
+
+.tl-clip.is-freeze .fill {
+  background: linear-gradient(135deg, #64748b, #334155);
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 6px,
+    rgba(255, 255, 255, 0.08) 6px,
+    rgba(255, 255, 255, 0.08) 12px
+  );
+}
+
+.tl-clip .wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18px;
+  opacity: 0.45;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.35) 0 2px,
+    transparent 2px 5px
+  );
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.tl-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: ew-resize;
+  z-index: 3;
+}
+.tl-handle.l {
+  left: 0;
+}
+.tl-handle.r {
+  right: 0;
+}
+.tl-handle:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Filmora-style inline volume stepper on audio/video clips */
+.tl-vol {
+  position: absolute;
+  top: 3px;
+  right: 8px;
+  z-index: 4;
+  display: none;
+  align-items: center;
+  gap: 2px;
+  background: rgba(0, 0, 0, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 6px;
+  padding: 1px 2px;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--on-accent);
+}
+.tl-clip:hover .tl-vol,
+.tl-clip.selected .tl-vol {
+  display: inline-flex;
+}
+.tl-vol button {
+  width: 16px;
+  height: 16px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--on-accent);
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+.tl-vol button:hover {
+  background: var(--accent);
+}
+.tl-vol span {
+  min-width: 32px;
+  text-align: center;
+  pointer-events: none;
+}
+.tl-clip.is-boosted .tl-vol span {
+  color: var(--warn);
+  font-weight: 700;
+}
+
+.playhead {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--accent);
+  z-index: 6;
+  pointer-events: none;
+  box-shadow: 0 0 8px var(--accent-soft);
+}
+.playhead::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid var(--accent);
+}
+
+.ai-markers {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  pointer-events: none;
+  z-index: 3;
+}
+.ai-mark {
+  position: absolute;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--gen));
+  border-radius: 2px;
+  opacity: 0.85;
+}
+
+.tl-empty-hint {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--muted);
+  font-size: 12px;
+  pointer-events: none;
+  text-align: center;
+  width: 280px;
+}
+
+/* Filmora Beat Sync — highlight vs regular markers */
+.beat-layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 14px;
+  pointer-events: none;
+  z-index: 2;
+}
+.beat-tick {
+  position: absolute;
+  bottom: 2px;
+  width: 2px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 1px;
+}
+.beat-tick.hl {
+  width: 3px;
+  height: 12px;
+  bottom: 1px;
+  background: var(--warn);
+  box-shadow: 0 0 6px rgba(255, 176, 32, 0.7);
+}
+
+/* Timeline rubber-band marquee (drag empty lane space) */
+.tl-marquee {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+  border: 1px solid var(--accent);
+  background: rgba(91, 140, 255, 0.16);
+  box-shadow: 0 0 0 1px rgba(91, 140, 255, 0.35);
+}
+.tl-clip.marquee-hit {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}

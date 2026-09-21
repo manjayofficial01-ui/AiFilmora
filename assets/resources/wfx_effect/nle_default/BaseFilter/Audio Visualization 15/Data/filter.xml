@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>8E16FFBC-D0CA-4CC7-80F3-692E4BC3C4AA</GUID>
+    <Name>Audio Visualization 15</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 15.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

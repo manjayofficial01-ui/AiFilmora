@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>8167B53F-E2F8-4667-96EC-F4B1E7F168B6</GUID>
+        <Name>Sobel Filter</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+        <ConfigFile>Sobel Filter.conf</ConfigFile>
+        </GPUFilter>
+        </Filter>

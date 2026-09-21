@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>2D0FCDC7-956B-469f-8E05-7B36CC2933FF</GUID>
+    <Name>ColorSketch</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>ColorSketch.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

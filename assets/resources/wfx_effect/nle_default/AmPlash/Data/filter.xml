@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>4E7B2717-D7A7-4725-83FF-E3705512F8E8</GUID>
+        <Name>AmPlash</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>AmPlash.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

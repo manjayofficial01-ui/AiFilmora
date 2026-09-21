@@ -1,0 +1,7 @@
+{
+	"type" : "audio_transition",
+	"display_name" : "audio fade",
+	"unique_name" : "audio/blender/transition-fade",
+	"thumb" : "thumb.png",
+	"video" : "test.mp4"
+}

@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>55D37319-8F37-4593-BBAF-9FF0A6307C01</GUID>
+    <Name>VCR distortion</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>VCR distortion.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>AE35EB06-076E-4F7B-98AF-9E2C37E3781C</GUID>
+        <Name>Grey Grid</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Grey Grid.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

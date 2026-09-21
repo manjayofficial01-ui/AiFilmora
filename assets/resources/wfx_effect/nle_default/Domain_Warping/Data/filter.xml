@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>8B9F31FB-B828-4919-A6A5-DFB193524019</GUID>
+        <Name>Domain_Warping</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Domain_Warping.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

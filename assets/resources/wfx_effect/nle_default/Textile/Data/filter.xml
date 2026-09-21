@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>84966D50-730C-4f9b-B10F-B4C94112B77E</GUID>
+    <Name>textile</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>textile.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

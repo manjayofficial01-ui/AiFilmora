@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>BECC0DB2-67E8-4a9c-BFFB-B1AFD8351811</GUID>
+    <Name>Rise</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Rise.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

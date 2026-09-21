@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>A653EECF-24EF-988F-7029-345FD0E4A774</GUID>
+<Name>Beam Saber Energize</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Saber Energize.conf</ConfigFile>
+</GPUFilter>
+</Filter>

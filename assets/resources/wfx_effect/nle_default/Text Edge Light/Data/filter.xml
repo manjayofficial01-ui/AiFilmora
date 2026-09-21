@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>FD6450FC-0D8A-4347-9D1A-AF3215EC5FCE</GUID>
+        <Name>Text Edge Light</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+        <ConfigFile>Text Edge Light.conf</ConfigFile>
+        </GPUFilter>
+        </Filter>

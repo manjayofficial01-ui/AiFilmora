@@ -1,0 +1,10 @@
+ <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>B23034C1-24C4-4504-9776-6805CFBD7F03</GUID>
+    <Name>Canvas</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Canvas.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

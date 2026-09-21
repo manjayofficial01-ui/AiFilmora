@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>004AF9BF-A233-4f3a-A14F-2E475C732091</GUID>
+        <Name>FuzzyImg</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>FuzzyImg.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

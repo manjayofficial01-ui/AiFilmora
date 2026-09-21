@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>5C05F0AE-6D95-4612-988B-E763A5C922DC</GUID>
+    <Name>Old video</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>OldVideo.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

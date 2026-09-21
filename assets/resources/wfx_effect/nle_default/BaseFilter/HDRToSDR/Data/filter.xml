@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>823faef6-9b7e-40a9-aac2-c902a072f5b5</GUID>
+        <Name>HDRToSDR</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>HDRToSDR.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

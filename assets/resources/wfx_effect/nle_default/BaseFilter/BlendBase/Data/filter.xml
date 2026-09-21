@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>6904F98A-FD9B-5B92-6A2C-6895D82D2437</GUID>
+<Name>BlendBase</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>BlendBase.conf</ConfigFile>
+</GPUFilter>
+</Filter>

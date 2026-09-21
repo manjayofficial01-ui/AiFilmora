@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<GPUENCODETTYPE GpuNum="2">
+    <GpuType HARDWARE_ACCELERATE_NVENC="1" HARDWARE_ACCELERATE_INTEL="1" />
+</GPUENCODETTYPE>

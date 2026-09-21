@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filmora_ExportParameter_XML>
+    <FILEFORCC FourCC="MP4 ">
+        <Video>
+            <VideoEncoder value = "H264,MP4V,AV1 ,HEVC,CFHD"></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "4096"></Resolution>
+            <VideoBitrate value = "256000,384000,512000,768000,900000,1200000,1500000,2000000,3000000,4000000,6000000,7000000,8000000,10000000,15000000,20000000,30000000,80000000"></VideoBitrate>
+            <FrameRate value = "12,15,20,23.97,24,25,29.97,30,50,59.94,60,120"></FrameRate>
+        </Video>
+        <Audio>
+            <AudioEncoder value = "AAC "></AudioEncoder>
+            <Channel value = "1,2,6"></Channel>
+            <AudioBitrate value = "96000,128000,160000,192000,256000,320000"></AudioBitrate>
+            <SampleRate value = "32000,44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="M4V ">
+        <Video>
+            <VideoEncoder value = "Xvid,H264"></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "4096"></Resolution>
+            <VideoBitrate value = "256000,384000,512000,900000,1200000,1500000,2000000,3000000,4000000,6000000,7000000,8000000,10000000,15000000,20000000,30000000,40000000,80000000,100000000,150000000"></VideoBitrate>
+            <FrameRate value = "12,15,20,23.97,24,25,29.97,30,50,59.94,60,120,240"></FrameRate>
+        </Video>
+        <Audio>
+            <AudioEncoder value = "AAC "></AudioEncoder>
+            <Channel value = "1,2,6"></Channel>
+            <AudioBitrate value = "96000,128000,160000,192000,256000,320000"></AudioBitrate>
+            <SampleRate value = "22050,32000,44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="WMV ">
+        <Video>
+            <VideoEncoder value = "WMV2,WMV3"></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "1920"></Resolution>
+            <VideoBitrate value = "256000,384000,512000,768000,900000,1200000,1500000,2000000,3000000,4000000,6000000,7000000,8000000,10000000,15000000,20000000,30000000,80000000"></VideoBitrate>
+            <FrameRate value = "12,15,20,23.97,24,25,29.97,30"></FrameRate>
+        </Video>
+        <Audio>
+            <AudioEncoder value = "WMA9"></AudioEncoder>
+            <Channel value = "2,6"></Channel>
+            <AudioBitrate value = "96000,128000,192000,256000,512000"></AudioBitrate>
+            <SampleRate value = "32000,44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="AVI ">
+        <Video>
+            <VideoEncoder value = "Xvid,MJPG"></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "1920"></Resolution>
+            <VideoBitrate value = "256000,384000,512000,768000,900000,1200000,1500000,2000000,3000000,4000000,6000000,7000000,8000000,10000000,15000000,20000000,30000000,80000000"></VideoBitrate>
+            <FrameRate value = "12,15,20,23.97,24,25,29.97,30"></FrameRate>
+        </Video>
+        <Audio>
+            <AudioEncoder value = "MP3 ,PCM "></AudioEncoder>
+            <Channel value = "1,2"></Channel>
+            <AudioBitrate value = "96000,128000,192000,256000,320000"></AudioBitrate>
+            <SampleRate value = "22050,32000,44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="MOV ">
+        <Video>
+            <VideoEncoder value = "Xvid,H264,APCN,APCS,APCH,APCO,AP4H,AP4X"></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "4096"></Resolution>
+            <VideoBitrate value = "256000,384000,512000,768000,900000,1200000,1500000,2000000,3000000,4000000,6000000,7000000,8000000,10000000,15000000,20000000,30000000,80000000"></VideoBitrate>
+            <FrameRate value = "12,15,20,23.97,24,25,29.97,30,50,59.94,60,120,240"></FrameRate>
+        </Video>
+        <Audio>
+            <AudioEncoder value = "AAC ,PCMB"></AudioEncoder>
+            <Channel value = "1,2,6"></Channel>
+            <AudioBitrate value = "96000,128000,192000,256000,320000"></AudioBitrate>
+            <SampleRate value = "22050,32000,44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="F4V ">
+        <Video>
+            <VideoEncoder value = "H264"></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "1920"></Resolution>
+            <VideoBitrate value = "256000,384000,512000,768000,900000,1200000,1500000,2000000,3000000,4000000,6000000,7000000,8000000,10000000,15000000,20000000,30000000,80000000"></VideoBitrate>
+            <FrameRate value = "12,15,20,23.97,24,25,29.97,30,50,59.94,60"></FrameRate>
+        </Video>
+        <Audio>
+            <AudioEncoder value = "AAC "></AudioEncoder>
+            <Channel value = "1,2,6"></Channel>
+            <AudioBitrate value = "96000,128000,192000,256000,320000"></AudioBitrate>
+            <SampleRate value = "44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="MKV ">
+        <Video>
+            <VideoEncoder value = "Xvid,H264"></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "4096"></Resolution>
+            <VideoBitrate value = "256000,384000,512000,768000,900000,1200000,1500000,2000000,3000000,4000000,6000000,7000000,8000000,10000000,15000000,20000000,30000000,80000000"></VideoBitrate>
+            <FrameRate value = "12,15,20,23.97,24,25,29.97,30,50,59.94,60,120"></FrameRate>
+        </Video>
+        <Audio>
+            <AudioEncoder value = "AAC ,MP3 "></AudioEncoder>
+            <Channel value = "1,2,6"></Channel>
+            <AudioBitrate value = "64000,96000,128000,192000,256000,320000"></AudioBitrate>
+            <SampleRate value = "44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="TS  ">
+        <Video>
+            <VideoEncoder value = "H264,MP2V"></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "1920"></Resolution>
+            <VideoBitrate value = "512000,768000,900000,1000000,1200000,1500000,2000000,3000000,4000000,6000000,7000000,8000000,10000000,15000000,1800000,20000000,30000000,80000000"></VideoBitrate>
+            <FrameRate value = "23.97,24,25,29.97,30"></FrameRate>
+        </Video>
+        <Audio>
+            <AudioEncoder value = "MP2A"></AudioEncoder>
+            <Channel value = "1,2"></Channel>
+            <AudioBitrate value = "64000,96000,128000,192000,256000,384000"></AudioBitrate>
+            <SampleRate value = "44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="3GP ">
+        <Video>
+            <VideoEncoder value = "Xvid,H263"></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "352"></Resolution>
+            <VideoBitrate value = "96000,128000,160000,256000,384000,512000"></VideoBitrate>
+            <FrameRate value = "12,15,23.97"></FrameRate>
+        </Video>
+        <Audio>
+            <AudioEncoder value = "AAC "></AudioEncoder>
+            <Channel value = "1,2"></Channel>
+            <AudioBitrate value = "32000,64000,96000,128000"></AudioBitrate>
+            <SampleRate value = "8000,22050"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="MPG2">
+        <Video>
+            <VideoEncoder value = "MP2V,H264"></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "1920"></Resolution>
+            <VideoBitrate value = "256000,384000,512000,768000,900000,1200000,1500000,2000000,3000000,4000000,6000000,7000000,8000000,10000000,15000000,20000000,30000000,80000000"></VideoBitrate>
+            <FrameRate value = "23.97,24,25,29.97,30"></FrameRate>
+        </Video>
+        <Audio>
+            <AudioEncoder value = "MP2A"></AudioEncoder>
+            <Channel value = "1,2"></Channel>
+            <AudioBitrate value = "64000,96000,128000"></AudioBitrate>
+            <SampleRate value = "44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="WEBM">
+        <Video>
+            <VideoEncoder value = "VP8 ,VP9 "></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "1920"></Resolution>
+            <VideoBitrate value = "256000,384000,512000,768000,900000,1200000,1500000,2000000,3000000,4000000,6000000,7000000,8000000,10000000,15000000,20000000,30000000,80000000"></VideoBitrate>
+            <FrameRate value = "15,30"></FrameRate>
+        </Video>
+        <Audio>
+            <AudioEncoder value = "VBIS"></AudioEncoder>
+            <Channel value = "1,2"></Channel>
+            <AudioBitrate value = "64000,96000,128000,192000,256000,320000"></AudioBitrate>
+            <SampleRate value = "22050,32000,44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="GIF ">
+        <Video>
+            <VideoEncoder value = "GIF "></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "1920"></Resolution>
+            <VideoBitrate value = "256000,384000,512000,768000,900000,1000000,1200000,1500000,2000000,3000000,4000000,6000000,7000000,8000000,10000000,15000000,20000000,30000000"></VideoBitrate>
+            <FrameRate value = "10,12,15,20,23.97,24,25,29.97,30"></FrameRate>
+        </Video>
+    </FILEFORCC>
+    <FILEFORCC FourCC="PIC ">
+        <Video>
+            <VideoEncoder value = "PNG ,JPG "></VideoEncoder>
+            <Resolution minValue = "64" maxValue= "4096"></Resolution>
+            <FrameRate value = "12,15,20,23.97,24,25,29.97,30,50,59.94,60"></FrameRate>
+        </Video>
+    </FILEFORCC>
+    <FILEFORCC FourCC="MP3 ">
+        <Audio>
+            <AudioEncoder value = "MP3 "></AudioEncoder>
+            <Channel value = "1,2"></Channel>
+            <AudioBitrate value = "64000,96000,128000,160000,192000,256000,320000"></AudioBitrate>
+            <SampleRate value = "44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="M4A ">
+        <Audio>
+            <AudioEncoder value = "AAC "></AudioEncoder>
+            <Channel value = "1,2,6"></Channel>
+            <AudioBitrate value = "96000,128000,160000,192000,256000,320000"></AudioBitrate>
+            <SampleRate value = "22050,32000,44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+    <FILEFORCC FourCC="WAV ">
+        <Audio>
+            <AudioEncoder value = "PCM "></AudioEncoder>
+            <Channel value = "1,2"></Channel>
+            <AudioBitrate value = "64000,96000,128000,160000,192000,256000,320000"></AudioBitrate>
+            <SampleRate value = "44100,48000"></SampleRate>
+        </Audio>
+    </FILEFORCC>
+</Filmora_ExportParameter_XML>

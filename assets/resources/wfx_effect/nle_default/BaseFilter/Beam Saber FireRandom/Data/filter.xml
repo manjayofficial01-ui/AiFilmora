@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>14ECBC85-F9E7-DB9A-3733-17EE8240A8D6</GUID>
+<Name>Beam Saber FireRandom</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Saber FireRandom.conf</ConfigFile>
+</GPUFilter>
+</Filter>

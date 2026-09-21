@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>9E3AF76F-D1B1-4F80-BD21-0DABC5D2E02D</GUID>
+<Name>VectorText3DWhiteMode</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>VectorText3D.conf</ConfigFile>
+</GPUFilter>
+</Filter>

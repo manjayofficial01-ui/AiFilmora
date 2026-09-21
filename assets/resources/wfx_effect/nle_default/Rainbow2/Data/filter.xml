@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>986D9EB4-F480-4757-B661-10C87DB2EFCB</GUID>
+        <Name>Rainbow2</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Rainbow2.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

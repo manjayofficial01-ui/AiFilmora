@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>6488D488-A959-4DA2-A082-7A0D061A06A4</GUID>
+<Name>Beam Text Saber Line Fire</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Text Saber Line Fire.conf</ConfigFile>
+</GPUFilter>
+</Filter>

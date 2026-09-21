@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>BF5E66ED-3D2D-4BC8-AB1C-C0A03999D3E4</GUID>
+        <Name>Interwoven</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Interwoven.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

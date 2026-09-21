@@ -1,0 +1,93 @@
+{
+	"title": "Novità di Filmora %1.",
+	"titleByManual": "Stai utilizzando l'ultima versione. Scopri le nuove funzioni della versione %1!",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "Testo-video",
+			"discription": "Sprigiona la tua creatività con Conversione testo-video e scopri la magia dell'AI di Filmora",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "Da immagine a video",
+			"discription": "Da immagine a video ora con tecnologia Veo 3! Scopri risultati di generazione notevolmente migliorati!",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},	
+		{
+			"id": "ai_idea_to_video",
+			"name": "Da idea a video AI",
+			"discription": "Trasforma le tue idee grezze in video brevi professionali mantenendo la coerenza dello stile visivo e garantendo la continuità dei personaggi attraverso le scene.",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "Stilizzazione immagine con AI",
+			"discription": "Stilizzazione immagine AI‍avanzata! Ora disponibile nella scheda AIGC con funzionalità di stilizzazione immagine avanzate ed estese.",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "Da audio a video",
+			"discription": "Trasforma facilmente podcast audio in brevi video accattivanti. Modifica, taglia ed evidenzia le tue storie preferite.",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "Clip smart di breve durata",
+			"discription": "Trasforma video lunghi in corti coinvolgenti.Taglia, rifinisci e metti in risalto i momenti migliori!",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "Taglio scena smart",
+			"discription": "Estrai le parti evidenziate e le scene con persone per migliorare l'efficienza delle modifiche.",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "Generazione BGM smart",
+			"discription": "Genera automaticamente musica di sottofondo adatta al tuo video.",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "Reframe automatico",
+			"discription": "Utilizza Reframe automatico per esportare video che corrispondono alle proporzioni delle piattaforme di social media.",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "AI che comprende, assiste e migliora. Con AI Mate al tuo fianco, puoi creare incredibili video più velocemente che mai.",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "Modifica multi-camera",
+			"discription": "Importa filmati da più videocamere e passa facilmente da un'angolazione all'altra per un'esperienza di editing pratica ed efficiente. Semplifica processi di modifica complessi e migliora il tuo flusso di lavoro creativo.",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "Traduzione AI",
+			"discription": "Traduci automaticamente video e audio in più di 20 lingue e sincronizza l'audio con il movimento delle labbra dei parlanti.",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

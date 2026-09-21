@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>87E372F5-44F1-45aa-8C6E-BC3762CA7798</GUID>
+        <Name>WaterRipple</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>WaterRipple.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

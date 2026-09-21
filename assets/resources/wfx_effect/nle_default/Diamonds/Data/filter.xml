@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>DC624B91-2E74-431C-957E-9D74E344111E</GUID>
+        <Name>Diamonds</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Diamonds.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

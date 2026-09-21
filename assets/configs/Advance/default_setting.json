@@ -1,0 +1,58 @@
+[
+    {
+        "type": 4096,
+        "title": "Green Screen",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Green Screen.conf"
+    },
+    {
+        "type": 4096,
+        "title": "Facial Recognition",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Facial Recognition.conf"
+    },
+    {
+        "type": 4096,
+        "title": "Blur background",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Blur background.conf"
+    },
+    {
+        "type": 4096,
+        "title": "Mirror",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Mirror.conf"
+    },
+    {
+        "type": 4096,
+        "title": "Border Overlay",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Border Overlay.conf"
+    },
+    {
+        "type": 4096,
+        "title": "Mosaic",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Mosaic.conf"
+    },
+    {
+        "type": 4096,
+        "title": "Cinema Style",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/Cinema Style.conf"
+    }
+]

@@ -1,0 +1,10 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>3A55B9FB-DDB6-4B0A-8576-36F7AFF27989</GUID>
+        <Name>TextEdgeGrid</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>TextEdgeGrid.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>

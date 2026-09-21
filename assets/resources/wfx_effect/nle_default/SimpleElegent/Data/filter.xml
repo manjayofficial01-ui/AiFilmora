@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>94C674C7-B853-4b72-A035-46412DA6B447</GUID>
+        <Name>SimpleElegent</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>SimpleElegent.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

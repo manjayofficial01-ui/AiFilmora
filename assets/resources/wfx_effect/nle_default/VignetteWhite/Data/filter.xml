@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>77036E5E-515D-4bc8-841D-8804E7EC5705</GUID>
+        <Name>VignetteWhite</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>VignetteWhite.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

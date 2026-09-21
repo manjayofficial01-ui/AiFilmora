@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>E09AB513-B4B2-4B62-8289-2DC46EF0F167</GUID>
+        <Name>Mosaic 2</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Mosaic 2.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

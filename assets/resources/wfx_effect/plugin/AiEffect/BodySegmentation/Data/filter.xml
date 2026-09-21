@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>EE6BC05B-DD9B-4154-9E03-00740D1CA060</GUID>
+    <Name>BodySegmentation</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>BodySegmentation.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

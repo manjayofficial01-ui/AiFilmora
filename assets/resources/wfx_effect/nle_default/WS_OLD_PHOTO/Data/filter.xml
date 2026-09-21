@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>43E461FF-BEB3-4ef1-974A-93812CB8D210</GUID>
+        <Name>WS_OLD_PHOTO</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>WS_OLD_PHOTO.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

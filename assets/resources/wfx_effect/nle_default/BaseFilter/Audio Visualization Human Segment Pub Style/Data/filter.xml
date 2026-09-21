@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>F740C183-1F8E-4EAC-AFFF-D96D284593B8</GUID>
+    <Name>Audio Visualization Human Segment Pub Style</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization Human Segment Pub Style.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

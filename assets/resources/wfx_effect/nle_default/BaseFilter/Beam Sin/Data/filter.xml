@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>1FA3FB64-25DD-E0CB-E4CD-F57F33EDD08C</GUID>
+<Name>Beam Sin</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Sin.conf</ConfigFile>
+</GPUFilter>
+</Filter>

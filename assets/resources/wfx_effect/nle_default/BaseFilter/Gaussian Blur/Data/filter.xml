@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>BCBE3824-BB66-4C29-A5DB-DFE4381FAA9F</GUID>
+<Name>Gaussian Blur</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Gaussian Blur.conf</ConfigFile>
+</GPUFilter>
+</Filter>

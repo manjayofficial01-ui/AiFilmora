@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>8FC75F27-39C6-4767-B1E9-E08826A36CEF</GUID>
+    <Name>Audio Visualizer Color10</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualizer Color10.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

@@ -1,0 +1,142 @@
+
+void Init(){
+	m_IsNeedCpuFrame = true;
+}
+ 
+void NewCustomizeParameter(){
+    InputTypeMapSetIsBGR(0, false);
+    InputTypeMapSetIsBGR(1, false);
+		NewIntParam("uStep", 0);
+		NewFboTexture();
+		NewFboTexture();
+		NewFboTexture();
+		CreateRGBAInput(0, 0, 0, false);
+		CreateRGBAInput(0, 0, 0, false);
+		CreateRGBAInput(0, 0, 0, false);
+}
+
+int Prepare(int outFrame_width, int outFrame_height, int outFrame_pitch){
+    GLEffect DualKawaseBlur = GLEffect("5FCCB3C4-83CA-446A-ACCA-08BAE84893D4"); // DualKawaseBlur
+    ivec2 size = ivec2();
+    if (outFrame_width > outFrame_height) {
+        size = ivec2(548, 308);
+    } else {
+        size = ivec2(308, 548);
+    }
+
+    Prepare(DualKawaseBlur, size.x, size.y, size.x * 4);
+  
+    return 0;
+}
+
+int GetVertexIndex(Object vecTex, int suCaiNumber, float iPro)
+{
+	int frameSize = GetSize(vecTex[suCaiNumber]);
+
+	float curPos1 = frameSize * iPro;
+
+	int index = int(curPos1);
+
+	if (index > frameSize - 1)
+	{
+		index = frameSize - 1;
+	}
+	return index;
+}
+
+int Running(FilterData src_bg_data,FilterData src_fg_data,FilterData dst_data,int nOutWidth,int nOutHeight,int nOutPitch){
+    Effect m_pNormalGenerate = Effect(GuidVideoLight);
+		FilterData emptyOut;
+		float curretime = float(GetCurrentTime());
+		float totaltime = float(GetTotalTime());
+		float iPro = min(curretime / totaltime, 1.0);
+		
+		Object vecTex = GetVecTex();
+		int index = 0;
+		index = GetVertexIndex(vecTex, 0, iPro);
+		
+		ivec2 size = ivec2();
+    if (nOutWidth > nOutHeight) {
+        size = ivec2(548, 308);
+    } else {
+        size = ivec2(308, 548);
+    }
+		
+		cvMat matBack;
+    cvMat matFore = GetMat(src_fg_data);
+    cvMat matIn;
+    cv_resize(matFore, matIn, size);
+    cvMat matOut = cvMat(size.y, size.x, CV_8UC4);
+    if(NLEEffectFilterTransformChannels(m_pNormalGenerate, matOut, matBack, matIn) != 0){
+        LogInfo("m_pNormalGenerate Failed");
+        return 1;//Failed
+    }
+		
+		Effect m_pCHumanSegmentation = Effect(GuidHumanSegmentationLowPrecision);
+		FilterData m_HumanFilterData;
+		SET_PREFIX(m_pCHumanSegmentation, "Edge Thickness", -5.0);
+		SET_PREFIX(m_pCHumanSegmentation, "Edge Feather", 10.0);
+
+		cvMat m_Human;
+		if (!GetHuamnSegmanetGrayResult(m_HumanFilterData, m_pCHumanSegmentation, m_Human, src_fg_data, true, true, size, false, 1))
+		{
+			LogInfo("GetHuamnSegmanetGrayResult Failed");
+			return 1; // Failed
+		};
+		
+		FilterData normal_filter = FilterData(matOut);
+		GLEffect DualKawaseBlur = GLEffect("5FCCB3C4-83CA-446A-ACCA-08BAE84893D4"); // DualKawaseBlur
+		SET_PREFIX(DualKawaseBlur, "uIterations", 4);
+		SET_PREFIX(DualKawaseBlur, "uOffset", 1.0);
+		SET_PREFIX(DualKawaseBlur, "uViewSizeWidth", 200.0);
+    SET_PREFIX(DualKawaseBlur, "uViewSizeHeight", 200.0);
+    Running(DualKawaseBlur, src_bg_data, normal_filter, emptyOut, size.x, size.y, size.x * 4);
+    FilterData normal_blur = FilterData(GetDstFboTextureNum(DualKawaseBlur), size.x, size.y, size.x * 4);
+		
+    int nInputIndex = 0;
+		
+		SetIntParam("uStep", 0);
+    SetInputFilterData(nInputIndex, src_fg_data);
+    SetInputFilterData(nInputIndex, normal_blur);
+		SetInputFilterData(nInputIndex, m_HumanFilterData);
+		// SetInputFilterData(nInputIndex, src_fg_data);
+		SetInputFilterData(nInputIndex, src_fg_data);
+		
+		// return DoEffect(dst_data);
+		
+		DoEffect(emptyOut);
+		SwapFboTexture(1);
+		FilterData resultdata1 = FilterData(GetFboTextureNum(1), size.x, size.y, size.x * 4);
+		
+    nInputIndex = 0;
+		SetIntParam("uStep", 1);
+    SetInputFilterData(nInputIndex, src_fg_data);
+    SetInputFilterData(nInputIndex, resultdata1);
+    SetInputFilterData(nInputIndex, m_HumanFilterData);
+    // SetInputFilterData(nInputIndex, src_fg_data);
+		SetInputRGBData(nInputIndex, matOut);
+		
+		// return DoEffect(dst_data);
+		
+		DoEffect(emptyOut);
+		SwapFboTexture(2);
+		FilterData resultdata2 = FilterData(GetFboTextureNum(2), size.x, size.y, size.x * 4);
+		
+		SET_PREFIX(DualKawaseBlur, "uViewSizeWidth", 300.0);
+    SET_PREFIX(DualKawaseBlur, "uViewSizeHeight", 300.0);
+    Running(DualKawaseBlur, src_bg_data, resultdata2, emptyOut, size.x, size.y, size.x * 4);
+    FilterData DualKawaseBlur_data = FilterData(GetDstFboTextureNum(DualKawaseBlur), size.x, size.y, size.x * 4);
+		
+		
+		SetIntParam("uStep", 2);
+		nInputIndex = 0;
+		SetInputFilterData(nInputIndex, src_fg_data);
+		SetInputFilterData(nInputIndex, DualKawaseBlur_data);
+		SetInputFilterData(nInputIndex, resultdata2);
+		SetInputRGBData(nInputIndex, matOut);
+		nInputIndex++;
+    SetInputTextures(nInputIndex);
+    
+
+    return DoEffect(dst_data);
+}

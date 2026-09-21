@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>B973C9F9-F03A-4414-B2AB-C3E39C79D9D6</GUID>
+    <Name>WhiteWiperSegmentaion</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>WhiteWiperSegmentaion.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>25E4478A-C617-4c60-B95A-F378D2923E17</GUID>
+        <Name>Glow</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Glow.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

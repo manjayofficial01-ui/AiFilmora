@@ -1,0 +1,878 @@
+{
+	"version": "1.1",
+	"installfolder": "",
+	"platformlist": [
+		"win_x64",
+		"win_arm64",
+		"mac_x86",
+		"mac_arm",
+		"android",
+		"ios",
+		"ohos"
+	],
+	"modules": [
+		{
+			"module_slug": "planar_tracking",
+			"dependent_plugins": [
+				"plane_track"
+			]
+		},
+		{
+			"module_slug": "smart_mosaic",
+			"dependent_plugins": [
+				"smart_mosaic"
+			]
+		},
+		{
+			"module_slug": "ai_potrait_cutout",
+			"dependent_plugins": [
+				"human_segmentation_hair"
+			]
+		},
+		{
+			"module_slug": "ai_potrait_cutout_ios",
+			"dependent_plugins": [
+				"human_segmentation_hair",
+				"human_segmentation_highacc"
+			]
+		},
+		{
+			"module_slug": "ai_potrait_cutout_android",
+			"dependent_plugins": [
+				"human_segmentation_hair",
+				"human_segmentation_highacc"
+			]
+		},
+		{
+			"module_slug": "video_denoising",
+			"dependent_plugins": [
+				"video_denoising_lite"
+			]
+		},
+		{
+			"module_slug": "ai_potrait",
+			"dependent_plugins": [
+				"human_segmentation_effect",
+				"human_segmentation_highacc",
+				"face_landmarks_v3",
+				"face_pose_estimator",
+				"face_visibility",
+				"face_detector"
+			]
+		},
+		{
+			"module_slug": "interactive_segment",
+			"dependent_plugins": [
+				"interactive_segment",
+				"mask_propagation"
+			]
+		},
+		{
+			"module_slug": "auto_reframe",
+			"dependent_plugins": [
+				"auto_reframe"
+			]
+		},
+		{
+			"module_slug": "instant_mode",
+			"dependent_plugins": [
+				"face_detector"
+			]
+		},
+		{
+			"module_slug": "speech_enhance",
+			"dependent_plugins": [
+				"speech_enhance_v3"
+			]
+		},
+		{
+			"module_slug": "video_feature_extraction",
+			"dependent_plugins": [
+				"video_feature_extraction"
+			]
+		},
+		{
+			"module_slug": "ai_mask",
+			"dependent_plugins": [
+				"human_segmentation_highacc",
+				"interactive_segment",
+				"semantic_segmentation"
+			]
+		},
+		{
+			"module_slug": "skin_protect",
+			"dependent_plugins": [
+				"human_skin_segment"
+			]
+		},
+		{
+			"module_slug": "remove_background",
+			"dependent_plugins": [
+				"semantic_segmentation"
+			]
+		},
+		{
+			"module_slug": "ai_frameinterpolation",
+			"dependent_plugins": [
+				"video_frame_interpolation"
+			]
+		},
+		{
+			"module_slug": "audio_separation_lite",
+			"dependent_plugins": [
+				"audio_separation_lite"
+			]
+		},
+		{
+			"module_slug": "face_cluster_search",
+			"dependent_plugins": [
+				"face_visibility",
+				"face_cluster"
+			]
+		},
+		{
+			"module_slug": "depth_estimate",
+			"dependent_plugins": [
+				"depth_estimate"
+			]
+		},
+		{
+			"module_slug": "pipeline_human_landmarks",
+			"dependent_plugins": [
+				"face_landmarks_v3",
+				"face_pose_estimator",
+				"face_visibility",
+				"face_detector"
+			]
+		},
+		{
+			"module_slug": "audio_stt_search",
+			"dependent_plugins": [
+				"audio_stt"
+			]
+		},
+		{
+			"module_slug": "video_search_image",
+			"dependent_plugins": [
+				"video_search_image"
+			]
+		},
+		{
+			"module_slug": "video_search_text",
+			"dependent_plugins": [
+				"video_search_text"
+			]
+		},
+		{
+			"module_slug": "clip_algorithm",
+			"dependent_plugins": [
+				"clip_algorithm"
+			]
+		},
+		{
+			"module_slug": "face_landmarks_v3",
+			"dependent_plugins": [
+				"face_landmarks_v3"
+			]
+		},
+		{
+			"module_slug": "face_pose_estimator",
+			"dependent_plugins": [
+				"face_pose_estimator"
+			]
+		},
+		{
+			"module_slug": "face_visibility",
+			"dependent_plugins": [
+				"face_visibility"
+			]
+		},
+		{
+			"module_slug": "face_detector",
+			"dependent_plugins": [
+				"face_detector"
+			]
+		},
+		{
+			"module_slug": "mask_propagation",
+			"dependent_plugins": [
+				"mask_propagation"
+			]
+		},
+		{
+			"module_slug": "video_frame_interpolation",
+			"dependent_plugins": [
+				"video_frame_interpolation"
+			]
+		},
+		{
+			"module_slug": "human_landmarks",
+			"dependent_plugins": [
+				"human_landmarks"
+			]
+		},
+		{
+			"module_slug": "semantic_segmentation",
+			"dependent_plugins": [
+				"semantic_segmentation"
+			]
+		},
+		{
+			"module_slug": "speech_enhance_v2",
+			"dependent_plugins": [
+				"speech_enhance_v2"
+			]
+		},
+		{
+			"module_slug": "human_skin_segment",
+			"dependent_plugins": [
+				"human_skin_segment"
+			]
+		},
+		{
+			"module_slug": "face_cluster",
+			"dependent_plugins": [
+				"face_cluster"
+			]
+		},
+		{
+			"module_slug": "video_denoising_lite",
+			"dependent_plugins": [
+				"video_denoising_lite"
+			]
+		},
+		{
+			"module_slug": "audio_stt",
+			"dependent_plugins": [
+				"audio_stt"
+			]
+		},
+		{
+			"module_slug": "speech_enhance_v3",
+			"dependent_plugins": [
+				"speech_enhance_v3"
+			]
+		},
+		{
+			"module_slug": "plane_track",
+			"dependent_plugins": [
+				"plane_track"
+			]
+		},
+		{
+			"module_slug": "speech_enhance_v4",
+			"dependent_plugins": [
+				"speech_enhance_v4"
+			]
+		},
+		{
+			"module_slug": "ai_wind_denoise_v2",
+			"dependent_plugins": [
+				"ai_wind_denoise_v2"
+			]
+		},
+		{
+			"module_slug": "midi_detection",
+			"dependent_plugins": [
+				"midi_detection"
+			]
+		},
+		{
+			"module_slug": "speech_detection",
+			"dependent_plugins": [
+				"speech_detection"
+			]
+		},
+		{
+			"module_slug": "human_segmentation_effect",
+			"dependent_plugins": [
+				"human_segmentation_effect"
+			]
+		},
+		{
+			"module_slug": "human_segmentation_highacc",
+			"dependent_plugins": [
+				"human_segmentation_highacc"
+			]
+		},
+		{
+			"module_slug": "human_segmentation_hair",
+			"dependent_plugins": [
+				"human_segmentation_hair"
+			]
+		},
+		{
+			"module_slug": "large_language_chat",
+			"dependent_plugins": [
+				"large_language_chat"
+			]
+		},
+		{
+			"module_slug": "face_landmarks_v2",
+			"dependent_plugins": [
+				"face_landmarks_v2"
+			]
+		},
+		{
+			"module_slug": "stable_diffusion",
+			"dependent_plugins": [
+				"stable_diffusion"
+			]
+		},
+		{
+			"module_slug": "video_scene_segment",
+			"dependent_plugins": [
+				"video_scene_segment"
+			]
+		},
+		{
+			"module_slug": "cuda_sdk",
+			"dependent_plugins": [
+				"cuda_sdk"
+			]
+		},
+		{
+			"module_slug": "video_understanding_hiai",
+			"dependent_plugins": [
+				"video_understanding_hiai"
+			]
+		},
+		{
+			"module_slug": "cuda_sdk_12_9",
+			"dependent_plugins": [
+				"cuda_sdk_12_9"
+			]
+		},
+		{
+			"module_slug": "video_quality_enhance",
+			"dependent_plugins": [
+				"video_quality_enhance"
+			]
+		}
+	],
+	"model": [
+		{
+			"model_slug": "plane_track",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.6",
+					"mac_x86": "1.0.6",
+					"mac_arm": "1.0.6",
+					"ohos": "1.0.4",
+					"win_arm64": "1.0.5"
+				}
+			}
+		},
+		{
+			"model_slug": "smart_mosaic",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.3",
+					"mac_x86": "1.0.3",
+					"mac_arm": "1.0.3",
+					"ohos": "1.0.1",
+					"win_arm64": "1.0.2"
+				}
+			}
+		},
+		{
+			"model_slug": "human_segmentation_hair",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "5.0.2",
+					"mac_x86": "5.0.2",
+					"mac_arm": "5.0.1",
+					"ohos": "4.0.9",
+					"win_arm64": "4.1.0",
+					"android": "4.0.9",
+					"ios": "4.0.9"
+				}
+			}
+		},
+		{
+			"model_slug": "video_denoising_lite",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "3.0.2",
+					"mac_x86": "3.0.2",
+					"mac_arm": "3.0.2",
+					"ohos": "3.0.2",
+					"win_arm64": "3.0.2",
+					"android": "3.0.2",
+					"ios": "3.0.2"
+				}
+			}
+		},
+		{
+			"model_slug": "human_segmentation_effect",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "2.4.4",
+					"mac_x86": "2.4.4",
+					"mac_arm": "2.4.4",
+					"ohos": "2.4.4",
+					"win_arm64": "2.4.5",
+					"android": "2.4.4",
+					"ios": "2.4.4"
+				}
+			}
+		},
+		{
+			"model_slug": "depth_estimate",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "2.0.1",
+					"mac_x86": "2.0.1",
+					"mac_arm": "2.0.1",
+					"ohos": "1.0.2",
+					"win_arm64": "1.0.3",
+					"android": "1.0.2",
+					"ios": "1.0.2"
+				}
+			}
+		},
+		{
+			"model_slug": "human_landmarks",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.4",
+					"mac_x86": "1.0.4",
+					"mac_arm": "1.0.4",
+					"ohos": "1.0.2",
+					"win_arm64": "1.0.2",
+					"android": "1.0.2",
+					"ios": "1.0.2"
+				}
+			}
+		},
+		{
+			"model_slug": "human_segmentation_highacc",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "3.1.9",
+					"mac_x86": "3.1.9",
+					"mac_arm": "3.1.7",
+					"ohos": "3.1.7",
+					"win_arm64": "3.1.8",
+					"android": "3.1.7",
+					"ios": "3.1.7"
+				}
+			}
+		},
+		{
+			"model_slug": "face_landmarks_v3",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.0",
+					"mac_x86": "1.0.0",
+					"mac_arm": "1.0.0",
+					"ohos": "1.0.0",
+					"win_arm64": "1.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "face_pose_estimator",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.1",
+					"mac_x86": "1.0.1",
+					"mac_arm": "1.0.1",
+					"ohos": "1.0.2",
+					"win_arm64": "1.0.2"
+				}
+			}
+		},
+		{
+			"model_slug": "face_visibility",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.5",
+					"mac_x86": "1.0.5",
+					"mac_arm": "1.0.5",
+					"ohos": "1.0.3",
+					"win_arm64": "1.0.4"
+				}
+			}
+		},
+		{
+			"model_slug": "face_detector",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "2.0.7",
+					"mac_x86": "2.0.7",
+					"mac_arm": "2.0.7",
+					"ohos": "2.0.6",
+					"win_arm64": "2.0.7"
+				}
+			}
+		},
+		{
+			"model_slug": "interactive_segment",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "4.0.2",
+					"mac_x86": "4.0.1",
+					"mac_arm": "4.0.0",
+					"ohos": "3.2.2",
+					"win_arm64": "3.2.3",
+					"android": "3.2.2",
+					"ios": "3.2.2"
+				}
+			}
+		},
+		{
+			"model_slug": "mask_propagation",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "5.0.4",
+					"mac_x86": "5.0.1",
+					"mac_arm": "5.0.2",
+					"ohos": "3.1.7",
+					"win_arm64": "4.2.6",
+					"android": "4.2.6",
+					"ios": "4.2.6"
+				}
+			}
+		},
+		{
+			"model_slug": "auto_reframe",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "2.0.0",
+					"mac_x86": "2.0.0",
+					"mac_arm": "2.0.0",
+					"ohos": "2.0.0",
+					"win_arm64": "2.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "speech_enhance_v3",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.3",
+					"mac_x86": "1.0.3",
+					"mac_arm": "1.0.3",
+					"ohos": "1.0.3",
+					"win_arm64": "1.0.3"
+				}
+			}
+		},
+		{
+			"model_slug": "video_feature_extraction",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.1",
+					"mac_x86": "1.0.1",
+					"mac_arm": "1.0.1"
+				}
+			}
+		},
+		{
+			"model_slug": "semantic_segmentation",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.6",
+					"mac_x86": "1.0.6",
+					"mac_arm": "1.0.6",
+					"ohos": "1.0.4",
+					"win_arm64": "1.0.5"
+				}
+			}
+		},
+		{
+			"model_slug": "human_skin_segment",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "2.2.3",
+					"mac_x86": "2.2.3",
+					"mac_arm": "2.2.3",
+					"ohos": "2.2.2",
+					"win_arm64": "2.2.3"
+				}
+			}
+		},
+		{
+			"model_slug": "video_frame_interpolation",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "3.1.3",
+					"mac_x86": "3.1.3",
+					"mac_arm": "3.1.3",
+					"ohos": "3.1.3",
+					"win_arm64": "3.1.3"
+				}
+			}
+		},
+		{
+			"model_slug": "audio_separation_lite",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.1",
+					"mac_x86": "1.0.1",
+					"mac_arm": "1.0.1"
+				}
+			}
+		},
+		{
+			"model_slug": "face_cluster",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "2.0.5",
+					"mac_x86": "2.0.5",
+					"mac_arm": "2.0.5",
+					"ohos": "2.0.3",
+					"win_arm64": "2.0.5"
+				}
+			}
+		},
+		{
+			"model_slug": "audio_stt",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.1",
+					"mac_x86": "1.0.1",
+					"mac_arm": "1.0.1"
+				}
+			}
+		},
+		{
+			"model_slug": "video_search_image",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.0",
+					"mac_x86": "1.0.0",
+					"mac_arm": "1.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "video_search_text",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.0",
+					"mac_x86": "1.0.0",
+					"mac_arm": "1.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "clip_algorithm",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.0",
+					"mac_x86": "1.0.0",
+					"mac_arm": "1.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "speech_enhance_v2",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.1",
+					"mac_x86": "1.0.1"
+				}
+			}
+		},
+		{
+			"model_slug": "human_segmentation_capture",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "3.0.2",
+					"mac_x86": "3.0.2",
+					"mac_arm": "3.0.2"
+				}
+			}
+		},
+		{
+			"model_slug": "speech_enhance",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.1",
+					"mac_x86": "1.0.1",
+					"mac_arm": "1.0.1"
+				}
+			}
+		},
+		{
+			"model_slug": "speech_enhance_v4",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.2",
+					"mac_x86": "1.0.2",
+					"mac_arm": "1.0.2",
+					"win_arm64": "1.0.2"
+				}
+			}
+		},
+		{
+			"model_slug": "ai_wind_denoise_v2",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.2",
+					"mac_x86": "1.0.2",
+					"mac_arm": "1.0.2"
+				}
+			}
+		},
+		{
+			"model_slug": "midi_detection",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.0",
+					"mac_x86": "1.0.0",
+					"mac_arm": "1.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "speech_detection",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.0",
+					"mac_x86": "1.0.0",
+					"mac_arm": "1.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "human_segmentation_effect",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": "2.4.4"
+			}
+		},
+		{
+			"model_slug": "human_segmentation_highacc",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": "3.1.7"
+			}
+		},
+		{
+			"model_slug": "human_segmentation_capture",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": "3.0.2"
+			}
+		},
+		{
+			"model_slug": "human_segmentation_hair",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": "5.0.1"
+			}
+		},
+		{
+			"model_slug": "large_language_chat",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "face_landmarks_v2",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"ohos": "3.0.5",
+					"win_x64": "3.0.5",
+					"mac_x86": "3.0.5",
+					"mac_arm": "3.0.5"
+				}
+			}
+		},
+		{
+			"model_slug": "stable_diffusion",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "video_scene_segment",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"ohos": "1.0.2"
+				}
+			}
+		},
+		{
+			"model_slug": "cuda_sdk",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "video_understanding_hiai",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"ohos": "1.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "cuda_sdk_12_9",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.0"
+				}
+			}
+		},
+		{
+			"model_slug": "video_quality_enhance",
+			"model_info": {
+				"plugin_type": 1,
+				"minversion": {
+					"win_x64": "1.0.0"
+				}
+			}
+		}
+	],
+	"modify_time": "2025-07-16 16:16:26"
+}

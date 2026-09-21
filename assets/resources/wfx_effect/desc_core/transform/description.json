@@ -1,0 +1,110 @@
+{
+    "type": "video_effect",
+    "display_name": "transform",
+    "unique_name": "video/effect/transform",
+    "capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "params": [
+        {
+            "name": "EnableTransform",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 1,
+            "default_value": 1
+        },
+        {
+            "name": "Anchor_x",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 0.5
+        },
+        {
+            "name": "Anchor_y",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 0.5
+        },
+        {
+            "name": "Position_x",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 0.5
+        },
+        {
+            "name": "Position_y",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 0.5
+        },
+        {
+            "name": "Scale_x",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 100.0
+        },
+        {
+            "name": "Scale_y",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 100.0
+        },
+        {
+            "name": "Rotation",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": 0.0
+        },
+        {
+            "name": "EnableShadow",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 1,
+            "default_value": 0
+        },
+        {
+            "name": "nDistance",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 100,
+            "default_value": 10
+        },
+        {
+            "name": "nBlur",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 100,
+            "default_value": 20
+        },
+        {
+            "name": "nAlpha",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 100,
+            "default_value": 80
+        },
+        {
+            "name": "dwValue",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 16777215,
+            "default_value": 0,
+            "ui_type": "Color"
+        },
+		{
+            "name": "uDirectAngle",
+            "type": 2,
+            "min_value": -360.0,
+            "max_value": 360.0,
+            "default_value": 135.0
+        }
+    ],
+    "ENCRYPT": "1"
+}

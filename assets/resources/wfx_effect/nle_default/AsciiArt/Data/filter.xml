@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>ECED6FD1-E4AF-43BC-8DEE-FD66802C8D62</GUID>
+        <Name>AsciiArt</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>AsciiArt.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

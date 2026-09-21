@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>9F704262-6F1E-4039-B05D-490A59D6B8CF</GUID>
+        <Name>DelayGrab</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>DelayGrab.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

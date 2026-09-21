@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>47F0E9B6-2087-4F2F-92E5-820C8211AAEE</GUID>
+    <Name>UFT_FractalNoise</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>UFT_FractalNoise.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

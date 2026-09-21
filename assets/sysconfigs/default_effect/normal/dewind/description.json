@@ -1,0 +1,7 @@
+{
+    "type": "audio_effect",
+    "display_name": "dewind",
+    "unique_name": "audio/effect/dewind",
+    "params": [],
+    "ENCRYPT": "0"
+}

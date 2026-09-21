@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>26A97A4E-20A4-45F4-95BC-ECDE3F4A336E</GUID>
+<Name>Char Scale</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>char_scale.conf</ConfigFile>
+</GPUFilter>
+</Filter>

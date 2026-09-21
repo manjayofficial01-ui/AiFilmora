@@ -1,0 +1,93 @@
+{
+	"title": "Nieuw in Filmora %1.",
+	"titleByManual": "U gebruikt de nieuwste versie. Bekijk de nieuwe functies in %1!",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "Tekst-naar-video",
+			"discription": "Laat uw creativiteit de vrije loop met Tekst-naar-video en ontdek de magie van Filmora AI",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "Afbeelding naar video",
+			"discription": "Beeld-naar-video nu mogelijk dankzij Veo 3! Ervaar een enorme verbetering van gegenereerde resultaten!",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "ai_idea_to_video",
+			"name": "Idee-naar-video met AI",
+			"discription": "Transformeer ruwe ideeën naar professionele short videos met behoud van visuele stijlconsistentie en gegarandeerde personagecontinuïteit tussen scenes.",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "AI-afbeeldingsstylizer",
+			"discription": "AI-afbeeldingsstylizer ‍verbeterd! Nu beschikbaar onder het tabblad AIGC met uitgebreide en verbeterde mogelijkheden voor het stileren van afbeeldingen.",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "Audio-naar-video",
+			"discription": "Maak eenvoudig boeiende korte video's van audiopodcasts. Bewerk, knip en markeer uw favoriete verhalen.",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "Slimme korte clips",
+			"discription": "Transformeer lange video's in aantrekkelijke shorts.Knip, kort in en markeer uw mooiste momenten!",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "Scène slim uitsnijden",
+			"discription": "Extraheer hoogtepunten en scènes van personen om de bewerkingsefficiëntie te verbeteren.",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "Slim genereren van achtergrondmuziek",
+			"discription": "Automatisch achtergrondmuziek genereren die past bij uw video.",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "Automatisch Reframe",
+			"discription": "Gebruik Auto-reframe om video's te exporteren die overeenkomen met de hoogte-breedteverhouding van sociale-mediaplatforms.",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "AI die begrijpt, helpt en verbetert. Met AI Mate aan uw zijde kunt u sneller dan ooit verbluffende video's maken.",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "Beelden van meerdere camera's bewerken",
+			"discription": "Importeer beelden van meerdere camera's en schakel naadloos tussen verschillende invalshoeken voor een efficiënte en praktische bewerkingservaring. Vereenvoudig complexe bewerkingsprocessen en verbeter uw creatieve workflow.",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "AI-vertaling",
+			"discription": "Vertaal video's en audio automatisch in meer dan 20 talen en synchroniseer audio met de lipbewegingen van de sprekers.",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

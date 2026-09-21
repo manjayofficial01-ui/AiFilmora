@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>D4A1FDF7-FD14-490e-8D29-177AEC4DED39</GUID>
+    <Name>Shadow</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Shadow.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

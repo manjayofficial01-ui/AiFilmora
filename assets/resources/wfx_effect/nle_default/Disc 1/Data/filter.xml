@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>40A7BF23-EBE1-4FE7-AFB7-2F7FA5ACF4F2</GUID>
+        <Name>Disc 1</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Disc 1.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextNode FillMode="0" File="" Color="16777215" Version="2.0" BasePixel="39">
+    <TextParam>
+        <TextData AlignModel="0" Align="0" Radius="0" Angle="0" TextMode="1" OffsetX="4" OffsetY="-2" Name="004C006100790065007200200031">
+            <CharData Title="0054006500780074" RowSpace="5" LineSpace="10" Underline="0" UnderlineColor="-1">
+                <Font Version="1" Size="48" HSize="48" VSize="48" Bold="0" Italic="0" FontName="004F00720062006900740072006F006E00200052006500670075006C00610072"/>
+                <Face Enable="1" Alpha="255" BlurRadius="0" Effect="0" ColorCount="1" Color1="13601280"/>
+                <Border Enable="1" Size="2" Color1="13601280" Alpha="255" BlurRadius="0" Join="0">
+                    <Gradient Enable="0" GradType="0" Angle="90">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="0" Alpha="20" BlurRadius="2" Distance="2" Direction="3" Angle="118"/>
+            </CharData>
+        </TextData>
+        <Gradient Enable="1" GradType="0" Angle="90" Count="3" Color1="13601280" Pos1="0" Color2="16760576" Pos2="53" Color3="13601280" Pos3="100"/>
+        <Texture Enable="0" FillMode="1" TextureImagePath="C:/Program Files (x86)/Wondershare/Effects Studio/resources/captions/PresetX/Default/11/res/texture-image-{d5733c32-93a5-44df-965b-dd043709b26f}.jpg" TextureImageTempPath=""/>
+        <ExternAttr>
+            <Layer id="1" OffsetX="4" OffsetY="-1" Name="004C006100790065007200200031">
+                <Face Enable="0" Alpha="22" BlurRadius="0" Effect="0">
+                    <ColorList>
+                        <Color id="1" value="16777215"/>
+                    </ColorList>
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="1" TextureImagePath="C:/Program Files (x86)/Wondershare/Effects Studio/resources/captions/PresetX/实验缩略图/电影/res/texture-image-{3471e8a9-4233-4d55-b922-e35313e2a252}.jpg" TextureImageTempPath=""/>
+                </Face>
+                <Border Enable="1" Size="1" Color1="1576704" Alpha="255" BlurRadius="12" Join="0">
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="3" Distance="3" Direction="3"/>
+            </Layer>
+            <Layer id="2" OffsetX="3" OffsetY="-1" Name="004C006100790065007200200031">
+                <Face Enable="0" Alpha="0" BlurRadius="0" Effect="0">
+                    <ColorList>
+                        <Color id="1" value="16777215"/>
+                    </ColorList>
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="1" TextureImagePath="C:/Program Files (x86)/Wondershare/Effects Studio/resources/captions/PresetX/实验缩略图/电影/res/texture-image-{356ff3e3-df35-443d-a17b-ff4bc3189b43}.jpg" TextureImageTempPath=""/>
+                </Face>
+                <Border Enable="1" Size="4" Color1="1182464" Alpha="153" BlurRadius="7" Join="0">
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="3" Distance="3" Direction="3"/>
+            </Layer>
+            <Layer id="3" OffsetX="3" OffsetY="-2" Name="004C006100790065007200200031">
+                <Face Enable="0" Alpha="22" BlurRadius="0" Effect="0">
+                    <ColorList>
+                        <Color id="1" value="16777215"/>
+                    </ColorList>
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="1" TextureImagePath="C:/Program Files (x86)/Wondershare/Effects Studio/resources/captions/PresetX/实验缩略图/电影/res/texture-image-{4ba9d50b-3003-42ac-97cc-003dba1ffaa6}.jpg" TextureImageTempPath=""/>
+                </Face>
+                <Border Enable="1" Size="5" Color1="2496768" Alpha="155" BlurRadius="0" Join="0">
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="3" Distance="3" Direction="3"/>
+            </Layer>
+            <Layer id="4" OffsetX="3" OffsetY="-2" Name="004C006100790065007200200031">
+                <Face Enable="0" Alpha="255" BlurRadius="0" Effect="0">
+                    <ColorList>
+                        <Color id="1" value="16777215"/>
+                    </ColorList>
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="1" TextureImagePath="C:/Program Files (x86)/Wondershare/Effects Studio/resources/captions/PresetX/实验缩略图/电影/res/texture-image-{46b86b05-5f1d-4b9a-a6a3-0004bc3c2d21}.jpg" TextureImageTempPath=""/>
+                </Face>
+                <Border Enable="1" Size="7" Color1="16777215" Alpha="255" BlurRadius="0" Join="0">
+                    <Gradient Enable="1" GradType="0" Angle="90">
+                        <ColorPos id="1" Color="16711680" Pos="13"/>
+                        <ColorPos id="2" Color="16739181" Pos="34"/>
+                        <ColorPos id="3" Color="10616832" Pos="75"/>
+                        <ColorPos id="4" Color="10682368" Pos="100"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="3" Distance="3" Direction="3"/>
+            </Layer>
+            <Layer id="5" OffsetX="4" OffsetY="-2" Name="004C006100790065007200200031">
+                <Face Enable="0" Alpha="255" BlurRadius="0" Effect="0">
+                    <ColorList>
+                        <Color id="1" value="16777215"/>
+                    </ColorList>
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="1" TextureImagePath="C:/Program Files (x86)/Wondershare/Effects Studio/resources/captions/PresetX/实验缩略图/电影/res/texture-image-{fc5c53f7-3f80-49f9-9818-f78cba7c255f}.jpg" TextureImageTempPath=""/>
+                </Face>
+                <Border Enable="1" Size="3" Color1="16711680" Alpha="255" BlurRadius="0" Join="0">
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="3" Distance="3" Direction="3"/>
+            </Layer>
+            <Layer id="6" OffsetX="5" OffsetY="-2" Name="004C006100790065007200200031">
+                <Face Enable="0" Alpha="255" BlurRadius="0" Effect="0">
+                    <ColorList>
+                        <Color id="1" value="16777215"/>
+                    </ColorList>
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="1" TextureImagePath="C:/Program Files (x86)/Wondershare/Effects Studio/resources/captions/PresetX/实验缩略图/电影/res/texture-image-{99d4d564-2f15-49ae-8dd2-7560e472cbc4}.jpg" TextureImageTempPath=""/>
+                </Face>
+                <Border Enable="1" Size="7" Color1="16777215" Alpha="255" BlurRadius="0" Join="0">
+                    <Gradient Enable="1" GradType="0" Angle="270">
+                        <ColorPos id="1" Color="12320768" Pos="0"/>
+                        <ColorPos id="2" Color="9043968" Pos="31"/>
+                        <ColorPos id="3" Color="6422528" Pos="77"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="3" Distance="3" Direction="3"/>
+            </Layer>
+            <Layer id="7" OffsetX="1" OffsetY="1" Name="004C006100790065007200200031">
+                <Face Enable="0" Alpha="255" BlurRadius="0" Effect="0">
+                    <ColorList>
+                        <Color id="1" value="16777215"/>
+                    </ColorList>
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="1" TextureImagePath="C:/Program Files (x86)/Wondershare/Effects Studio/resources/captions/PresetX/实验缩略图/电影/res/texture-image-{f820d683-69cb-4501-b65a-b1a6359d78c4}.jpg" TextureImageTempPath=""/>
+                </Face>
+                <Border Enable="1" Size="11" Color1="0" Alpha="153" BlurRadius="10" Join="0">
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="16777215" Pos="0"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="3" Distance="3" Direction="3"/>
+            </Layer>
+        </ExternAttr>
+    </TextParam>
+    <EffectParam VZoom="1" HZoom="1"/>
+</TextNode>

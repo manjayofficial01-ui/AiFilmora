@@ -1,0 +1,10 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>AI-Light-3F209260-03B7-49C8-9675-865E00F7D6E9</GUID>
+<Name>Mysterious purple</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Mysterious purple.conf</ConfigFile>
+</GPUFilter>
+</Filter>

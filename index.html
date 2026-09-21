@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%235B8CFF'/%3E%3Cpath d='M8 22V10l12 6-12 6z' fill='%23fff'/%3E%3C/svg%3E" />
+    <title>AiFilmora — AI Video Editor Suite</title>
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/timeline.css" />
+    <link rel="stylesheet" href="css/theme-vip.css" />
+    <link rel="stylesheet" href="css/library-workspace.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Title bar (Filmora-inspired) -->
+      <header class="titlebar filmora-titlebar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <span>
+            AiFilmora
+            <small>Windows AI Video Suite</small>
+          </span>
+        </div>
+        <nav class="filmora-menu" aria-label="Main menu">
+          <details class="fm-item" id="fmFile">
+            <summary>File</summary>
+            <div class="fm-pop" role="menu">
+              <!-- No data-fm on these: each id already owns a real handler in
+                   bindMenus()/settings-panel.js, and the data-fm map would
+                   re-click the same button => infinite recursion. -->
+              <button id="menuNew">New project…</button>
+              <button id="menuProjectSettings">Project settings…</button>
+              <button id="menuRecent">Recent projects…</button>
+              <hr/>
+              <button id="menuSave">Save</button>
+              <button id="menuSaveAs">Save as…</button>
+              <button id="menuLoad">Load</button>
+              <hr/>
+              <button id="menuResetDemo">Reset demo data</button>
+              <button id="menuPreferences">Preferences…</button>
+            </div>
+          </details>
+          <details class="fm-item" id="fmEdit">
+            <summary>Edit</summary>
+            <div class="fm-pop" role="menu">
+              <button data-edit="undo">Undo</button>
+              <button data-edit="redo">Redo</button>
+              <hr/>
+              <button data-edit="split">Split at playhead</button>
+              <button data-edit="trim-start">Trim start to playhead</button>
+              <button data-edit="trim-end">Trim end to playhead</button>
+              <hr/>
+              <button data-edit="copy">Copy</button>
+              <button data-edit="paste">Paste</button>
+              <button data-edit="duplicate">Duplicate clip</button>
+              <button data-edit="ripple">Ripple delete</button>
+              <button data-edit="delete">Delete clip</button>
+            </div>
+          </details>
+          <details class="fm-item" id="fmTools">
+            <summary>Tools</summary>
+            <div class="fm-pop" role="menu">
+              <button id="menuShortcuts">Keyboard shortcuts…</button>
+              <hr/>
+              <button data-fm="stabilize">Stabilize selection</button>
+              <button data-fm="color-match">Color match</button>
+              <button data-fm="auto-enhance">Auto enhance</button>
+              <button data-fm="voice-isolate">Voice isolate</button>
+              <button data-fm="vocal-remover">Vocal remover</button>
+              <button data-fm="auto-sync">Auto sync audio</button>
+            </div>
+          </details>
+          <details class="fm-item" id="fmView">
+            <summary>View</summary>
+            <div class="fm-pop" role="menu">
+              <button data-fm="zoom-fit">Zoom timeline to fit</button>
+              <button data-fm="fullscreen">Fullscreen preview</button>
+              <button data-fm="safe-areas">Toggle safe areas</button>
+              <button data-fm="chapters-bar">Toggle chapter progress bar</button>
+            </div>
+          </details>
+          <details class="fm-item" id="fmExtended">
+            <summary>Extended</summary>
+            <div class="fm-pop" role="menu">
+              <button data-fm="script-to-video">Script to video…</button>
+              <button data-fm="roughcut">Auto rough cut…</button>
+              <button data-fm="batch">Multi-clip editing…</button>
+              <button data-fm="subprojects">Import subproject…</button>
+              <hr/>
+              <button data-fm="export-srt">Export captions (.srt)</button>
+              <button data-fm="export-chapters">Export chapter timestamps</button>
+              <button data-fm="thumbnail">Export thumbnail</button>
+            </div>
+          </details>
+          <details class="fm-item" id="fmHelp">
+            <summary>Help</summary>
+            <div class="fm-pop" role="menu">
+              <button data-fm="shortcuts">Shortcuts</button>
+              <button data-fm="about">About AiFilmora</button>
+              <button data-fm="docs">Research notes…</button>
+            </div>
+          </details>
+          <details class="fm-item" id="fmVersion">
+            <summary>Version</summary>
+            <div class="fm-pop" role="menu">
+              <div class="fm-info-row"><strong>AiFilmora 2.2.2</strong> — 15 Filmora shader transitions · Toolbar order · ruler-drag zoom · drag auto-scroll</div>
+              <div class="fm-info-row">Full-width library bar · searchable Filters &amp; Audio</div>
+              <div class="fm-info-row">6 Pan &amp; Zoom presets · Filmora's own curves</div>
+              <div class="fm-info-row">29 Filmora colour presets · real per-pixel grade</div>
+              <div class="fm-info-row">262 font faces · 186 families · visual picker</div>
+              <div class="fm-info-row">25 real .CUBE LUTs · 76 audio FX</div>
+              <div class="fm-info-row">150 animations · 192 filter looks</div>
+              <div class="fm-info-row">48 text styles · 98 text art · 86 motion</div>
+              <div class="fm-info-row">106 caption animations · 5 Filmora themes</div>
+              <div class="fm-info-row">Collapsible Project Info card · remembered choice</div>
+              <div class="fm-info-row">Theme: <span id="fmThemeLabel">dark</span></div>
+              <hr/>
+              <button data-fm="release-notes">What's new in 2.2.2…</button>
+            </div>
+          </details>
+        </nav>
+        <!-- Filmora keeps its edit actions as an icon toolbar beside the menu
+             rather than as a second text row. -->
+        <div class="tb-tools" role="toolbar" aria-label="Quick actions">
+          <button class="tb-ico" data-fm="save" title="Save project (Ctrl+S)" data-icon="save" aria-label="Save project"></button>
+          <button class="tb-ico" data-edit="undo" title="Undo (Ctrl+Z)" data-icon="undo" aria-label="Undo"></button>
+          <button class="tb-ico" data-edit="redo" title="Redo (Ctrl+Shift+Z)" data-icon="redo" aria-label="Redo"></button>
+          <span class="tb-sep" aria-hidden="true"></span>
+          <button class="tb-ico" data-edit="split" title="Split at playhead (S)" data-icon="split" aria-label="Split at playhead"></button>
+          <button class="tb-ico" data-edit="trim-start" title="Trim start to playhead" data-icon="trim" aria-label="Trim start to playhead"></button>
+          <button class="tb-ico" data-edit="delete" title="Delete clip (Del)" data-icon="delete" aria-label="Delete clip"></button>
+          <span class="tb-sep" aria-hidden="true"></span>
+          <button class="tb-ico" data-fm="fullscreen" title="Fullscreen preview" data-icon="fullscreen" aria-label="Fullscreen preview"></button>
+        </div>
+        <div class="project-pill" data-icon="project" title="Project name">
+          <strong id="projectTitleLive">Demo</strong>
+        </div>
+        <div class="titlebar-right">
+          <div class="credits-chip" id="creditsChip" title="AI credit meter">AI Credits —</div>
+          <button class="tb-ico" id="menuRecentTop" title="Recent projects" data-icon="recent" aria-label="Recent projects"></button>
+          <button class="tb-ico" id="menuPreferencesTop" title="Preferences" data-icon="settings" aria-label="Preferences"></button>
+          <button class="btn primary export-pill" id="btnExportTop" title="Export (Ctrl+E)" data-icon="export"><span>Export</span><span class="chev" aria-hidden="true">▾</span></button>
+        </div>
+      </header>
+
+      <!-- Workspace -->
+      <div class="workspace">
+        <!-- Left sidebar -->
+        <aside class="panel sidebar">
+          <div class="panel-header compact">
+            <h2 class="sr-only">Library</h2>
+            <div class="panel-tabs icon-tabs" id="libraryTabs">
+              <button class="tab active" data-sidebar="media" data-icon="media" title="Media"><span class="tab-ico"></span><span class="tab-lbl">Media</span></button>
+              <button class="tab" data-sidebar="assets" data-icon="effects" title="Installed asset packs"><span class="tab-ico"></span><span class="tab-lbl">Assets</span></button>
+              <button class="tab" data-sidebar="textpresets" data-icon="text" title="Text presets"><span class="tab-ico"></span><span class="tab-lbl">Text</span></button>
+              <button class="tab" data-sidebar="shapes" data-icon="shapes" title="Shapes & drawings"><span class="tab-ico"></span><span class="tab-lbl">Shapes</span></button>
+              <button class="tab" data-sidebar="effects" data-icon="effects" title="Effects"><span class="tab-ico"></span><span class="tab-lbl">Effects</span></button>
+              <button class="tab" data-sidebar="transitions" data-icon="transitions" title="Transitions"><span class="tab-ico"></span><span class="tab-lbl">Trans</span></button>
+              <button class="tab" data-sidebar="tools" data-icon="aiTools" title="AI Tools"><span class="tab-ico"></span><span class="tab-lbl">AI</span></button>
+            </div>
+          </div>
+
+          <div id="side-media" class="sidebar-view active">
+            <div class="panel-body">
+              <div class="search-row">
+                <label class="sr-only" for="mediaSearch">Search media</label>
+                <input id="mediaSearch" type="search" placeholder="Search media…" title="Filter media by name, kind, or model" />
+                <button class="btn sm" id="btnImport">Import</button>
+                <input id="fileImport" type="file" accept="video/*,audio/*,image/*" multiple hidden />
+              </div>
+              <div class="onboard-strip">
+                Double-click media to insert · drag to timeline · use <strong>Assets</strong> for installed packs
+              </div>
+              <div id="mediaGrid"></div>
+            </div>
+          </div>
+
+          <div id="side-assets" class="sidebar-view">
+            <div class="panel-body">
+              <div class="section-title">Asset packs</div>
+              <div class="quick-prompts" id="assetCats" style="margin-bottom:8px">
+                <button class="chip active" data-asset-cat="media">Media</button>
+                <button class="chip" data-asset-cat="transitions">Transitions</button>
+                <button class="chip" data-asset-cat="styles">Text textures</button>
+              </div>
+              <div class="search-row">
+                <button class="btn sm" id="btnRescanAssets">Rescan assets/</button>
+              </div>
+              <div id="assetStatus" style="font-size:11px;color:var(--muted);margin-bottom:8px">Scanning…</div>
+              <div class="media-grid" id="assetGrid"></div>
+              <p style="font-size:11px;color:var(--muted);margin-top:10px">
+                Reads installed packs under <code>assets/</code> (transitions, text textures, sample media).
+                Click media to add to bin + playhead.
+              </p>
+            </div>
+          </div>
+
+          <div id="side-textpresets" class="sidebar-view">
+            <div class="panel-body">
+              <div class="section-title">Title presets</div>
+              <p style="font-size:12px;color:var(--ink-dim);margin-top:0">
+                Click a preset to apply to the selected title, or use <strong>Add Title</strong> in the Text editor.
+              </p>
+              <div class="preset-grid" id="textPresetGrid"></div>
+              <div class="btn-row" style="margin-top:10px">
+                <button class="btn primary sm" id="btnAddTitleFromLib">Add Title at playhead</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="side-shapes" class="sidebar-view">
+            <div class="panel-body">
+              <div class="section-title">Shapes &amp; drawings</div>
+              <div class="search-row">
+                <input id="shapeSearch" type="search" placeholder="Search shapes…" />
+                <button class="btn sm" id="btnImportShapes" title="Import SVG/PNG shapes">Import</button>
+                <input id="fileImportShapes" type="file" accept=".svg,image/*" multiple hidden />
+              </div>
+              <div class="quick-prompts" id="shapeCats" style="margin-bottom:8px">
+                <button class="chip active" data-shape-cat="all">All</button>
+                <button class="chip" data-shape-cat="basic">Basic</button>
+                <button class="chip" data-shape-cat="arrow">Arrows</button>
+                <button class="chip" data-shape-cat="badge">Badges</button>
+                <button class="chip" data-shape-cat="user">Mine</button>
+                <button class="chip" data-shape-cat="fav">★ Fav</button>
+              </div>
+              <p style="font-size:11px;color:var(--muted);margin-top:0">
+                Click to insert at playhead · ★ favorites · Import SVG/PNG into Mine
+                (also drop files in <code>assets/shapes/</code>).
+              </p>
+              <div class="preset-grid" id="shapeGrid"></div>
+              <div class="section-title">Style</div>
+              <div class="field">
+                <label for="shapeFill">Fill</label>
+                <input id="shapeFill" type="color" value="#c9a227" />
+              </div>
+              <div class="field">
+                <label for="shapeStroke">Stroke</label>
+                <input id="shapeStroke" type="color" value="#ffffff" />
+              </div>
+              <div class="field">
+                <label for="shapeStrokeStyle">Stroke style</label>
+                <select id="shapeStrokeStyle">
+                  <option value="solid">Solid</option>
+                  <option value="dashed">Dashed</option>
+                  <option value="dotted">Dotted</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="shapeStrokeW">Stroke width</label>
+                <div class="slider-row">
+                  <input id="shapeStrokeW" type="range" min="0" max="12" value="2" />
+                  <output id="shapeStrokeWOut">2</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="shapeSize">Size</label>
+                <div class="slider-row">
+                  <input id="shapeSize" type="range" min="20" max="120" value="50" />
+                  <output id="shapeSizeOut">50</output>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="side-effects" class="sidebar-view">
+            <div class="panel-body">
+              <div class="section-title">Looks</div>
+              <div class="btn-row">
+                <button class="btn sm" data-tool="grade">Cinematic LUT</button>
+                <button class="btn sm" data-tool="reframe">Smart 9:16</button>
+                <button class="btn sm" data-tool="upscale">Super Scale</button>
+              </div>
+              <div class="btn-row">
+                <button class="btn sm" data-tool="autoEnhance">Auto Enhance</button>
+                <button class="btn sm" data-tool="colorMatch">Color Match</button>
+                <button class="btn sm" data-tool="stabilize">Stabilize</button>
+              </div>
+              <div class="section-title">Isolation & Audio</div>
+              <div class="btn-row">
+                <button class="btn sm" data-tool="mask">Magic Mask</button>
+                <button class="btn sm" data-tool="voice">Voice Isolation</button>
+                <button class="btn sm" data-tool="denoise">Denoise</button>
+              </div>
+              <div class="btn-row">
+                <button class="btn sm" data-tool="vocalRemover">Vocal Remover</button>
+                <button class="btn sm" data-tool="stretch">Audio Stretch</button>
+                <button class="btn sm" data-tool="faceMosaic">Face Mosaic</button>
+              </div>
+              <div class="section-title">Filmora AI tools</div>
+              <div class="btn-row">
+                <button class="btn sm" data-tool="scenes">Scene Detect</button>
+                <button class="btn sm" data-tool="duck">Auto Duck</button>
+                <button class="btn sm" data-tool="srt">Export .srt</button>
+              </div>
+              <div class="btn-row">
+                <button class="btn sm" data-tool="music">AI Music</button>
+                <button class="btn sm" data-tool="tts">Text→Speech</button>
+                <button class="btn sm" data-tool="thumbnail">Thumbnail</button>
+              </div>
+              <div class="btn-row">
+                <button class="btn sm" data-tool="extend">AI Extend</button>
+                <button class="btn sm" data-tool="objectRemover">Object Remover</button>
+                <button class="btn sm" data-tool="beatMontage">Beat Montage</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="side-transitions" class="sidebar-view">
+            <div class="panel-body">
+              <div class="section-title">Transition preview</div>
+              <div class="trans-preview-wrap">
+                <canvas id="transPreviewCanvas" width="240" height="135" aria-label="Transition preview"></canvas>
+                <div id="transPreviewLabel" class="trans-preview-label">Hover a transition</div>
+              </div>
+
+              <div class="section-title">
+                Filmora default transitions
+                <span class="field-hint" id="transPresetCount">4 with previews</span>
+              </div>
+              <div class="preset-grid" id="transPresetGrid"></div>
+
+              <div class="section-title">Built-in &amp; Filmora shader transitions</div>
+              <div class="preset-grid" id="transGrid"></div>
+
+              <div class="section-title">Custom assets</div>
+              <p style="font-size:11px;color:var(--muted);margin-top:0">
+                Drop transition/effect files into <code>assets/transitions/</code> (with optional
+                <code>manifest.json</code>), or import here. Images become wipe overlays.
+              </p>
+              <div class="btn-row">
+                <button class="btn sm" id="btnImportTransitions">Import transitions</button>
+                <button class="btn sm" id="btnReloadTransitions">Rescan folder</button>
+              </div>
+              <input id="fileImportTransitions" type="file" accept="image/*,video/*,.json" multiple hidden />
+              <div class="preset-grid" id="customTransGrid" style="margin-top:8px"></div>
+              <p id="transHint" style="font-size:11px;color:var(--muted);margin-top:12px">
+                Select a clip, then click a transition to apply at its out-point. ◇ on a cut reopens this panel.
+              </p>
+            </div>
+          </div>
+
+          <div id="side-tools" class="sidebar-view">
+            <div class="panel-body">
+              <div class="tool-list">
+                <button class="tool-item" id="toolTranscribe" onclick="document.getElementById('btnTranscribe').click()">
+                  <span class="icon">Aa</span>
+                  <span><strong>Transcript Edit</strong><span>Paper cut from speech</span></span>
+                </button>
+                <button class="tool-item" onclick="document.querySelector('[data-inspector=textpanel]').click()">
+                  <span class="icon">T</span>
+                  <span><strong>Titles & Text</strong><span>Lower thirds, stickers</span></span>
+                </button>
+                <button class="tool-item" onclick="document.querySelector('[data-inspector=mate]').click()">
+                  <span class="icon gen">✦</span>
+                  <span><strong>AI Mate</strong><span>Chat-driven editing</span></span>
+                </button>
+                <button class="tool-item" onclick="document.querySelector('[data-inspector=lab]').click()">
+                  <span class="icon gen">⚡</span>
+                  <span><strong>GenAI Lab</strong><span>Multi-model B-roll</span></span>
+                </button>
+                <button class="tool-item" onclick="document.querySelector('[data-inspector=aisettings]').click()">
+                  <span class="icon gen">⚙</span>
+                  <span><strong>AI Providers</strong><span>OpenAI-compatible keys</span></span>
+                </button>
+                <button class="tool-item" onclick="document.getElementById('btnExport').click()">
+                  <span class="icon warn">↑</span>
+                  <span><strong>Export Studio</strong><span>Social + master presets</span></span>
+                </button>
+                <div class="section-title" style="padding:6px 4px 2px">Filmora 15 Creative</div>
+                <button class="tool-item" id="toolPen" title="Pen Tool (P)">
+                  <span class="icon">✎</span>
+                  <span><strong>Pen Tool</strong><span>Draw paths + trim-path anim</span></span>
+                </button>
+                <button class="tool-item" id="toolTextPath">
+                  <span class="icon">↝</span>
+                  <span><strong>Text Path</strong><span>Animate text along a path</span></span>
+                </button>
+                <button class="tool-item" id="toolChart">
+                  <span class="icon">▥</span>
+                  <span><strong>Animated Charts</strong><span>CSV import → bar/line/pie</span></span>
+                </button>
+                <button class="tool-item" id="toolChartImport">
+                  <span class="icon">⇪</span>
+                  <span><strong>Import Chart CSV</strong><span>label,value rows → chart</span></span>
+                </button>
+                <button class="tool-item" id="toolVisualizer">
+                  <span class="icon gen">♫</span>
+                  <span><strong>Audio Visualizer</strong><span>Bars / wave / circle</span></span>
+                </button>
+                <button class="tool-item" id="toolSubtitles">
+                  <span class="icon">cc</span>
+                  <span><strong>Subtitle Extractor</strong><span>Captions from video clips</span></span>
+                </button>
+                <button class="tool-item" id="toolChapterAdd" title="Add chapter (N)">
+                  <span class="icon">⌗</span>
+                  <span><strong>Add Chapter</strong><span>Chapter at playhead</span></span>
+                </button>
+                <button class="tool-item" id="toolChapterExport">
+                  <span class="icon">⌗</span>
+                  <span><strong>Export Chapters</strong><span>YouTube timestamps</span></span>
+                </button>
+                <button class="tool-item" id="toolVoiceChanger">
+                  <span class="icon gen">🎙</span>
+                  <span><strong>Voice Changer</strong><span>Chipmunk, deep, robot…</span></span>
+                </button>
+                <button class="tool-item" id="toolVoiceClone">
+                  <span class="icon gen">🧬</span>
+                  <span><strong>AI Voice Cloning</strong><span>Enroll voice from audio</span></span>
+                </button>
+                <button class="tool-item" id="toolSfx">
+                  <span class="icon gen">💥</span>
+                  <span><strong>AI SFX Generator</strong><span>Text prompt → sound FX</span></span>
+                </button>
+                <button class="tool-item" id="toolAutoSync">
+                  <span class="icon">⇄</span>
+                  <span><strong>Auto Sync</strong><span>Align audio to video</span></span>
+                </button>
+                <button class="tool-item" id="toolBatch">
+                  <span class="icon">≡</span>
+                  <span><strong>Multi-Clip Editing</strong><span>Batch volume/speed/LUT/FX</span></span>
+                </button>
+                <button class="tool-item" id="toolMotionBlur">
+                  <span class="icon">◍</span>
+                  <span><strong>Motion Blur</strong><span>Toggle on selected clip</span></span>
+                </button>
+                <button class="tool-item" id="toolDeflicker">
+                  <span class="icon">✦</span>
+                  <span><strong>Flicker Removal</strong><span>Toggle on selected clip</span></span>
+                </button>
+                <button class="tool-item" id="toolSubproject">
+                  <span class="icon">🗂</span>
+                  <span><strong>Import Subproject</strong><span>.aifimora.json as nest</span></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <div class="rsz rsz-x" id="resizeSidebar" title="Drag to resize library · double-click reset" role="separator" aria-orientation="vertical"></div>
+
+        <!-- Preview stage -->
+        <main class="stage">
+          <div class="preview-tabs">
+            <button class="ptab active" data-ptab="timeline">Timeline</button>
+            <button class="ptab" data-ptab="source">Source</button>
+            <div class="preview-spacer"></div>
+            <label class="preview-dd">
+              <span>Quality</span>
+              <select id="previewQuality" title="Filmora-style preview quality">
+                <option value="0.5">Quarter (1/4)</option>
+                <option value="0.75">Half (1/2)</option>
+                <option value="1" selected>Full</option>
+                <option value="1.5">1.5×</option>
+                <option value="2">2×</option>
+              </select>
+            </label>
+            <label class="preview-dd">
+              <span>Aspect</span>
+              <select id="previewAspect" title="Project aspect ratio">
+                <option value="16:9" selected>16:9</option>
+                <option value="9:16">9:16</option>
+                <option value="1:1">1:1</option>
+                <option value="4:5">4:5</option>
+                <option value="21:9">21:9</option>
+              </select>
+            </label>
+          </div>
+          <div class="preview-wrap">
+            <canvas id="previewCanvas" width="1280" height="720" aria-label="Program monitor" role="img"></canvas>
+            <canvas id="sourceCanvas" width="1280" height="720" aria-label="Source monitor" role="img" hidden></canvas>
+            <div class="preview-overlay">
+              <div class="preview-badges">
+                <span class="badge">Program</span>
+                <span class="badge ai">AI overlay</span>
+              </div>
+            </div>
+          </div>
+          <div class="transport">
+            <button class="transport-btn" id="btnGoStart" title="Home" aria-label="Go to start">⏮</button>
+            <button class="transport-btn" id="btnPrev" title="J / −5s" aria-label="Back 5 seconds">⏪</button>
+            <button class="transport-btn play" id="btnPlay" title="Space" aria-label="Play">▶</button>
+            <button class="transport-btn" id="btnNext" title="L / +5s" aria-label="Forward 5 seconds">⏩</button>
+            <div class="timecode" id="timecode" aria-live="off">00:00:00:00</div>
+            <div class="player-volume" id="playerVolume">
+              <button class="transport-btn" id="btnPlayerMute" title="Mute master" aria-label="Mute master volume">🔊</button>
+              <label class="sr-only" for="masterVolume">Master volume</label>
+              <input id="masterVolume" type="range" min="0" max="100" value="80" title="Master volume" />
+              <span id="masterVolumeOut" style="font-size:11px;color:var(--muted);min-width:2.5em">80%</span>
+            </div>
+            <div class="spacer"></div>
+            <span style="font-size:11px;color:var(--muted)">Seq <span id="seqDuration">00:00:00</span></span>
+            <button class="transport-btn" id="btnFullscreen" title="Fullscreen preview (F)" aria-label="Fullscreen">⛶</button>
+            <button class="btn primary" id="btnExport">Export</button>
+          </div>
+        </main>
+
+        <!-- Right inspector -->
+        <aside class="panel inspector">
+          <div class="panel-header compact pi-header">
+            <h2>Project</h2>
+            <button class="btn sm" id="piToggle" type="button" aria-controls="projectInfo" aria-expanded="true" aria-label="Hide project information">Hide</button>
+          </div>
+          <div class="project-info" id="projectInfo">
+            <div class="pi-row"><span class="pi-k">Name</span><span class="pi-v" id="piName">—</span></div>
+            <div class="pi-row"><span class="pi-k">Files</span><span class="pi-v" id="piFiles">local</span></div>
+            <div class="pi-row"><span class="pi-k">Resolution</span><span class="pi-v" id="piResolution">—</span></div>
+            <div class="pi-row"><span class="pi-k">Frame rate</span><span class="pi-v" id="piFps">—</span></div>
+            <div class="pi-row"><span class="pi-k">Color space</span><span class="pi-v" id="piColor">Rec. 709</span></div>
+            <div class="pi-row"><span class="pi-k">Sample rate</span><span class="pi-v" id="piSample">48 000 Hz</span></div>
+            <div class="pi-row"><span class="pi-k">Duration</span><span class="pi-v" id="piDuration">00:00:00</span></div>
+            <div class="pi-thumb">
+              <canvas id="piThumb" width="220" height="124" aria-label="Project thumbnail"></canvas>
+              <button class="btn sm" id="piEdit" type="button">Edit</button>
+            </div>
+          </div>
+          <div class="panel-header compact">
+            <h2 class="sr-only">Inspector</h2>
+            <div class="panel-tabs icon-tabs scroll-x" id="inspectorTabs">
+              <button class="tab active" data-inspector="fx" data-icon="fx" title="Color / FX"><span class="tab-ico"></span><span class="tab-lbl">FX</span></button>
+              <button class="tab" data-inspector="motion" data-icon="motion" title="Motion"><span class="tab-ico"></span><span class="tab-lbl">Motion</span></button>
+              <button class="tab" data-inspector="speed" data-icon="speed" title="Speed"><span class="tab-ico"></span><span class="tab-lbl">Speed</span></button>
+              <button class="tab" data-inspector="volume" data-icon="volume" title="Volume"><span class="tab-ico"></span><span class="tab-lbl">Audio</span></button>
+              <button class="tab" data-inspector="textpanel" data-icon="textInspector" title="Text"><span class="tab-ico"></span><span class="tab-lbl">Text</span></button>
+              <button class="tab" data-inspector="mate" data-icon="mate" title="AI Mate"><span class="tab-ico"></span><span class="tab-lbl">Mate</span></button>
+              <button class="tab" data-inspector="lab" data-icon="lab" title="GenAI Lab"><span class="tab-ico"></span><span class="tab-lbl">Lab</span></button>
+              <button class="tab" data-inspector="text" data-icon="transcript" title="Transcript"><span class="tab-ico"></span><span class="tab-lbl">Text&nbsp;edit</span></button>
+              <button class="tab" data-inspector="scopes" data-icon="scopes" title="Scopes"><span class="tab-ico"></span><span class="tab-lbl">Scopes</span></button>
+              <button class="tab" data-inspector="aisettings" data-icon="ai" title="AI providers"><span class="tab-ico"></span><span class="tab-lbl">AI</span></button>
+              <button class="tab" data-inspector="creative" data-icon="creative" title="Creative"><span class="tab-ico"></span><span class="tab-lbl">Creative</span></button>
+            </div>
+          </div>
+
+          <!-- Filmora 15 Creative (Pen/Charts/Visualizer/Chapters) -->
+          <div id="insp-creative" class="inspector-view">
+            <div class="panel-body" id="creativePanel">
+              <div class="field">
+                <label>Selected clip</label>
+                <div id="creativeClipLabel" style="font-size:12px;color:var(--ink-dim)">No clip selected</div>
+              </div>
+              <div id="creativeClipProps"></div>
+              <div class="section-title">Video Chapters</div>
+              <div id="chapterList" style="max-height:180px;overflow:auto;font-size:12px"></div>
+              <div class="row" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+                <button class="btn sm" id="btnChapterAdd">Add at playhead</button>
+                <button class="btn sm" id="btnChapterRename">Rename…</button>
+                <button class="btn sm primary" id="btnChapterExport">Export timestamps</button>
+              </div>
+              <p style="font-size:11px;color:var(--muted);margin-top:10px">
+                Pen Tool (P) draws path clips · Text Path follows drawn paths · Charts import CSV · Visualizer rides the beat grid.
+              </p>
+            </div>
+          </div>
+
+          <!-- Color / FX -->
+          <div id="insp-fx" class="inspector-view active">
+            <div class="panel-body">
+              <div class="field">
+                <label>Selected clip</label>
+                <div id="selectedClipLabel" style="font-size:12px;color:var(--ink-dim)">No clip selected</div>
+              </div>
+
+              <div class="section-title">Color</div>
+              <div class="field">
+                <label for="fxExposure">Exposure</label>
+                <div class="slider-row">
+                  <input id="fxExposure" type="range" min="-50" max="50" value="0" />
+                  <output id="fxExposureOut" for="fxExposure">0</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxContrast">Contrast</label>
+                <div class="slider-row">
+                  <input id="fxContrast" type="range" min="-50" max="50" value="0" />
+                  <output id="fxContrastOut" for="fxContrast">0</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxSaturation">Saturation</label>
+                <div class="slider-row">
+                  <input id="fxSaturation" type="range" min="-50" max="50" value="0" />
+                  <output id="fxSaturationOut" for="fxSaturation">0</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxTemperature">Temperature</label>
+                <div class="slider-row">
+                  <input id="fxTemperature" type="range" min="-50" max="50" value="0" />
+                  <output id="fxTemperatureOut" for="fxTemperature">0</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxVignette">Vignette</label>
+                <div class="slider-row">
+                  <input id="fxVignette" type="range" min="0" max="100" value="0" />
+                  <output id="fxVignetteOut" for="fxVignette">0</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxTint">Tint (green↔magenta)</label>
+                <div class="slider-row">
+                  <input id="fxTint" type="range" min="-50" max="50" value="0" />
+                  <output id="fxTintOut" for="fxTint">0</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxHighlights">Highlights</label>
+                <div class="slider-row">
+                  <input id="fxHighlights" type="range" min="-50" max="50" value="0" />
+                  <output id="fxHighlightsOut" for="fxHighlights">0</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxShadows">Shadows</label>
+                <div class="slider-row">
+                  <input id="fxShadows" type="range" min="-50" max="50" value="0" />
+                  <output id="fxShadowsOut" for="fxShadows">0</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxSharpness">Sharpness</label>
+                <div class="slider-row">
+                  <input id="fxSharpness" type="range" min="0" max="100" value="0" />
+                  <output id="fxSharpnessOut" for="fxSharpness">0</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxLut">LUT</label>
+                <select id="fxLut">
+                  <option value="none">None</option>
+                  <option value="cinematic">Cinematic</option>
+                  <option value="tealOrange">Teal &amp; Orange</option>
+                  <option value="sunset">Sunset</option>
+                  <option value="neon">Neon</option>
+                  <option value="mono">Mono</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="fxLutIntensity">LUT intensity</label>
+                <div class="slider-row">
+                  <input id="fxLutIntensity" type="range" min="0" max="100" value="80" />
+                  <output id="fxLutIntensityOut" for="fxLutIntensity">80</output>
+                </div>
+              </div>
+              <div class="field">
+                <label>Filmora LUT library <span class="field-hint" id="lutCountHint">25 real .CUBE looks</span></label>
+                <input id="lutSearch" class="search-input" type="search" placeholder="Search LUTs…" aria-label="Search LUTs" />
+                <div class="lut-grid" id="lutGrid" role="listbox" aria-label="Filmora LUT library"></div>
+              </div>
+              <div class="field">
+                <label>Filmora colour presets <span class="field-hint" id="colorPresetHint">29 built-in looks</span></label>
+                <input id="colorPresetSearch" class="search-input" type="search" placeholder="Search colour presets…" aria-label="Search colour presets" />
+                <div class="lut-grid" id="colorPresetGrid" role="listbox" aria-label="Filmora colour presets"></div>
+                <div class="slider-row">
+                  <input id="fxColorPresetIntensity" type="range" min="0" max="100" value="100" />
+                  <output id="fxColorPresetIntensityOut" for="fxColorPresetIntensity">100</output>
+                </div>
+                <div class="btn-row">
+                  <button class="btn sm ghost" id="btnColorPresetClear" type="button">None</button>
+                </div>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px">
+                  Graded per pixel from Filmora's own
+                  <code>ColorAnd3dLutPreset/…/Data/*.conf</code> — white balance,
+                  exposure, vibrance, highlight/shadow, HSL and vignette, not a
+                  <code>ctx.filter</code> approximation.
+                </div>
+              </div>
+              <div class="btn-row">
+                <button class="btn sm" id="btnAutoEnhance">Auto Enhance</button>
+                <button class="btn sm" id="btnColorMatch">Color Match</button>
+              </div>
+              <div class="field">
+                <label for="fxReframe">Smart Conform</label>
+                <select id="fxReframe">
+                  <option value="none">Original 16:9</option>
+                  <option value="9:16">Vertical 9:16</option>
+                  <option value="1:1">Square 1:1</option>
+                  <option value="4:5">Portrait 4:5</option>
+                </select>
+              </div>
+
+              <div class="section-title">
+                Filmora filter looks
+                <span class="field-hint" id="filterCountHint">192 presets</span>
+              </div>
+              <div class="field">
+                <input id="filterSearch" class="search-input" type="search" placeholder="Search 192 looks…" aria-label="Search filters" />
+                <div class="fx-rack" id="filterList" role="listbox" aria-label="Filmora filter looks"></div>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px">
+                  Named looks from <code>resources/wfx_effect/nle_default</code>. Sets the
+                  clip's LUT identity so exports and the AI assistant refer to it by name.
+                </div>
+              </div>
+
+              <div class="section-title">AI enhancement</div>
+              <label class="field" style="display:flex;align-items:center;gap:8px">
+                <input id="fxMask" type="checkbox" /> Magic Mask (subject isolation)
+              </label>
+              <div class="field">
+                <label for="fxMaskShape">Mask shape</label>
+                <select id="fxMaskShape"></select>
+              </div>
+              <div class="field">
+                <label for="fxMaskFeather">Mask feather</label>
+                <div class="slider-row">
+                  <input id="fxMaskFeather" type="range" min="0" max="100" value="20" />
+                  <output id="fxMaskFeatherOut" for="fxMaskFeather">20</output>
+                </div>
+              </div>
+              <label class="field" style="display:flex;align-items:center;gap:8px">
+                <input id="fxMaskInvert" type="checkbox" /> Invert mask
+              </label>
+              <label class="field" style="display:flex;align-items:center;gap:8px">
+                <input id="fxVoice" type="checkbox" /> Voice isolation / Studio Sound
+              </label>
+              <div class="field">
+                <label for="fxVoiceStrength">Voice strength</label>
+                <div class="slider-row">
+                  <input id="fxVoiceStrength" type="range" min="0" max="100" value="60" />
+                  <output id="fxVoiceStrengthOut" for="fxVoiceStrength">60</output>
+                </div>
+              </div>
+              <label class="field" style="display:flex;align-items:center;gap:8px">
+                <input id="fxDenoise" type="checkbox" /> Denoise (AI Audio Denoise)
+              </label>
+              <div class="field">
+                <label for="fxDenoiseStrength">Denoise strength</label>
+                <select id="fxDenoiseStrength">
+                  <option value="weak">Weak</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="strong">Strong</option>
+                </select>
+              </div>
+              <label class="field" style="display:flex;align-items:center;gap:8px">
+                <input id="fxUpscale" type="checkbox" /> Super Scale / Upscale
+              </label>
+              <label class="field" style="display:flex;align-items:center;gap:8px">
+                <input id="fxStabilize" type="checkbox" /> Stabilization
+              </label>
+              <div class="field">
+                <label for="fxStabilizeSmooth">Stabilize smoothness</label>
+                <div class="slider-row">
+                  <input id="fxStabilizeSmooth" type="range" min="0" max="100" value="50" />
+                  <output id="fxStabilizeSmoothOut" for="fxStabilizeSmooth">50</output>
+                </div>
+              </div>
+              <label class="field" style="display:flex;align-items:center;gap:8px">
+                <input id="fxFaceMosaic" type="checkbox" /> Face Mosaic (privacy blur)
+              </label>
+              <label class="field" style="display:flex;align-items:center;gap:8px">
+                <input id="fxObjectRemover" type="checkbox" /> Object Remover (Magic Box)
+              </label>
+
+              <div class="section-title">Chroma key (green screen)</div>
+              <label class="field" style="display:flex;align-items:center;gap:8px">
+                <input id="fxChroma" type="checkbox" /> Enable chroma key
+              </label>
+              <div class="field">
+                <label for="fxChromaColor">Key color</label>
+                <div class="slider-row">
+                  <input id="fxChromaColor" type="color" value="#00ff00" style="width:48px;height:28px" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxChromaSimilarity">Similarity</label>
+                <div class="slider-row">
+                  <input id="fxChromaSimilarity" type="range" min="0" max="100" value="40" />
+                  <output id="fxChromaSimilarityOut" for="fxChromaSimilarity">40</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxChromaSmoothness">Smoothness</label>
+                <div class="slider-row">
+                  <input id="fxChromaSmoothness" type="range" min="0" max="100" value="10" />
+                  <output id="fxChromaSmoothnessOut" for="fxChromaSmoothness">10</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxChromaFeather">Edge feather</label>
+                <div class="slider-row">
+                  <input id="fxChromaFeather" type="range" min="0" max="100" value="10" />
+                  <output id="fxChromaFeatherOut" for="fxChromaFeather">10</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxChromaSpill">Spill suppression</label>
+                <div class="slider-row">
+                  <input id="fxChromaSpill" type="range" min="0" max="100" value="10" />
+                  <output id="fxChromaSpillOut" for="fxChromaSpill">10</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="fxSplit">Split screen</label>
+                <select id="fxSplit">
+                  <option value="none">None</option>
+                  <option value="side">Side by side</option>
+                  <option value="pip">Picture-in-picture</option>
+                  <option value="grid4">Grid 2×2</option>
+                </select>
+              </div>
+
+              <div class="btn-row" style="margin-top:12px">
+                <button class="btn sm" id="btnResetFx">Reset FX</button>
+                <button class="btn sm" id="btnApplyFxAll">Apply to all</button>
+                <button class="btn sm danger" id="btnClearFx">Clear effects</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Volume (Filmora Audio) -->
+          <div id="insp-volume" class="inspector-view">
+            <div class="panel-body">
+              <div class="field">
+                <label>Clip</label>
+                <div id="volumeClipLabel" style="font-size:12px;color:var(--ink-dim)">No clip selected</div>
+              </div>
+
+              <div class="section-title">Clip volume</div>
+              <div class="field">
+                <label for="clipVolume">Level (0–500%)</label>
+                <div class="slider-row">
+                  <input id="clipVolume" type="range" min="0" max="500" step="1" value="100" />
+                  <output id="clipVolumeOut">100%</output>
+                </div>
+                <div class="btn-row" style="margin-top:6px">
+                  <button class="btn sm" data-vol="0">0%</button>
+                  <button class="btn sm" data-vol="25">25%</button>
+                  <button class="btn sm" data-vol="50">50%</button>
+                  <button class="btn sm" data-vol="100">100%</button>
+                  <button class="btn sm" data-vol="200">200%</button>
+                  <button class="btn sm" data-vol="500">500%</button>
+                </div>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px">Above 100% uses boost gain (up to 5×). Quick adjust: − / + badge on timeline audio & video clips (Shift = ±25).</div>
+                <label class="field" style="display:flex;gap:8px;align-items:center;margin-top:10px">
+                  <input id="volMute" type="checkbox" />
+                  Mute clip
+                </label>
+              </div>
+
+              <div class="section-title">Fades</div>
+              <div class="field">
+                <label for="volFadeIn">Fade in (s)</label>
+                <div class="slider-row">
+                  <input id="volFadeIn" type="range" min="0" max="5" step="0.1" value="0" />
+                  <output id="volFadeInOut">0.0s</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="volFadeOut">Fade out (s)</label>
+                <div class="slider-row">
+                  <input id="volFadeOut" type="range" min="0" max="5" step="0.1" value="0" />
+                  <output id="volFadeOutOut">0.0s</output>
+                </div>
+              </div>
+              <div class="section-title">
+                Audio transition curve
+                <span class="field-hint" id="audioTransHint">7 Filmora types</span>
+              </div>
+              <div class="field">
+                <div class="lut-grid" id="audioTransGrid" role="listbox" aria-label="Filmora audio transitions"></div>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px" id="audioTransNote"></div>
+                <div class="btn-row">
+                  <button class="btn sm ghost" id="btnAudioTransDefault" type="button">Use project default</button>
+                </div>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px">
+                  Crossfade shapes from <code>resources/transition/*/description.json</code>.
+                  Red is the outgoing clip, green the incoming one; the faint dashed
+                  line is their combined level — flat means no dip through the
+                  hand-over. The native DSP is a DLL a browser cannot load, so each
+                  type uses the standard curve its name denotes.
+                </div>
+              </div>
+              <div class="section-title">Normalize (Filmora LUFS)</div>
+              <label class="field" style="display:flex;gap:8px;align-items:center">
+                <input id="volNormalize" type="checkbox" />
+                Auto normalize
+              </label>
+              <div class="field">
+                <label for="volLufs">Target LUFS</label>
+                <select id="volLufs">
+                  <option value="-16">Web −16 LUFS</option>
+                  <option value="-14" selected>Streaming −14 LUFS</option>
+                  <option value="-23">Broadcast −23 LUFS</option>
+                  <option value="-10">Loud social −10 LUFS</option>
+                </select>
+              </div>
+              <div class="section-title">Equalizer & Cleanup (Filmora)</div>
+              <div class="field">
+                <label for="volEq">EQ preset</label>
+                <select id="volEq">
+                  <option value="flat">Flat</option>
+                  <option value="voice">Voice / Dialogue</option>
+                  <option value="music">Music</option>
+                  <option value="bass">Bass Boost</option>
+                  <option value="treble">Treble Boost</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="volDenoise">Denoise</label>
+                <select id="volDenoise">
+                  <option value="off">Off</option>
+                  <option value="weak">Weak</option>
+                  <option value="medium">Medium</option>
+                  <option value="strong">Strong</option>
+                </select>
+              </div>
+              <label class="field" style="display:flex;gap:8px;align-items:center">
+                <input id="volHum" type="checkbox" /> Hum removal (50/60Hz)
+              </label>
+              <label class="field" style="display:flex;gap:8px;align-items:center">
+                <input id="volWind" type="checkbox" /> Wind removal
+              </label>
+              <div class="section-title">
+                Filmora audio effects
+                <span class="field-hint" id="audioFxCount">76 presets</span>
+              </div>
+              <div class="field">
+                <input id="audioFxSearch" class="search-input" type="search" placeholder="Search 76 effects…" aria-label="Search audio effects" />
+                <div class="chip-row" id="audioFxFamilies" role="tablist" aria-label="Audio effect families"></div>
+                <div class="fx-rack" id="audioFxList" role="listbox" aria-label="Filmora audio effects"></div>
+                <div class="fx-chain" id="audioFxChain" aria-label="Applied effects"></div>
+                <div class="btn-row">
+                  <button class="btn sm" id="btnAudioFxAudition" title="Play a test tone through the chain">Audition chain</button>
+                  <button class="btn sm ghost" id="btnAudioFxClear">Clear chain</button>
+                </div>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px">
+                  Preset names and parameter ranges come from Filmora's own
+                  <code>resources/audio_effect/…/description.json</code>. The native
+                  DLLs are not loadable in a browser, so each family is realised with
+                  Web Audio equivalents.
+                </div>
+              </div>
+              <div class="btn-row">
+                <button class="btn sm" id="btnVolReset">Reset volume</button>
+                <button class="btn sm" id="btnAudioStretch">Audio Stretch</button>
+              </div>
+              <div style="font-size:11px;color:var(--muted);margin-top:10px">
+                Master volume is on the player (monitor only). Track mute is on timeline headers.
+              </div>
+            </div>
+          </div>
+
+          <!-- Speed (Filmora-style) -->
+          <div id="insp-speed" class="inspector-view">
+            <div class="panel-body">
+              <div class="field">
+                <label>Clip</label>
+                <div id="speedClipLabel" style="font-size:12px;color:var(--ink-dim)">No clip selected</div>
+              </div>
+
+              <div class="section-title">Uniform speed</div>
+              <div class="field">
+                <label for="clipSpeed">Playback rate</label>
+                <div class="slider-row">
+                  <input id="clipSpeed" type="range" min="25" max="800" step="5" value="100" />
+                  <output id="clipSpeedOut">1.00×</output>
+                </div>
+                <div class="btn-row" style="margin-top:6px">
+                  <button class="btn sm" data-speed="0.25">0.25×</button>
+                  <button class="btn sm" data-speed="0.5">0.5×</button>
+                  <button class="btn sm" data-speed="0.75">0.75×</button>
+                  <button class="btn sm" data-speed="1">1×</button>
+                  <button class="btn sm" data-speed="1.5">1.5×</button>
+                  <button class="btn sm" data-speed="2">2×</button>
+                  <button class="btn sm" data-speed="4">4×</button>
+                  <button class="btn sm" data-speed="8">8×</button>
+                </div>
+                <label class="field" style="display:flex;gap:8px;align-items:center;margin-top:10px">
+                  <input id="speedReverse" type="checkbox" />
+                  Reverse speed
+                </label>
+                <label class="field" style="display:flex;gap:8px;align-items:center">
+                  <input id="speedRipple" type="checkbox" checked />
+                  Ripple — shift later clips on this track
+                </label>
+                <label class="field" style="display:flex;gap:8px;align-items:center">
+                  <input id="speedMuteOnFast" type="checkbox" />
+                  Mute audio when speed ≠ 1×
+                </label>
+                <label class="field" style="display:flex;gap:8px;align-items:center">
+                  <input id="speedPitch" type="checkbox" checked />
+                  Maintain pitch (when supported)
+                </label>
+                <div id="speedHint" style="font-size:11px;color:var(--muted);margin-top:6px">
+                  Longer/shorter clips pull or push following clips when Ripple is on.
+                </div>
+              </div>
+
+              <div class="section-title">Speed ramp presets (Filmora)</div>
+              <div class="btn-row">
+                <button class="btn sm" data-ramp="montage">Montage</button>
+                <button class="btn sm" data-ramp="hero">Hero Moment</button>
+                <button class="btn sm" data-ramp="bullet">Bullet Time</button>
+                <button class="btn sm" data-ramp="jumper">Jumper</button>
+                <button class="btn sm" data-ramp="flashIn">Flash In</button>
+                <button class="btn sm" data-ramp="flashOut">Flash Out</button>
+              </div>
+              <div id="rampHint" style="font-size:11px;color:var(--muted);margin-top:6px">
+                Presets set a base rate and mark a ramp curve on the clip (visible in Motion keys).
+              </div>
+
+              <div class="section-title">Freeze frame</div>
+              <div class="field">
+                <label for="freezeDur">Hold length (seconds)</label>
+                <div class="slider-row">
+                  <input id="freezeDur" type="range" min="0.5" max="10" step="0.5" value="5" />
+                  <output id="freezeDurOut">5.0s</output>
+                </div>
+                <button class="btn primary sm block" id="btnFreezeFrame" style="margin-top:8px">
+                  Freeze frame at playhead
+                </button>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px">
+                  Filmora-style: inserts a still (default 5s) and ripples the track open.
+                </div>
+              </div>
+
+              <div class="section-title">Reset</div>
+              <div class="btn-row">
+                <button class="btn sm" id="btnSpeedReset">Clear speed · 1×</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Mate -->
+          <div id="insp-mate" class="inspector-view">
+            <div class="panel-body" style="display:flex;flex-direction:column;gap:8px;min-height:0;overflow:hidden">
+              <div class="mate-layout">
+                <div class="mate-log" id="mateLog"></div>
+                <div class="quick-prompts">
+                  <button class="chip" data-quick="Build a rough cut from media bin">Rough cut</button>
+                  <button class="chip" data-quick="Remove silence and filler words">Cut silence</button>
+                  <button class="chip" data-quick="Add auto captions">Captions</button>
+                  <button class="chip" data-quick="Generate cinematic B-roll">B-roll</button>
+                  <button class="chip" data-quick="Reframe to 9:16 for TikTok">9:16</button>
+                  <button class="chip" data-quick="Apply cinematic color grade">Grade</button>
+                </div>
+                <div class="chat-input">
+                  <label class="sr-only" for="mateInput">Message AI Mate</label>
+                  <textarea id="mateInput" placeholder="Tell AI Mate what to do… (Ctrl+Enter)"></textarea>
+                  <button class="btn gen" id="mateSend">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GenAI Lab -->
+          <div id="insp-lab" class="inspector-view">
+            <div class="panel-body">
+              <div class="section-title">Model lab · multi-vendor</div>
+              <div class="model-grid" id="modelGrid"></div>
+              <form id="genForm">
+                <div class="field">
+                  <label for="genPrompt">Prompt</label>
+                  <div class="prompt-box">
+                    <textarea id="genPrompt" rows="3" placeholder="Aerial push over neon city at dusk, light rain, anamorphic…"></textarea>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="genKind">Type</label>
+                  <select id="genKind">
+                    <option value="broll">B-roll clip</option>
+                    <option value="i2v">Image → Video</option>
+                    <option value="sfx">SFX / audio bed</option>
+                  </select>
+                </div>
+                <button class="btn gen block" type="submit">Generate · spends credits</button>
+              </form>
+              <div class="section-title">Jobs</div>
+              <div class="job-list" id="jobList"></div>
+              <p style="font-size:11px;color:var(--muted);margin-top:10px">
+                Models mirror the competitive multi-vendor pattern (Veo, Runway, Kling, Seedance).
+                Generation is simulated locally with realistic job UX + credit metering.
+              </p>
+            </div>
+          </div>
+
+          <!-- Titles / Text editor -->
+          <div id="insp-textpanel" class="inspector-view">
+            <div class="panel-body">
+              <div class="section-title">Text editor</div>
+              <p style="font-size:11px;color:var(--muted);margin-top:0">
+                Presets live in <strong>Library → Text</strong>. Edit the selected title here or on the preview.
+              </p>
+              <div class="section-title">Content</div>
+              <div class="field">
+                <label for="textContent">Text</label>
+                <textarea id="textContent" rows="3" placeholder="Your title"></textarea>
+                <div id="textClipHint" style="font-size:11px;color:var(--muted);margin-top:4px">No text clip selected — Add Title creates one at the playhead.</div>
+              </div>
+              <div class="btn-row">
+                <button class="btn primary sm" id="btnAddTitle">Add Title</button>
+                <button class="btn sm" id="btnApplyText">Apply</button>
+              </div>
+
+              <div class="section-title">
+                Filmora text styles
+                <span class="field-hint" id="textStyleCount">48 presets</span>
+              </div>
+              <div class="field">
+                <input id="textStyleSearch" class="search-input" type="search" placeholder="Search text styles…" aria-label="Search text styles" />
+                <div class="style-grid" id="textStyleGrid" role="listbox" aria-label="Filmora text styles"></div>
+              </div>
+
+              <div class="section-title">Style</div>
+              <div class="field">
+                <label for="textFont">Font</label>
+                <div class="filmora-font-picker">
+                  <div class="filmora-font-picker-row">
+                    <select id="textFont"></select>
+                    <button class="btn sm" id="textFontToggle" type="button" title="Toggle all Filmora fonts">All ▾</button>
+                  </div>
+                  <div class="filmora-font-preview" id="textFontPreview">Aa — preview</div>
+                  <input id="fontSearch" class="search-input" type="search" placeholder="Search 186 font families…" aria-label="Search fonts" />
+                  <!-- Each tile is rendered in its own typeface, so the face must be
+                       downloaded first. 262 files / 87 MB is far too much to pull at
+                       boot: tiles only load their font when scrolled into view. -->
+                  <div class="font-grid" id="fontGrid" role="listbox" aria-label="Filmora fonts"></div>
+                  <div class="field-hint" id="fontGridHint"></div>
+                </div>
+              </div>
+              <div class="field">
+                <label for="textSize">Size</label>
+                <div class="slider-row">
+                  <input id="textSize" type="range" min="16" max="120" value="48" />
+                  <output id="textSizeOut">48</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="textWeight">Weight</label>
+                <select id="textWeight">
+                  <option value="400">Regular</option>
+                  <option value="500" selected>Medium</option>
+                  <option value="600">Semibold</option>
+                  <option value="700">Bold</option>
+                  <option value="800">Extra bold</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="textColor">Color</label>
+                <input id="textColor" type="color" value="#ffffff" />
+              </div>
+              <div class="field">
+                <label for="textBg">Background</label>
+                <input id="textBg" type="color" value="#000000" />
+                <div class="slider-row" style="margin-top:6px">
+                  <input id="textBgAlpha" type="range" min="0" max="100" value="0" />
+                  <output id="textBgAlphaOut">0</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="textSpacing">Letter spacing</label>
+                <div class="slider-row">
+                  <input id="textSpacing" type="range" min="0" max="16" value="0" />
+                  <output id="textSpacingOut">0</output>
+                </div>
+              </div>
+              <label class="field" style="display:flex;gap:8px;align-items:center">
+                <input id="textShadow" type="checkbox" checked /> Drop shadow
+              </label>
+              <label class="field" style="display:flex;gap:8px;align-items:center">
+                <input id="textUpper" type="checkbox" /> UPPERCASE
+              </label>
+
+              <div class="section-title">Position & motion</div>
+              <div class="field">
+                <label for="textPos">Anchor</label>
+                <select id="textPos">
+                  <option value="center">Center</option>
+                  <option value="lower">Lower third</option>
+                  <option value="top">Top</option>
+                  <option value="custom">Custom</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="textAlign">Align</label>
+                <select id="textAlign">
+                  <option value="center">Center</option>
+                  <option value="left">Left</option>
+                  <option value="right">Right</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="textX">X %</label>
+                <div class="slider-row">
+                  <input id="textX" type="range" min="0" max="100" value="50" />
+                  <output id="textXOut">50</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="textY">Y %</label>
+                <div class="slider-row">
+                  <input id="textY" type="range" min="0" max="100" value="50" />
+                  <output id="textYOut">50</output>
+                </div>
+              </div>
+              <div class="field">
+                <label for="textAnim">Animation</label>
+                <select id="textAnim">
+                  <option value="none">None</option>
+                  <option value="fade">Fade</option>
+                  <option value="slideup">Slide up</option>
+                  <option value="slidedown">Slide down</option>
+                  <option value="typewriter">Typewriter</option>
+                  <option value="pop">Pop</option>
+                  <option value="zoom">Zoom</option>
+                  <option value="blur">Blur in</option>
+                </select>
+              </div>
+              <div class="btn-row" style="margin-top:8px">
+                <button class="btn sm danger" id="btnClearAnim">Remove animation</button>
+              </div>
+
+              <div class="section-title">Filmora-style caption animations</div>
+              <p style="font-size:11px;color:var(--muted);margin-top:0">
+                Thumbnail gallery sourced from <code>assets/resources/captions/...</code> · click a thumbnail to apply its animation to the selected title.
+              </p>
+              <div class="caption-anim-toolbar">
+                <input id="capAnimSearch" type="search" placeholder="Search animations…" />
+                <select id="capAnimKind" title="Source folder">
+                  <option value="all">All</option>
+                  <option value="base">Base</option>
+                  <option value="guid">Standard</option>
+                  <option value="motion">Motion</option>
+                </select>
+              </div>
+              <div class="caption-anim-grid" id="capAnimGrid"></div>
+            </div>
+          </div>
+
+          <!-- Text Edit -->
+          <div id="insp-text" class="inspector-view">
+            <div class="panel-body">
+              <div class="section-title">Text-based editing</div>
+              <p style="font-size:12px;color:var(--ink-dim);margin-top:0">
+                Premiere-style paper edit + Descript-style transcript cutting. Local ASR path:
+                faster-whisper + VAD.
+              </p>
+              <div class="btn-row" style="margin-bottom:10px">
+                <button class="btn primary sm" id="btnTranscribe">Transcribe</button>
+                <button class="btn sm" id="btnRemoveFillers">Strip fillers</button>
+                <button class="btn gen sm" id="btnPaperEdit">Paper edit</button>
+                <button class="btn sm danger" id="btnCutSelected">Cut selected</button>
+              </div>
+              <div id="transcriptList"></div>
+            </div>
+          </div>
+
+          <!-- AI Providers -->
+          <div id="insp-aisettings" class="inspector-view">
+            <div class="panel-body">
+              <div class="section-title">OpenAI-compatible provider</div>
+              <p style="font-size:12px;color:var(--ink-dim);margin-top:0">
+                Bring your own key. Works with OpenAI, OpenRouter, Groq, DeepSeek, Mistral,
+                Together, Ollama, LM Studio, and any <code>/v1/chat/completions</code> endpoint.
+                Keys stay in this browser profile.
+              </p>
+              <div class="field">
+                <label for="aiProviderSelect">Provider</label>
+                <select id="aiProviderSelect"></select>
+              </div>
+              <div class="field">
+                <label for="aiBaseURL">Base URL</label>
+                <input id="aiBaseURL" type="url" placeholder="https://api.openai.com/v1" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="aiApiKey">API key</label>
+                <input id="aiApiKey" type="password" placeholder="sk-…" autocomplete="off" />
+                <div id="aiKeyHint" style="font-size:11px;color:var(--muted);margin-top:4px"></div>
+              </div>
+              <div class="field">
+                <label for="aiModel">Model</label>
+                <input id="aiModel" list="aiModelList" placeholder="gpt-4o-mini" autocomplete="off" />
+                <datalist id="aiModelList"></datalist>
+              </div>
+              <div class="field">
+                <label for="aiModelSelect">Model list <span style="color:var(--muted);font-weight:400">(from List models)</span></label>
+                <select id="aiModelSelect" title="Fetched models for this endpoint — pick one to fill Model above"></select>
+                <div id="aiModelCount" style="font-size:11px;color:var(--muted);margin-top:4px">No fetched models yet — click List models.</div>
+              </div>
+              <div class="section-title">Quality</div>
+              <div class="field">
+                <label for="aiTemp">Temperature <output id="aiTempOut" for="aiTemp">0.7</output></label>
+                <div class="slider-row">
+                  <input id="aiTemp" type="range" min="0" max="2" step="0.05" value="0.7" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="aiTopP">Top P <output id="aiTopPOut" for="aiTopP">1</output></label>
+                <div class="slider-row">
+                  <input id="aiTopP" type="range" min="0" max="1" step="0.05" value="1" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="aiMaxTokens">Max tokens</label>
+                <input id="aiMaxTokens" type="number" min="1" max="128000" step="1" value="1024" />
+              </div>
+              <div class="field">
+                <label for="aiFreq">Frequency penalty <output id="aiFreqOut" for="aiFreq">0</output></label>
+                <div class="slider-row">
+                  <input id="aiFreq" type="range" min="-2" max="2" step="0.1" value="0" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="aiPres">Presence penalty <output id="aiPresOut" for="aiPres">0</output></label>
+                <div class="slider-row">
+                  <input id="aiPres" type="range" min="-2" max="2" step="0.1" value="0" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="aiSeed">Seed <span style="color:var(--muted);font-weight:400">(blank = random)</span></label>
+                <input id="aiSeed" type="number" min="0" step="1" placeholder="e.g. 42" />
+              </div>
+              <div class="field">
+                <label for="aiTimeout">Request timeout</label>
+                <select id="aiTimeout">
+                  <option value="15000">15s</option>
+                  <option value="30000">30s</option>
+                  <option value="60000" selected>60s</option>
+                  <option value="120000">120s</option>
+                  <option value="300000">300s</option>
+                </select>
+              </div>
+              <div class="section-title">Headers & endpoint</div>
+              <div class="field">
+                <label for="aiOrg">Organization <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+                <input id="aiOrg" type="text" placeholder="org-… (sent as OpenAI-Organization)" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="aiHeaders">Custom headers <span style="color:var(--muted);font-weight:400">(one per line: Name: value — or JSON)</span></label>
+                <textarea id="aiHeaders" rows="3" placeholder="HTTP-Referer: https://myapp.example&#10;X-Title: AiFilmora&#10;# Azure uses api-key automatically" spellcheck="false"></textarea>
+                <div style="font-size:11px;color:var(--muted);margin-top:4px">OpenRouter: add <code>HTTP-Referer</code> + <code>X-Title</code> here if required. Azure <code>api-key</code> header is set automatically.</div>
+              </div>
+              <div class="field">
+                <label for="aiExtraBody">Extra request JSON <span style="color:var(--muted);font-weight:400">(merged into body)</span></label>
+                <textarea id="aiExtraBody" rows="2" placeholder='{"response_format":{"type":"json_object"}}' spellcheck="false"></textarea>
+                <div id="aiExtraBodyHint" style="font-size:11px;color:var(--muted);margin-top:4px"></div>
+              </div>
+              <div class="btn-row">
+                <button class="btn sm" id="btnAIListModels">List models</button>
+                <button class="btn primary sm" id="btnAITest">Test connection</button>
+                <button class="btn sm danger" id="btnAIClearKey">Clear key</button>
+              </div>
+              <div id="aiProviderStatus" style="margin-top:10px;font-size:12px;color:var(--ink-dim)">—</div>
+              <div class="section-title">Custom AI provider</div>
+              <p style="font-size:11px;color:var(--muted);margin-top:0">
+                Add any OpenAI-compatible endpoint (vLLM, Ollama, LM Studio, Azure,
+                OpenRouter, a self-hosted gateway…). Name + Base URL are required;
+                models can be comma- or line-separated, or fetched later with
+                <strong>List models</strong>.
+              </p>
+              <div class="field">
+                <label for="aiCustomName">Provider name</label>
+                <input id="aiCustomName" type="text" placeholder="My gateway" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="aiCustomBaseURL">Base URL</label>
+                <input id="aiCustomBaseURL" type="url" placeholder="https://my-host:8000/v1" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="aiCustomKeyHint">Key hint <span style="color:var(--muted);font-weight:400">(shown under API key)</span></label>
+                <input id="aiCustomKeyHint" type="text" placeholder="sk-… / optional" autocomplete="off" />
+              </div>
+              <div class="field">
+                <label for="aiCustomModels">Models <span style="color:var(--muted);font-weight:400">(comma or line separated — optional)</span></label>
+                <textarea id="aiCustomModels" rows="2" placeholder="my-model-a, my-model-b" spellcheck="false"></textarea>
+              </div>
+              <label class="field" style="display:flex;gap:8px;align-items:center">
+                <input id="aiCustomLocal" type="checkbox" /> Local provider (API key optional)
+              </label>
+              <div class="btn-row">
+                <button class="btn sm primary" id="btnAIAddProvider" type="button">Add custom provider</button>
+              </div>
+              <div id="aiCustomList" style="margin-top:8px;display:flex;flex-direction:column;gap:6px"></div>
+              <div class="section-title">Custom models for this provider</div>
+              <p style="font-size:11px;color:var(--muted);margin-top:0">
+                Add any model id served by the active endpoint — it is stored with
+                this provider and appears in the Model list.
+              </p>
+              <div class="field">
+                <label for="aiNewModel">Add model id</label>
+                <div class="export-dest-ctl">
+                  <input id="aiNewModel" type="text" placeholder="e.g. llama-3.3-70b-versatile" autocomplete="off" spellcheck="false" />
+                  <button class="btn sm" id="btnAINewModel" type="button">Add model</button>
+                </div>
+              </div>
+              <div id="aiUserModels" style="display:flex;flex-direction:column;gap:6px"></div>
+              <div class="section-title">What uses this provider</div>
+              <ul style="font-size:12px;color:var(--ink-dim);padding-left:18px;line-height:1.6">
+                <li>AI Mate chat (live model when configured)</li>
+                <li>Script rewrite / title suggestions</li>
+                <li>Caption polish &amp; chapter naming</li>
+              </ul>
+              <p style="font-size:11px;color:var(--muted)">
+                Tip: for offline, run Ollama and pick that preset. Cloud providers may block
+                browser CORS — use a local proxy or the Electron main-process bridge.
+              </p>
+            </div>
+          </div>
+
+          <!-- Motion -->
+          <div id="insp-motion" class="inspector-view">
+            <div class="panel-body" id="motionPanel">
+              <div class="field">
+                <label>Selected clip</label>
+                <div id="motionClipLabel" style="font-size:12px;color:var(--ink-dim)">No clip selected</div>
+              </div>
+              <p class="muted-note">Select a video or image clip to animate transform, scale, rotation, and opacity with keyframes.</p>
+            </div>
+
+            <!-- Pan & Zoom: Filmora's own keyframed crop curves. -->
+            <div class="panel-body" id="panZoomSection">
+              <div class="section-title">
+                Pan &amp; Zoom
+                <span class="field-hint" id="panZoomHint">6 Filmora presets</span>
+              </div>
+              <div class="field">
+                <div class="lut-grid" id="panZoomGrid" role="listbox" aria-label="Filmora Pan and Zoom presets"></div>
+                <div class="slider-row">
+                  <input id="panZoomIntensity" type="range" min="0" max="100" value="100" />
+                  <output id="panZoomIntensityOut" for="panZoomIntensity">100</output>
+                </div>
+                <div class="btn-row">
+                  <button class="btn sm ghost" id="btnPanZoomClear" type="button">None</button>
+                </div>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px">
+                  Crop rectangles keyframed in <code>configs/PanZoom/*.conf</code> —
+                  the outline shows where the frame starts, the green box where it ends.
+                </div>
+              </div>
+            </div>
+
+            <!-- Kept outside #motionPanel: initMotionPanel() clears that element. -->
+            <div class="panel-body" id="animSection">
+              <div class="section-title">
+                Filmora clip animation
+                <span class="field-hint" id="animCountHint">150 presets</span>
+              </div>
+              <div class="field">
+                <div class="chip-row" id="animKindRow" role="tablist" aria-label="Animation kind"></div>
+                <input id="animSearch" class="search-input" type="search" placeholder="Search animations…" aria-label="Search animations" />
+                <div class="fx-rack" id="animList" role="listbox" aria-label="Filmora clip animations"></div>
+                <div class="btn-row">
+                  <button class="btn sm" id="btnAnimPreview" title="Preview the selected animation">Preview</button>
+                  <button class="btn sm ghost" id="btnAnimClear">Clear</button>
+                </div>
+                <div style="font-size:11px;color:var(--muted);margin-top:6px">
+                  Titles come from <code>configs/AnimationNew</code>. Filmora stores the
+                  bodies as GPU shader presets, so each name is mapped onto an
+                  equivalent CSS-style transform envelope.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scopes -->
+          <div id="insp-scopes" class="inspector-view">
+            <div class="panel-body">
+              <div class="field">
+                <label for="scopeMode">Scope</label>
+                <select id="scopeMode">
+                  <option value="waveform">Waveform</option>
+                  <option value="parade">RGB Parade</option>
+                  <option value="vectorscope">Vectorscope</option>
+                  <option value="histogram">Histogram</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="scopeParity">Color space</label>
+                <select id="scopeParity">
+                  <option value="rec709">Rec. 709</option>
+                  <option value="rec2020">Rec. 2020</option>
+                </select>
+              </div>
+              <div class="scope-wrap">
+                <canvas id="scopeCanvas" width="320" height="180"></canvas>
+              </div>
+              <p class="muted-note">Live from the program monitor. Switch to any clip to inspect its color.</p>
+            </div>
+          </div>
+        </aside>
+        <div class="rsz rsz-x" id="resizeInspector" title="Drag to resize inspector · double-click reset" role="separator" aria-orientation="vertical"></div>
+        <div class="rsz rsz-y" id="resizeTimeline" title="Drag to resize timeline · double-click reset" role="separator" aria-orientation="horizontal"></div>
+
+        <!-- Timeline -->
+        <section class="timeline-panel" id="timelinePanel">
+          <div class="tl-toolbar">
+            <strong style="font-size:12px;margin-right:8px">Timeline</strong>
+            <button class="btn sm" id="btnUndo" title="Ctrl+Z">Undo</button>
+            <button class="btn sm" id="btnRedo" title="Ctrl+Y">Redo</button>
+            <button class="btn sm" id="btnMuteClip" aria-pressed="false" title="Mute / unmute selected clip">Mute Clip</button>
+            <button class="btn sm" id="btnTrimStart" title="Trim clip start to playhead">Trim Start</button>
+            <button class="btn sm" id="btnTrimEnd" title="Trim clip end to playhead">Trim End</button>
+            <button class="btn sm" id="btnSplit">Split <span class="help-kbd">S</span></button>
+            <button class="btn sm" id="btnDetachAudio" title="Split audio to A1">Detach Audio</button>
+            <button class="btn sm accent" id="btnBeatSync" title="Detect beats on the selected audio clip">Beat Sync</button>
+            <button class="btn sm" id="btnBeatOptions" title="Filmora Beat Options: highlight frequency / offset">Beat Options</button>
+            <button class="btn sm" id="btnClearBeats" title="Remove beat markers from selected clip">Clear Beats</button>
+            <button class="btn sm danger" id="btnDeleteClip">Delete</button>
+            <button class="btn sm" id="btnCrop" title="Crop selected clip on the preview">Crop</button>
+            <button class="btn sm active" id="btnSnap" aria-pressed="true">Snap</button>
+            <div class="spacer"></div>
+            <span style="font-size:11px;color:var(--muted)" title="Drag the ruler to zoom · click the ruler to seek · Ctrl+wheel also zooms · double-click slider to reset">Zoom</span>
+            <label class="sr-only" for="tlZoom">Timeline zoom</label>
+            <span id="tlZoomWrap" style="display:inline-flex;align-items:center;gap:6px">
+              <input class="zoom-slider" id="tlZoom" type="range" min="0.4" max="4" step="0.1" value="1.2" />
+            </span>
+          </div>
+          <div class="tl-body">
+            <div class="tl-track-labels">
+              <div class="tl-label-spacer"></div>
+              <div class="tl-labels-body"></div>
+              <div class="tl-labels-foot track-add-col">
+                <button class="track-add-btn" id="btnAddTrack" title="Add video track" aria-label="Add video track"><span class="ta-icon">+V</span></button>
+                <button class="track-add-btn" id="btnAddAudioTrack" title="Add audio track" aria-label="Add audio track"><span class="ta-icon">+A</span></button>
+              </div>
+            </div>
+            <div class="tl-scroll" id="tlScroll">
+              <div class="tl-lanes"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Status -->
+      <footer class="statusbar">
+        <span class="status-dot" id="statusDot"></span>
+        <span>AiFilmora 2.2.2 · Electron-ready Windows suite</span>
+        <span id="statClips">0 clips</span>
+        <span id="statLastAction" style="color:var(--muted)"></span>
+        <div class="right">
+          <span id="aiModeChip" class="ai-mode-chip" title="Active AI provider mode">AI: Simulated</span>
+          <span id="statModel">AI Mate</span>
+          <span id="statCredits">—</span>
+          <span id="statSave">Autosave on</span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- First-run chooser -->
+    <div class="modal-backdrop" id="firstRunModal" role="dialog" aria-modal="true" aria-label="Welcome">
+      <div class="modal">
+        <h3>Welcome to AiFilmora</h3>
+        <p>Choose how you want to start. You can change this anytime.</p>
+        <div class="preset-grid">
+          <button type="button" class="preset" id="frEmpty">
+            <strong>Empty project</strong>
+            <span>Start clean and import media</span>
+          </button>
+          <button type="button" class="preset" id="frDemo">
+            <strong>Demo cut</strong>
+            <span>Sample clips, titles, and timeline</span>
+          </button>
+          <button type="button" class="preset" id="frAssets">
+            <strong>Browse assets</strong>
+            <span>Jump into installed asset packs</span>
+          </button>
+        </div>
+        <div class="modal-actions">
+          <button class="btn ghost" id="frSkip">Skip</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Export modal -->
+    <div class="modal-backdrop" id="exportModal" role="dialog" aria-modal="true" aria-label="Export">
+      <div class="modal">
+        <h3>Export</h3>
+        <p>Duration <strong id="exportDuration">00:00</strong> · credits metered like Filmora / PowerDirector.</p>
+        <div class="export-dest" id="exportDest">
+          <div class="export-dest-row">
+            <label for="exportFileName">File name</label>
+            <div class="export-dest-ctl">
+              <input id="exportFileName" type="text" spellcheck="false" autocomplete="off" placeholder="my-video" />
+              <span class="export-dest-ext" id="exportExt">.mp4</span>
+            </div>
+          </div>
+          <div class="export-dest-row">
+            <label for="exportFolder">Save in</label>
+            <div class="export-dest-ctl">
+              <input id="exportFolder" type="text" spellcheck="false" autocomplete="off" placeholder="Choose a folder…" />
+              <button class="btn sm" id="exportBrowse" type="button" title="Choose where this video is saved">Browse…</button>
+            </div>
+          </div>
+          <label class="save-check" for="exportRememberDir">
+            <input id="exportRememberDir" type="checkbox" />
+            <span>Use this folder as the default save location</span>
+          </label>
+          <label class="save-check" for="exportAskAlways">
+            <input id="exportAskAlways" type="checkbox" checked />
+            <span>Ask where to save every time (uncheck to reuse the default silently)</span>
+          </label>
+          <div class="export-dest-hint" id="exportDestHint"></div>
+        </div>
+        <div class="preset-grid" id="presetGrid"></div>
+        <div style="margin-top:14px">
+          <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden">
+            <div id="exportProgress" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--gen))"></div>
+          </div>
+          <div id="exportStatus" style="margin-top:8px;font-size:12px;color:var(--ink-dim)">Ready</div>
+          <div id="exportMeta" style="margin-top:4px;font-size:11px;color:var(--muted)"></div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" id="exportCancel" title="Stop a running render and close">Cancel</button>
+          <button class="btn primary" id="exportStart">Start render</button>
+          <button class="btn ghost" id="exportClose">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Release notes modal (2.2.2 Shader transitions + Toolbar order + ruler zoom + drag auto-scroll + wrapping tabs) -->
+    <div class="modal-backdrop" id="releaseNotesModal" role="dialog" aria-modal="true" aria-label="Release notes">
+      <div class="modal">
+        <h3>AiFilmora 2.2.2 — 15 Filmora shader transitions · Toolbar order · ruler-drag zoom · drag auto-scroll</h3>
+        <p style="font-size:12px;color:var(--ink-dim);margin:0 0 8px">
+          Filmora-style library shell around the real Filmora 14 assets in <code>assets/</code>.
+        </p>
+        <ul style="font-size:12px;line-height:1.75;color:var(--ink-dim);padding-left:18px;max-height:46vh;overflow:auto">
+          <li><strong>15 Filmora shader transitions</strong> — canvas ports of the real
+              GPU shaders in <code>assets/resources/wfx_effect/Transition/*.frag</code>:
+              Cross Zoom, Push, Drop Bands, Erase Wipe, Linear Wipe, Pinwheel,
+              Pixelate, Roll Clockwise, Round Zoom Out, Skew Split, Doorway, Whirl,
+              Evaporate (real mask PNG), Fade Black/White with the sine curve from
+              the <code>.frag</code> source. Grouped under a "Shader" rail filter in
+              Transitions, with live preview + apply + undo.</li>
+          <li><strong>Timeline toolbar order</strong> — Undo, Redo, Mute Clip,
+              Trim Start, Trim End, Split, Detach Audio, Beat Sync, Beat Options,
+              Clear Beats, Delete.</li>
+          <li><strong>Ruler-drag zoom that works</strong> — drag the timeline
+              ruler in any direction to zoom (right/up = in, left/down = out);
+              click still seeks. Zoom stays view-only and never changes clip lengths.</li>
+          <li><strong>Drag auto-scroll</strong> — holding a clip near the panel
+              edges keeps scrolling the timeline (up/down + left/right) with the
+              track labels in sync, so clips reach off-screen tracks.</li>
+          <li><strong>Wrapping inspector tabs</strong> — the right-panel tabs
+              arrange downward into extra rows when the panel shrinks instead of
+              hiding.</li>
+          <li><strong>Real Save for project + video</strong> — Save / Save as writes a
+              <code>.aifimora.json</code> file and Export writes a real captured video
+              file. Both ask for folder + file name, with <em>Use as default save
+              location</em> and <em>Ask every time</em> checkboxes remembered in
+              Preferences → Folders.</li>
+          <li><strong>Full-height right inspector</strong> — the right panel is now one
+              single column top-to-bottom; the timeline spans only the left area.</li>
+          <li><strong>Ruler-drag zoom</strong> — drag the timeline ruler up/down (or
+              Alt+drag) to zoom in/out; drag left/right to scrub. Zoom is view-only
+              and never extends video, audio, or file lengths.</li>
+          <li><strong>Custom AI providers + models</strong> — add any OpenAI-compatible
+              endpoint (name + Base URL + models) and add custom model ids to any
+              provider in the AI panel.</li>
+          <li><strong>Collapsible Project Info card</strong> — the inspector's Project
+              header now has a Hide / Show toggle (keyboard accessible) so the
+              metadata card can collapse fully; your choice is remembered and can
+              also be changed in Preferences → General.</li>
+        </ul>
+        <p style="font-size:11px;color:var(--muted);margin:8px 0 0">
+          All new content is read from the local Filmora 14 install (dev use). Preset bodies are
+          still re-implemented in the browser — no native shaders or DLLs are loaded.
+        </p>
+        <p style="font-size:11px;color:var(--muted);margin:8px 0 0">
+          Filmora's preset bodies ship as GPU shaders and native DLLs, which a browser cannot
+          load. What we use is the published metadata — names, categories, parameter ranges and
+          real thumbnails — and we say so in each panel.
+        </p>
+        <div class="modal-actions">
+          <button class="btn primary" id="releaseNotesOk">Got it</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shortcuts modal -->
+    <div class="modal-backdrop" id="shortcutsModal" role="dialog" aria-modal="true" aria-label="Shortcuts">
+      <div class="modal">
+        <h3>Keyboard shortcuts</h3>
+        <ul style="font-size:12px;line-height:1.8;color:var(--ink-dim);padding-left:18px">
+          <li><span class="help-kbd">Space</span> Play / pause</li>
+          <li><span class="help-kbd">Ctrl</span>+<span class="help-kbd">Z</span> Undo · <span class="help-kbd">Ctrl</span>+<span class="help-kbd">Y</span> / <span class="help-kbd">Shift</span>+<span class="help-kbd">Z</span> Redo</li>
+          <li><span class="help-kbd">S</span> Split at playhead · <span class="help-kbd">Ctrl+S</span> Save</li>
+          <li><span class="help-kbd">Delete</span> Remove selected clip</li>
+          <li><span class="help-kbd">J</span> / <span class="help-kbd">L</span> −2s / +2s · <span class="help-kbd">K</span> Pause</li>
+          <li><span class="help-kbd">←</span> <span class="help-kbd">→</span> Frame step · <span class="help-kbd">Shift</span> 1s</li>
+          <li><span class="help-kbd">Alt</span>+<span class="help-kbd">↑</span>/<span class="help-kbd">↓</span> Move clip to another track</li>
+          <li><span class="help-kbd">↑</span>/<span class="help-kbd">↓</span> Nudge clip start time</li>
+          <li>Drag clips vertically between compatible lanes</li>
+          <li><span class="help-kbd">+</span> / <span class="help-kbd">−</span> Timeline zoom</li>
+          <li><span class="help-kbd">M</span> Focus AI Mate · <span class="help-kbd">T</span> Text-based edit</li>
+          <li><span class="help-kbd">P</span> Pen Tool · <span class="help-kbd">N</span> Add chapter · <span class="help-kbd">Ctrl+Shift+N</span> Export chapters</li>
+          <li><span class="help-kbd">Ctrl+Alt+B</span> Multi-Clip (batch) editing</li>
+          <li><span class="help-kbd">Home</span> / <span class="help-kbd">End</span> Start / end of sequence</li>
+        </ul>
+        <div class="modal-actions">
+          <button class="btn primary" id="shortcutsOk">Got it</button>
+          <button class="btn" id="shortcutsClose">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preferences modal -->
+    <div class="modal-backdrop wide" id="settingsModal" role="dialog" aria-modal="true" aria-label="Preferences">
+      <div class="modal">
+        <h3>Preferences</h3>
+        <div id="settingsModalBody" class="settings-body"></div>
+        <div class="modal-actions">
+          <button class="btn" id="settingsReset">Reset to defaults</button>
+          <button class="btn ghost" id="settingsClose">Close</button>
+          <button class="btn primary" id="settingsSave">Save preferences</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toasts" id="toasts" aria-live="polite"></div>
+
+    <script type="module" src="js/app.js?dbg=2"></script>
+  </body>
+</html>

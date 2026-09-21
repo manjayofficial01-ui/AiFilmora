@@ -1,0 +1,93 @@
+{
+	"title": "What's New in Filmora %1. ",
+	"titleByManual": "You are using the latest version. Check out the new %1 features!",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "Text to Video",
+			"discription": "Unleash your creativity with Text to Video and experience the magic of Filmora AI",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "Image to Video",
+			"discription": "Image to Video Now Powered by Veo 3! Experience Massively Enhanced Generation Results!",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},	
+		{
+			"id": "ai_idea_to_video",
+			"name": "AI Idea to Video",
+			"discription": "Transform your raw ideas into professional short videos while maintaining visual style consistency and ensuring character continuity across scenes.",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "AI Image Stylizer",
+			"discription": "AI Image Stylizer Enhanced! Now available under the AIGC tab with expanded and enhanced image stylization capabilities.",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "Audio to Video",
+			"discription": "Easily turn audio podcasts into captivating short videos. Edit, trim, and highlight your favorite stories.",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "Smart Short Clips",
+			"discription": "Transform long videos into engaging shorts effortlessly. Cut, trim, and highlight your best moments!",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "Smart Scene Cut",
+			"discription": "Effortlessly extract highlights and character scenes to boost editing efficiency.",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "Smart BGM Generation",
+			"discription": "Automatically generate background music that matches your video's content and mood.",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "Auto Reframe",
+			"discription": "Use Auto Reframe to export videos that match the aspect ratios of social media platforms.",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "AI that understands, assists, and elevates. With AI Mate by your side, you can create stunning videos faster than ever before.",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "Multi-Camera Editing",
+			"discription": "Import footage from multiple cameras and seamlessly switch between different angles for an efficient and convenient editing experience. Simplify complex editing processes and enhance your creative workflow.",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "AI Translation",
+			"discription": "Automatically translate videos and audio into more than 20 languages, and sync audio with the speakers’ lip movements.",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

@@ -1,0 +1,63 @@
+{
+    "background": [
+      {
+        "border": {
+          "color": 23434,
+          "enable": 0,
+          "size": 10
+        },
+        "color": -29696,
+        "enable": 0,
+        "outsetx": 2,
+        "outsety": 2,
+        "roundAngle": 15,
+        "type": 2
+      }
+    ],
+    "enable": 1,
+    "subtitle": {
+      "animation": {
+        "enable": 1,
+        "rules": [
+          {
+            "endTime": 0.5,
+            "endValue": 255,
+            "maxTime": 500,
+            "property": "alpha",
+            "startTime": 127,
+            "startValue": 0,
+            "type": 0
+          },
+          {
+            "endTime": 1,
+            "endValue": 255,
+            "maxTime": 500,
+            "property": "alpha",
+            "startTime": 0.5,
+            "startValue": 255,
+            "type": 0
+          }
+        ]
+      },
+      "charPlayMode": 2,
+      "keepStyle": 0,
+      "punctuationLineBreak": 0,
+      "styles": [
+        {
+          "enable": 1,
+          "textStyle": "{\"Aspect\":\"16:9\",\"AutoLine\":0,\"AutoLineLimited\":0,\"AutoLineScale\":1.0,\"Background\":{\"Alpha\":255,\"Border\":{\"Alpha\":255,\"Color\":0,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Size\":0},\"Bottom\":0.0,\"Color\":0,\"Enable\":0,\"FillMode\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Left\":0.0,\"Radian\":0,\"Right\":0.0,\"Top\":0.0},\"BasePixel\":0,\"ChangeAlignMode\":0,\"Curve\":{\"Angle\":180,\"Enable\":0},\"DirectX\":1,\"DirectY\":1,\"Edge\":{\"Bottom\":0.4722222089767456,\"Left\":0.43967917561531067,\"Right\":0.43967917561531067,\"Top\":0.4722222089767456},\"FillTextArea\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Layout\":{\"Angle\":0.0,\"CharSpace\":0,\"LineSpace\":0,\"TextAlign\":\"center\",\"TextAlignMode\":\"horizontal\",\"TextAlignPos\":\"center\",\"Underline\":0,\"UnderlineColor\":-1},\"Offset\":{\"x\":0,\"y\":0},\"OutputTextPath\":0,\"ScaleX\":0.12064162641763687,\"ScaleY\":0.0555555559694767,\"TemplatePath\":\"\",\"Text\":\"Wednesday\",\"TextData\":[{\"Basic\":{\"Effect\":0,\"Enable\":1,\"FontBold\":0,\"FontHSize\":20.0,\"FontItalic\":0,\"FontName\":\"Outfit SemiBold\",\"FontSize\":20.0,\"FontVSize\":20.0,\"TextAlpha\":255,\"TextBlurRadius\":0,\"TextColor\":[{\"Color\":16777215}]},\"Border\":{\"Alpha\":255,\"BlurRadius\":0,\"Color\":13977411,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Size\":0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"CharData\":\"Wednesday\",\"CharSpace\":0,\"LineSpace\":0,\"Shadow\":{\"Alpha\":140,\"BlurRadius\":7,\"Color\":0,\"Direction\":3,\"Distance\":2,\"Enable\":1,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"Underline\":0,\"UnderlineColor\":-1}],\"TextMode\":1,\"TextScale\":1.0,\"TextVersion\":3.0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0},\"UseDefaultBaseline\":0,\"ViewSize\":\"1920:1080\"}",
+          "type": 0
+        },
+        {
+          "enable": 1,
+          "textStyle": "{\"Aspect\":\"16:9\",\"AutoLine\":0,\"AutoLineLimited\":0,\"AutoLineScale\":1.0,\"Background\":{\"Alpha\":255,\"Border\":{\"Alpha\":255,\"Color\":0,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Size\":0},\"Bottom\":0.0,\"Color\":0,\"Enable\":0,\"FillMode\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Left\":0.0,\"Radian\":0,\"Right\":0.0,\"Top\":0.0},\"BasePixel\":0,\"ChangeAlignMode\":0,\"Curve\":{\"Angle\":180,\"Enable\":0},\"DirectX\":1,\"DirectY\":1,\"Edge\":{\"Bottom\":0.4722222089767456,\"Left\":0.43967917561531067,\"Right\":0.43967917561531067,\"Top\":0.4722222089767456},\"FillTextArea\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Layout\":{\"Angle\":0.0,\"CharSpace\":0,\"LineSpace\":0,\"TextAlign\":\"center\",\"TextAlignMode\":\"horizontal\",\"TextAlignPos\":\"center\",\"Underline\":0,\"UnderlineColor\":-1},\"Offset\":{\"x\":0,\"y\":0},\"OutputTextPath\":0,\"ScaleX\":0.12064162641763687,\"ScaleY\":0.0555555559694767,\"TemplatePath\":\"\",\"Text\":\"Wednesday\",\"TextData\":[{\"Basic\":{\"Effect\":0,\"Enable\":1,\"FontBold\":0,\"FontHSize\":20.0,\"FontItalic\":0,\"FontName\":\"Outfit SemiBold\",\"FontSize\":20.0,\"FontVSize\":20.0,\"TextAlpha\":255,\"TextBlurRadius\":0,\"TextColor\":[{\"Color\":7368959}]},\"Border\":{\"Alpha\":255,\"BlurRadius\":0,\"Color\":13977411,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Size\":0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"CharData\":\"Wednesday\",\"CharSpace\":0,\"LineSpace\":0,\"Shadow\":{\"Alpha\":140,\"BlurRadius\":7,\"Color\":0,\"Direction\":3,\"Distance\":2,\"Enable\":1,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"Underline\":0,\"UnderlineColor\":-1}],\"TextMode\":1,\"TextScale\":1.0,\"TextVersion\":3.0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0},\"UseDefaultBaseline\":0,\"ViewSize\":\"1920:1080\"}",
+          "type": 1
+        },
+        {
+          "enable": 1,
+          "textStyle": "{\"Aspect\":\"16:9\",\"AutoLine\":0,\"AutoLineLimited\":0,\"AutoLineScale\":1.0,\"Background\":{\"Alpha\":255,\"Border\":{\"Alpha\":255,\"Color\":0,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Size\":0},\"Bottom\":0.0,\"Color\":0,\"Enable\":0,\"FillMode\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Left\":0.0,\"Radian\":0,\"Right\":0.0,\"Top\":0.0},\"BasePixel\":0,\"ChangeAlignMode\":0,\"Curve\":{\"Angle\":180,\"Enable\":0},\"DirectX\":1,\"DirectY\":1,\"Edge\":{\"Bottom\":0.4722222089767456,\"Left\":0.43967917561531067,\"Right\":0.43967917561531067,\"Top\":0.4722222089767456},\"FillTextArea\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Layout\":{\"Angle\":0.0,\"CharSpace\":0,\"LineSpace\":0,\"TextAlign\":\"left\",\"TextAlignMode\":\"horizontal\",\"TextAlignPos\":\"center\",\"Underline\":0,\"UnderlineColor\":-1},\"Offset\":{\"x\":0,\"y\":0},\"OutputTextPath\":0,\"ScaleX\":0.12064162641763687,\"ScaleY\":0.0555555559694767,\"TemplatePath\":\"\",\"Text\":\"Wednesday\",\"TextData\":[{\"Basic\":{\"Effect\":0,\"Enable\":1,\"FontBold\":0,\"FontHSize\":20.0,\"FontItalic\":0,\"FontName\":\"Outfit SemiBold\",\"FontSize\":20.0,\"FontVSize\":20.0,\"TextAlpha\":255,\"TextBlurRadius\":0,\"TextColor\":[{\"Color\":16771902}]},\"Border\":{\"Alpha\":255,\"BlurRadius\":0,\"Color\":13977411,\"Enable\":0,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Size\":0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"CharData\":\"Wednesday\",\"CharSpace\":0,\"LineSpace\":0,\"Shadow\":{\"Alpha\":140,\"BlurRadius\":7,\"Color\":0,\"Direction\":3,\"Distance\":2,\"Enable\":1,\"Gradient\":{\"Angle\":0,\"ColorPos\":[{\"Color\":16777215,\"Pos\":0},{\"Color\":0,\"Pos\":100}],\"Enable\":0,\"GradType\":0,\"GradVer\":\"2.0\"},\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0}},\"Underline\":0,\"UnderlineColor\":-1}],\"TextMode\":1,\"TextScale\":1.0,\"TextVersion\":3.0,\"Texture\":{\"Enable\":0,\"File\":\"\",\"FillMode\":0},\"UseDefaultBaseline\":0,\"ViewSize\":\"1920:1080\"}",
+          "type": 2
+        }
+      ]
+    }
+  }

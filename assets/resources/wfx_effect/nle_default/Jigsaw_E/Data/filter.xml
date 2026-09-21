@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>EADA816C-CC38-4964-AE9D-6030F9A1E705</GUID>
+        <Name>Jigsaw_E</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Jigsaw_E.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

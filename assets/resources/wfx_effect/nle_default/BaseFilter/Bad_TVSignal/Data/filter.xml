@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>9B5EFE7A-C286-406e-A286-681142AC8B66</GUID>
+        <Name>Bad_TVSignal</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>BadTV.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

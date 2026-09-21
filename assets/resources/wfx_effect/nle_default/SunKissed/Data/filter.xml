@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>9B478F78-6FE4-46b1-AF38-7C83100B7E5D</GUID>
+        <Name>SunKissed</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>SunKissed.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

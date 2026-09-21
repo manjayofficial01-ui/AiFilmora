@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>0CA7BF5C-C3E5-4BF9-B32E-DDB6FA3D230B</GUID>
+<Name>Beam 3D</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam 3D.conf</ConfigFile>
+</GPUFilter>
+</Filter>

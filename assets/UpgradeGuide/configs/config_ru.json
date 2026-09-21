@@ -1,0 +1,93 @@
+{
+	"title": "Новые возможности Filmora %1.",
+	"titleByManual": "Вы используете актуальную версию. Ознакомьтесь с новыми функциями %1!",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "Текст в видео",
+			"discription": "Раскройте свой творческий потенциал с помощью функции «Текст в видео» и откройте для себя магию искусственного интеллекта Filmora",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "Изобр. в видео",
+			"discription": "Теперь функция «Изображение в видео» работает на базе Veo 3! Оцените улучшенные результаты создания!",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},	
+		{
+			"id": "ai_idea_to_video",
+			"name": "Идея в видео с ИИ",
+			"discription": "Преобразуйте сырые идеи в профессиональные короткие видео с сохранением визуальной стилистики и обеспечением целостности персонажей во всех сценах.",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "Стилизатор изображений ИИ",
+			"discription": "Стилизатор изображений ИИ ‍усовершенствован! Теперь инструмент доступен на вкладке AIGC и предоставляет расширенные и улучшенные возможности стилизации изображений.",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "Аудио в видео",
+			"discription": "С легкостью превратите аудиоподкасты в захватывающие короткие видеоролики. Редактируйте, обрезайте и выделяйте свои любимые истории.",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "Интеллектуальные короткие клипы",
+			"discription": "Превратите длинные видео в привлекательные короткие клипы.Вырезайте, обрезайте и выделяйте лучшие моменты!",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "Интеллектуальная обрезка сцены",
+			"discription": "Извлечение сцен выделения и персонажа для повышения эффективности редактирования.",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "Интеллектуальная генерация фоновой музыки",
+			"discription": "Автоматическая генерация фоновой музыки, соответствующей вашему видео.",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "Авто рефрейминг",
+			"discription": "Используйте функцию «Автоматическое кадрирование», чтобы экспортировать видео, соответствующие соотношению сторон на платформах социальных сетей.",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "Искусственный интеллект, который понимает, помогает и улучшает. С помощью AI Mate вы сможете создавать потрясающие видеоролики быстрее, чем когда-либо.",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "Редактирование материалов с нескольких камер",
+			"discription": "Импортируйте отснятые с нескольких камер материалы и легко переключайтесь между разными углами обзора, чтобы обеспечить эффективное и удобное редактирование. Упростите сложные процессы редактирования и раскройте свой творческий потенциал.",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "Перевод ИИ",
+			"discription": "Автоматический перевод видео и аудио на более чем 20 языков и синхронизация звука аудио с движениями губ спикеров.",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

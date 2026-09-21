@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>1CB976CB-FDD7-4669-A06F-D3AFB3A58456</GUID>
+<Name>MotionBlur</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>motion_blur.conf</ConfigFile>
+</GPUFilter>
+</Filter>

@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>A5394086-2AE7-4df3-B85B-0D69E4594338</GUID>
+    <Name>Kaleidoscope</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Kaleidoscope.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

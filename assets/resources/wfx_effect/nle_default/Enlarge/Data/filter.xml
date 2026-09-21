@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>22F62993-FF48-4182-B70E-29A6CDBD05AA</GUID>
+        <Name>Enlarge</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Enlarge.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

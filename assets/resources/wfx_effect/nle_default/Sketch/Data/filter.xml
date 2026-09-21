@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>04E1E803-CB09-49cf-91C9-071B1BF67315</GUID>
+    <Name>Sketch</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Sketch.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

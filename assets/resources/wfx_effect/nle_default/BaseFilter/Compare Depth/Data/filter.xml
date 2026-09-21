@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>602B6F19-AE6B-481D-936A-38308F0A1940</GUID>
+<Name>Compare Depth</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Compare Depth.conf</ConfigFile>
+</GPUFilter>
+</Filter>

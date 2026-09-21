@@ -1,0 +1,652 @@
+[
+	{
+		"type": 33,
+		"title": "Fade in",
+		"category": "Preset Animation",
+		"favorate": 0,
+		"config": "/Fade in.conf"
+	},
+	{
+		"type": 33,
+		"title": "Fade out",
+		"category": "Preset Animation",
+		"favorate": 0,
+		"config": "/Fade out.conf"
+	},
+	{
+		"type": 33,
+		"title": "Pause",
+		"category": "Preset Animation",
+		"favorate": 0,
+		"config": "/Pause.conf"
+	},
+	{
+		"type": 33,
+		"title": "Slide Right",
+		"category": "Preset Animation",
+		"favorate": 0,
+		"config": "/Slide Right.conf"
+	},
+	{
+		"type": 33,
+		"title": "Slide Left",
+		"category": "Preset Animation",
+		"favorate": 0,
+		"config": "/Slide Left.conf"
+	},
+	{
+		"type": 33,
+		"title": "Slide Up",
+		"category": "Preset Animation",
+		"favorate": 0,
+		"config": "/Slide Up.conf"
+	},
+	{
+		"type": 33,
+		"title": "Slide Down",
+		"category": "Preset Animation",
+		"favorate": 0,
+		"config": "/Slide Down.conf"
+	},
+	{
+		"type": 33,
+		"title": "Vortex In",
+		"category": "Preset Animation",
+		"favorate": 0,
+		"config": "/Vortex In.conf"
+	},
+	{
+		"type": 33,
+		"title": "Vortex Out",
+		"category": "Preset Animation",
+		"favorate": 0,
+		"config": "/Vortex Out.conf"
+	},
+	{
+		"type": 33,
+		"title": "Zoom In",
+		"category": "Preset Animation",
+		"favorate": 0,
+		"config": "/Zoom In.conf"
+	},
+	{
+		"type": 33,
+		"title": "Zoom Out",
+		"category": "Preset Animation",
+		"favorate": 0,
+		"config": "/Zoom Out.conf"
+	},
+	{
+		"type": 256,
+		"title": "No Motion",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"config": "/No Motion.conf"
+	},
+	{
+		"type": 256,
+		"title": "Boom!",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Boom!.conf"
+	},
+	{
+		"type": 256,
+		"title": "Bounce to zoom in 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Bounce to zoom in 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Bounce to zoom in 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Bounce to zoom in 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Bounce to zoom out 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Bounce to zoom out 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Clockwise rotate to zoom in 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Clockwise rotate to zoom in 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Clockwise rotate to zoom in 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Clockwise rotate to zoom in 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Clockwise rotate",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Clockwise rotate.conf"
+	},
+	{
+		"type": 256,
+		"title": "Counter clockwise rotate",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Counter clockwise rotate.conf"
+	},
+	{
+		"type": 256,
+		"title": "Down Up 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Down Up 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Down Up 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Down Up 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Fade Slide 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Fade Slide 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Fade Slide 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Fade Slide 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Fade Slide 3",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Fade Slide 3.conf"
+	},
+	{
+		"type": 256,
+		"title": "Fade Slide 4",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Fade Slide 4.conf"
+	},
+	{
+		"type": 256,
+		"title": "Fade Zoom In",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Fade Zoom In.conf"
+	},
+	{
+		"type": 256,
+		"title": "Fade Zoom Out",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Fade Zoom Out.conf"
+	},
+	{
+		"type": 256,
+		"title": "Fade2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Fade2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Flip Down1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Flip Down1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Flip Down2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Flip Down2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Flip Up1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Flip Up1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Flip Up2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Flip Up2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Fly to zoom in",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Fly to zoom in.conf"
+	},
+	{
+		"type": 256,
+		"title": "Grow Shrink",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Grow Shrink.conf"
+	},
+	{
+		"type": 256,
+		"title": "Move to bottom",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Move to bottom.conf"
+	},
+	{
+		"type": 256,
+		"title": "Move to left",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Move to left.conf"
+	},
+	{
+		"type": 256,
+		"title": "Move to lower left",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Move to lower left.conf"
+	},
+	{
+		"type": 256,
+		"title": "Move to lower right",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Move to lower right.conf"
+	},
+	{
+		"type": 256,
+		"title": "Move to right",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Move to right.conf"
+	},
+	{
+		"type": 256,
+		"title": "Move to top",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Move to top.conf"
+	},
+	{
+		"type": 256,
+		"title": "Move to upper left",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Move to upper left.conf"
+	},
+	{
+		"type": 256,
+		"title": "Move to upper right and zoom in",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Move to upper right and zoom in.conf"
+	},
+	{
+		"type": 256,
+		"title": "Move to upper right",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Move to upper right.conf"
+	},
+	{
+		"type": 256,
+		"title": "Photo Spin 3",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Photo Spin 3.conf"
+	},
+	{
+		"type": 256,
+		"title": "Photo Spin 4",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Photo Spin 4.conf"
+	},
+	{
+		"type": 256,
+		"title": "Rotate to zoom in 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Rotate to zoom in 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Rotate to zoom in 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Rotate to zoom in 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Spin 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Spin 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Spin 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Spin 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Spin 3",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Spin 3.conf"
+	},
+	{
+		"type": 256,
+		"title": "Spin 4",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Spin 4.conf"
+	},
+	{
+		"type": 256,
+		"title": "Stretch in and zoom in 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Stretch in and zoom in 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Stretch in and zoom in 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Stretch in and zoom in 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Stretch to left",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Stretch to left.conf"
+	},
+	{
+		"type": 256,
+		"title": "Stretch to right",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Stretch to right.conf"
+	},
+	{
+		"type": 256,
+		"title": "To the Left 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/To the Left 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "To the Left 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/To the Left 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "To the Right 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/To the Right 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "To the Right 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/To the Right 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Up Down 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Up Down 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Up Down 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Up Down 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Wham!",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Wham!.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom in 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom in 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom in 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom in 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom in 3",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom in 3.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom in and out",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom in and out.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom in to the bottom",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom in to the bottom.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom in to the left",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom in to the left.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom in to the right",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom in to the right.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom in to the top",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom in to the top.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom out 1",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom out 1.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom out 2",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom out 2.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom out 3",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom out 3.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom out to the right",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Zoom out to the right.conf"
+	},
+	{
+		"type": 256,
+		"title": "Drop",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Drop.conf"
+	},
+	{
+		"type": 256,
+		"title": "Expansion",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Expansion.conf"
+	},
+	{
+		"type": 256,
+		"title": "Fly in and Fade out",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Fly in and Fade out.conf"
+	},
+	{
+		"type": 256,
+		"title": "Fly in and Fly out",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Fly in and Fly out.conf"
+	},
+	{
+		"type": 256,
+		"title": "Stretch in and zoom in",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Stretch in and zoom in.conf"
+	},
+	{
+		"type": 256,
+		"title": "Tiny zoom",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"Extesnsion": "",
+		"config": "/Tiny zoom.conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom in",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"config": "/Zoom in(motion).conf"
+	},
+	{
+		"type": 256,
+		"title": "Zoom Out",
+		"category": "Preset Motions",
+		"favorate": 0,
+		"config": "/Zoom Out(motion).conf"
+	}
+]

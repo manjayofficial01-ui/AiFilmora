@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<LutInfos>
+    <CubeLut AliasName="007 Series" Path="CubeLUTFiles/007 Series.CUBE"/>
+	<CubeLut AliasName="B&amp;W Film" Path="CubeLUTFiles/B&amp;W Film.CUBE"/>
+	<CubeLut AliasName="Batman" Path="CubeLUTFiles/Batman.CUBE"/>
+    <CubeLut AliasName="Cool Film" Path="CubeLUTFiles/Cool Film.CUBE"/>
+	<CubeLut AliasName="Dark Film" Path="CubeLUTFiles/Dark Film.CUBE"/>
+    <CubeLut AliasName="Game of Thrones" Path="CubeLUTFiles/Game of Thrones.CUBE"/>
+    <CubeLut AliasName="Gravity" Path="CubeLUTFiles/Gravity.CUBE"/>
+	<CubeLut AliasName="Harry Potter" Path="CubeLUTFiles/Harry Potter.CUBE"/>
+    <CubeLut AliasName="House of Cards" Path="CubeLUTFiles/House of Cards.CUBE"/>
+    <CubeLut AliasName="Mission Impossible" Path="CubeLUTFiles/Mission Impossible.CUBE"/>
+    <CubeLut AliasName="Reign" Path="CubeLUTFiles/Reign.CUBE"/>
+    <CubeLut AliasName="Sparta 300" Path="CubeLUTFiles/Sparta 300.CUBE"/>
+    <CubeLut AliasName="Star Wars" Path="CubeLUTFiles/Star Wars.CUBE"/>
+    <CubeLut AliasName="Walking Dead" Path="CubeLUTFiles/Walking Dead.CUBE"/>
+    <CubeLut AliasName="Warm Film" Path="CubeLUTFiles/Warm Film.CUBE"/>
+</LutInfos>

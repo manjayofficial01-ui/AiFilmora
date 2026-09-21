@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>C00B6DF8-2BBA-4BE9-8D5D-2F2D3E0EB3AA</GUID>
+    <Name>Audio Visualization 22</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 22.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

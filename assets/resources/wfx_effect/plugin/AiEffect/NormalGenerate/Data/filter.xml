@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>06C45B3A-CFE8-437D-81BF-18E8F603FB6C</GUID>
+    <Name>NormalGenerate</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>NormalGenerate.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

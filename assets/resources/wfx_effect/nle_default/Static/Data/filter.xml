@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>39CCE9A3-827D-4352-AA19-56EA04590D60</GUID>
+        <Name>Static</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Static.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

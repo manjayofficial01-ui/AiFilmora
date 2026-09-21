@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>F56989E1-FA99-44D3-9244-9FB2457737C7</GUID>
+    <Name>Audio Visualizer Color2</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualizer Color2.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

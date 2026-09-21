@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>CB6B9622-87BD-42A2-A813-DBF5E377C5F3</GUID>
+<Name>3DTextEdgeBeam</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>3DTextEdgeBeam.conf</ConfigFile>
+</GPUFilter>
+</Filter>

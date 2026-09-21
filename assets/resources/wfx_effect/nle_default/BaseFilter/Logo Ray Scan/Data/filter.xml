@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>BD54124F-3E1F-4967-98C6-96523A29F26E</GUID>
+    <Name>Logo Ray Scan</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+    <ConfigFile>Logo Ray Scan.conf</ConfigFile>
+    </GPUFilter>
+    </Filter>
+    

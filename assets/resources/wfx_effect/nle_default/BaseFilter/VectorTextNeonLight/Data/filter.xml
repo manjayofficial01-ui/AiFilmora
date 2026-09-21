@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>DD4FF364-5D14-404D-B633-65F97D357A4A</GUID>
+<Name>VectorTextNeonLight</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>VectorTextNeonLight.conf</ConfigFile>
+</GPUFilter>
+</Filter>

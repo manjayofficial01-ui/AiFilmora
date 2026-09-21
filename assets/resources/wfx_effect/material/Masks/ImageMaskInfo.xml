@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<filmora version="9.0">
+    <!--itemtype 0表示添加项 1表示内置image mask项 2表示自定义项mask项-->
+    <!--src 界面显示图片资源路径 -->
+    <!--imagesrc mask image资源路径 -->
+    <imageinfo width="98" height="55">
+        <item src="add.png" itemtype="0"/>
+        <item src="00No Mask Thumb.png" imagesrc="" itemtype="1"/>
+        <item src="01Thumb.png" imagesrc="01.png" itemtype="1"/>
+        <item src="02Thumb.png" imagesrc="02.png" itemtype="1"/>
+        <item src="03Thumb.png" imagesrc="03.png" itemtype="1"/>
+        <item src="04Thumb.png" imagesrc="04.png" itemtype="1"/>
+        <item src="05Thumb.png" imagesrc="05.png" itemtype="1"/>
+        <item src="06Thumb.png" imagesrc="06.png" itemtype="1"/>
+        <item src="07Thumb.png" imagesrc="07.png" itemtype="1"/>
+        <item src="08Thumb.png" imagesrc="08.png" itemtype="1"/>
+        <item src="09Thumb.png" imagesrc="09.png" itemtype="1"/>
+        <item src="10Thumb.png" imagesrc="10.png" itemtype="1"/>
+        <item src="11Thumb.png" imagesrc="11.png" itemtype="1"/>
+        <item src="12Thumb.png" imagesrc="12.png" itemtype="1"/>
+        <item src="13Thumb.png" imagesrc="13.png" itemtype="1"/>
+        <item src="14Thumb.png" imagesrc="14.png" itemtype="1"/>
+        <item src="15Thumb.png" imagesrc="15.png" itemtype="1"/>
+        <item src="16Thumb.png" imagesrc="16.png" itemtype="1"/>
+        <item src="17Thumb.png" imagesrc="17.png" itemtype="1"/>
+        <item src="18Thumb.png" imagesrc="18.png" itemtype="1"/>
+        <item src="19Thumb.png" imagesrc="19.png" itemtype="1"/>
+        <item src="20Thumb.png" imagesrc="20.png" itemtype="1"/>
+        <item src="21Thumb.png" imagesrc="21.png" itemtype="1"/>
+        <item src="22Thumb.png" imagesrc="22.png" itemtype="1"/>
+        <item src="23Thumb.png" imagesrc="23.png" itemtype="1"/>
+        <item src="24Thumb.png" imagesrc="24.png" itemtype="1"/>
+        <item src="25Thumb.png" imagesrc="25.png" itemtype="1"/>
+        <item src="26Thumb.png" imagesrc="26.png" itemtype="1"/>
+        <item src="27Thumb.png" imagesrc="27.png" itemtype="1"/>
+        <item src="28Thumb.png" imagesrc="28.png" itemtype="1"/>
+        <item src="29Thumb.png" imagesrc="29.png" itemtype="1"/>
+        <item src="30Thumb.png" imagesrc="30.png" itemtype="1"/>
+        <item src="31Thumb.png" imagesrc="31.png" itemtype="1"/>
+        <item src="32Thumb.png" imagesrc="32.png" itemtype="1"/>
+        <item src="33Thumb.png" imagesrc="33.png" itemtype="1"/>
+        <item src="34Thumb.png" imagesrc="34.png" itemtype="1"/>
+        <item src="35Thumb.png" imagesrc="35.png" itemtype="1"/>
+        <item src="36Thumb.png" imagesrc="36.png" itemtype="1"/>
+        <item src="37Thumb.png" imagesrc="37.png" itemtype="1"/>
+        <item src="38Thumb.png" imagesrc="38.png" itemtype="1"/>
+        <item src="39Thumb.png" imagesrc="39.png" itemtype="1"/>
+        <item src="40Thumb.png" imagesrc="40.png" itemtype="1"/>
+    </imageinfo>
+</filmora>

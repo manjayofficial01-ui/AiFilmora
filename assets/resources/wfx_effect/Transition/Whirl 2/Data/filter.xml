@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>771fa6d5-035b-48fe-a3fb-8f1d30a1666c</GUID>
+        <Name>Whirl 2</Name>
+        <Transition>1</Transition>
+        <GPUFilter>
+    	<ConfigFile>Whirl 2.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

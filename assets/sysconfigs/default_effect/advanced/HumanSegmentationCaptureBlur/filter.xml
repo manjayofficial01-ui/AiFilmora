@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>1AEA14C6-59BC-491F-A1D1-EB02009706B7</GUID>
+        <Name>HumanSegmentationCaptureBlur</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>HumanSegmentationCaptureBlur.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

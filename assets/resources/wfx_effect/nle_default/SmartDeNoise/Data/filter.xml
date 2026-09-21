@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>CFE92EDA-8603-4C12-B8DC-39F2C508375C</GUID>
+        <Name>smartDeNoise</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>smartDeNoise.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

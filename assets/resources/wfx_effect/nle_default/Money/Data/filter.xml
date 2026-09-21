@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>9C488EA5-79EB-46A6-A4EE-4F16DE09F5F4</GUID>
+        <Name>Money</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Money.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

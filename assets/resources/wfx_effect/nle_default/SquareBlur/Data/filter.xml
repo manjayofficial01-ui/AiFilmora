@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>3DC7BBD0-E1EA-4c23-8947-51BF32442581</GUID>
+        <Name>SquareBlur</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>SquareBlur.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

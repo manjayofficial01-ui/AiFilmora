@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>1FF3A847-984D-4239-95A5-3874F722C46E</GUID>
+        <Name>Blur2</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Blur2.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

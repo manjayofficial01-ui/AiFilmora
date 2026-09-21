@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>166E7DCB-071B-4A32-B0C3-CABEF7EB4AFA</GUID>
+        <Name>Pixelated_Edges</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Pixelated_Edges.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

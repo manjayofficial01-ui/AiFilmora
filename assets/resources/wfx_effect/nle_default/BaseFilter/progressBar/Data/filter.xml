@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>f229f247-55ae-4082-9654-10d65f7f72c3</GUID>
+        <Name>ProgressBar</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>progressBar.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

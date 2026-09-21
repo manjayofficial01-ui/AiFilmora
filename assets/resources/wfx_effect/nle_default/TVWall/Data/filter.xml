@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>562330DC-1334-4b02-A5B9-B140FC68B0E2</GUID>
+        <Name>TVWall</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>TVWall.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

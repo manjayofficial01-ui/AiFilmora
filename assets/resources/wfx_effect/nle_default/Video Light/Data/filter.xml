@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>1C91B5FC-C059-4968-B2D6-B92AF3B56B0D</GUID>
+<Name>Video Light</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Video Light.conf</ConfigFile>
+</GPUFilter>
+</Filter>

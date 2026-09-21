@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>388D5958-5F28-40FD-B6F3-2A71F13FA79C</GUID>
+    <Name>Audio Visualization 29</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 29.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

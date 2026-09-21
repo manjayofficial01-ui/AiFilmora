@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>2B8FF2E0-CA93-4760-9207-931205487DDF</GUID>
+    <Name>Audio Visualization 04</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 04.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

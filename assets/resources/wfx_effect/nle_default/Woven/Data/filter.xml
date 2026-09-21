@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>DCDFA16D-FDAE-45b5-8758-6477B9B3819F</GUID>
+        <Name>Woven</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Woven.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

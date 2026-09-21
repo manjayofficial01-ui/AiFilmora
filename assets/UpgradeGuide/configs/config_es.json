@@ -1,0 +1,93 @@
+{
+	"title": "Novedades de Filmora %1.",
+	"titleByManual": "Estás utilizando la última versión. ¡Echa un vistazo a las nuevas funciones de la versión %1!",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "Texto a vídeo",
+			"discription": "Desata tu creatividad con Texto a vídeo y experimenta la magia de la IA de Filmora.",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "Imagen a vídeo",
+			"discription": "Imagen a vídeo incluye ahora la tecnología de Veo 3. Disfruta de resultados de generación muy mejorados.",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},	
+		{
+			"id": "ai_idea_to_video",
+			"name": "Idea a vídeo con IA",
+			"discription": "Transforma tus ideas en bruto en videos cortos profesionales manteniendo la coherencia visual y garantizando la continuidad de personajes en todas las escenas.",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "Estilizador de imágenes mediante IA",
+			"discription": "Hemos mejorado el Estilizador ‍de imagen con IA. Ya está disponible en la pestaña Contenido generado por IA y tiene nuevas y mejoradas funciones de estilización de imágenes.",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "Audio a vídeo",
+			"discription": "Convierte pódcasts de audio en cautivadores vídeos breves. Edita, recorta y destaca tus momentos favoritos.",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "Clips cortos inteligentes",
+			"discription": "Transforma vídeos largos en vídeos cortos atractivos.Recorta, edita y destaca los mejores momentos de tu vídeo.",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "Intelligenter Szenenschnitt",
+			"discription": "Selecciona los momentos más destacados y las escenas de los personajes clave para mejorar la eficiencia del proceso de edición.",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "Generación de música ambiental inteligente",
+			"discription": "Genera automáticamente música de fondo que coincida con tu vídeo.",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "Reencuadre Automático",
+			"discription": "Utiliza la función de reencuadre automático para exportar vídeos que coincidan con las relaciones de aspecto de las plataformas de redes sociales.",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "Una IA que comprende, ayuda y permite mejorar. Con AI Mate, podrás crear vídeos increíbles más rápido que nunca.",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "Edición multicámara",
+			"discription": "Importa grabaciones de varias cámaras y alterna entre diferentes ángulos para disfrutar de una experiencia de edición cómoda y eficaz. Simplifica los procesos complejos de edición y mejora tu flujo de trabajo creativo.",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "Traducción con AI",
+			"discription": "Traduce automáticamente vídeos y audio a más de 20 idiomas y sincroniza el audio con los movimientos de los labios de los hablantes.",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

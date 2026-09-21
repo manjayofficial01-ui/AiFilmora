@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>974A1C95-921E-4D28-89D5-23B7B249589A</GUID>
+    <Name>HumanSegmentation</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>HumanSegmentation.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

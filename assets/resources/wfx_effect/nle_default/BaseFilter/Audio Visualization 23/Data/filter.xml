@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>A8F299FF-B9C4-4340-A47C-E17F9C5FC178</GUID>
+    <Name>Audio Visualization 23</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 23.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

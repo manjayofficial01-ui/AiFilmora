@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>9B9C573E-3838-4171-8AC4-27CDD5895352</GUID>
+    <Name>Audio Visualization Human Segment Spectrum 3d</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization Human Segment Spectrum 3d.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

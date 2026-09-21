@@ -1,0 +1,53 @@
+{
+    "type": "video_effect",
+    "display_name": "crop/pan-zoom",
+    "unique_name": "video/effect/crop-pan-zoom",
+    "capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "params": [
+        {
+            "name": "SettingScript",
+            "type": 6,
+            "min_value": 0.0,
+            "max_value": 0.0,
+            "default_value": "[]"
+        },
+        {
+            "name": "AutoFitMode",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 2,
+            "default_value": 0
+        },
+        {
+            "name": "crop_x",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 1.0,
+            "default_value": 0.0
+        },
+        {
+            "name": "crop_y",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 1.0,
+            "default_value": 0.0
+        },
+        {
+            "name": "crop_width",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 1.0,
+            "default_value": 1.0
+        },
+        {
+            "name": "crop_height",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 1.0,
+            "default_value": 1.0
+        }
+    ],
+    "ENCRYPT": "1"
+}

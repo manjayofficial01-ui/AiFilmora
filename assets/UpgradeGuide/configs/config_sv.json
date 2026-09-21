@@ -1,0 +1,93 @@
+{
+	"title": "Nyheter i Filmora %1.",
+	"titleByManual": "Du använder den senaste versionen. Kolla in de nya funktionerna i %1!",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "Text-till-video",
+			"discription": "Släpp loss din kreativitet med Text-till-video och upplev magin som är Filmora AI",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "Bild till video",
+			"discription": "Bild till video drivs nu av Veo 3! Få enormt förbättrade genereringsresultat!",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},		
+		{
+			"id": "ai_idea_to_video",
+			"name": "AI-idé till video",
+			"discription": "Förvandla dina råa idéer till professionella kortvideor samtidigt som den visuella stilen bevaras och karaktärernas kontinuitet säkerställs över alla scener.",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "AI-bildredigerare",
+			"discription": "AI-bildredigerare ‍nu ännu bättre! Nu finns den tillgänglig under fliken AIGC med utökade och förbättrade bildstiliseringsmöjligheter.",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "Ljud till video",
+			"discription": "Förvandla enkelt ljudpoddsändningar till fängslande korta videor. Redigera, trimma och markera dina favoritartiklar.",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "Smarta korta klipp",
+			"discription": "Förvandla långa videor till engagerande videoklipp.Klipp, trimma och visa upp dina bästa ögonblick!",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "Smart scenklippning",
+			"discription": "Extrahera höjdpunkter och karaktärsscener för att öka redigeringseffektiviteten.",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "Smart generering av bakgrundsmusik",
+			"discription": "Generera bakgrundsmusik som matchar din video automatiskt.",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "Auto Reframe",
+			"discription": "Om du vill exportera videor som matchar höjd/bredd-förhållandet för sociala medier väljer du Automatisk ändring av bildrutor.",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "AI som förstår, hjälper till och förbättrar. Med AI Mate skapar du fantastiska videoklipp snabbare än någonsin.",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "Redigering för flera kameror",
+			"discription": "Importera innehåll från flera kameror och växla mellan olika vinklar för effektiv och smidig redigering. Förenkla komplicerade redigeringsprocesser och förbättra ditt kreativa arbetsflöde.",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "AI-översättning",
+			"discription": "Översätt videor och ljud automatiskt till fler än 20 språk och synkronisera ljudet med talarens munrörelser.",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

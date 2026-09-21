@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>8BA75A82-9A5A-3D05-B156-2155BC1E123E</GUID>
+<Name>Beam Saber Default</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Saber Default.conf</ConfigFile>
+</GPUFilter>
+</Filter>

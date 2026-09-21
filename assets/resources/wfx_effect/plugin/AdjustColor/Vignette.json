@@ -1,0 +1,49 @@
+{
+    "GUID": "AFFC9844-F334-4FE4-992F-1C222C3E8A37",
+    "OPENGL": "Vignette.frag",
+    "ENCRYPT": "1",
+    "PARAMS": [
+        {
+            "NAME": "amount",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "feather",
+            "TYPE": "float",
+            "DEFAULT": 50.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "highlights",
+            "TYPE": "float",
+            "DEFAULT": 50.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "size",
+            "TYPE": "float",
+            "DEFAULT": 100.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "roundness",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "exposure",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        }
+    ]
+}

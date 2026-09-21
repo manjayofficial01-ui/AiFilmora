@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>00548362-3BED-739D-B780-CE3AA818DC47</GUID>
+<Name>Beam Noise</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Noise.conf</ConfigFile>
+</GPUFilter>
+</Filter>

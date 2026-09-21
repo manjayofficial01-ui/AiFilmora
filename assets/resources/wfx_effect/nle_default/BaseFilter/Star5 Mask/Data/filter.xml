@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>ECAF3E42-5E76-4688-9323-8EB431646D26</GUID>
+<Name>Star5 Mask</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Star5 Mask.conf</ConfigFile>
+</GPUFilter>
+</Filter>

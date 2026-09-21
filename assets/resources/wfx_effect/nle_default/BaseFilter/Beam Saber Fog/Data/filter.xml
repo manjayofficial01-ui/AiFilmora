@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>2964EE3E-BF3F-1AF9-6B56-147206F18197</GUID>
+<Name>Beam Saber Fog</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Saber Fog.conf</ConfigFile>
+</GPUFilter>
+</Filter>

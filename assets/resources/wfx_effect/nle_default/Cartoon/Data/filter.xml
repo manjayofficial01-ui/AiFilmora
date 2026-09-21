@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>F0A59856-167B-4164-A721-39F5330C6F94</GUID>
+        <Name>Cartoon</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Cartoon.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

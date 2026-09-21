@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>B708C1BB-39A4-410b-A622-8FBC323FD2D7</GUID>
+        <Name>VignetteRadius</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>VignetteRadius.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

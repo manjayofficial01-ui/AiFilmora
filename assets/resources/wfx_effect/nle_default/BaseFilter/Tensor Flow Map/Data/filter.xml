@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>C1501C3A-0895-4361-B242-9B43E36B13AA</GUID>
+<Name>Tensor Flow Map</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Tensor Flow Map.conf</ConfigFile>
+</GPUFilter>
+</Filter>

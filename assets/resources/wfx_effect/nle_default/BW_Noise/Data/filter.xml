@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>3E3535CE-7889-4e9e-A1EE-D5220E323EC8</GUID>
+        <Name>BW_Noise</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>BW_Noise.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

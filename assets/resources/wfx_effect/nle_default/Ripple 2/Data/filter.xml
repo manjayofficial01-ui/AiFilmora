@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>16AE6CD1-15EA-4024-88AB-292E563546D7</GUID>
+        <Name>Ripple 2</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Ripple 2.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

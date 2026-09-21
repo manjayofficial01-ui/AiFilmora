@@ -1,0 +1,34 @@
+{
+    "type": "video_effect",
+    "display_name": "Stereoscopic",
+    "unique_name": "video/effect/stereoscopic",
+    "capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "params": [
+        {
+            "name": "Convergence", 
+            "type": 3,
+            "min_value": -10.0,
+            "max_value": 10.0,
+            "default_value": 0.0
+        },
+        {
+            "name": "AutoScale",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 1,
+            "default_value": 0,          
+            "ui_type": "CheckBox"
+        },
+        {
+            "name": "SwapEyes",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 1,
+            "default_value": 0,
+            "ui_type": "CheckBox"
+        }
+    ],
+    "ENCRYPT": "1"
+}

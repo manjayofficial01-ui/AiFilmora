@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>4F345BBD-E420-1B6E-26D1-ADD11EF0A2E8</GUID>
+<Name>Beam</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam.conf</ConfigFile>
+</GPUFilter>
+</Filter>

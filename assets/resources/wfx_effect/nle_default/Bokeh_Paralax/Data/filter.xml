@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>BECB1D2A-5CEE-451A-9726-DC471CB199ED</GUID>
+        <Name>Bokeh_Paralax</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Bokeh_Paralax.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

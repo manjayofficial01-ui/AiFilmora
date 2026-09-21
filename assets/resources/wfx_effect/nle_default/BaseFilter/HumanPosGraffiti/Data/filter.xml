@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>264AA662-B4AA-4EC2-83CD-86902C2A113A</GUID>
+<Name>HumanPosGraffiti</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>HumanPosGraffiti.conf</ConfigFile>
+</GPUFilter>
+</Filter>

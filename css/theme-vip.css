@@ -1,0 +1,169 @@
+/* AiFimora VIP — black · white · gold
+ *
+ * IMPORTANT: every rule here is scoped under `.theme-vip`.
+ * settings.applyTheme() toggles that class on <html>; without the scope these
+ * rules applied globally 24/7 and silently overrode tokens.css for every theme
+ * (which is why switching themes used to change almost nothing).
+ */
+.theme-vip {
+  --bg: #090909;
+  --bg-elev: #0e0e0e;
+  --panel: #121212;
+  --panel-2: #1a1a1a;
+  --panel-3: #242424;
+  --border: #2c2c2c;
+  --border-soft: #1f1f1f;
+  --ink: #f5f5f5;
+  --ink-dim: #c4c4c4;
+  --muted: #8a8a8a;
+  --accent: #c9a227;
+  --accent-soft: rgba(201, 162, 39, 0.16);
+  --accent-strong: #e0b93a;
+  --gen: #d4af37;
+  --gen-soft: rgba(212, 175, 55, 0.14);
+  --warn: #e0b93a;
+  --warn-soft: rgba(224, 185, 58, 0.14);
+  --danger: #e85d5d;
+  --danger-soft: rgba(232, 93, 93, 0.14);
+  --violet: #c9a227;
+  --clip-video: #8b7355;
+  --clip-audio: #6b8f71;
+  --clip-text: #c9a227;
+  --clip-ai: #b8962e;
+  --clip-gen: #a08c28;
+  --radius: 6px;
+  --radius-sm: 4px;
+  --radius-lg: 10px;
+  --shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "Cascadia Code", "Cascadia Mono", Consolas, "SF Mono", monospace;
+  --title-h: 36px;
+  --menu-h: 32px;
+  --toolbar-h: 44px;
+  --status-h: 28px;
+  --sidebar-w: 280px;
+  --inspector-w: 320px;
+  --timeline-h: 280px;
+  --track-h: 48px;
+  --ruler-h: 28px;
+  --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --gold-grad: linear-gradient(135deg, #a67c00 0%, #e0b93a 45%, #f0d78c 100%);
+}
+
+.theme-vip body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.theme-vip .brand-mark {
+  background: var(--gold-grad) !important;
+  box-shadow: 0 0 14px rgba(201, 162, 39, 0.45) !important;
+}
+
+.theme-vip .btn.primary {
+  background: var(--gold-grad) !important;
+  border-color: #e0b93a !important;
+  color: #1a1400 !important;
+  font-weight: 700;
+}
+.theme-vip .btn.gen {
+  background: linear-gradient(180deg, #e0b93a, #c9a227) !important;
+  border-color: #e0b93a !important;
+  color: #1a1400 !important;
+}
+
+.theme-vip .credits-chip {
+  background: var(--accent-soft) !important;
+  border-color: rgba(201, 162, 39, 0.45) !important;
+  color: var(--accent-strong) !important;
+}
+.theme-vip .credits-chip .bar > i {
+  background: var(--gold-grad) !important;
+}
+
+.theme-vip .transport-btn.play {
+  background: var(--gold-grad) !important;
+  border-color: transparent !important;
+  color: #1a1400 !important;
+  box-shadow: 0 0 18px rgba(201, 162, 39, 0.35) !important;
+}
+
+.theme-vip .titlebar {
+  background: linear-gradient(180deg, #141414, #0a0a0a) !important;
+  border-bottom-color: #2a2210 !important;
+}
+
+.theme-vip .menubar {
+  background: #101010 !important;
+  border-bottom-color: #2a2210 !important;
+}
+
+.theme-vip .panel-header {
+  background: #0f0f0f !important;
+  border-bottom-color: #2a2210 !important;
+}
+
+.theme-vip .tab.active {
+  background: var(--accent-soft) !important;
+  color: var(--accent-strong) !important;
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.theme-vip .status-dot {
+  background: var(--gen) !important;
+  box-shadow: 0 0 8px var(--gen) !important;
+}
+
+.theme-vip .ai-mode-chip[data-mode="live"] {
+  border-color: rgba(201, 162, 39, 0.5) !important;
+  color: var(--accent-strong) !important;
+  background: var(--accent-soft) !important;
+}
+
+.theme-vip .tl-clip[data-type="video"] .fill {
+  background: linear-gradient(135deg, #5c4d2e, #2a2418) !important;
+}
+.theme-vip .tl-clip[data-type="text"] .fill {
+  background: linear-gradient(135deg, #c9a227, #6b5410) !important;
+}
+.tl-clip[data-type="gen"] .fill,
+.theme-vip .tl-clip[data-type="ai"] .fill {
+  background: linear-gradient(135deg, #a08c28, #3d3410) !important;
+}
+
+.theme-vip .playhead {
+  background: #e0b93a !important;
+  box-shadow: 0 0 8px rgba(224, 185, 58, 0.55) !important;
+}
+.theme-vip .playhead::before {
+  border-top-color: #e0b93a !important;
+}
+
+.theme-vip .tl-trans.has {
+  background: var(--accent) !important;
+  border-color: var(--accent-strong) !important;
+  color: #1a1400 !important;
+  box-shadow: 0 0 10px rgba(201, 162, 39, 0.45) !important;
+}
+
+.theme-vip .badge.ai {
+  color: var(--accent-strong) !important;
+  border-color: rgba(201, 162, 39, 0.45) !important;
+}
+
+.theme-vip .canvas-edit-box {
+  border-color: rgba(201, 162, 39, 0.9) !important;
+}
+
+.theme-vip .crop-handle {
+  background: #e0b93a !important;
+  border-color: #fff !important;
+}
+
+.scrollbar-gold .tl-scroll::-webkit-scrollbar-thumb,
+.theme-vip .tl-scroll::-webkit-scrollbar-thumb {
+  background: #3a3420 !important;
+}
+.theme-vip .tl-labels-body::-webkit-scrollbar-thumb {
+  background: #3a3420 !important;
+}

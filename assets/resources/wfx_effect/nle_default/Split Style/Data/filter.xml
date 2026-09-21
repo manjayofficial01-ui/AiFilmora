@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>569E97C5-13FB-441a-B3C1-EA0CEC829623</GUID>
+        <Name>Split</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Split.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

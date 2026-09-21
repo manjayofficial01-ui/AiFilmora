@@ -1,0 +1,14 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>1269735E-F675-4AAA-B0A3-9A8D9FA93B7B</GUID>
+        <Name>Human_Border</Name>
+        <Transition>1</Transition>
+        <HumanSegment>
+            <GPUFilter>
+                <ConfigFile>Human_Border.conf</ConfigFile>
+            </GPUFilter>
+        </HumanSegment>
+        
+    	</Filter>
+    	

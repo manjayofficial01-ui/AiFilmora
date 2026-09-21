@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>3F68EC3C-4003-488c-8BD4-4D6CA41E85C5</GUID>
+        <Name>FreshNew</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>FreshNew.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

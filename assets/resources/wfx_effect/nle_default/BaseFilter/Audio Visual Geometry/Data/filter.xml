@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+    <GUID>3879039C-008D-446C-B23C-94543DA84859</GUID>
+    <Name>Audio Visual Geometry</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visual Geometry.conf</ConfigFile>
+    </GPUFilter>
+</Filter>
+    	

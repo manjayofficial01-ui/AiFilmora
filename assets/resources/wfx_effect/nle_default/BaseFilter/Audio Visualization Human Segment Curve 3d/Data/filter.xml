@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>DF473B1F-DF93-4629-85A2-834F968266FE</GUID>
+    <Name>Audio Visualization Human Segment Curve 3d</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization Human Segment Curve 3d.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

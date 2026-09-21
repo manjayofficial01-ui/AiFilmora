@@ -1,0 +1,24 @@
+
+void NewCustomizeParameter(){
+  NewIntParam("uHorizontal", 0);
+  NewFboTexture();
+}
+
+int Running(FilterData src_bg_data,FilterData src_fg_data,FilterData dst_data,int nOutWidth,int nOutHeight,int nOutPitch){
+  SetIntParam("uEclosion", PREFIX("uEclosion"));
+  int nInputIndex = 0;
+  SetInputFilterData(nInputIndex, src_fg_data);
+  SetIntParam("uHorizontal", 0);
+  FilterData emptyOut;
+  int ret = DoEffect(emptyOut);
+  SwapFboTexture(0);
+
+  FboTexture horizFbo = GetFboTextureNum(0);
+  SetIntParam("uHorizontal", 1);
+  FilterData horiData = FilterData(horizFbo, nOutWidth, nOutHeight, nOutPitch);
+  nInputIndex = 0;
+  SetInputFilterData(nInputIndex, horiData);
+  ret = DoEffect(dst_data);
+
+  return ret;
+}

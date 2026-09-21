@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Cameras>
+	<Camera Type="GoPro Hero 11">
+		<Item name="5.3K(4:3)-Wide" path="GoPro 11 Black_5312_4648-W.xml"/>
+		<Item name="5.3K(4:3)-Wide" path="GoPro 11 Black_5312_3984-W.xml"/>
+		<Item name="5.3K-Wide" path="GoPro 11 Black_5312_2988-W.xml"/>
+		<Item name="5.3K-SuperView" path="GoPro 11 Black_5312_2988-S.xml"/>
+		<Item name="4K(4:3)-Wide" path="GoPro 11 Black_4000_3000-W.xml"/>
+		<Item name="3.8K(4:3)-Wide" path="GoPro 11 Black_3840_3360-W.xml"/>
+		<Item name="4K-Wide" path="GoPro 11 Black_3840_2160-W.xml"/>
+		<Item name="4K-SuperView" path="GoPro 11 Black_3840_2160-S.xml"/>
+		<Item name="2.7K(4:3)-Wide" path="GoPro 11 Black_2704_2028-W.xml"/>
+		<Item name="2.7K-Wide" path="GoPro 11 Black_2704_1520-W.xml"/>
+		<Item name="2.7K-SuperView" path="GoPro 11 Black_2704_1520-S.xml"/>
+		<Item name="1080p-Wide" path="GoPro 11 Black_1920_1080-W.xml"/>
+		<Item name="1080p-SuperView" path="GoPro 11 Black_1920_1080-S.xml"/>
+	</Camera>
+
+	<Camera Type="GoPro Hero 10">
+		<Item name="5.3K-Wide" path="GoPro 10 Black_5312_2988-W.xml"/>
+		<Item name="5.3K-SuperView" path="GoPro 10 Black_5312_2988-S.xml"/>
+		<Item name="5K(4:3)-Wide" path="GoPro 10 Black_5120_3840-W.xml"/>
+		<Item name="4K(4:3)-Wide" path="GoPro 10 Black_4000_3000-W.xml"/>
+		<Item name="4K-Wide" path="GoPro 10 Black_3840_2160-W.xml"/>
+		<Item name="4K-SuperView" path="GoPro 10 Black_3840_2160-S.xml"/>
+		<Item name="2.7K(4:3)-Wide" path="GoPro 10 Black_2704_2028-W.xml"/>
+		<Item name="2.7K-Wide" path="GoPro 10 Black_2704_1520-W.xml"/>
+		<Item name="2.7K-SuperView" path="GoPro 10 Black_2704_1520-S.xml"/>
+		<Item name="1080p-Wide" path="GoPro 10 Black_1920_1080-W.xml"/>
+		<Item name="1080p-SuperView" path="GoPro 10 Black_1920_1080-S.xml"/>
+	</Camera>
+
+	<Camera Type="GoPro Hero 9">
+		<Item name="5.3K-Wide" path="GoPro 9 Black_5312_2988-W.xml"/>
+		<Item name="5K(4:3)-Wide" path="GoPro 9 Black_5120_3840-W.xml"/>
+		<Item name="5K-Wide" path="GoPro 9 Black_5120_2880-W.xml"/>
+		<Item name="4K(4:3)-Wide" path="GoPro 9 Black_4000_3000-W.xml"/>
+		<Item name="4K-Wide" path="GoPro 9 Black_3840_2160-W.xml"/>
+		<Item name="4K-SuperView" path="GoPro 9 Black_3840_2160-S.xml"/>
+		<Item name="2.7K(4:3)-Wide" path="GoPro 9 Black_2704_2028-W.xml"/>
+		<Item name="2.7K-Wide" path="GoPro 9 Black_2704_1520-W.xml"/>
+		<Item name="2.7K-SuperView" path="GoPro 9 Black_2704_1520-S.xml"/>
+		<Item name="1440p-Wide" path="GoPro 9 Black_1920_1440-W.xml"/>
+		<Item name="1080p-SuperView" path="GoPro 9 Black_1920_1080-S.xml"/>
+		<Item name="1080p-Wide" path="GoPro 9 Black_1920_1080-W.xml"/>
+	</Camera>
+	
+  <Camera Type="GoPro Hero 7">
+		<Item name="4K SuperView" path="GoPro Hero 7 Black_4K-S.xml"/>
+		<Item name="4K Wide" path="GoPro Hero 7 Black_4K-W.xml"/>
+		<Item name="2.7K SuperView" path="GoPro Hero 7 Black_2.7K-S.xml"/>
+		<Item name="2.7K Medium" path="GoPro Hero 7 Black_2.7K-M.xml"/>
+		<Item name="2.7K Wide" path="GoPro Hero 7 Black_2.7K-W.xml"/>
+		<Item name="2.7K(4:3) Wide" path="GoPro Hero 7 Black_2.7K-4-3-W.xml"/>
+		<Item name="1440p Wide" path="GoPro Hero 7 Black_1440P-W.xml"/>
+		<Item name="1080p SuperView" path="GoPro Hero 7 Black_1080P-S.xml"/>
+		<Item name="1080p Medium" path="GoPro Hero 7 Black_1080P-M.xml"/>
+		<Item name="1080p Narrow" path="GoPro Hero 7 Black_1080P-N.xml"/>
+		<Item name="1080p Wide" path="GoPro Hero 7 Black_1080P-W.xml"/>
+		<Item name="960p Wide" path="GoPro Hero 7 Black_960P-W.xml"/>
+		<Item name="720p SuperView" path="GoPro Hero 7 Black_720P-S.xml"/>
+		<Item name="720p Medium" path="GoPro Hero 7 Black_720P-M.xml"/>
+		<Item name="720p Narrow" path="GoPro Hero 7 Black_720P-N.xml"/>
+		<Item name="720p Wide" path="GoPro Hero 7 Black_720P-W.xml"/>
+		<Item name="WVGA Wide" path="GoPro Hero 7 Black_480P-W.xml"/>
+	</Camera>
+	
+	<Camera Type="GoPro Hero 6">
+		<Item name="4K SuperView" path="GoPro Hero 5 Black_4K-S.xml"/>
+		<Item name="4K Wide" path="GoPro Hero 5 Black_4K-W.xml"/>
+		<Item name="2.7K SuperView" path="GoPro Hero 5 Black_2.7K-S.xml"/>
+		<Item name="2.7K Medium" path="GoPro Hero 5 Black_2.7K-M.xml"/>
+		<Item name="2.7K Wide" path="GoPro Hero 5 Black_2.7K-W.xml"/>
+		<Item name="2.7K(4:3) Wide" path="GoPro Hero 5 Black_2.7K-4-3-W.xml"/>
+		<Item name="1440p Wide" path="GoPro Hero 5 Black_1440P-W.xml"/>
+		<Item name="1080p SuperView" path="GoPro Hero 5 Black_1080P-S.xml"/>
+		<Item name="1080p Medium" path="GoPro Hero 5 Black_1080P-M.xml"/>
+		<Item name="1080p Narrow" path="GoPro Hero 5 Black_1080P-N.xml"/>
+		<Item name="1080p Wide" path="GoPro Hero 5 Black_1080P-W.xml"/>
+		<Item name="960p Wide" path="GoPro Hero 5 Black_960P-W.xml"/>
+		<Item name="720p SuperView" path="GoPro Hero 5 Black_720P-S.xml"/>
+		<Item name="720p Medium" path="GoPro Hero 5 Black_720P-M.xml"/>
+		<Item name="720p Narrow" path="GoPro Hero 5 Black_720P-N.xml"/>
+		<Item name="720p Wide" path="GoPro Hero 5 Black_720P-W.xml"/>
+		<Item name="WVGA Wide" path="GoPro Hero 5 Black_480P-W.xml"/>
+	</Camera>
+
+	<Camera Type="GoPro Hero 5">
+		<Item name="4K Wide" path="Gopro HERO 5_Session_4K-W.xml"/>
+		<Item name="2.7K(4:3) Wide" path="Gopro HERO 5_Session_2.7K-4-3-W.xml"/>
+		<Item name="2.7K Medium" path="Gopro HERO 5_Session_2.7K-M.xml"/>
+		<Item name="2.7K SuperView" path="Gopro HERO 5_Session_2.7K-S.xml"/>
+		<Item name="2.7K Wide" path="Gopro HERO 5_Session_2.7K-W.xml"/>
+		<Item name="1440p Wide" path="Gopro HERO 5_Session_1440P-W.xml"/>
+		<Item name="1080p Medium" path="Gopro HERO 5_Session_1080P-M.xml"/>
+		<Item name="1080p Narrow" path="Gopro HERO 5_Session_1080P-N.xml"/>
+		<Item name="1080p SuperView" path="Gopro HERO 5_Session_1080P-S.xml"/>
+		<Item name="1080p Wide" path="Gopro HERO 5_Session_1080P-W.xml"/>
+		<Item name="960p Wide" path="Gopro HERO 5_Session_960P-W.xml"/>
+		<Item name="720p Medium" path="Gopro HERO 5_Session_720P-M.xml"/>
+		<Item name="720p SuperView" path="Gopro HERO 5_Session_720P-S.xml"/>
+		<Item name="720p Wide" path="Gopro HERO 5_Session_720P-W.xml"/>
+	</Camera>
+	
+	<Camera Type="GoPro Hero 4">
+		<Item name="4K Wide" path="Gopro HERO 4 silver_4K-W.xml"/>
+		<Item name="2.7K Medium" path="Gopro HERO 4 silver_2.7K-M.xml"/>
+		<Item name="2.7k Wide" path="Gopro HERO 4 silver_2.7K-W.xml"/>
+		<Item name="1080p Medium" path="Gopro HERO 4 silver_1080P-M.xml"/>
+		<Item name="1080p Narrow" path="Gopro HERO 4 silver_1080P-N.xml"/>
+		<Item name="1080p Wide" path="Gopro HERO 4 silver_1080P-W.xml"/>
+		<Item name="1080 SuperView Wide" path="Gopro HERO 4 silver_1080S-W.xml"/>
+		<Item name="1440p Wide" path="Gopro HERO 4 silver_1440P-W.xml"/>
+		<Item name="960p Wide" path="Gopro HERO 4 silver_960P-W.xml"/>
+		<Item name="720p Medium" path="Gopro HERO 4 silver_720P-M.xml"/>
+		<Item name="720p Narrow" path="Gopro HERO 4 silver_720P-N.xml"/>
+		<Item name="720 SuperView Wide" path="Gopro HERO 4 silver_720P-S.xml"/>
+		<Item name="720p Wide" path="Gopro HERO 4 silver_720P-W.xml"/>
+		<Item name="WVGA Wide" path="Gopro HERO 4 silver_480P-W.xml"/>
+	</Camera>
+	
+	<Camera Type="GoPro Hero 3">
+		<Item name="4K Cin Wide" path="Gopro HERO 3_4K Cin-W.xml"/>
+		<Item name="4K Wide" path="Gopro HERO 3_4K-W.xml"/>
+		<Item name="2.7K Cin Wide" path="Gopro HERO 3_2.7KCin-W.xml"/>
+		<Item name="2.7K Wide" path="Gopro HERO 3_2.7K-W.xml"/>
+		<Item name="1080p Medium" path="Gopro HERO 3_1080P-M.xml"/>
+		<Item name="1080p Narrow" path="Gopro HERO 3_1080P-N.xml"/>
+		<Item name="1080p Wide" path="Gopro HERO 3_1080P-W.xml"/>
+		<Item name="1440p Wide" path="Gopro HERO 3_1440P-W.xml"/>
+		<Item name="960p Wide" path="Gopro HERO 3_960P-W.xml"/>
+		<Item name="720p Medium" path="Gopro HERO 3_720P-M.xml"/>
+		<Item name="720p Narrow" path="Gopro HERO 3_2.7KCin-W.xml"/>
+		<Item name="720p Wide" path="Gopro HERO 3_720P-W.xml"/>
+		<Item name="WVGA Wide" path="Gopro HERO 3_WVGA-W.xml"/>
+	</Camera>
+	
+	<Camera Type="GoPro Hero +">
+		<Item name="1080p Wide" path="Gopro HERO+_1080P-W.xml"/>
+		<Item name="720p Wide" path="Gopro HERO+_720P-W.xml"/>
+		<Item name="720p SuperView" path="Gopro HERO+_720S-W.xml"/>
+	</Camera>
+	
+	<Camera Type="iON Camera Air Pro 3">
+		<Item name="1080p" path="iON Camera Air Pro 3_1080P.xml"/>
+		<Item name="240p" path="iON Camera Air Pro 3_240P.xml"/>
+	</Camera>
+	
+	<Camera Type="Panasonic HX-A1">
+		<Item name="1080p" path="panasonic HX-A1_1080P.xml"/>
+		<Item name="720p" path="panasonic HX-A1_720P.xml"/>
+		<Item name="480p" path="panasonic HX-A1_480P.xml"/>
+	</Camera>
+	
+	<Camera Type="Richo WG-M1">
+		<Item name="1080p Medium" path="RICHO_WG-M1_1080P-M.xml"/>
+		<Item name="1080p Narrow" path="RICHO_WG-M1_1080P-N.xml"/>
+		<Item name="1080p Wide" path="RICHO_WG-M1_1080P-W.xml"/>
+		<Item name="1080p Water" path="RICHO_WG-M1_1080P-water.xml"/>
+		<Item name="960p Wide" path="RICHO_WG-M1_960P-W.xml"/>
+		<Item name="960p Water" path="RICHO_WG-M1_960P-water.xml"/>
+		<Item name="720p Wide" path="RICHO_WG-M1_720P-W.xml"/>
+		<Item name="720p Water" path="RICHO_WG-M1_720P-water.xml"/>
+		<Item name="480p Wide" path="RICHO_WG-M1_480P-W.xml"/>
+		<Item name="480p Water" path="RICHO_WG-M1_480P-water.xml"/>
+	</Camera>
+	
+	<Camera Type="Sony FDR X3000">
+		<Item name="4K" path="sony fdr-x3000_4K.xml"/>
+		<Item name="1080p Medium" path="sony fdr-x3000_1080P-M.xml"/>
+		<Item name="1080p Narrow" path="sony fdr-x3000_1080P-N.xml"/>
+		<Item name="1080p Wide" path="sony fdr-x3000_1080P-W.xml"/>
+	</Camera>
+	
+	<Camera Type="Sony HDR AS50">
+		<Item name="1080p" path="SONY_HDR-AS50_1080P.xml"/>
+		<Item name="720p" path="SONY_HDR-AS50_720P.xml"/>
+	</Camera>
+	
+</Cameras>

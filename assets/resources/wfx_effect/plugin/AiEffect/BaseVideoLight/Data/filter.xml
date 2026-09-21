@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>53213176-13B3-4306-A337-69402DC748AC</GUID>
+    <Name>BaseVideoLight</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>BaseVideoLight.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

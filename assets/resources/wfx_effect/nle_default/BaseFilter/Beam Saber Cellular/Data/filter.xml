@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>DC701355-0655-CD4A-7065-D8AA346394E7</GUID>
+<Name>Beam Saber Cellular</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Saber Cellular.conf</ConfigFile>
+</GPUFilter>
+</Filter>

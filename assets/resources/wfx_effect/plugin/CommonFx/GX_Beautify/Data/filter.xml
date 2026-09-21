@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>E3D47645-4302-4AE0-8308-4893788FE8DF</GUID>
+<Name>GX_Beautify</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>GX_Beautify.conf</ConfigFile>
+</GPUFilter>
+</Filter>

@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>D3FFB279-0581-4c3c-8CAC-CB2E1D148614</GUID>
+        <Name>BeautifyImg</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>BeautifyImg.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

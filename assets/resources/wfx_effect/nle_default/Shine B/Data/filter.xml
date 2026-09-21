@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>35B558CD-37D6-43aa-8AA2-1E3090524931</GUID>
+        <Name>Shine B</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>ShineB.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

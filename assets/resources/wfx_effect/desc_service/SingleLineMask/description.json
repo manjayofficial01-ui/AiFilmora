@@ -1,0 +1,45 @@
+{
+    "type": "video_effect",
+    "display_name": "SingleLineMask",
+    "unique_name": "video/effect/singlelinemask",
+	"capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "params": [
+		{
+			"name": "Position_x",
+			"type": 3,
+			"min_value": -1.0,
+			"max_value":  2.0,
+			"default_value": 0.5
+		},
+		{
+			"name": "Position_y",
+			"type": 3,
+			"min_value": -1.0,
+			"max_value":  2.0,
+			"default_value": 0.5
+		},
+		{
+			"name": "Rotation",
+			"type": 3,
+			"min_value": -9999.99,
+			"max_value": 9999.99,
+			"default_value": 0
+		},
+		{
+			"name": "Feather",
+			"type": 3,
+			"min_value": 0.0,
+			"max_value": 1.0,
+			"default_value": 0.0
+		},
+		{
+			"name": "InvMask",
+			"type": 1,
+			"min_value": 0,
+			"max_value": 1,
+			"default_value": 0
+		}
+    ]
+}

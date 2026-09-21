@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>7ADBCFB3-ACCF-4c5c-B188-A7537AED400D</GUID>
+    <Name>Flip Up</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Flip Up.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

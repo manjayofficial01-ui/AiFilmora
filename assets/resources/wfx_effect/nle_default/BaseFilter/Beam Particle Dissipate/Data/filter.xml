@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>1CD27053-C217-4B49-9C64-211BF1641E0F</GUID>
+<Name>Beam Particle Dissipate</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Particle Dissipate.conf</ConfigFile>
+</GPUFilter>
+</Filter>

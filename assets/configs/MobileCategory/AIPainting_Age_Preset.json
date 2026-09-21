@@ -1,0 +1,24 @@
+{
+    "AIPainting_Age_Preset": [
+        {
+            "slug": "Age_00",
+            "type": 61
+        },
+        {
+            "slug": "Age_20",
+            "type": 61
+        },
+        {
+            "slug": "Age_30",
+            "type": 61
+        },
+        {
+            "slug": "Age_55",
+            "type": 61
+        },
+        {
+            "slug": "Age_70",
+            "type": 61
+        }
+    ]
+}

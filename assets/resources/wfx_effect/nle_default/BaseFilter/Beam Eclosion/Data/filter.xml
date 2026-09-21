@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>C64ECC4D-F39E-77BB-673E-F9B7387C49FD</GUID>
+<Name>Beam Eclosion</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Eclosion.conf</ConfigFile>
+</GPUFilter>
+</Filter>

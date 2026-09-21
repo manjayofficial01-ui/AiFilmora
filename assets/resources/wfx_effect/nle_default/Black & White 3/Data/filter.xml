@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>BCC3FDCE-791D-4f87-B321-A899F655D855</GUID>
+        <Name>Black&White3</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>BlackWhite3.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

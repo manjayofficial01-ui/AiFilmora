@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>13BF6A6C-54B2-4F17-B95B-2382967CC431</GUID>
+    <Name>Audio Visualization 07</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 07.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

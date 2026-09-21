@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>286C9435-2266-4F3D-9F53-9CE10DDECB69</GUID>
+<Name>Sensetime Beauty Converter</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Sensetime Beauty Converter.conf</ConfigFile>
+</GPUFilter>
+</Filter>

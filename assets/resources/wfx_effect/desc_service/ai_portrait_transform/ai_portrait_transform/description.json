@@ -1,0 +1,104 @@
+{
+    "type": "video_effect",
+    "display_name": "ai_portrait_transform",
+    "unique_name": "video/effect/ai_portrait_transform",
+	"capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "params": [
+        {
+            "name": "EnableTransform",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 1,
+            "default_value": 1
+        },
+        {
+            "name": "Position_x",
+            "type": 3,
+            "min_value": -1.0,
+            "max_value": 2.0,
+            "default_value": 0.5
+        },
+        {
+            "name": "Position_y",
+            "type": 3,
+            "min_value": -1.0,
+            "max_value": 2.0,
+            "default_value": 0.5
+        },
+        {
+            "name": "Scale_x",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 2147483647.0,
+            "default_value": 100.0
+        },
+        {
+            "name": "Scale_y",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 2147483647.0,
+            "default_value": 100.0
+        },
+        {
+            "name": "Rotation",
+            "type": 3,
+            "min_value": 0.0,
+            "max_value": 2147483647.0,
+            "default_value": 0.0
+        },
+        {
+            "name": "EnableShadow",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 1,
+            "default_value": 0
+        },
+        {
+            "name": "nDistance",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 100,
+            "default_value": 10
+        },
+        {
+            "name": "nBlur",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 100,
+            "default_value": 20
+        },
+        {
+            "name": "nAlpha",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 100,
+            "default_value": 80
+        },
+        {
+            "name": "nPortraitAlpha",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 100,
+            "default_value": 100
+        },
+        {
+            "name": "dwValue",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 16777215,
+            "default_value": 0,
+            "ui_type": "Color"
+        },
+        {
+            "name": "uDirect",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 7,
+            "default_value": 7,
+            "ui_type": "9Palaces"
+        }
+    ],
+    "ENCRYPT": "1"
+}

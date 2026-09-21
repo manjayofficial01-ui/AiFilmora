@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>BB101941-A106-4332-B70F-22DD4B4236BD</GUID>
+        <Name>Sunrise</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Sunrise.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

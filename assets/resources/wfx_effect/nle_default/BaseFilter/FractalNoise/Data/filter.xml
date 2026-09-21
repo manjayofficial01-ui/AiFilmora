@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>D6545134-70B8-4E1A-8669-A11268EA325B</GUID>
+<Name>FractalNoise</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>FractalNoise.conf</ConfigFile>
+</GPUFilter>
+</Filter>

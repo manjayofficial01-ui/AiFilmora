@@ -1,0 +1,10 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>08634BD5-10F8-4EF8-99E7-CBAAA51E47B0</GUID>
+        <Name>LogoShadowEdgeGrid</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+        <ConfigFile>LogoShadowEdgeGrid.conf</ConfigFile>
+        </GPUFilter>
+        </Filter>

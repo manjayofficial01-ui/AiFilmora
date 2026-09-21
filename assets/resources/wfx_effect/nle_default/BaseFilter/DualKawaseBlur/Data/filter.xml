@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>5FCCB3C4-83CA-446A-ACCA-08BAE84893D4</GUID>
+<Name>DualKawaseBlur</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>DualKawaseBlur.conf</ConfigFile>
+</GPUFilter>
+</Filter>

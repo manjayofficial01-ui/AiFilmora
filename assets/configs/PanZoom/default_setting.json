@@ -1,0 +1,50 @@
+[
+	{
+        "type": 16384,
+        "title": "Zoom to bottom right",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/ZoomToBottomRight.conf"
+    },
+	{
+        "type": 16384,
+        "title": "Zoom in",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/ZoomIn.conf"
+    },
+	{
+        "type": 16384,
+        "title": "Zoom out",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/ZoomOut.conf"
+    },
+	{
+        "type": 16384,
+        "title": "Pan Right",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/PanRight.conf"
+    },
+	{
+        "type": 16384,
+        "title": "Pan Left",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/PanLeft.conf"
+    },
+	{
+        "type": 16384,
+        "title": "Zoom Original",
+        "category": "Default",
+        "favorate": 0,
+        "Extesnsion": "",
+        "config": "/ZoomOriginal.conf"
+    }
+]

@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>15CFAC72-2444-4FE1-84F6-58E479400909</GUID>
+        <Name>Rings</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Rings.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>1126AE85-1A80-8A95-5BBB-4B01C61B0B5A</GUID>
+<Name>Particle Emit</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Particle Emit.conf</ConfigFile>
+</GPUFilter>
+</Filter>

@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>2FB07150-54FD-9DB0-6A1D-D424A90FF154</GUID>
+        <Name>BackGround Erode</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>BackGround Erode.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

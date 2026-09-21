@@ -1,0 +1,35 @@
+{
+    "GUID": "434A8B6B-0804-4760-BE79-04CBCBB2E335",
+    "OPENGL": "Color.frag",
+    "ENCRYPT": "1",
+    "PARAMS": [
+        {
+            "NAME": "u_temperature",
+            "TYPE": "float",
+            "DEFAULT": 0,
+            "MIN": -100,
+            "MAX": 100
+        },
+        {
+            "NAME": "u_tint",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "u_vibrance",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        },
+        {
+            "NAME": "u_saturation",
+            "TYPE": "float",
+            "DEFAULT": 0.0,
+            "MIN": -100.0,
+            "MAX": 100.0
+        }
+    ]
+}

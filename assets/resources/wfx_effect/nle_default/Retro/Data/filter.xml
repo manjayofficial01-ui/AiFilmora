@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>EFFE7C7D-AA0F-4cb0-8C1C-CDE05D04BC97</GUID>
+        <Name>Retro</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Retro.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

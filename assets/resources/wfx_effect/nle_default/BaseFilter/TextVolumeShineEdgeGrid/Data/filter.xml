@@ -1,0 +1,10 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>48F18D68-5098-4EC0-A149-6816440BDF13</GUID>
+        <Name>TextVolumeShineEdgeGrid</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>TextVolumeShineEdgeGrid.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>

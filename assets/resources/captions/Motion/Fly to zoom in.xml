@@ -1,0 +1,35 @@
+<NLEMotion>
+<Motion>
+<MotionAlians>Fly to zoom in</MotionAlians>
+<MotionGUID>{39FF4761-0F9E-422D-B1FE-EC5945A96CAB}</MotionGUID>
+<MotionShader>motionEffect.frag</MotionShader>
+<MotionResType>0</MotionResType>
+		<MotionTimeConfig>
+			<MaxLength>5</MaxLength>
+			<InKeyIndex>3</InKeyIndex>
+			<OutKeyIndex>-1</OutKeyIndex>
+		</MotionTimeConfig>
+<MotionPositionList>
+<Point XPos="-0.277778" YPos="0.833333"/>
+<Point XPos="0.833333" YPos="0.833333"/>
+<Point XPos="0.833333" YPos="0.833333"/>
+<Point XPos="0.833333" YPos="0.833333"/>
+<Point XPos="0.833333" YPos="0.833333"/>
+<Point XPos="0.833333" YPos="0.833333"/>
+<Point XPos="0.833333" YPos="0.833333"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+</MotionPositionList>
+<MotionEffectList>
+<MotionEffect KeyFrame="0.000000" scaleX="0.500000" scaleY="0.500000" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="0.190000" scaleX="0.200000" scaleY="0.200000" rotate="720" alpha="100"/>
+<MotionEffect KeyFrame="0.316000" scaleX="0.200000" scaleY="0.200000" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="0.800000" scaleX="1.050000" scaleY="1.050000" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="1.000000" scaleX="1.050000" scaleY="1.050000" rotate="0" alpha="100"/>
+</MotionEffectList>
+</Motion>
+</NLEMotion>

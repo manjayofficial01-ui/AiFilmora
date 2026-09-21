@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>80245935-DBAE-4B1C-A09A-33B7AF1ADBD2</GUID>
+    <Name>Audio Visualization 14</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 14.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

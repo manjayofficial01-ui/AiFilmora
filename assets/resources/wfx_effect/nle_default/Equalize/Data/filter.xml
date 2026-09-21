@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>F6B936B0-CF61-4da8-B532-8DC88617FB9C</GUID>
+        <Name>Equalize</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Equalize.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

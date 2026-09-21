@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<filmora version="9.0">
+	<faceoff itemwidth="130" itemheight="73">
+		<!--type 0:马赛克 1:贴图 -->
+		<!--src:界面显示图片资源路径 -->
+		<!--imagesrc:image资源路径 -->
+		<item type="0" imagesrc="" src="mosaic.png"/>
+        <item type="1" imagesrc="faceoff_00.png" src="00.png"/>
+		<item type="1" imagesrc="faceoff_01.png" src="01.png"/>
+		<item type="1" imagesrc="faceoff_02.png" src="02.png"/>
+		<item type="1" imagesrc="faceoff_03.png" src="03.png"/>
+		<item type="1" imagesrc="faceoff_04.png" src="04.png"/>
+		<item type="1" imagesrc="faceoff_05.png" src="05.png"/>
+		<item type="1" imagesrc="faceoff_06.png" src="06.png"/>
+		<item type="1" imagesrc="faceoff_07.png" src="07.png"/>
+		<item type="1" imagesrc="faceoff_08.png" src="08.png"/>
+		<item type="1" imagesrc="faceoff_09.png" src="09.png"/>
+		<item type="1" imagesrc="faceoff_10.png" src="10.png"/>
+		<item type="1" imagesrc="faceoff_11.png" src="11.png"/>
+		<item type="1" imagesrc="faceoff_12.png" src="12.png"/>
+		<item type="1" imagesrc="faceoff_13.png" src="13.png"/>
+		<item type="1" imagesrc="faceoff_14.png" src="14.png"/>
+		<item type="1" imagesrc="faceoff_15.png" src="15.png"/>
+		<item type="1" imagesrc="faceoff_16.png" src="16.png"/>
+		<item type="1" imagesrc="faceoff_17.png" src="17.png"/>
+		<item type="1" imagesrc="faceoff_18.png" src="18.png"/>
+	</faceoff>
+</filmora>

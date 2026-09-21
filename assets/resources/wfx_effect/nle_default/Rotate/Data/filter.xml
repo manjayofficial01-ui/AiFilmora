@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>9B6A315E-2CEA-42b0-ABB2-A20FB790A433</GUID>
+        <Name>Rotate</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Rotate.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

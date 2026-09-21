@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>647304F8-B2DC-4200-B8B2-E8FF95020A44</GUID>
+    <Name>Wash</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Wash.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

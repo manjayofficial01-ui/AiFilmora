@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+    <GUID>7DD3CCB1-96BB-4705-B273-F65F046838CC</GUID>
+    <Name>Basic 3D</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>basic_3d.conf</ConfigFile>
+    </GPUFilter>
+</Filter>
+    	

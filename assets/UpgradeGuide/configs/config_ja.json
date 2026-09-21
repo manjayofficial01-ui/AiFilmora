@@ -1,0 +1,93 @@
+{
+	"title": "Filmora %1の新機能。",
+	"titleByManual": "最新バージョンを使用しています。%1の新機能をチェックしましょう。",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "テキストから動画生成",
+			"discription": "テキストから動画生成で創造性を解き放ち、Filmora AIの魔法を体験しましょう",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "画像から動画生成",
+			"discription": "画像から動画生成のAIモデルがVeo 3に。大幅に強化された生成結果をご体験ください！",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},	
+		{
+			"id": "ai_idea_to_video",
+			"name": "AIでアイデアから動画生成",
+			"discription": "未加工のアイデアを、視覚スタイルの一貫性を維持しつつシーンを跨いだキャラクター継続性を確保したプロ仕様のショート動画に変換",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "AI画像スタイライズ",
+			"discription": "AI画像スタイライズが‍強化されました！AIGCタブで、拡張および強化された画像スタイライズ機能をご利用いただけます。",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "オーディオから動画生成",
+			"discription": "オーディオポッドキャストを魅力的なショート動画に簡単に変換できます。お気に入りのストーリーを編集、トリミング、ハイライトしましょう。",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "スマートショートクリップ",
+			"discription": "長い動画を魅力的なショート動画に変換します。カットしてトリミングし、最高の瞬間にスポットライトを当てましょう。",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "スマートシーンカット",
+			"discription": "ハイライトや人物が登場するシーンを抽出して編集効率を高めます。",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "スマートBGMジェネレーター",
+			"discription": "動画に合うBGMを自動で生成します。",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "オートリフレーム",
+			"discription": "オートリフレームを使用して、ソーシャルメディアプラットフォームのアスペクト比に合う動画をエクスポートします。",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "AIが理解して、アシストして、レベルアップ。AI Mateがあれば、今までにないスピードで驚きの動画を作成できます。",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "マルチカメラ編集",
+			"discription": "映像を複数のカメラからインポートしてアングルをシームレスに切り替えられるので、効率的かつ便利な編集作業が可能です。複雑な編集プロセスがシンプルになり、ワークフローの創造性がさらに広がります。",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "AI翻訳",
+			"discription": "動画と音声を20以上の言語に自動翻訳し、音声を話し手の口の動きに合わせます。",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

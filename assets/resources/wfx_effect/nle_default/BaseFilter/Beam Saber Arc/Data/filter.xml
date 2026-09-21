@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>D0AF64B4-D133-4B73-B64D-AF3470F10E06</GUID>
+<Name>Beam Saber Arc</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Saber Arc.conf</ConfigFile>
+</GPUFilter>
+</Filter>

@@ -1,0 +1,32 @@
+{
+    "type": "video_effect",
+    "display_name": "TrackMatte",
+    "unique_name": "video/effect/trackmatte",
+    "capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "params": [
+        {
+            "name": "Track_matte_mode", 
+            "type": 5,
+            "min_value": 0,
+            "max_value": 1,
+            "default_value": 0
+        },
+        {
+            "name": "Track_matte_from",
+            "type": 6,
+            "default_value": "",          
+            "ui_type": "NoShow"
+        },
+        {
+            "name": "Track_matte_invert",
+            "type": 5,
+            "min_value": 0,
+            "max_value": 1,
+            "default_value": 0,
+            "ui_type": "CheckBox"
+        }
+    ],
+    "ENCRYPT": "1"
+}

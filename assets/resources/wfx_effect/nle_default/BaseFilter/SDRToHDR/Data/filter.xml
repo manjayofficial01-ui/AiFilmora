@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>efb44219-2e30-4eaa-8c99-633819a0e27a</GUID>
+        <Name>SDRToHDR</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>SDRToHDR.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

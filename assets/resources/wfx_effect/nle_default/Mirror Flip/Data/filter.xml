@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>BE80CF63-1E35-4b1f-92A3-B1FACD636AEA</GUID>
+        <Name>Mirror Flip</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Mirror Flip.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

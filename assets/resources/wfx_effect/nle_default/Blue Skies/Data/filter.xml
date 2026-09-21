@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>23ED6584-3EB2-4451-80CE-89D3529DE5C8</GUID>
+        <Name>Blue Skies</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>BlueSkies.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>252930DB-8102-478B-B01F-09591DA02B5F</GUID>
+        <Name>Gitch2</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Gitch2.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

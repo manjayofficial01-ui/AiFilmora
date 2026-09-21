@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+            <GUID>6895A7C7-928E-48e2-8CB1-DC0485646A5B</GUID>
+            <Name>Sequence 2</Name>
+            <Transition>0</Transition>
+            <GPUFilter>
+                <ConfigFile>Sequence 2.conf</ConfigFile>
+            </GPUFilter>	
+        </Filter>

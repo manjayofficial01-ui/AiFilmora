@@ -1,0 +1,63 @@
+{
+	"title": "快来使用体验%1版本最新功能吧！",
+	"titleByManual": "当前已是最新版本（%1），您可在下方使用体验版本最新功能！",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "文生视频",
+			"discription": "释放你的语言创造力，使用文生视频，体验万兴喵影的魔力。",
+			"mediaPath": "text_to_video_cn.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "图生视频",
+			"discription": "图生视频支持多种生成方式，可跳转立即体验或探索更多创意效果。",
+			"mediaPath": "image_to_video_cn.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},		
+		{
+			"id": "ai_idea_to_video",
+			"name": "灵感成片",
+			"discription": "将原始创意转化为专业短视频，在保持视觉风格一致性的同时确保跨场景角色连贯性。",
+			"mediaPath": "ai_idea_to_video_cn.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_voice_cloning",
+			"name": "音色克隆",
+			"discription": "使用万兴喵影的音色克隆功能，只需录制 10 秒钟的音频，即可获得您声音的真实克隆！",
+			"mediaPath": "ai_voice_cloning_cn.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "AI视频翻译",
+			"discription": "智能将音视频翻译成全球多种语言，人物口型也可以对得上，让全球观众都能访问您的视频！",
+			"mediaPath": "ai_translation_cn.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "AI智能配乐",
+			"discription": "自动生成与您的视频内容相匹配的背景音乐。",
+			"mediaPath": "smart_bgm_generation_cn.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "自动比例裁切",
+			"discription": "利用自动比例裁切功能，轻松导出与社交媒体平台标准比例匹配的视频。",
+			"mediaPath": "auto_reframe_cn.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "多机位剪辑",
+			"discription": "轻松导入多台摄像机拍摄的素材，通过无缝切换视角，为您提供了高效、便捷的编辑体验，简化了繁琐的操作步骤，提升了创作效率。",
+			"mediaPath": "multi_camera_editing_cn.png",
+			"canTryNow": true
+		}
+	]
+}

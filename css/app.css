@@ -1,0 +1,2802 @@
+/* AiFimora app chrome */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar);
+  border-radius: 6px;
+  border: 2px solid var(--panel);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+#app {
+  display: grid;
+  grid-template-rows: var(--title-h) 1fr var(--status-h);
+  height: 100vh;
+  min-width: 960px;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+/* Title bar */
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  background: var(--titlebar-grad);
+  border-bottom: 1px solid var(--border-soft);
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.brand-mark {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--accent), var(--gen));
+  box-shadow: 0 0 12px rgba(91, 140, 255, 0.45);
+}
+
+.brand span small {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Filmora has no centred project chip floating in the middle of the titlebar —
+   the old `margin: 0 auto` here split the bar into two dead gaps. The chip now
+   hugs the right cluster and the free space sits between the two groups. */
+.project-pill {
+  margin: 0 2px 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--stroke-2);
+  color: var(--ink-muted);
+  font-size: 11px;
+  max-width: 190px;
+  min-width: 0;
+  -webkit-app-region: no-drag;
+}
+
+.project-pill strong {
+  color: var(--ink-strong);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-pill .ico {
+  display: grid;
+  place-items: center;
+  color: var(--ink-muted);
+}
+.project-pill .ico svg {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+
+.win-controls {
+  display: flex;
+  gap: 2px;
+  -webkit-app-region: no-drag;
+}
+
+.win-btn {
+  width: 36px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  color: var(--ink-dim);
+  display: grid;
+  place-items: center;
+}
+.win-btn:hover {
+  background: var(--panel-3);
+  color: var(--ink);
+}
+.win-btn.close:hover {
+  background: var(--danger);
+  color: var(--on-accent);
+}
+
+/* Menu */
+.menubar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 8px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.menu-btn {
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--ink-dim);
+  font-size: 12px;
+}
+.menu-btn:hover,
+.menu-btn[aria-expanded="true"] {
+  background: var(--panel-2);
+  color: var(--ink);
+}
+
+.menu-spacer {
+  flex: 1;
+}
+
+.credits-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  border: 1px solid var(--stroke-1);
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 600;
+}
+.credits-chip .bar {
+  width: 72px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.credits-chip .bar > i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--gen));
+  border-radius: 2px;
+}
+
+/* Workspace */
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(180px, var(--sidebar-w)) 5px minmax(280px, 1fr) 5px minmax(220px, var(--inspector-w));
+  grid-template-rows: minmax(0, 1fr) 5px minmax(120px, var(--timeline-h));
+  min-height: 0;
+  min-width: 0;
+  max-height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.workspace.split-right-ai {
+  grid-template-columns: var(--sidebar-w) 6px 1fr 6px 360px;
+}
+
+/* Panel grid placement */
+.sidebar {
+  grid-column: 1;
+  grid-row: 1;
+  overflow: hidden;
+}
+#resizeSidebar {
+  grid-column: 2;
+  grid-row: 1;
+}
+.stage {
+  grid-column: 3;
+  grid-row: 1;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+}
+#resizeInspector {
+  grid-column: 4;
+  grid-row: 1 / -1;
+}
+/* 2.2.0: right inspector is one single column top-to-bottom. */
+.inspector {
+  grid-column: 5;
+  grid-row: 1 / -1;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  max-height: 100%;
+}
+#resizeTimeline {
+  grid-column: 1 / 5;
+  grid-row: 2;
+}
+.timeline-panel {
+  grid-column: 1 / 5;
+  grid-row: 3;
+  overflow: hidden;
+  min-height: 0;
+  max-height: 100%;
+}
+
+/* Resizers */
+.rsz {
+  position: relative;
+  z-index: 8;
+  background: transparent;
+  touch-action: none;
+}
+.rsz::after {
+  content: "";
+  position: absolute;
+  background: transparent;
+  transition: background 0.12s;
+}
+.rsz-x {
+  cursor: col-resize;
+}
+.rsz-x::after {
+  inset: 0 1px;
+}
+.rsz-y {
+  cursor: row-resize;
+}
+.rsz-y::after {
+  inset: 1px 0;
+}
+.rsz:hover::after,
+.rsz:active::after,
+body.resizing-x .rsz-x::after,
+body.resizing-y .rsz-y::after {
+  background: var(--accent);
+}
+body.resizing-x,
+body.resizing-y {
+  user-select: none;
+  cursor: col-resize;
+}
+body.resizing-y {
+  cursor: row-resize;
+}
+
+.panel {
+  min-width: 0;
+  min-height: 0;
+  background: var(--panel);
+  border: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--bg-elev);
+  flex-shrink: 0;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.panel-header h2 {
+  margin: 0;
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  white-space: nowrap;
+}
+
+.panel-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-left: 0;
+  padding: 4px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  flex: 0 0 auto;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  /* Filmora FTabbarV15: translucent strip, 6px radius */
+  background: var(--surface-2);
+  border-radius: var(--radius);
+}
+
+.tab {
+  padding: 4px 10px;
+  min-height: var(--ctl-h); /* Filmora tab min-height: 24px */
+  border-radius: var(--radius-sm); /* Filmora selected tab: 4px */
+  font-size: 11px;
+  color: var(--ink-muted); /* unselected tab text */
+  font-weight: 600;
+  flex: 0 1 auto;
+  max-width: 100%;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border: none;
+  background: transparent;
+  transition: background 0.12s, color 0.12s;
+}
+
+.tab {
+  padding: 4px 10px;
+  min-height: var(--ctl-h); /* Filmora tab min-height: 24px */
+  border-radius: var(--radius-sm); /* Filmora selected tab: 4px */
+  font-size: 11px;
+  color: var(--ink-muted); /* unselected tab text */
+  font-weight: 600;
+  flex: 0 1 auto;
+  max-width: 100%;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border: none;
+  background: transparent;
+  transition: background 0.12s, color 0.12s;
+}
+.tab:hover {
+  color: var(--ink-strong);
+  background: var(--surface-1);
+}
+.tab.active {
+  /* Filmora selected tab: 14% white fill + primary text */
+  color: var(--ink-strong);
+  background: var(--surface-3);
+}
+
+.panel-body {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  overflow-x: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Left sidebar */
+.sidebar {
+  border-right: 1px solid var(--border);
+}
+
+.sidebar-view {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.sidebar-view.active {
+  display: flex;
+}
+
+.search-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.search-row input,
+.field input,
+.field select,
+.field textarea,
+.chat-input textarea,
+.prompt-box textarea {
+  width: 100%;
+  /* Filmora QComboBox / QDoubleSpinBox: borderless, 30%-black fill, 6px radius */
+  background: var(--field);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 7px 10px 7px 8px;
+  color: var(--ink-body);
+}
+.search-row input:focus,
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+.chat-input textarea:focus,
+.prompt-box textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.search-row input::placeholder,
+textarea::placeholder,
+input::placeholder {
+  color: var(--muted);
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.media-card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-elev);
+  cursor: grab;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.media-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.media-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.media-thumb {
+  aspect-ratio: 16/9;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  background: var(--bg-deep);
+}
+
+.media-meta {
+  padding: 6px 8px 8px;
+}
+.media-meta strong {
+  display: block;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.media-meta span {
+  font-size: 10px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+.media-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.65);
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.media-badge.ai {
+  background: rgba(139, 92, 246, 0.85);
+  border-color: transparent;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  min-height: var(--ctl-h); /* Filmora's standard control height */
+  border-radius: var(--radius); /* 6px, matches Filmora */
+  border: 1px solid var(--stroke-1); /* Filmora control border (white 14%) */
+  background: var(--surface-1); /* Filmora resting fill (white 4%) */
+  color: var(--ink-body);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.12s, border-color 0.12s, color 0.12s, transform 0.08s;
+}
+.btn:hover {
+  background: var(--surface-2); /* Filmora hover fill (white 6%) */
+  border-color: var(--stroke-1);
+  color: var(--ink-strong);
+}
+.btn:active {
+  border-color: var(--accent); /* Filmora pressed = cyan ring, not a fill */
+  color: var(--ink-strong);
+  transform: translateY(1px);
+}
+/* Filmora's active/selected state: cyan border + lifted text (never a cyan fill) */
+.btn.active,
+.btn[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--surface-3);
+  color: var(--ink-strong);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn.primary {
+  background: linear-gradient(180deg, var(--accent-strong), var(--accent));
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+.btn.primary:hover {
+  filter: brightness(1.06);
+}
+.btn.gen {
+  background: linear-gradient(180deg, var(--gen), color-mix(in srgb, var(--gen) 75%, #000));
+  border-color: var(--gen);
+  color: var(--bg-deep);
+}
+.btn.gen:hover {
+  filter: brightness(1.05);
+}
+.btn.accent {
+  background: linear-gradient(180deg, var(--warn), color-mix(in srgb, var(--warn) 70%, #000));
+  border-color: var(--warn);
+  color: var(--bg-deep);
+}
+.btn.accent:hover {
+  filter: brightness(1.05);
+}
+.btn.ghost {
+  background: transparent;
+}
+.btn.danger {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+.btn.sm {
+  padding: 4px 8px;
+  font-size: 11px;
+}
+.btn.block {
+  width: 100%;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Effects / tool list */
+.tool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tool-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-soft);
+  background: var(--bg-elev);
+  text-align: left;
+  width: 100%;
+}
+.tool-item:hover {
+  border-color: var(--accent);
+  background: var(--panel-2);
+}
+.tool-item .icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  flex-shrink: 0;
+  font-size: 13px;
+}
+.tool-item .icon.gen {
+  background: var(--gen-soft);
+  color: var(--gen);
+}
+.tool-item .icon.warn {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+.tool-item strong {
+  display: block;
+  font-size: 12px;
+}
+.tool-item span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Center stage.
+   Round 4 fix: this grid has three children (tab strip, preview, transport) but
+   only declared two rows, so the tab strip swallowed the `1fr` and ballooned to
+   ~292 px while the preview canvas collapsed to its intrinsic 204 px. Giving
+   each child its own row puts the free space where it belongs — the preview. */
+.stage {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--bg-deep);
+  border-left: 1px solid var(--border-soft);
+  border-right: 1px solid var(--border-soft);
+}
+
+.preview-wrap {
+  position: relative;
+  min-height: 0;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* On-canvas Filmora-style edit layer (text / stickers) */
+.canvas-edit-layer {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  pointer-events: none;
+  z-index: 6;
+}
+.canvas-edit-layer.visible {
+  display: grid;
+}
+.canvas-edit-box {
+  position: absolute;
+  pointer-events: auto;
+  cursor: move;
+  border: 1.5px dashed rgba(91, 140, 255, 0.85);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  user-select: none;
+  background: rgba(0, 0, 0, 0.12);
+}
+.canvas-edit-box:hover,
+.canvas-edit-box:focus-visible {
+  border-style: solid;
+  border-color: #fff;
+  outline: none;
+}
+.canvas-edit-box.dragging {
+  opacity: 0.92;
+  cursor: grabbing;
+}
+.canvas-edit-label {
+  position: absolute;
+  left: 0;
+  top: -20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  background: rgba(11, 13, 16, 0.85);
+  padding: 1px 6px;
+  border-radius: 3px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.canvas-edit-text {
+  width: 100%;
+  text-align: inherit;
+  outline: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+  cursor: inherit;
+}
+.canvas-edit-text[contenteditable="true"] {
+  cursor: text;
+  background: rgba(91, 140, 255, 0.12);
+  border-radius: 2px;
+}
+/* 8 resize handles */
+.canvas-edit-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--accent);
+  border: 1.5px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+  z-index: 2;
+  touch-action: none;
+}
+.canvas-edit-handle:hover {
+  background: #fff;
+  border-color: var(--accent);
+}
+.h-nw { left: -6px; top: -6px; cursor: nwse-resize; }
+.h-n  { left: 50%; top: -6px; margin-left: -5px; cursor: ns-resize; }
+.h-ne { right: -6px; top: -6px; cursor: nesw-resize; }
+.h-e  { right: -6px; top: 50%; margin-top: -5px; cursor: ew-resize; }
+.h-se { right: -6px; bottom: -6px; cursor: nwse-resize; }
+.h-s  { left: 50%; bottom: -6px; margin-left: -5px; cursor: ns-resize; }
+.h-sw { left: -6px; bottom: -6px; cursor: nesw-resize; }
+.h-w  { left: -6px; top: 50%; margin-top: -5px; cursor: ew-resize; }
+
+#previewCanvas {
+  display: block;
+  /* size is set by player.js to always fit 16:9 in the wrap */
+  width: 320px;
+  height: 180px;
+  max-width: 100%;
+  max-height: 100%;
+  background: var(--bg-deep);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-soft);
+}
+
+.preview-overlay {
+  position: absolute;
+  inset: 16px;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.preview-badges {
+  display: flex;
+  gap: 6px;
+}
+
+.badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.badge.live {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+.badge.ai {
+  color: var(--accent-strong);
+  border-color: rgba(91, 140, 255, 0.45);
+}
+
+.transport {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px 10px;
+  min-width: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.35));
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.transport .spacer {
+  flex: 1;
+}
+
+.player-volume {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.player-volume input[type="range"] {
+  width: 72px;
+  accent-color: var(--accent);
+}
+
+/* Crop overlay */
+.crop-layer {
+  position: absolute;
+  inset: 0;
+  display: none;
+  z-index: 8;
+  pointer-events: none;
+}
+.crop-layer.visible {
+  display: block;
+}
+.crop-shade {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+.crop-box {
+  position: absolute;
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+  cursor: move;
+}
+.crop-box.dragging {
+  opacity: 0.95;
+}
+.crop-label {
+  position: absolute;
+  left: 0;
+  top: -20px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 1px 6px;
+  border-radius: 3px;
+  pointer-events: none;
+}
+.crop-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border: 1.5px solid var(--accent);
+  border-radius: 2px;
+  z-index: 2;
+}
+.crop-handle.h-nw { left: -5px; top: -5px; cursor: nwse-resize; }
+.crop-handle.h-n  { left: 50%; top: -5px; margin-left: -5px; cursor: ns-resize; }
+.crop-handle.h-ne { right: -5px; top: -5px; cursor: nesw-resize; }
+.crop-handle.h-e  { right: -5px; top: 50%; margin-top: -5px; cursor: ew-resize; }
+.crop-handle.h-se { right: -5px; bottom: -5px; cursor: nwse-resize; }
+.crop-handle.h-s  { left: 50%; bottom: -5px; margin-left: -5px; cursor: ns-resize; }
+.crop-handle.h-sw { left: -5px; bottom: -5px; cursor: nesw-resize; }
+.crop-handle.h-w  { left: -5px; top: 50%; margin-top: -5px; cursor: ew-resize; }
+.crop-actions {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+/* Transition preview */
+.trans-preview-wrap {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-deep);
+  margin-bottom: 10px;
+}
+#transPreviewCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+}
+.trans-preview-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 4px 8px;
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--ink-dim);
+}
+
+.shape-preset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  position: relative;
+}
+.shape-preset .shape-thumb {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+}
+.shape-star {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: none;
+  background: rgba(0, 0, 0, 0.45);
+  color: var(--accent-strong);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 1;
+}
+.shape-star:hover {
+  background: var(--accent-soft);
+}
+
+.onboard-strip {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  background: var(--accent-soft);
+  color: var(--ink-dim);
+  font-size: 11px;
+  line-height: 1.4;
+}
+.asset-card {
+  cursor: pointer;
+}
+.asset-card:hover {
+  outline: 1px solid var(--accent);
+}
+
+.timecode {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  min-width: 96px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.transport span {
+  white-space: nowrap;
+}
+
+.transport-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+.transport-btn:hover {
+  background: var(--panel-3);
+  border-color: var(--border-hover);
+}
+.transport-btn.play {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(180deg, var(--accent-strong), var(--accent));
+  border-color: transparent;
+  color: var(--on-accent);
+  box-shadow: 0 0 16px var(--accent-soft);
+}
+
+/* Right inspector */
+.inspector {
+  border-left: 1px solid var(--border);
+}
+
+.inspector-view {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.inspector-view.active {
+  display: flex;
+}
+
+.field {
+  margin-bottom: 10px;
+  min-width: 0;
+  max-width: 100%;
+}
+.field input[type="range"],
+.field input[type="text"],
+.field input[type="url"],
+.field input[type="password"],
+.field input[type="search"],
+.field input[type="color"],
+.field select,
+.field textarea {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.field label {
+  display: block;
+  font-size: 11px;
+  color: var(--ink-dim);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.slider-row {
+  display: grid;
+  grid-template-columns: 1fr 48px;
+  gap: 8px;
+  align-items: center;
+}
+.slider-row input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+.slider-row output {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+  text-align: right;
+}
+
+.section-title {
+  margin: 14px 0 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* section headers placed inside a preset-grid (transitions panel shader/built-in groups) */
+.preset-grid > .section-title {
+  margin: 4px 0 2px;
+  padding-top: 6px;
+  border-top: 1px solid var(--panel-line, rgba(255, 255, 255, 0.06));
+}
+.preset-grid > .section-title:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+/* AI Mate */
+#insp-mate .panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.mate-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  gap: 8px;
+}
+
+.mate-log {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 2px;
+}
+
+.msg {
+  max-width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.msg.user {
+  align-self: flex-end;
+  background: var(--accent-soft);
+  border: 1px solid rgba(91, 140, 255, 0.3);
+}
+.msg.bot {
+  align-self: stretch;
+  background: var(--bg-elev);
+  border: 1px solid var(--border-soft);
+}
+.msg.sys {
+  align-self: stretch;
+  background: var(--gen-soft);
+  border: 1px solid rgba(0, 212, 160, 0.25);
+  color: var(--accent-strong);
+  font-size: 11px;
+}
+.msg .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.quick-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 100%;
+  min-width: 0;
+}
+.chip {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--ink-dim);
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.chat-input {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+}
+.chat-input textarea {
+  min-height: 64px;
+  resize: vertical;
+}
+
+/* GenAI Lab */
+.model-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.model-card {
+  padding: 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  text-align: left;
+  cursor: pointer;
+}
+.model-card:hover,
+.model-card.active {
+  border-color: var(--gen);
+  background: rgba(0, 212, 160, 0.08);
+}
+.model-card strong {
+  display: block;
+  font-size: 12px;
+}
+.model-card span {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.job-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+.job {
+  padding: 8px;
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  border: 1px solid var(--border-soft);
+}
+.job header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+.job .progress {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.job .progress > i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--gen), var(--accent));
+  transition: width 0.2s;
+}
+.job.done .progress > i {
+  background: var(--gen);
+}
+.job.fail .progress > i {
+  background: var(--danger);
+}
+
+/* Transcript */
+.transcript {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+}
+.t-line {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  align-items: start;
+}
+.t-line:hover {
+  background: var(--panel-2);
+}
+.t-line.selected {
+  background: var(--accent-soft);
+  border-color: rgba(91, 140, 255, 0.35);
+}
+.t-line .t {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  padding-top: 2px;
+}
+.t-line .w {
+  color: var(--ink);
+  line-height: 1.55;
+}
+.t-line .w mark.filler {
+  background: var(--warn-soft);
+  color: var(--warn);
+  border-radius: 2px;
+  padding: 0 2px;
+  text-decoration: line-through;
+}
+.t-line .meta {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* Timeline panel spans full width bottom */
+.timeline-panel {
+  border-top: 1px solid var(--border);
+  background: var(--bg-elev);
+  display: grid;
+  grid-template-rows: 40px 1fr;
+  min-height: 0;
+}
+
+.tl-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--panel);
+}
+
+.tl-toolbar .spacer {
+  flex: 1;
+}
+
+.zoom-slider {
+  width: 100px;
+  accent-color: var(--accent);
+}
+
+/* Status */
+.statusbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  background: var(--panel);
+  border-top: 1px solid var(--border-soft);
+  font-size: 11px;
+  color: var(--muted);
+}
+.statusbar .right {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gen);
+  box-shadow: 0 0 8px var(--gen);
+}
+.status-dot.busy {
+  background: var(--warn);
+  box-shadow: 0 0 8px var(--warn);
+}
+
+.ai-mode-chip {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  color: var(--ink-dim);
+}
+.ai-mode-chip[data-mode="live"] {
+  border-color: rgba(0, 212, 160, 0.45);
+  color: var(--gen);
+  background: var(--gen-soft);
+}
+.ai-mode-chip[data-mode="sim"] {
+  border-color: rgba(255, 176, 32, 0.35);
+  color: var(--warn);
+  background: var(--warn-soft);
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  place-items: center;
+  z-index: 50;
+  backdrop-filter: blur(2px);
+}
+.modal-backdrop.open {
+  display: grid;
+}
+.modal {
+  width: min(520px, calc(100vw - 32px));
+  max-height: min(80vh, 720px);
+  overflow: auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+.modal h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+.modal p {
+  margin: 0 0 12px;
+  color: var(--ink-dim);
+  font-size: 12px;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* Export destination — where the rendered file goes + what it is called */
+.export-dest {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 10px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+}
+.export-dest-row {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 8px;
+  align-items: center;
+}
+.export-dest-row > label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-dim);
+}
+.export-dest-ctl {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-width: 0;
+}
+.export-dest-ctl input[type="text"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 6px 8px;
+  color: var(--ink);
+  font-size: 12px;
+}
+.export-dest-ctl input[type="text"]:disabled {
+  opacity: 0.5;
+}
+.export-dest-ext {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+.export-dest-hint {
+  font-size: 11px;
+  color: var(--muted);
+  word-break: break-all;
+}
+/* 2.2.0 save-location checkboxes (export modal + save-location modal). */
+.save-check {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 11px;
+  color: var(--ink-dim);
+  cursor: pointer;
+  line-height: 1.5;
+}
+.save-check input[type="checkbox"] {
+  margin-top: 2px;
+  accent-color: var(--accent);
+  flex: 0 0 auto;
+}
+.export-dest.invalid .export-dest-ctl input#exportFileName {
+  border-color: var(--warn);
+}
+
+.preset-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.preset {
+  padding: 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  text-align: left;
+  cursor: pointer;
+}
+.preset:hover,
+.preset.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.preset strong {
+  display: block;
+  font-size: 12px;
+}
+.preset span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Toasts */
+.toasts {
+  position: fixed;
+  right: 16px;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 60;
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  min-width: 220px;
+  max-width: 340px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  font-size: 12px;
+  animation: toast-in 0.18s ease-out;
+}
+.toast.ok {
+  border-color: rgba(0, 212, 160, 0.4);
+}
+.toast.err {
+  border-color: rgba(255, 92, 122, 0.45);
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.empty {
+  padding: 18px 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.help-kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  color: var(--ink-dim);
+}
+
+/* ---- AiFilmora: new panels (Motion, Scopes, Preferences) ---- */
+.muted-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 6px 0 0;
+  line-height: 1.5;
+}
+
+.modal-backdrop.wide .modal {
+  width: min(760px, calc(100vw - 32px));
+}
+.settings-body {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 0;
+  min-height: 360px;
+}
+.settings-nav {
+  border-right: 1px solid var(--border);
+  padding-right: 8px;
+}
+.settings-nav button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  border: 0;
+  background: transparent;
+  color: var(--ink-dim);
+  font-size: 13px;
+  cursor: pointer;
+}
+.settings-nav button.active {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+.settings-pane {
+  padding: 4px 14px;
+  overflow: auto;
+}
+.settings-pane h4 {
+  margin: 14px 0 8px;
+  font-size: 13px;
+  color: var(--ink);
+}
+.settings-pane .field {
+  margin-bottom: 10px;
+}
+.settings-pane .row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.settings-pane .hint {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 2px 0 0;
+}
+.lut-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+.lut-row .name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Scopes */
+.scope-wrap {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 6px;
+  margin: 6px 0;
+}
+#scopeCanvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--bg-deep);
+}
+
+/* Motion panel + keyframes */
+.kf-section {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  margin: 8px 0;
+  background: var(--bg-elev);
+}
+.kf-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.kf-head .prop {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.kf-track {
+  position: relative;
+  height: 22px;
+  margin-top: 8px;
+  background: repeating-linear-gradient(90deg, var(--bg) 0 11px, var(--bg-elev) 11px 12px);
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.kf-dot {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--panel);
+  cursor: grab;
+}
+.kf-dot:hover { transform: scale(1.15); }
+.kf-dot:hover::after {
+  content: attr(data-v);
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  background: var(--ink);
+  color: var(--panel);
+  padding: 1px 4px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.kf-empty {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.badge {
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+
+/* Beat Sync markers on timeline clips */
+.beat-layer {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.beat-tick {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  margin-left: -1px;
+  background: linear-gradient(180deg, rgba(255, 213, 102, 0.95), rgba(255, 213, 102, 0.35));
+  box-shadow: 0 0 4px rgba(255, 213, 102, 0.6);
+}
+
+/* Media bin — marquee multi-select + checkbox + delete */
+.media-bin { display: flex; flex-direction: column; gap: 8px; }
+.media-toolbar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px; border: 1px solid var(--border);
+  border-radius: var(--radius); background: var(--bg-elev);
+  font-size: 11px; color: var(--ink-dim);
+}
+.media-select-all { display: flex; align-items: center; gap: 6px; cursor: pointer; font-weight: 600; }
+.media-select-all input { width: 14px; height: 14px; accent-color: var(--accent); cursor: pointer; }
+.media-count { font-family: var(--mono); }
+.media-hint { margin-left: auto; color: var(--muted); font-size: 10px; }
+.media-select-wrap { position: relative; }
+.media-marquee {
+  position: absolute; z-index: 5; pointer-events: none;
+  border: 1px solid var(--accent); background: rgba(91,140,255,0.18);
+  box-shadow: 0 0 0 1px rgba(91,140,255,0.35);
+}
+
+/* ============================================================
+ * Filmora-inspired shell (research/FILMORA-INSPIRED-REDESIGN.md)
+ * ============================================================ */
+
+.filmora-titlebar { gap: 10px; padding: 0 14px; }
+.filmora-titlebar .project-pill { -webkit-app-region: no-drag; }
+/* No `margin-left: auto` here — the project chip already owns the auto margin.
+   Two auto margins split the free space between them and reopen a dead gap
+   right in the middle of the right-hand cluster. */
+.filmora-titlebar .titlebar-right { display: flex; gap: 6px; align-items: center; -webkit-app-region: no-drag; }
+.filmora-titlebar .credits-chip { padding: 3px 10px; font-size: 11px; }
+.export-pill { font-weight: 700; padding: 6px 14px; }
+
+/* Filmora-style menus in the titlebar (File · Edit · Tools · View · Extended · Help · Version) */
+.filmora-menu { display: flex; align-items: center; gap: 2px; -webkit-app-region: no-drag; }
+.fm-item { position: relative; }
+.fm-item > summary {
+  list-style: none;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--ink-dim);
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.fm-item > summary::-webkit-details-marker { display: none; }
+.fm-item[open] > summary,
+.fm-item > summary:hover {
+  background: var(--panel-2);
+  color: var(--ink);
+}
+.fm-pop {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 220px;
+  padding: 6px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 100;
+}
+.fm-pop button {
+  text-align: left;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  font-size: 12px;
+  background: transparent;
+}
+.fm-pop button:hover { background: var(--panel-2); color: var(--accent-strong); }
+.fm-pop hr { border: none; border-top: 1px solid var(--border-soft); margin: 4px 6px; }
+.fm-info-row { padding: 6px 10px; font-size: 11px; color: var(--ink-dim); }
+
+/* Preview tabs (Timeline / Source) + Quality + Aspect dropdowns */
+.preview-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border-soft);
+}
+.ptab {
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--ink-dim);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ptab:hover { color: var(--ink); }
+.ptab.active { background: var(--accent-soft); color: var(--accent-strong); }
+.preview-spacer { flex: 1; }
+.preview-dd { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-dim); }
+.preview-dd select {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  padding: 3px 6px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.panel-header.compact.pi-header {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Project Info card (Filmora-style right rail top) */
+.project-info[hidden] { display: none; }
+.project-info {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--panel);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+.pi-row {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 8px;
+  font-size: 11px;
+  align-items: center;
+  min-width: 0;
+}
+.pi-k { color: var(--ink-dim); font-weight: 600; }
+.pi-v { color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pi-thumb {
+  position: relative;
+  margin-top: 6px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-elev);
+  aspect-ratio: 16/9;
+}
+.pi-thumb canvas { width: 100%; height: 100%; display: block; }
+.pi-thumb .btn { position: absolute; right: 6px; bottom: 6px; padding: 3px 8px; font-size: 10px; }
+
+/* Filmora font picker + caption gallery inside the Text panel */
+.filmora-font-picker {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.filmora-font-picker-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px;
+  align-items: center;
+}
+.filmora-font-picker select {
+  width: 100%;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  padding: 4px 6px;
+  font-size: 12px;
+}
+.filmora-font-preview {
+  padding: 8px 10px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+  font-size: 18px;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* Visual font picker (1.6.0) — every tile is set in its own typeface. */
+.font-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: 5px;
+  max-height: 260px;
+  overflow: auto;
+  padding: 5px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+}
+.font-tile {
+  display: grid;
+  gap: 1px;
+  padding: 7px 8px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  background: var(--panel-2);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+  transition: border-color 0.12s, background 0.12s;
+}
+.font-tile:hover { border-color: var(--accent); background: var(--bg-elev); }
+.font-tile.applied { border-color: var(--accent); background: var(--accent-soft, var(--bg-elev)); }
+/* Before the face arrives the tile shows the name in the UI font; once
+   document.fonts.load() resolves we swap to the real face. */
+.font-tile .font-tile-sample {
+  font-size: 19px;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: inherit;
+}
+.font-tile .font-tile-name {
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--ui-font, inherit);
+}
+.caption-anim-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 6px;
+  max-height: 260px;
+  overflow: auto;
+  padding: 4px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+}
+.caption-anim {
+  position: relative;
+  aspect-ratio: 1;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--panel);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.caption-anim img { width: 100%; height: 100%; object-fit: contain; }
+.caption-anim:hover { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.caption-anim.applied::after {
+  content: "✓";
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  color: var(--gen);
+  font-weight: 700;
+}
+.caption-anim-label {
+  position: absolute;
+  left: 4px;
+  bottom: 2px;
+  font-size: 9px;
+  color: var(--ink);
+  background: rgba(0,0,0,0.55);
+  padding: 1px 4px;
+  border-radius: 3px;
+  max-width: calc(100% - 8px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.caption-anim-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-size: 11px;
+  color: var(--ink-dim);
+}
+.caption-anim-toolbar input[type="search"] {
+  flex: 1;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  padding: 3px 6px;
+  font-size: 11px;
+}
+.caption-anim-toolbar select {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  padding: 3px 6px;
+  font-size: 11px;
+}
+
+/* Theme-preset swatches in Preferences → Appearance */
+.theme-preset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+  margin-top: 6px;
+}
+.theme-preset {
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 8px;
+  cursor: pointer;
+  background: var(--bg-elev);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.theme-preset.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.theme-preset-swatches { display: flex; gap: 3px; height: 18px; border-radius: 4px; overflow: hidden; }
+.theme-preset-swatches span { flex: 1; display: block; }
+.theme-preset-name { font-size: 12px; font-weight: 600; color: var(--ink); }
+.theme-preset-desc { font-size: 10px; color: var(--muted); }
+.media-card.marquee-hit { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.media-card.is-offline { opacity: 0.75; }
+.media-card.is-offline .media-thumb { filter: grayscale(0.6) brightness(0.8); }
+.media-check {
+  position: absolute; top: 6px; right: 6px; z-index: 3;
+  width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.65); border: 1px solid rgba(255,255,255,0.25); border-radius: 5px;
+  cursor: pointer;
+}
+.media-check input { width: 14px; height: 14px; accent-color: var(--accent); cursor: pointer; margin: 0; }
+.media-del {
+  position: absolute; bottom: 44px; right: 6px; z-index: 3;
+  width: 22px; height: 22px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.65); color: #ffb4b4; font-size: 11px; cursor: pointer;
+  display: none; align-items: center; justify-content: center;
+}
+.media-card:hover .media-del, .media-card.selected .media-del { display: inline-flex; }
+.media-del:hover { background: rgba(180,40,40,0.85); color: #fff; }
+.media-play {
+  position: absolute; left: 50%; top: 34%; transform: translate(-50%,-50%); z-index: 3;
+  width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.6); color: #fff; font-size: 13px; cursor: pointer;
+  display: none; align-items: center; justify-content: center;
+}
+.media-card:hover .media-play { display: inline-flex; }
+.media-play:hover { background: var(--accent); border-color: var(--accent); }
+.media-preview-overlay {
+  position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.7); padding: 20px;
+}
+.media-preview-card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+  padding: 12px; max-width: 94vw; display: flex; flex-direction: column; gap: 10px;
+}
+.media-preview-head { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+.media-preview-head strong { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.media-preview-head span { color: var(--muted); font-size: 11px; font-family: var(--mono); }
+.media-preview-body { display: flex; align-items: center; justify-content: center; }
+.media-preview-foot { display: flex; gap: 8px; justify-content: flex-end; }
+.media-ctx {
+  position: fixed; z-index: 10000; min-width: 190px; display: flex; flex-direction: column;
+  background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 4px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+}
+.media-ctx button {
+  text-align: left; background: transparent; border: 0; color: var(--ink);
+  padding: 8px 10px; border-radius: 6px; font-size: 12px; cursor: pointer;
+}
+.media-ctx button:hover { background: var(--panel-3); }
+.media-ctx button.danger { color: #ff9d9d; }
+
+/* ============================================================
+ * Filmora slider system (Widgets/FFPlayerToolSlider)
+ *   BackgroundWidget → track: 6% white, 2px radius
+ *   GrooveWidget     → fill : #c3cad0 (light grey, NOT the accent)
+ * Browsers gave us their native slider before — this makes it theme-aware.
+ * ============================================================ */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-2);
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-2);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--ink-body);
+  border: 1px solid var(--stroke-1);
+  transition: background 0.12s, border-color 0.12s;
+}
+input[type="range"]:hover::-webkit-slider-thumb,
+input[type="range"]:focus::-webkit-slider-thumb {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+input[type="range"]::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-2);
+}
+input[type="range"]::-moz-range-progress {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ink-body);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ink-body);
+  border: 1px solid var(--stroke-1);
+}
+input[type="range"]:hover::-moz-range-thumb {
+  background: var(--accent);
+}
+input[type="range"]:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Filmora separator (FTimelineTabBar_LineWidget — white 24%) */
+.hr,
+.fm-pop hr,
+.settings-sep {
+  border: none;
+  border-top: 1px solid var(--stroke-3);
+}
+
+/* =========================================================================
+   Round 4 — icon-first tabs, compact chrome, dark-first polish
+   The Filmora shell is icon-led: the tab strip carries the meaning, so the
+   redundant "LIBRARY" / "INSPECTOR" headings are dropped and the strip itself
+   is tightened to a single 34 px row.
+   ========================================================================= */
+
+/* Visually hidden but still announced by screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- compact panel headers ------------------------------------------------ */
+.panel-header.compact {
+  padding: 5px 7px;
+  gap: 4px;
+  background: var(--panel);
+}
+
+/* --- icon tabs ------------------------------------------------------------ */
+.panel-tabs.icon-tabs {
+  gap: 1px;
+  padding: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--stroke-2);
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.icon-tabs .tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 3px 2px;
+  min-height: 28px;
+  border-radius: var(--radius-sm);
+}
+
+.icon-tabs .tab-ico,
+.icon-tabs .ico {
+  display: grid;
+  place-items: center;
+  height: 15px;
+  color: var(--ink-muted);
+  transition: color 0.12s;
+}
+.icon-tabs .tab-ico svg,
+.icon-tabs .ico svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+.icon-tabs .tab-lbl {
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink-muted);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.12s;
+}
+
+.icon-tabs .tab:hover {
+  background: var(--surface-1);
+}
+.icon-tabs .tab:hover .tab-ico,
+.icon-tabs .tab:hover .tab-lbl,
+.icon-tabs .tab:hover .ico {
+  color: var(--ink-strong);
+}
+
+.icon-tabs .tab.active {
+  background: var(--surface-3);
+  box-shadow: inset 0 0 0 1px var(--stroke-1);
+}
+.icon-tabs .tab.active .tab-ico,
+.icon-tabs .tab.active .ico {
+  color: var(--accent-strong);
+}
+.icon-tabs .tab.active .tab-lbl {
+  color: var(--ink-strong);
+}
+
+/* Inspector rail: 11 destinations never fit on one row of a narrow panel, so
+   the strip wraps into as many rows as needed — tabs arrange downward when
+   there is no space, and no tab is ever hidden or cut off. */
+.panel-tabs.icon-tabs.scroll-x {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  overflow: visible;
+}
+.icon-tabs.scroll-x .tab {
+  flex: 1 1 46px;
+  min-width: 46px;
+  max-width: 76px;
+  padding: 3px 4px;
+}
+
+/* --- generic icon slot (any [data-icon] host) ----------------------------- */
+.has-ico > .ico {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+.has-ico > .ico svg {
+  display: block;
+}
+
+/* --- titlebar icon buttons ------------------------------------------------ */
+.tb-ico {
+  width: 26px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  color: var(--ink-muted);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition: background 0.12s, color 0.12s;
+}
+.tb-ico svg {
+  width: 15px;
+  height: 15px;
+}
+.tb-ico:hover {
+  background: var(--surface-2);
+  color: var(--ink-strong);
+}
+.tb-ico:active {
+  background: var(--surface-3);
+}
+
+/* Quick-action icon toolbar in the titlebar. */
+.tb-tools {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  margin-left: 4px;
+  padding-left: 6px;
+  border-left: 1px solid var(--stroke-2);
+  -webkit-app-region: no-drag;
+}
+.tb-sep {
+  width: 1px;
+  height: 15px;
+  margin: 0 3px;
+  background: var(--stroke-1);
+  flex: 0 0 auto;
+}
+
+.export-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: var(--ctl-h);
+  padding: 0 10px;
+}
+.export-pill .ico svg {
+  width: 14px;
+  height: 14px;
+}
+.export-pill .chev {
+  font-size: 10px;
+  opacity: 0.85;
+}
+
+/* --- menu strip ----------------------------------------------------------- */
+.filmora-menu {
+  gap: 0;
+}
+.fm-item > summary {
+  padding: 5px 9px;
+  font-size: 12px;
+  border-radius: var(--radius-sm);
+}
+.fm-pop {
+  padding: 4px;
+}
+
+/* --- chrome density ------------------------------------------------------- */
+.panel-body {
+  padding: 8px;
+  gap: 8px;
+}
+
+.preview-tabs {
+  gap: 4px;
+  padding: 4px 8px;
+}
+.ptab {
+  padding: 3px 10px;
+  font-size: 11px;
+}
+
+.transport {
+  gap: 6px;
+  padding: 6px 10px 8px;
+}
+
+.tl-toolbar {
+  gap: 5px;
+  padding: 0 8px;
+}
+
+.statusbar {
+  gap: 10px;
+  padding: 0 10px;
+}
+
+.credits-chip {
+  gap: 6px;
+  padding: 3px 9px;
+  font-size: 11px;
+}
+.credits-chip .chip-ico {
+  display: inline-grid;
+  place-items: center;
+  color: var(--accent-ai);
+}
+.credits-chip .chip-ico svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* --- dark-first polish ---------------------------------------------------- */
+/* The dark theme is the intended default, so it gets the depth treatment:
+   panels sit on a near-black base and everything above is a translucent white
+   lift, which is what reads as "premium" rather than "flat grey". */
+:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .menubar,
+:root[data-theme="dark"] .tl-toolbar,
+:root[data-theme="dark"] .statusbar {
+  background: var(--panel);
+}
+:root[data-theme="dark"] body {
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(61, 220, 255, 0.05), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(91, 140, 255, 0.05), transparent 55%),
+    var(--bg);
+}
+:root[data-theme="dark"] .panel {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02) inset;
+}
+:root[data-theme="dark"] .tab.active,
+:root[data-theme="dark"] .icon-tabs .tab.active {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.07));
+}
+:root[data-theme="dark"] .btn.primary {
+  box-shadow: 0 2px 10px rgba(91, 140, 255, 0.28);
+}
+
+/* Thinner, unobtrusive scrollbars everywhere in dark mode. */
+:root[data-theme="dark"] * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar) transparent;
+}
+:root[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--scrollbar);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+  background-clip: content-box;
+}
+:root[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* =========================================================================
+   v1.5.0 — Filmora LUT browser (assets/configs/ColorAnd3dLutPreset)
+   25 real 32³ .CUBE looks, each previewed by grading a reference colour
+   chart through the LUT itself, so the tile shows what the look does.
+   ========================================================================= */
+.field-hint {
+  float: right;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-muted);
+}
+
+.search-input {
+  width: 100%;
+  margin-bottom: 6px;
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--stroke-1);
+  background: var(--field);
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  box-sizing: border-box;
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.lut-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 6px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 2px;
+}
+
+.lut-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0;
+  border: 1px solid var(--stroke-2);
+  border-radius: var(--radius-sm);
+  background: var(--surface-1);
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.12s, background 0.12s;
+}
+.lut-tile:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-2);
+}
+.lut-tile.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.lut-tile.pending .lut-thumb {
+  opacity: 0.45;
+}
+
+.lut-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.lut-name {
+  padding: 3px 5px 4px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink-body);
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lut-tile.active .lut-name {
+  color: var(--ink-strong);
+}
+
+.empty-hint {
+  margin: 6px 2px;
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+
+/* =========================================================================
+   v1.5.0 — Filmora audio effects rack (assets/resources/audio_effect)
+   76 presets grouped into 13 families, every parameter range taken from
+   Filmora's own description.json.
+   ========================================================================= */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.chip {
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--stroke-1);
+  background: var(--surface-1);
+  color: var(--ink-muted);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.chip:hover { background: var(--surface-2); color: var(--ink-strong); }
+.chip.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+.chip-n { opacity: 0.65; font-weight: 500; }
+
+.fx-rack {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3px;
+  max-height: 190px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+.fx-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4px 7px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: var(--surface-1);
+  text-align: left;
+  cursor: pointer;
+}
+.fx-item:hover { background: var(--surface-2); }
+.fx-item.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.fx-item-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-body);
+}
+.fx-item.active .fx-item-name { color: var(--ink-strong); }
+.fx-item-meta {
+  font-size: 10px;
+  color: var(--ink-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fx-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+.fx-chain-row {
+  padding: 6px 7px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--stroke-2);
+  background: var(--card);
+}
+.fx-chain-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+.fx-chain-head strong {
+  font-size: 11px;
+  color: var(--ink-strong);
+  font-weight: 600;
+}
+.fx-remove {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-sm);
+  color: var(--ink-muted);
+  font-size: 10px;
+  display: grid;
+  place-items: center;
+}
+.fx-remove:hover { background: var(--danger-soft); color: var(--danger); }
+.fx-note { font-size: 10px; color: var(--ink-muted); }
+.fx-param {
+  display: grid;
+  grid-template-columns: 1fr 90px 34px;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+.fx-param span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fx-param output {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-body);
+}
+
+/* =========================================================================
+   v1.5.0 — Filmora text styles (configs/TextStyle, real PNG thumbnails)
+   ========================================================================= */
+.style-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 5px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.style-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0;
+  border: 1px solid var(--stroke-2);
+  border-radius: var(--radius-sm);
+  background: var(--surface-1);
+  cursor: pointer;
+  overflow: hidden;
+}
+.style-tile:hover { border-color: var(--border-hover); background: var(--surface-2); }
+.style-tile.active { border-color: var(--accent); background: var(--accent-soft); }
+.style-tile img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  background: var(--panel-2);
+}
+.style-tile span {
+  padding: 2px 4px 3px;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.style-tile.active span { color: var(--ink-strong); }
+
+.trans-preset {
+  position: relative;
+  overflow: hidden;
+}
+.trans-preset img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-sm);
+  background: var(--panel-2);
+}

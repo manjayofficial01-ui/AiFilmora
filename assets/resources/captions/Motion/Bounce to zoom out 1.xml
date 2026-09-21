@@ -1,0 +1,26 @@
+<NLEMotion>
+<Motion>
+<MotionAlians>Bounce to zoom out 1</MotionAlians>
+<MotionGUID>{27BCFDE6-CE46-4AA5-955F-E5BBD0353EB6}</MotionGUID>
+<MotionResType>0</MotionResType>
+		<MotionTimeConfig>
+			<MaxLength>5</MaxLength>
+			<InKeyIndex>1</InKeyIndex>
+			<OutKeyIndex>-1</OutKeyIndex>
+		</MotionTimeConfig>
+<MotionPositionList>
+<Point XPos="0.853125" YPos="0.856250"/>
+<Point XPos="1.000000" YPos="1.000000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+</MotionPositionList>
+<MotionEffectList>
+<MotionEffect KeyFrame="0.000000" scaleX="2.000000" scaleY="2.000000" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="0.800000" scaleX="1.000000" scaleY="1.000000" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="1.000000" scaleX="1.000000" scaleY="1.000000" rotate="0" alpha="100"/>
+</MotionEffectList>
+</Motion>
+</NLEMotion>

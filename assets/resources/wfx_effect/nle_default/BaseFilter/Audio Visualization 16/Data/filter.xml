@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>EC69E21C-433F-4C8C-8793-A4ED07F77D8E</GUID>
+    <Name>Audio Visualization 16</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 16.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

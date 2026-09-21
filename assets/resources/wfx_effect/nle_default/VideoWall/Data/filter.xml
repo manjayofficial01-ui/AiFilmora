@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>CB730FB7-9D79-4353-B26E-F67D218733D0</GUID>
+        <Name>VideoWall</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>VideoWall.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextNode FillMode="0" File="" Color="16777215" Version="2.0" BasePixel="28">
+    <TextParam>
+        <TextData AlignModel="0" Align="0" Radius="0" Angle="0" TextMode="1" OutputTextPath="0" OffsetX="0" OffsetY="0" Name="004C006100790065007200200031">
+            <CharData Title="00480041004C004C004F005700450045004E" RowSpace="9" LineSpace="10" Underline="0" UnderlineColor="-1">
+                <Font Version="1" Size="48" HSize="48" VSize="48" Bold="0" Italic="0" FontName="004C00610063007100750065007200200052006500670075006C00610072"/>
+                <Face Enable="1" Alpha="165" BlurRadius="0" Effect="0" ColorCount="1" Color1="16777215"/>
+                <Border Enable="0" Size="1" Color1="16757012" Alpha="255" BlurRadius="1" Join="0">
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="0" Pos="100"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="5" Distance="4" Direction="3"/>
+            </CharData>
+        </TextData>
+        <Gradient Enable="0" GradType="0" Angle="0" Count="2" Color1="16777215" Pos1="0" Color2="0" Pos2="100"/>
+        <Texture Enable="1" FillMode="1" TextureImagePath="%CaptionResourcePath%/PresetX/µÚÁùÂÖ/Halloween 01/res/texture-image-{0a4836f5-845f-49e3-85ac-7d730d6e1a49}.png" TextureImageTempPath=""/>
+        <Background_01 Enable="0" Color="0" Alpha="255" Radian="0" ScaleX="100" ScaleY="100">
+            <Gradient Enable="0" GradType="0" Angle="0">
+                <ColorPos id="1" Color="16777215" Pos="0"/>
+                <ColorPos id="2" Color="0" Pos="100"/>
+            </Gradient>
+        </Background_01>
+        <ExternAttr>
+            <Layer id="1" OffsetX="0" OffsetY="0" Name="004C006100790065007200200030">
+                <Face Enable="1" Alpha="255" BlurRadius="0" Effect="0">
+                    <ColorList>
+                        <Color id="1" value="16777215"/>
+                    </ColorList>
+                    <Gradient Enable="1" GradType="0" Angle="270">
+                        <ColorPos id="1" Color="16533852" Pos="0"/>
+                        <ColorPos id="2" Color="16625983" Pos="100"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Face>
+                <Border Enable="1" Size="2" Color1="16747614" Alpha="127" BlurRadius="1" Join="0">
+                    <Gradient Enable="1" GradType="0" Angle="270">
+                        <ColorPos id="1" Color="16745364" Pos="0"/>
+                        <ColorPos id="2" Color="16756326" Pos="100"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="5" Distance="4" Direction="3"/>
+            </Layer>
+            <Layer id="2" OffsetX="0" OffsetY="0" Name="004C006100790065007200200030">
+                <Face Enable="0" Alpha="255" BlurRadius="0" Effect="0">
+                    <ColorList>
+                        <Color id="1" value="16777215"/>
+                    </ColorList>
+                    <Gradient Enable="1" GradType="0" Angle="270">
+                        <ColorPos id="1" Color="16533852" Pos="0"/>
+                        <ColorPos id="2" Color="16625983" Pos="100"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Face>
+                <Border Enable="1" Size="1" Color1="1574407" Alpha="255" BlurRadius="6" Join="0">
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="0" Pos="100"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="5" Distance="4" Direction="3"/>
+            </Layer>
+            <Layer id="3" OffsetX="0" OffsetY="0" Name="004C006100790065007200200030">
+                <Face Enable="0" Alpha="255" BlurRadius="0" Effect="0">
+                    <ColorList>
+                        <Color id="1" value="16777215"/>
+                    </ColorList>
+                    <Gradient Enable="1" GradType="0" Angle="270">
+                        <ColorPos id="1" Color="16533852" Pos="0"/>
+                        <ColorPos id="2" Color="16625983" Pos="100"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Face>
+                <Border Enable="1" Size="12" Color1="9314101" Alpha="255" BlurRadius="1" Join="0">
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="0" Pos="100"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="5" Distance="4" Direction="3"/>
+            </Layer>
+            <Layer id="4" OffsetX="-1" OffsetY="0" Name="004C006100790065007200200030">
+                <Face Enable="0" Alpha="255" BlurRadius="0" Effect="0">
+                    <ColorList>
+                        <Color id="1" value="16777215"/>
+                    </ColorList>
+                    <Gradient Enable="1" GradType="0" Angle="270">
+                        <ColorPos id="1" Color="16533852" Pos="0"/>
+                        <ColorPos id="2" Color="16625983" Pos="100"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Face>
+                <Border Enable="1" Size="11" Color1="3279122" Alpha="255" BlurRadius="5" Join="0">
+                    <Gradient Enable="0" GradType="0" Angle="0">
+                        <ColorPos id="1" Color="16777215" Pos="0"/>
+                        <ColorPos id="2" Color="0" Pos="100"/>
+                    </Gradient>
+                    <Texture Enable="0" FillMode="0" TextureImagePath="" TextureImageTempPath=""/>
+                </Border>
+                <Shadow Enable="0" Color="16777215" Alpha="255" BlurRadius="5" Distance="4" Direction="3"/>
+            </Layer>
+        </ExternAttr>
+    </TextParam>
+    <EffectParam VZoom="1" HZoom="1"/>
+</TextNode>

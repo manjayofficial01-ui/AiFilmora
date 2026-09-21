@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>B84A6B57-861A-4931-835D-4B52E255CB34</GUID>
+        <Name>Chaos 1</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>cameraShake3.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

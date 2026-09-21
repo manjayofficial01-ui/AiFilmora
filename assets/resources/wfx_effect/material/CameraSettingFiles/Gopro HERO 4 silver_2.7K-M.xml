@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CamraCalibrationParams>
+    <FishEye>
+        <!-- This are fisheEye Params -->
+        <K-Params Name="is K-Params">
+            <K00>1780.447516</K00>
+            <K01>0.000000</K01>
+            <K02>1294.662816</K02>
+            <K10>0.000000</K10>
+            <K11>1783.686313</K11>
+            <K12>706.702354</K12>
+            <K20>0.000000</K20>
+            <K21>0.000000</K21>
+            <K22>1.000000</K22>
+        </K-Params>
+        <D-Params Name="is D-Params">
+            <D0>-0.062690</D0>
+            <D1>1.192563</D1>
+            <D2>-4.792426</D2>
+            <D3>6.508427</D3>
+        </D-Params>
+        <Resolution Name="is Resolution">
+            <Width>2704</Width>
+            <Height>1520</Height>
+        </Resolution>
+    </FishEye>
+</CamraCalibrationParams>

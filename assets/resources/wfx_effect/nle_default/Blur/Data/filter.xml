@@ -1,0 +1,10 @@
+ <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>98DA6C30-55AD-4164-9FF5-53D535E719B8</GUID>
+    <Name>Blur</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Blur.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

@@ -1,0 +1,51 @@
+[
+    {
+        "type": 64,
+        "title": "Customize",
+        "category": "Default",
+        "favorate": 0,
+        "config": "/Customize.conf"
+    },
+    {
+        "type": 64,
+        "title": "Montage",
+        "category": "Default",
+        "favorate": 0,
+        "config": "/Montage.conf"
+    },
+    {
+        "type": 64,
+        "title": "Hero moment",
+        "category": "Default",
+        "favorate": 0,
+        "config": "/Hero moment.conf"
+    },
+    {
+        "type": 64,
+        "title": "Bullet time",
+        "category": "Default",
+        "favorate": 0,
+        "config": "/Bullet time.conf"
+    },
+    {
+        "type": 64,
+        "title": "Jumper",
+        "category": "Default",
+        "favorate": 0,
+        "config": "/Jumper.conf"
+    },
+    {
+        "type": 64,
+        "title": "Flash in",
+        "category": "Default",
+        "favorate": 0,
+        "config": "/Flash in.conf"
+    },
+    {
+        "type": 64,
+        "title": "Flash out",
+        "category": "Default",
+        "favorate": 0,
+        "config": "/Flash out.conf"
+    }
+]

@@ -1,0 +1,93 @@
+{
+	"title": "Nowości w programie Filmora w wersji %1.",
+	"titleByManual": "Korzystasz z najnowszej wersji. Sprawdź nowe funkcje dostępne w wersji %1!",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "Zamiana tekstu na wideo",
+			"discription": "Uwolnij swoją kreatywność dzięki funkcji Zamiana tekstu na wideo i poznaj magię Filmora AI",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "Obraz na wideo",
+			"discription": "Zamiana obrazu na film jest od teraz obsługiwana przez Veo 3! Korzystaj z wyjątkowo udoskonalonych wygenerowanych wyników.",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},		
+		{
+			"id": "ai_idea_to_video",
+			"name": "Zamiana pomysłu na film za pomocą SI",
+			"discription": "Przekształć surowe pomysły w profesjonalne krótkie filmy, zachowując spójność stylu wizualnego i zapewniając ciągłość postaci we wszystkich scenach.",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "Stylizowanie zdjęć za pomocą SI",
+			"discription": "Stylizowanie zdjęć za pomocą SI ‍zostało udoskonalone! Od teraz funkcja ta jest dostępna w zakładce AIGC. Została ona rozszerzona i udoskonalona o nowe możliwości stylizowania zdjęć.",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "Audio na wideo",
+			"discription": "Z łatwością przekształcaj podcasty z samym dźwiękiem w atrakcyjne, krótkie filmy. Edytuj, przycinaj i wyróżniaj swoje ulubione historie.",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "Inteligentne krótkie klipy",
+			"discription": "Przekształcaj długie filmy w angażujące filmy krótkometrażowe.Wycinaj, przycinaj i wyróżniaj najlepsze momenty!",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "Smart Scene Cut",
+			"discription": "Wyodrębniaj najważniejsze sceny i postaci w celu zwiększenia wydajności edycji.",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "Inteligentne generowanie BGM",
+			"discription": "Automatycznie generuj podkład muzyczny pasujący do filmu.",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "Automatyczne przeformułowanie",
+			"discription": "Użyj funkcji Auto Reframe, aby wyeksportować filmy, które pasują do współczynników proporcji platform mediów społecznościowych.",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "Sztuczna inteligencja, która rozumie, pomaga i udoskonala. Dzięki asystentowi AI Mate możesz tworzyć oszałamiające filmy szybciej niż kiedykolwiek wcześniej.",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "Edycja z użyciem wielu kamer",
+			"discription": "Importuj nagrania z wielu kamer i płynnie przełączaj między różnymi ujęciami, aby zagwarantować sobie wydajną i wygodną edycję. Uprość złożone procesy edycji i usprawnij swój kreatywny przepływ pracy.",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "Tłumaczenia przy użyciu SI",
+			"discription": "Automatycznie tłumacz pliki wideo i audio na ponad 20 języków; synchronizuj dźwięk z ruchem warg osób mówiących.",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

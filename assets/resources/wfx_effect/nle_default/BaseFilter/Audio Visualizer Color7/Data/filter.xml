@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>B997F510-B417-4C50-972B-6B628D015CF8</GUID>
+    <Name>Audio Visualizer Color7</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualizer Color7.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

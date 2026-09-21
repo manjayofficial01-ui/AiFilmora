@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>630228AF-D900-4D89-AC41-01FF57F0A0ED</GUID>
+    <Name>Audio Visualization 08</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization 08.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

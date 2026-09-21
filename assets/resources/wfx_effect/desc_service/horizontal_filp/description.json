@@ -1,0 +1,9 @@
+{
+    "type": "video_effect",
+    "display_name": "horizontal_filp",
+    "unique_name": "video/effect/horizontal_filp",
+    "capability": ["opencl", "cpu"],
+    "thumb": "thumb.png",
+    "video": "test.mp4",
+    "ENCRYPT": "1"
+}

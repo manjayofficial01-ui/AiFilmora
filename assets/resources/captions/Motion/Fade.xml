@@ -1,0 +1,30 @@
+<NLEMotion>
+<Motion>
+<MotionAlians>Fade</MotionAlians>
+<MotionGUID>{65E49E19-9F93-413E-9218-D51863C7D3DE}</MotionGUID>
+<MotionResType>0</MotionResType>
+		<MotionTimeConfig>
+			<MaxLength>5</MaxLength>
+			<InKeyIndex>1</InKeyIndex>
+			<OutKeyIndex>2</OutKeyIndex>
+		</MotionTimeConfig>
+<MotionPositionList>
+<Point XPos="0.5" YPos="0.5"/>
+<Point XPos="0.5" YPos="0.5"/>
+<Point XPos="0.5" YPos="0.5"/>
+<Point XPos="0.5" YPos="0.5"/>
+<Point XPos="0.5" YPos="0.5"/>
+<Point XPos="0.5" YPos="0.5"/>
+<Point XPos="0.5" YPos="0.5"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+<Point XPos="0.500000" YPos="0.500000"/>
+</MotionPositionList>
+<MotionEffectList>
+<MotionEffect KeyFrame="0.000000" scaleX="1.0" scaleY="1.0" rotate="0" alpha="0"/>
+<MotionEffect KeyFrame="0.150000" scaleX="1.0" scaleY="1.0" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="0.85000"  scaleX="1.0" scaleY="1.0" rotate="0" alpha="100"/>
+<MotionEffect KeyFrame="1.000000" scaleX="1.0" scaleY="1.0" rotate="0" alpha="0"/>
+</MotionEffectList>
+</Motion>
+</NLEMotion>

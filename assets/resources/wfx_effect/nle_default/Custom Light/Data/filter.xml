@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>AI-Light-B8B9081B-4115-4036-AB17-DA56D3F32742</GUID>
+<Name>Custom Light</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Custom Light.conf</ConfigFile>
+</GPUFilter>
+</Filter>

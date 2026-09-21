@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>186D593A-3CAF-0AFC-145A-01DF7D00A695</GUID>
+        <Name>BackGround Accumulation</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>BackGround Accumulation.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

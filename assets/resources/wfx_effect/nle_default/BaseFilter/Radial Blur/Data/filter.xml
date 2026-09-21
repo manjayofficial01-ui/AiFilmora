@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>A75765C5-7A80-4044-A532-51EB2E15024E</GUID>
+<Name>Radial Blur</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Radial Blur.conf</ConfigFile>
+</GPUFilter>
+</Filter>
+	

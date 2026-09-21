@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>CD9DCD75-DC0E-4f7a-8484-52778D9FB202</GUID>
+    <Name>Flip</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Flip.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

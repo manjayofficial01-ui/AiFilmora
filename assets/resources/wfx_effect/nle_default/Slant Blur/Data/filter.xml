@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>A698F7D6-B9C4-4E69-B0C3-897FE6E3CBFB</GUID>
+        <Name>Slant Blur</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Slant Blur.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

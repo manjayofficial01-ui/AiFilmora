@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>22CB3F28-3DE4-411E-A555-6A19D91C0B36</GUID>
+<Name>BGColor</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>BGColor.conf</ConfigFile>
+</GPUFilter>
+</Filter>

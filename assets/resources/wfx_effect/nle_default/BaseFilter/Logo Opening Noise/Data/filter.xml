@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>AD776758-B347-4966-BE34-9C59785984FF</GUID>
+        <Name>Logo Opening Noise</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+        <ConfigFile>Logo Opening Noise.conf</ConfigFile>
+        </GPUFilter>
+        </Filter>

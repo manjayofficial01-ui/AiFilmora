@@ -1,0 +1,14 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>320840D4-CE58-4358-BD2C-8C00CED81DE6</GUID>
+    <Name>Human_Glitch</Name>
+    <Transition>1</Transition>
+    <HumanSegment>
+        <GPUFilter>
+            <ConfigFile>Human_Glitch.conf</ConfigFile>
+        </GPUFilter>
+    </HumanSegment>
+    
+	</Filter>
+	

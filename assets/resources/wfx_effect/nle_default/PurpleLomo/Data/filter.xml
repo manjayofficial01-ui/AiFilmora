@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>56F86BED-AA95-4fb1-8DC8-49A5C15A7111</GUID>
+        <Name>PurpleLomo</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>PurpleLomo.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+    <GUID>41A13063-B92B-4965-8CD6-6FD432512FFD</GUID>
+    <Name>Audio Visual Halo Spectrum</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visual Halo Spectrum.conf</ConfigFile>
+    </GPUFilter>
+</Filter>
+    	

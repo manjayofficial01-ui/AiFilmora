@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>6DE84CB8-C186-4419-8E88-6EE3B2967660</GUID>
+    <Name>SunSet</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>SunSet.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>DA3BB4EE-B146-413E-BD85-4531E3548F42</GUID>
+<Name>HumanPosTrail</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>HumanPosTrail.conf</ConfigFile>
+</GPUFilter>
+</Filter>

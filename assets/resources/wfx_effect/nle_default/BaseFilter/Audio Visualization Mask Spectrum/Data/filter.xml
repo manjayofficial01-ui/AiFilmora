@@ -1,0 +1,8 @@
+<Filter>
+    <GUID>423CF875-9C59-4FBD-8BA2-83A305AF0228</GUID>
+    <Name>Audio Visualization Mask Spectrum</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>Audio Visualization Mask Spectrum.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

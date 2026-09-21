@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wondershare_XML>
+  <PC>
+    <WMV>
+      <WMV2 />
+      <WMV3 />
+      <WMA9 />
+    </WMV>
+    <HEVC>
+      <HEVC></HEVC>
+      <AAC></AAC>
+    </HEVC>
+    <MP4>
+      <MPG4 />
+      <AAC></AAC>
+      <H264>
+        <profile>100</profile>
+        <level>51</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+    </MP4>
+    <AVI>
+      <XVID />
+      <MJPG />
+      <MP3 />
+    </AVI>
+    <MOV>
+      <XVID />
+      <H264>
+        <profile>100</profile>
+        <level>51</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <AAC />
+    </MOV>
+    <F4V>
+      <H264>
+        <profile>77</profile>
+        <level>51</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <AAC />
+    </F4V>
+    <MKV>
+      <H264>
+        <profile>100</profile>
+        <level>51</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <XVID />
+      <MP3 />
+      <AAC />
+    </MKV>
+    <TS>
+      <H264>
+        <profile>100</profile>
+        <level>51</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <MP2V />
+      <MP2A />
+    </TS>
+    <_3GP>
+      <MP2V />
+      <H263 />
+      <AAC />
+    </_3GP>
+    <MPEG-2>
+      <MP2A />
+      <MP2V />
+    </MPEG-2>
+    <WEBM>
+      <VP9 />
+      <VP8 />
+      <VBIS />
+    </WEBM>
+    <GIF>
+      <GIFV />
+    </GIF>
+    <MP3>
+      <MP3 />
+    </MP3>
+  </PC>
+  <Device>
+    <IPHONE>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <MPG4 />
+      <AAC />
+    </IPHONE>
+    <IPAD>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <MPG4 />
+      <AAC></AAC>
+    </IPAD>
+    <APPLETV>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <MPG4 />
+      <AAC></AAC>
+    </APPLETV>
+    <IPOD>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <MPG4 />
+      <AAC></AAC>
+    </IPOD>
+    <GALAXYS5>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <MPG4 />
+      <AAC />
+    </GALAXYS5>
+    <SMARTPHONE>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <MPG4 />
+      <AAC />
+    </SMARTPHONE>
+    <ANDROIDGENERIC>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <AAC />
+    </ANDROIDGENERIC>
+    <NEXUS>
+      <ANDROIDGENERIC>
+        <H264>
+          <profile>77</profile>
+          <level>41</level>
+          <BFrameNum>0</BFrameNum>
+        </H264>
+        <AAC />
+      </ANDROIDGENERIC>
+      <AAC />
+    </NEXUS>
+    <XBOXONE>
+      <WMV3 />
+      <WMA8 />
+      <WMA9 />
+    </XBOXONE>
+    <PS4>
+      <H264>
+        <profile>77</profile>
+        <level>30</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <AAC />
+    </PS4>
+    <WII>
+      <MJPG />
+      <PCM />
+    </WII>
+    <SONYTV>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <AAC />
+    </SONYTV>
+    <PSP>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <AAC />
+    </PSP>
+  </Device>
+  <WEB>
+    <YOUTUBE>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <AAC />
+    </YOUTUBE>
+    <FACEBOOK>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <AAC />
+    </FACEBOOK>
+    <VIMEO>
+      <H264>
+        <profile>77</profile>
+        <level>41</level>
+        <BFrameNum>0</BFrameNum>
+      </H264>
+      <AAC />
+    </VIMEO>
+  </WEB>
+</Wondershare_XML>

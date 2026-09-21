@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>D0A14E0A-298C-4adb-B82D-FDADA4E48A01</GUID>
+        <Name>RainDrop</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>RainDrop.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

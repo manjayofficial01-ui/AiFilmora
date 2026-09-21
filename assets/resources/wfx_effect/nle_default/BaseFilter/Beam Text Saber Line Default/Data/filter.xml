@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>9144F888-15A5-42BC-9509-081D19C92D7C</GUID>
+<Name>Beam Text Saber Line Default</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Text Saber Line Default.conf</ConfigFile>
+</GPUFilter>
+</Filter>

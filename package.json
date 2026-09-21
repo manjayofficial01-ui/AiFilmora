@@ -1,0 +1,68 @@
+{
+  "name": "aifilmora",
+  "version": "2.2.2",
+  "description": "AiFilmora — Windows-first AI video editor suite",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "start": "electron .",
+    "web": "npx --yes serve -l 5173 .",
+    "open": "start index.html",
+    "dist": "electron-builder --win nsis portable",
+    "dist:nsis": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win portable",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "keywords": [
+    "video-editor",
+    "nle",
+    "ai",
+    "windows"
+  ],
+  "author": "AiFilmora",
+  "license": "MIT",
+  "build": {
+    "appId": "com.aifilmora.app",
+    "productName": "AiFilmora",
+    "copyright": "Copyright © 2026 AiFilmora",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "css/**/*",
+      "js/**/*",
+      "electron/**/*",
+      "package.json",
+      "assets/configs/**/*",
+      "assets/resources/**/*",
+      "assets/transitions/**/*",
+      "assets/Fonts/**/*",
+      "assets/shapes/**/*",
+      "assets/Captions/**/*",
+      "assets/Skin/*.txt"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "artifactName": "${productName}-${version}-win-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "AiFilmora"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-portable-win-${arch}.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^26.15.3",
+    "playwright": "^1.63.0"
+  }
+}

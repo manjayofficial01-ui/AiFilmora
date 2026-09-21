@@ -1,0 +1,407 @@
+{
+	"version": "7.19.1.1",
+    "EffectInfo": {
+        "video/blender/simple-pip": {
+            // compositing
+            "name": "simplePip",
+            "virtual": 1
+        },
+        "video/effect/transform": {
+            "name": "transform",
+            "path": "/normal/transform/description.json"
+        },
+        "video/effect/horizontal_filp": {
+            "name": "horizontal_filp",
+            "path": "/normal/horizontal_filp/description.json",
+			"enabled": false
+        },
+        "video/effect/vertical_filp": {
+            "name": "vertical_filp",
+            "path": "/normal/vertical_filp/description.json",
+			"enabled": false
+        },
+        "87289B96-239D-4740-BF86-023F54349902": {
+            "name": "ObjectTracking",
+            "path": "/normal/ObjectTracking/ObjectTracking.conf",
+            "enabled": false
+        },
+        "59D8083B-9388-43BB-AF8A-F4B64E1F9C73": {
+            "name": "ChromeKeyEffect",
+            "path": "/normal/ChromaKey/ChromeKeyEffect.conf",
+            "enabled": false
+        },
+        "97F7C94A-0B47-4178-8C30-2B9984754D60": {
+            "name": "LensCorrection",
+            "path": "/normal/LensCorrection/LensCorrection.conf",
+            "enabled": false
+        },
+        "662E16ED-4524-4D13-AAE9-11DBA0C63E17": {
+            "name": "AdjustColor",
+            "path": "/normal/AdjustColor/AdjustColor.conf"
+        },
+        "45D9AD95-4F03-4B2F-A8C7-8F7817B73FA4": {
+            "name": "AutoEnhance",
+            "path": "/normal/AutoEnhance/Data/AutoEnhance.conf",
+            "enabled": false
+        },
+        "718F5DC3-D828-48BF-B7CF-135474EF64A4": {
+            "name": "matchcolor",
+            "path": "/normal/MatchColor/colortransfer.conf",
+            "enabled": false
+        },
+        "video/effect/crop-pan-zoom": {
+            "name": "crop/pan-zoom",
+            "path": "/normal/crop_pan_zoom/description.json"
+        },
+        "video/effect/textmask": {
+            "name": "textmask",
+            "path": "/normal/TextMask/description.json",
+            "enabled": false
+        },
+        "video/effect/stabilization": {
+            "name": "stabilization",
+            "enabled": false,
+            "virtual": 1
+        },
+        "video/effect/vbl_default_masks": {
+            "name": "vbl_default_masks",
+            "virtual": 1
+        },
+	"video/effect/fivestarmask": {
+            "name": "fivestarmask",
+            "path": "/normal/FiveStarMask/description.json",
+            "enabled": false
+        },
+	"video/effect/heartmask": {
+            "name": "heartmask",
+            "path": "/normal/HeartMask/description.json",
+            "enabled": false
+        },
+	"video/effect/ellipsemask": {
+            "name": "ellipsemask",
+            "path": "/normal/EllipseMask/description.json",
+            "enabled": false
+        },
+	"video/effect/roundrectmask": {
+            "name": "roundrectmask",
+            "path": "/normal/RoundRectMask/description.json",
+            "enabled": false
+        },
+	"video/effect/doublelinemask": {
+            "name": "doublelinemask",
+            "path": "/normal/DoubleLineMask/description.json",
+            "enabled": false
+        },
+	"video/effect/singlelinemask": {
+            "name": "singlelinemask",
+            "path": "/normal/SingleLineMask/description.json",
+            "enabled": false
+        },
+	"E9C6A2FD-10EE-474E-BD7A-2FB33AA8BD30": {
+            "name": "imageMask",
+            "path": "/normal/imageMask/Data/imageMask.conf",
+            "enabled": false
+        },
+        "audio/effect/ducking": {
+            "name": "ducking",
+            "path": "/normal/audio_ducking/description.json",
+            "enabled": false
+        },
+        "audio/effect/dewind": {
+            "name": "dewind",
+            "enabled": false
+        },
+        "audio/effect/dehum": {
+            "name": "dehum",
+            "enabled": false
+        },
+        "audio/effect/hiss_denoise": {
+            "name": "hiss",
+            "enabled": false
+        },
+        "audio/effect/volume": {
+            "name": "volume",
+            "virtual": 1
+        },
+		"audio/effect/voice_change": {
+            "name": "voice_change",
+            "path": "/normal/voice_change/description.json",
+			"enabled": false
+        },
+		"43E7D729-DCA4-420D-A6CB-0DDCA64F8C51": {
+            "name": "Mosaic",
+            "path": "/advanced/Mosaic/roiBlur.conf",
+			"enabled": false
+        },
+		"78226871-9C6D-453B-B259-5FD4B63C05BC": {
+            "name": "Cinema 21_9",
+            "path": "/advanced/Cinema_219/Cinema 21_9.conf",
+			"enabled": false
+        },
+		"7565A3DC-6BE2-48BA-9080-886E34EC497D": {
+            "name": "border",
+            "path": "/advanced/pipBorder/PipBorder.conf",
+			"enabled": false
+        },
+		"1AEA14C6-59BC-491F-A1D1-EB02009706B7": {
+            "name": "blur_background",
+            "path": "/advanced/HumanSegmentationCaptureBlur/HumanSegmentationCaptureBlur.conf",
+			"enabled": false
+        },
+		"496B0B93-9A49-4280-BB77-E939E2D51139": {
+            "name": "facial_recognition",
+            "path": "/advanced/HumanSegmentationBackChange/HumanSegmentationBackChange.conf",
+			"enabled": false
+        },
+		"0FDB786D-A9A9-4ED7-9964-AC6954FB441A": {
+            "name": "rgbcurve",
+            "path": "/normal/rgbcurve/rgbcurve.conf",
+			"enabled": false
+        },
+		"E3D47645-4302-4AE0-8308-4893788FE8DF": {
+		  "name": "GXBeautify",
+		  "enabled": false
+		}
+    },
+    "ConfigRules": {
+        "depBaseTimeline": {
+            "ParentClipType": 0,
+            "rules": [{
+                    // "desVideoAudio", "desVideo", "desPhoto", "desRecord"
+                    "SubClipType": [1, 2, 3, 10],
+                    "DefaultEffects": [
+                        "transform",
+                        "horizontal_filp",
+                        "vertical_filp",
+                        "stabilization",
+                        "simplePip",
+                        "ChromeKeyEffect",
+                        "LensCorrection",
+                        "AutoEnhance",
+                        "matchcolor",
+                        "AdjustColor",
+                        "crop/pan-zoom",
+                        "textmask",
+                        "vbl_default_masks",
+						"facial_recognition",
+						"border",
+						"imageMask",
+						"blur_background",
+						"Mosaic",
+						"Cinema 21_9",
+						"rgbcurve",
+						"GXBeautify"
+                    ]
+                }, {
+                    // "desElement"
+                    "SubClipType": [5],
+                    "DefaultEffects": [
+                        "transform",
+                        "horizontal_filp",
+                        "vertical_filp",
+                        "stabilization",
+                        "simplePip",
+                        "ChromeKeyEffect",
+                        "LensCorrection",
+                        "AutoEnhance",
+                        "AdjustColor",
+                        "crop/pan-zoom",
+                        "textmask",
+						"facial_recognition",
+						"border",
+						"imageMask",
+						"blur_background",
+						"Mosaic",
+						"Cinema 21_9",
+						"rgbcurve"
+                    ]
+                }, {
+                    // "desVideoAudio", "desVideo", "desRecord"
+                    "SubClipType": [1, 2, 10],
+                    "DefaultEffects": [
+                        "ObjectTracking"
+                    ]
+                }, {
+                    // "desText", "desLayer", "desBuffer"
+                    "SubClipType": [6, 7, 8],
+                    "DefaultEffects": [
+                        "transform",
+                        "crop/pan-zoom"
+                    ]
+                },{
+                    // "desText", "desBuffer"
+                    "SubClipType": [6, 8],
+                    "DefaultEffects": [
+                        "simplePip"
+                    ]
+                }, {
+                    // "desVideoAudio", "desAudio", "desAudioRecord"
+                    "SubClipType": [1, 4, 11],
+                    "DefaultEffects": [
+                        "ducking",
+                        "volume",
+                        "dewind",
+                        "dehum",
+                        "hiss"
+                    ]
+                }
+            ]
+        },
+        "depTitleTimeline": {
+            "ParentClipType": 1,
+            "rules": [{
+                    // "desParentItSelf", "desVideo", "desPhoto", "desText"
+                    "SubClipType": [0, 2, 3, 6],
+                    "DefaultEffects": [
+                        "transform",
+                        "AdjustColor",
+                        "crop/pan-zoom",
+                        "simplePip"
+                    ]
+                }, {
+                    // "desVideo", "desPhoto"
+                    "SubClipType": [2, 3],
+                    "DefaultEffects": [
+                        "horizontal_filp",
+                        "vertical_filp",
+                        "AutoEnhance"
+                    ]
+                }
+            ]
+        },
+		"depSubTitleTimeline": {
+			"ParentClipType": 4,
+			"rules": [{
+					// "desParentItSelf"
+					"SubClipType": [0],
+					"DefaultEffects": [
+					"transform",
+					"crop/pan-zoom",
+					"simplePip"
+					]
+				}, {
+					// "desText"
+					"SubClipType": [6],
+					"DefaultEffects": [
+					"transform",
+					"crop/pan-zoom"
+                    ]
+                }
+            ]
+        },
+        "depSplitScreenTimeline": {
+            "ParentClipType": 2,
+            "rules": [{
+                    // "desParentItSelf"
+                    "SubClipType": [0],
+                    "DefaultEffects": [
+                        "transform",
+                        "simplePip",
+                        "ChromeKeyEffect",
+                        "AutoEnhance",
+                        "matchcolor",
+                        "AdjustColor",
+                        "crop/pan-zoom"
+                    ]
+                }, {
+                    // "desVideoAudio", "desVideo", "desPhoto", "desRecord"
+                    "SubClipType": [1, 2, 3, 10],
+                    "DefaultEffects": [
+                        "transform",
+                        "horizontal_filp",
+                        "vertical_filp",
+                        "simplePip",
+                        "stabilization",
+                        "crop/pan-zoom",
+                        "ChromeKeyEffect",
+                        "LensCorrection",
+                        "AdjustColor",
+                        "AutoEnhance",
+						"GXBeautify"
+                    ]
+                }, {
+                    // "desVideoAudio", "desAudio", "desAudioRecord"
+                    "SubClipType": [1, 4, 11],
+                    "DefaultEffects": [
+                        "dewind",
+                        "dehum",
+                        "hiss"
+                    ]
+                }
+            ]
+        },
+        "depCompositeTimeline": {
+            "ParentClipType": 3
+        }
+    },
+    "EffectDefaultValue": {
+		"video/effect/transform": {
+			"dwValue": 1186339
+		},
+		"video/effect/stabilization": {
+			"SmoothLevel": 10,
+			"EdgeProcessing": "Reflect"
+		},
+		"E9C6A2FD-10EE-474E-BD7A-2FB33AA8BD30": {
+			"Profile": "%wes_resource_folder_path%/wfx_effect/material/Masks/35.png"
+		},
+		"662E16ED-4524-4D13-AAE9-11DBA0C63E17": {
+			"bEnableAutoColor": 1,
+			"bEnableWB": 1,
+			"bEnableColor": 1,
+			"bEnableLUT": 1,
+			"bEnableLight": 1,
+			"bEnableHSL": 1,
+			"bEnableVignette": 1
+		}
+    },
+    "PreviewVideo": {
+        "Effect": [{
+                "resType": -1,
+                "path": [
+                    "%default_res_config_path%/Default Effects/CommonResource/NewDemo.mp4"
+                ]
+            }, {
+                "resType": 14,
+                "path": [
+                    "%default_res_config_path%/Default Effects/CommonResource/AIPortrait.jpg"
+                ]
+            }, {
+                "resType": 16,
+                "path": [
+                    "%default_res_config_path%/Default Effects/CommonResource/ARface.jpg"
+                ]
+            }, {
+                "resType": 22,
+                "path": [
+                    "%default_res_config_path%/Default Effects/CommonResource/OpenFX.png"
+                ]
+			}, {
+                "resType": 34,
+                "path": [
+                    "%default_res_config_path%/Default Effects/CommonResource/MusicVisualization.mp3"
+                ]
+            }, {
+                "resType": 37,
+                "path": [
+                    "%default_res_config_path%/Default Effects/CommonResource/CombinationEffects.mp4"
+                ]
+            }
+        ],
+        "Transition": [{
+                "resType": -1,
+                "path": [
+                    "%default_res_config_path%/Default Effects/CommonResource/NewTrFrom.jpg",
+                    "%default_res_config_path%/Default Effects/CommonResource/NewTrTo.jpg"
+                ]
+            }
+        ],
+        "AudioEffect": [{
+                "resType": -1,
+                "path": [
+                    "%default_res_config_path%/Default Effects/CommonResource/sample.mp3"
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>59C58FC9-6DEB-4DE3-9020-DEA787548785</GUID>
+<Name>BlendBoom</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>BlendBoom.conf</ConfigFile>
+</GPUFilter>
+</Filter>

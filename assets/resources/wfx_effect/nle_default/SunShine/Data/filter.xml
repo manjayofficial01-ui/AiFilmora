@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>E05DAB18-F084-445b-BEA6-9EE4D7E5249B</GUID>
+        <Name>SunShine</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>SunShine.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

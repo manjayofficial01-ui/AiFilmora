@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>DA82B39B-F380-46c6-9445-3E096905D4E3</GUID>
+        <Name>FocusColor</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>FocusColor.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

@@ -1,0 +1,93 @@
+{
+	"title": "Ce este nou în Filmora %1.",
+	"titleByManual": "Utilizați cea mai recentă versiune. Descoperiți noile funcții ale versiunii %1!",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "Text în video",
+			"discription": "Eliberați-vă creativitatea cu funcția Text în video și experimentați magia Filmora AI",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "Imagine în video",
+			"discription": "Funcția Imagine în video este acum susținută de Veo 3! Experimentați rezultate de generare îmbunătățite!",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},	
+		{
+			"id": "ai_idea_to_video",
+			"name": "Idee în video cu AI",
+			"discription": "Transformați-vă ideile în videoclipuri scurte profesionale menținând coerența stilului vizual și asigurând continuitatea personajelor pe parcursul scenelor.",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "Stilizator de imagine cu AI",
+			"discription": "Stilizator de imagine cu AI ‍îmbunătățit! Acum este disponibil sub fila AIGC cu capacități extinse și îmbunătățite de stilizare a imaginii.",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "Audio în video",
+			"discription": "Transformați ușor podcasturile audio în videoclipuri scurte captivante. Editați, decupați și evidențiați poveștile preferate.",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "Smart Short Clips",
+			"discription": "Transformați clipurile video lungi în clipuri scurte captivante.Tăiați, scurtați și evidențiați cele mai bune momente!",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "Decupaj inteligent de scenă",
+			"discription": "Extrageți momentele importante și scenele cu personaje pentru a spori eficiența editării.",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "Generare Smart BGM",
+			"discription": "Generați automat muzică de fundal care se potrivește cu videoclipul.",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "Reîncadrare automată",
+			"discription": "Utilizați Reîncadrare automată pentru a exporta videoclipuri care se potrivesc cu rapoartele de aspect ale platformelor de social media.",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "AI care înțelege, ajută și îmbunătățește. Cu AI Mate alături, puteți crea videoclipuri uimitoare mai rapid ca niciodată.",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "Editare camere multiple",
+			"discription": "Importați materiale de pe mai multe camere și comutați fără probleme între unghiuri diferite pentru o experiență de editare eficientă și comodă. Simplificați procesele complexe de editare și îmbunătățiți fluxul de lucru creativ.",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "Traducere AI",
+			"discription": "Traduceți automat clipuri video și audio în mai mult de 20 de limbi și sincronizați sunetul cu mișcările buzelor vorbitorului.",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

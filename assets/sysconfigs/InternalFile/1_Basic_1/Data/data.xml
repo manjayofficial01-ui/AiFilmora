@@ -1,0 +1,173 @@
+<TimeLine>
+<Properties Count="33">
+<Property key="Animation.InRatio" type="double" value="0.000000"/>
+<Property key="Animation.OutRatio" type="double" value="0.000000"/>
+<Property key="Animation.StringParam" type="std::wstring" value=""/>
+<Property key="Animation.Type" type="int" value="0"/>
+<Property key="Children.Count" type="int" value="1"/>
+<Property key="Composition.Enabled" type="int" value="1"/>
+<Property key="Composition.Mode" type="int" value="0"/>
+<Property key="Composition.Opacity" type="int" value="255"/>
+<Property key="EffectBasinProp" type="CNLEPtr&lt;IUnknown&gt;" value="Interface:0000000000000000">
+<Properties Count="73">
+<Property key="ChromaKey.AlphaChannel" type="int" value="0"/>
+<Property key="ChromaKey.BoundaryChange" type="double" value="-2.000000"/>
+<Property key="ChromaKey.Color" type="int" value="65280"/>
+<Property key="ChromaKey.Enabled" type="int" value="0"/>
+<Property key="ChromaKey.Level" type="double" value="2.000000"/>
+<Property key="ChromaKey.kContrast" type="double" value="50.000000"/>
+<Property key="ChromaKey.kOffset" type="double" value="0.000000"/>
+<Property key="ColorAdjust.AutoColor.Enabled" type="int" value="1"/>
+<Property key="ColorAdjust.AutoColor.Threshold" type="double" value="0.000000"/>
+<Property key="ColorAdjust.AutoColor.Value" type="double" value="0.000000"/>
+<Property key="ColorAdjust.AutoEnhance.Amount" type="double" value="50.000000"/>
+<Property key="ColorAdjust.AutoEnhance.Enabled" type="int" value="0"/>
+<Property key="ColorAdjust.Color.Brightness" type="double" value="0.000000"/>
+<Property key="ColorAdjust.Color.Contrast" type="double" value="0.000000"/>
+<Property key="ColorAdjust.Color.Enabled" type="int" value="1"/>
+<Property key="ColorAdjust.Color.Exposure" type="double" value="0.000000"/>
+<Property key="ColorAdjust.Color.Saturation" type="double" value="0.000000"/>
+<Property key="ColorAdjust.Color.Vibrance" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Enabled" type="int" value="1"/>
+<Property key="ColorAdjust.HSL.Hue.0" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Hue.1" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Hue.2" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Hue.3" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Hue.4" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Hue.5" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Hue.6" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Hue.7" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Luminance.0" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Luminance.1" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Luminance.2" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Luminance.3" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Luminance.4" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Luminance.5" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Luminance.6" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Luminance.7" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Saturation.0" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Saturation.1" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Saturation.2" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Saturation.3" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Saturation.4" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Saturation.5" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Saturation.6" type="double" value="0.000000"/>
+<Property key="ColorAdjust.HSL.Saturation.7" type="double" value="0.000000"/>
+<Property key="ColorAdjust.LUT.Enabled" type="int" value="1"/>
+<Property key="ColorAdjust.Light.Blacks" type="double" value="0.000000"/>
+<Property key="ColorAdjust.Light.Enabled" type="int" value="1"/>
+<Property key="ColorAdjust.Light.Highlights" type="double" value="0.000000"/>
+<Property key="ColorAdjust.Light.Shadow" type="double" value="0.000000"/>
+<Property key="ColorAdjust.Light.White" type="double" value="0.000000"/>
+<Property key="ColorAdjust.Vignette.Amount" type="double" value="0.000000"/>
+<Property key="ColorAdjust.Vignette.Enabled" type="int" value="1"/>
+<Property key="ColorAdjust.Vignette.Exposure" type="double" value="0.000000"/>
+<Property key="ColorAdjust.Vignette.Feature" type="double" value="50.000000"/>
+<Property key="ColorAdjust.Vignette.Highlights" type="double" value="50.000000"/>
+<Property key="ColorAdjust.Vignette.Roundness" type="double" value="0.000000"/>
+<Property key="ColorAdjust.Vignette.Size" type="double" value="100.000000"/>
+<Property key="ColorAdjust.WhiteBalance.BGain" type="double" value="1.000000"/>
+<Property key="ColorAdjust.WhiteBalance.Enabled" type="int" value="1"/>
+<Property key="ColorAdjust.WhiteBalance.GGain" type="double" value="1.000000"/>
+<Property key="ColorAdjust.WhiteBalance.RGain" type="double" value="1.000000"/>
+<Property key="ColorAdjust.WhiteBalance.Temperature" type="double" value="0.000000"/>
+<Property key="ColorAdjust.WhiteBalance.Tint" type="double" value="0.000000"/>
+<Property key="EffectCover.Enable" type="int" value="1"/>
+<Property key="FlipUp.Enable" type="int" value="0"/>
+<Property key="Mirror.Enable" type="int" value="0"/>
+<Property key="Render.FishEyeEnable" type="int" value="0"/>
+<Property key="Render.FishEyeLevel" type="int" value="0"/>
+<Property key="Shadow.Blur" type="int" value="20"/>
+<Property key="Shadow.Color" type="int" value="0"/>
+<Property key="Shadow.Direction" type="int" value="7"/>
+<Property key="Shadow.Distance" type="int" value="10"/>
+<Property key="Shadow.Enabled" type="int" value="0"/>
+<Property key="Shadow.Transparency" type="int" value="80"/>
+</Properties>
+</Property>
+<Property key="EffectCoverProp" type="CNLEPtr&lt;IUnknown&gt;" value="Interface:0000000000000000">
+<Properties Count="2">
+<Property key="EffectCover.Enable" type="int" value="1"/>
+<Property key="z.FilterCount" type="int" value="0"/>
+</Properties>
+</Property>
+<Property key="Level" type="int" value="1"/>
+<Property key="REFCLSID" type="GUID" value="{8F6EF468-2F80-A782-B74B-DB21422F6BC5}"/>
+<Property key="Render.ContentRange" type="NLERange" value="Start:0, End:124"/>
+<Property key="Render.Framerate" type="NLERational" value="[25, 1]: 25.0000000 "/>
+<Property key="Render.MarginMode" type="int" value="5"/>
+<Property key="Render.Position" type="int" value="0"/>
+<Property key="Render.RangeFrameNumber" type="NLERange" value="Start:0, End:124"/>
+<Property key="Render.RationPosition" type="NLERational" value="[0, 1]: 0.0000000 "/>
+<Property key="TimelineType" type="int" value="16"/>
+<Property key="Transform.Angle" type="double" value="0.000000"/>
+<Property key="Transform.CenterPoint" type="NLEPointF" value="x:0.50000000000000000000, y:0.50000000000000000000"/>
+<Property key="Transform.Enabled" type="int" value="1"/>
+<Property key="Transform.Locked" type="int" value="1"/>
+<Property key="Transform.LockedTransform" type="int" value="0"/>
+<Property key="Transform.ResizeScale" type="NLEPointF" value="x:1.00000000000000000000, y:1.00000000000000000000"/>
+<Property key="Transform.ShowTransform" type="int" value="1"/>
+<Property key="UserData" type="CNLEPtr&lt;IUnknown&gt;" value="Interface:0000000000000000">
+<Properties Count="6">
+<Property key="Key_AncestralGuid" type="std::wstring" value="{eac96031-10ba-4a05-9da5-065ad7f731ce}"/>
+<Property key="Key_TimelineGuid" type="std::wstring" value="{1411a525-90b9-48af-8dc1-4f24412bc27a}"/>
+<Property key="clip_color_infotag" type="int" value="7"/>
+<Property key="key_timeline_markInOut_enable" type="int" value="0"/>
+<Property key="key_timeline_resource_info" type="std::wstring" value="{&quot;id&quot;:&quot;38814&quot;,&quot;key_resource_packname&quot;:&quot;DefaultPackage_93&quot;,&quot;name&quot;:&quot;Subtitle 9&quot;,&quot;resourcePackID&quot;:&quot;3375&quot;,&quot;titles&quot;:&quot;Subtitles_9&quot;}"/>
+<Property key="key_timeline_type" type="std::wstring" value="5"/>
+</Properties>
+</Property>
+<Property key="ViewEdit.Status.Using" type="int" value="1"/>
+<Property key="base.Enable" type="int" value="1"/>
+<Property key="time.position.end" type="NLERational" value="[5, 1]: 5.0000000 "/>
+<Property key="time.position.start" type="NLERational" value="[0, 1]: 0.0000000 "/>
+<Property key="time.trim.start" type="NLERational" value="[0, 1]: 0.0000000 "/>
+<Property key="z.Alias" type="std::wstring" value="TopTimeline"/>
+</Properties>
+<TimeLine>
+<Properties Count="33">
+<Property key="Animation.InRatio" type="double" value="0.000000"/>
+<Property key="Animation.OutRatio" type="double" value="0.000000"/>
+<Property key="Animation.StringParam" type="std::wstring" value=""/>
+<Property key="Animation.Type" type="int" value="0"/>
+<Property key="Composition.Enabled" type="int" value="1"/>
+<Property key="Composition.Mode" type="int" value="0"/>
+<Property key="Composition.Opacity" type="int" value="255"/>
+<Property key="Level" type="int" value="0"/>
+<Property key="REFCLSID" type="GUID" value="{4E03287E-3F81-43F0-9548-9E42627C9FC1}"/>
+<Property key="Render.ContentRange" type="NLERange" value="Start:0, End:124"/>
+<Property key="Render.Framerate" type="NLERational" value="[25, 1]: 25.0000000 "/>
+<Property key="Render.MarginMode" type="int" value="5"/>
+<Property key="Render.Position" type="int" value="0"/>
+<Property key="Render.RangeFrameNumber" type="NLERange" value="Start:0, End:124"/>
+<Property key="Render.RationPosition" type="NLERational" value="[0, 1]: 0.0000000 "/>
+<Property key="Text.Section.CaptionData" type="std::wstring" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;NLETitleArray&gt;&lt;NLETitleItem&gt;&lt;ShapeParam ShapeID=&quot;1&quot;&gt;&lt;ShapeGeometry ShapeGeometryWidth=&quot;600&quot; ShapeGeometryHeight=&quot;600&quot; ShapeGeometryPointCnt=&quot;0&quot;/&gt;&lt;ShapeColor&gt;&lt;ShapeFace ColorEnable=&quot;1&quot; ColorType=&quot;0&quot; FaceBlurType=&quot;0&quot; FaceBlurWidth=&quot;0&quot;&gt;&lt;SingleColor A=&quot;0&quot; R=&quot;233&quot; G=&quot;128&quot; B=&quot;1&quot;/&gt;&lt;GradientColor GradientDir=&quot;-1&quot;&gt;&lt;GradientColorStart A=&quot;255&quot; R=&quot;255&quot; G=&quot;255&quot; B=&quot;255&quot;/&gt;&lt;GradientColorEnd A=&quot;255&quot; R=&quot;255&quot; G=&quot;255&quot; B=&quot;255&quot;/&gt;&lt;/GradientColor&gt;&lt;/ShapeFace&gt;&lt;ShapeBorder ColorEnable=&quot;1&quot; ColorType=&quot;0&quot; BorderWidth=&quot;0&quot; BorderBlur=&quot;0&quot;&gt;&lt;SingleColor A=&quot;255&quot; R=&quot;255&quot; G=&quot;255&quot; B=&quot;255&quot;/&gt;&lt;GradientColor GradientDir=&quot;-1&quot;&gt;&lt;GradientColorStart A=&quot;255&quot; R=&quot;255&quot; G=&quot;255&quot; B=&quot;255&quot;/&gt;&lt;GradientColorEnd A=&quot;255&quot; R=&quot;255&quot; G=&quot;255&quot; B=&quot;255&quot;/&gt;&lt;/GradientColor&gt;&lt;/ShapeBorder&gt;&lt;/ShapeColor&gt;&lt;/ShapeParam&gt;&lt;EffectParam/&gt;&lt;TextNode&gt;&lt;TextParam&gt;&lt;TextData AlignModel=&quot;0&quot; Align=&quot;2&quot; Radius=&quot;0&quot; Angle=&quot;0&quot; TextMode=&quot;1&quot;&gt;&lt;CharData Title=&quot;004C006F00720065006D00200069007000730075006D&quot; RowSpace=&quot;0&quot; LineSpace=&quot;0&quot;&gt;&lt;Font Version=&quot;1&quot; Size=&quot;24&quot; Bold=&quot;0&quot; Italic=&quot;0&quot; FontName=&quot;0041007200690061006C00200055006E00690063006F006400650020004D0053&quot;/&gt;&lt;Face Enable=&quot;1&quot; Color1=&quot;16777215&quot; Alpha=&quot;255&quot; BlurRadius=&quot;0&quot; Effect=&quot;0&quot;/&gt;&lt;Border Enable=&quot;0&quot; Size=&quot;5&quot; Color1=&quot;65535&quot; Alpha=&quot;255&quot; BlurRadius=&quot;0&quot;/&gt;&lt;Shadow Enable=&quot;0&quot; Color=&quot;255&quot; Alpha=&quot;255&quot; BlurRadius=&quot;3&quot; Distance=&quot;8&quot; Direction=&quot;4&quot;/&gt;&lt;/CharData&gt;&lt;/TextData&gt;&lt;Texture Enable=&quot;0&quot; TextureImagePath=&quot;&quot; TextureImageTempPath=&quot;&quot;/&gt;&lt;Gradient Enable=&quot;0&quot; Color1=&quot;255&quot; Color2=&quot;65535&quot; GradType=&quot;0&quot;/&gt;&lt;/TextParam&gt;&lt;EffectParam VZoom=&quot;1&quot; HZoom=&quot;1&quot;/&gt;&lt;AnimationParam Type=&quot;0&quot;&gt;&lt;AnimationConfig AnimationType=&quot;0&quot; InterpolateType=&quot;0&quot; DurationType=&quot;1&quot; StartValue=&quot;0&quot; EndValue=&quot;255&quot; Property=&quot;0&quot;/&gt;&lt;AnimationConfig AnimationType=&quot;1&quot; InterpolateType=&quot;0&quot; DurationType=&quot;1&quot; StartValue=&quot;255&quot; EndValue=&quot;0&quot; Property=&quot;0&quot;/&gt;&lt;/AnimationParam&gt;&lt;/TextNode&gt;&lt;/NLETitleItem&gt;&lt;/NLETitleArray&gt;"/>
+<Property key="Text.Section.CaptionDataLength" type="int" value="1852"/>
+<Property key="Text.Section.CaptionOutputSize" type="NLEPointF" value="x:109.93259625390219000000, y:27.77500000000000200000"/>
+<Property key="TimelineType" type="int" value="8"/>
+<Property key="Transform.Angle" type="double" value="0.000000"/>
+<Property key="Transform.CenterPoint" type="NLEPointF" value="x:0.50000000000000000000, y:0.86333644568938506000"/>
+<Property key="Transform.Enabled" type="int" value="1"/>
+<Property key="Transform.Locked" type="int" value="0"/>
+<Property key="Transform.LockedTransform" type="int" value="0"/>
+<Property key="Transform.ResizeScale" type="NLEPointF" value="x:0.15396722164412072000, y:0.15396722164412072000"/>
+<Property key="Transform.ShowTransform" type="int" value="1"/>
+<Property key="UserData" type="CNLEPtr&lt;IUnknown&gt;" value="Interface:0000000000000000">
+<Properties Count="6">
+<Property key="Key_AncestralGuid" type="std::wstring" value="{c597eac2-eac5-47a7-9919-7e3c3ea5c885}"/>
+<Property key="Key_TimelineGuid" type="std::wstring" value="{76272bf1-0ff2-4719-b803-a701a4e9593d}"/>
+<Property key="Render.RangeType" type="int" value="1"/>
+<Property key="clip_color_infotag" type="int" value="7"/>
+<Property key="key_timeline_resource_info" type="std::wstring" value="{&quot;name&quot;:&quot;Caption&quot;}"/>
+<Property key="key_timeline_type" type="std::wstring" value="5"/>
+</Properties>
+</Property>
+<Property key="ViewEdit.Status.Using" type="int" value="1"/>
+<Property key="base.Enable" type="int" value="1"/>
+<Property key="time.position.end" type="NLERational" value="[5, 1]: 5.0000000 "/>
+<Property key="time.position.start" type="NLERational" value="[0, 1]: 0.0000000 "/>
+<Property key="time.trim.start" type="NLERational" value="[0, 1]: 0.0000000 "/>
+<Property key="z.Alias" type="std::wstring" value=""/>
+</Properties>
+</TimeLine>
+</TimeLine>

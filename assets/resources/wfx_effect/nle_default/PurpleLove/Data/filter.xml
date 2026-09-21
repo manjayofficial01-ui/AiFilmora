@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>F944258F-0E51-4f7b-979F-91E3E826E4FC</GUID>
+        <Name>PurpleLove</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>PurpleLove.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

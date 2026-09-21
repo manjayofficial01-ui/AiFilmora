@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id": "gold-wipe",
+      "label": "Gold Wipe",
+      "src": "assets/transitions/gold-wipe.png",
+      "kind": "wipeOverlay"
+    },
+    {
+      "id": "blue-sweep",
+      "label": "Blue Sweep",
+      "src": "assets/transitions/blue-sweep.png",
+      "kind": "wipeOverlay"
+    },
+    {
+      "id": "ember-flash",
+      "label": "Ember Flash",
+      "src": "assets/transitions/ember-flash.png",
+      "kind": "wipeOverlay"
+    }
+  ]
+}

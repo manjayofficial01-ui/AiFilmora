@@ -1,0 +1,93 @@
+{
+	"title": "Filmora %1 的新增功能",
+	"titleByManual": "您現在使用的是最新版本。查看 %1 的新功能！",
+	"features": [
+		{
+			"id": "text_to_video",
+			"name": "文字轉影片",
+			"discription": "運用文字轉影片功能，釋放您的創造力，體驗 Filmora AI 的神奇魔力",
+			"mediaPath": "text_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "image_to_video",
+			"name": "圖像轉影片",
+			"discription": "圖像轉影片功能現由 Veo 3 提供支援！體驗品質大幅提升的產生結果！",
+			"mediaPath": "image_to_video.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},	
+		{
+			"id": "ai_idea_to_video",
+			"name": "靈感成片",
+			"discription": "將您的原始創意轉化為專業短視頻，保持視覺風格一致性並確保角色在跨場景中的連貫性。",
+			"mediaPath": "ai_idea_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_image_stylizer",
+			"name": "AI影像樣式工具",
+			"discription": "AI 影像樣式工具‍功能增強！現已在 AIGC 標籤下提供更豐富、更強大的影像風格化功能。",
+			"mediaPath": "ai_image_stylizer.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "audio_to_video",
+			"name": "音訊轉影片",
+			"discription": "輕鬆將音訊播客轉為精彩短片。編輯、修剪，並突顯您最愛的故事。",
+			"mediaPath": "audio_to_video.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_short_clips",
+			"name": "AI智慧長片剪短片",
+			"discription": "將長片轉換為吸睛短片。切割、修剪並凸顯精彩時刻！",
+			"mediaPath": "smart_short_clips.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_scene_cut",
+			"name": "AI智慧切片",
+			"discription": "擷取精選片段和人物場景，以提高編輯效率。",
+			"mediaPath": "smart_scene_cut.png",
+			"canTryNow": true
+		},
+		{
+			"id": "smart_bgm_generation",
+			"name": "AI智慧配樂",
+			"discription": "自動產生與影片相符的背景音樂。",
+			"mediaPath": "smart_bgm_generation.png",
+			"canTryNow": true
+		},
+		{
+			"id": "auto_reframe",
+			"name": "自動重構幀比例",
+			"discription": "使用「自動重構幀比例」功能，匯出符合社交媒體平台長寬比要求的影片。",
+			"mediaPath": "auto_reframe.png",
+			"needShowUpdateIcon": true
+		},
+		{
+			"id": "filmora_copilot",
+			"name": "AI Mate",
+			"discription": "可理解、提供協助和提升品質的 AI。有了 AI Mate，您將能比以往更快速地製作令人驚艷的影片。",
+			"mediaPath": "filmora_copilot.png",
+			"canTryNow": true
+		},
+		{
+			"id": "multi_camera_editing",
+			"name": "多相機編輯",
+			"discription": "匯入多台相機的影片，並在不同角度之間流暢切換，實現高效且便利的編輯體驗。簡化複雜的編輯程序並強化您的創作工作流程。",
+			"mediaPath": "multi_camera_editing.png",
+			"canTryNow": true
+		},
+		{
+			"id": "ai_translation",
+			"name": "AI翻譯",
+			"discription": "自動將影片和音訊內容翻譯成 20 多種語言，並將音訊與話者的嘴型動作同步。",
+			"mediaPath": "ai_translation.png",
+			"canTryNow": true,
+			"needShowUpdateIcon": true
+		}
+	]
+}

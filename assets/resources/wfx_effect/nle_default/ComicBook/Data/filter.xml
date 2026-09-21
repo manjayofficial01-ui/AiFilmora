@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>F2EB9D43-1634-492B-A874-3156EC0BA742</GUID>
+        <Name>ComicBook</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>ComicBook.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

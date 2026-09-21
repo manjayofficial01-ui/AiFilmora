@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>2626CC6E-9F50-78E9-FD00-0BF7E02E6C40</GUID>
+<Name>Beam Shape Noise</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Shape Noise.conf</ConfigFile>
+</GPUFilter>
+</Filter>

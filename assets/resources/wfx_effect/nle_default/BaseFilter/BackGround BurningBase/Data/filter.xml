@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>ACB83110-B1AA-5340-C6B0-F754527248EB</GUID>
+        <Name>BackGround BurningBase</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>BackGround BurningBase.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

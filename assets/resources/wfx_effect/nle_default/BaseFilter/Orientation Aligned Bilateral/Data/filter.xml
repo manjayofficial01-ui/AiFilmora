@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>F5FAD96D-470F-4720-8099-82900399047F</GUID>
+<Name>Orientation Aligned Bilateral</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Orientation Aligned Bilateral.conf</ConfigFile>
+</GPUFilter>
+</Filter>

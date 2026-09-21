@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>7BBDE578-0484-465D-A55F-A6C9A80F24FA</GUID>
+<Name>Hexagona Blur</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Hexagona Blur.conf</ConfigFile>
+</GPUFilter>
+</Filter>

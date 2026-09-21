@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>8E3062B2-FA4C-44be-8DF1-2187B4FBEB4A</GUID>
+        <Name>Distort</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Distort.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

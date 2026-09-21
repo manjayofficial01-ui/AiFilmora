@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>AI-Light-91E0C48F-431A-4C44-95A4-55E8E1817BE1</GUID>
+<Name>Atmosphere Exposure</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Atmosphere Exposure.conf</ConfigFile>
+</GPUFilter>
+</Filter>

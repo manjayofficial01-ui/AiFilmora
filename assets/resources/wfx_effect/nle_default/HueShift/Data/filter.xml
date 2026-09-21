@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>12E5BC38-3508-44b0-AD1A-D0B37D19289F</GUID>
+        <Name>HueShift</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>HueShift.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

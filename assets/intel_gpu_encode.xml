@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+ 
+  <!--Eleventh generation-->
+  <!--Ninth  generation-->
+  <!--Eighth  generation-->
+  <!--Seventh  generation-->
+  <DEVICE_ID id="0166" name="HD Graphics 4000"></DEVICE_ID>
+  <DEVICE_ID id="0162" name="HD Graphics 4000"></DEVICE_ID>
+  <DEVICE_ID id="0152" name="HD Graphics 2500"></DEVICE_ID>
+  
+  <DEVICE_ID id="" name="xxxx"></DEVICE_ID>
+</Root>

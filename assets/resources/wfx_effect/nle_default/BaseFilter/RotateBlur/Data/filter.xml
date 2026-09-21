@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>ADEF3D57-594C-4267-92FB-BF144827233F</GUID>
+    <Name>RotateBlur</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>RotateBlur.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>

@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>DF84B47D-E164-4E31-BFB9-39B039E5B828</GUID>
+        <Name>Mosaic 1</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Mosaic 1.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <!--PowerVR based-->
+  <DEVICE_ID id="2E5B" name="GMA 500"></DEVICE_ID>
+  <DEVICE_ID id="8108" name="GMA 500"></DEVICE_ID>
+  <DEVICE_ID id="8109" name="GMA 500"></DEVICE_ID>
+  <DEVICE_ID id="4102" name="GMA 600"></DEVICE_ID>
+  
+  <DEVICE_ID id="0BE0" name="GMA 3600"></DEVICE_ID>
+  <DEVICE_ID id="0BE1" name="GMA 3600"></DEVICE_ID>
+  <DEVICE_ID id="0BE2" name="GMA 3650"></DEVICE_ID>
+  <DEVICE_ID id="0BE3" name="GMA 3650"></DEVICE_ID>
+  
+  <DEVICE_ID id="08C7" name="GMA"></DEVICE_ID>
+  <DEVICE_ID id="08C8" name="GMA"></DEVICE_ID>
+  <DEVICE_ID id="08C9" name="GMA"></DEVICE_ID>
+  <DEVICE_ID id="08CA" name="GMA"></DEVICE_ID>
+  
+  <DEVICE_ID id="08CB" name="GMA"></DEVICE_ID>
+  <DEVICE_ID id="08CC" name="GMA"></DEVICE_ID>
+  <DEVICE_ID id="08CD" name="GMA"></DEVICE_ID>
+  <DEVICE_ID id="08CE" name="GMA"></DEVICE_ID>
+  
+  <DEVICE_ID id="08CF" name="GMA"></DEVICE_ID>
+  
+  <!--Eleventh generation-->
+  <!--Ninth  generation-->
+  <!--Eighth  generation-->
+  <DEVICE_ID id="1606" name="HD Graphics"></DEVICE_ID> 
+  
+  
+  
+  <!--Seventh  generation-->
+  <DEVICE_ID id="015A" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0152" name="HD Graphics 2500"></DEVICE_ID>
+  <DEVICE_ID id="0F30" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0F31" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0F32" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0F33" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0155" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0157" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0402" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0406" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="040A" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="040B" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="040E" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0A02" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0A06" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0A0A" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0A0B" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0A0E" name="HD Graphics"></DEVICE_ID>
+  
+  <!--Sixth  generation-->
+  <DEVICE_ID id="010A" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0102" name="HD Graphics 2000"></DEVICE_ID>
+  
+  <!--Fifth  generation-->
+  <DEVICE_ID id="0042" name="HD Graphics"></DEVICE_ID>
+  <DEVICE_ID id="0046" name="HD Graphics"></DEVICE_ID>
+  
+  
+  <!--Fourth  generation-->
+  <DEVICE_ID id="2972" name="GMA 3000"></DEVICE_ID>
+  <DEVICE_ID id="2992" name="GMA 3000"></DEVICE_ID>
+  <DEVICE_ID id="29A2" name="GMA X3000"></DEVICE_ID>
+  <DEVICE_ID id="2982" name="GMA X3500"></DEVICE_ID>
+  <DEVICE_ID id="2A02" name="GMA X3100"></DEVICE_ID>
+  <DEVICE_ID id="2A12" name="GMA X3100"></DEVICE_ID>
+  <DEVICE_ID id="2E42" name="GMA 4500"></DEVICE_ID>
+  <DEVICE_ID id="2E92" name="GMA 4500"></DEVICE_ID>
+  <DEVICE_ID id="2E12" name="GMA 4500"></DEVICE_ID>
+  <DEVICE_ID id="2E32" name="GMA X4500"></DEVICE_ID>
+  <DEVICE_ID id="2E22" name="GMA X4500HD"></DEVICE_ID>
+  <DEVICE_ID id="2A42" name="GMA 4500MHD"></DEVICE_ID>
+
+  
+  <!--Third  generation-->
+  <DEVICE_ID id="2582" name="GMA 900"></DEVICE_ID>
+  <DEVICE_ID id="258A" name="GMA 900"></DEVICE_ID>
+  <DEVICE_ID id="2592" name="GMA 900"></DEVICE_ID>
+  <DEVICE_ID id="2772" name="GMA 950"></DEVICE_ID>
+  <DEVICE_ID id="27A2" name="GMA 950"></DEVICE_ID>
+  <DEVICE_ID id="27AE" name="GMA 950"></DEVICE_ID>
+  <DEVICE_ID id="29D2" name="GMA 3100"></DEVICE_ID>
+  <DEVICE_ID id="29B2" name="GMA 3100"></DEVICE_ID>
+  <DEVICE_ID id="29C2" name="GMA 3100"></DEVICE_ID>
+  <DEVICE_ID id="A001" name="GMA 3150"></DEVICE_ID>
+  <DEVICE_ID id="A011" name="GMA 3150"></DEVICE_ID>
+  
+  <!--Second  generation-->
+  <DEVICE_ID id="2562" name="Extreme Graphics 	"></DEVICE_ID>
+  <DEVICE_ID id="3577" name="Extreme Graphics 	"></DEVICE_ID>
+  <DEVICE_ID id="2572" name="Extreme Graphics 2"></DEVICE_ID>
+  <DEVICE_ID id="3582" name="Extreme Graphics 2"></DEVICE_ID>
+  <DEVICE_ID id="358E" name="Extreme Graphics 2"></DEVICE_ID>
+  <DEVICE_ID id="3582" name="Extreme Graphics 2"></DEVICE_ID>
+  
+  <!--First  generation-->
+  <DEVICE_ID id="7800" name="Intel740"></DEVICE_ID>
+  <DEVICE_ID id="1240" name="752"></DEVICE_ID>
+  <DEVICE_ID id="7121" name="3D graphics with Direct AGP"></DEVICE_ID>
+  <DEVICE_ID id="7123" name="3D graphics with Direct AGP"></DEVICE_ID>
+  <DEVICE_ID id="7125" name="3D graphics with Direct AGP"></DEVICE_ID>
+  <DEVICE_ID id="1132" name="3D graphics with Direct AGP"></DEVICE_ID>
+  
+  <DEVICE_ID id="" name="xxxx"></DEVICE_ID>
+</Root>

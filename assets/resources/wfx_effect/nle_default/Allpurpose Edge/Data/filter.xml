@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>46737C07-D034-42A4-875A-FA7ABDACBC16</GUID>
+<Name>Allpurpose Edge</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Allpurpose Edge.conf</ConfigFile>
+</GPUFilter>
+</Filter>

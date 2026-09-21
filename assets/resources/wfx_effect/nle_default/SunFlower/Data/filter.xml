@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>534C741C-4450-4ea4-9D8C-BD54AD7ED668</GUID>
+        <Name>SunFlower</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>SunFlower.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

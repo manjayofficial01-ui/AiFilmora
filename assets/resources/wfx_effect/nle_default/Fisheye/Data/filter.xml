@@ -1,0 +1,11 @@
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <Filter>
+    <GUID>A0DFCB73-9C3D-4d18-813E-8CC29D76D406</GUID>
+    <Name>Fisheye</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+	<ConfigFile>Fisheye.conf</ConfigFile>
+	</GPUFilter>
+	</Filter>
+	

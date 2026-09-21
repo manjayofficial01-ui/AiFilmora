@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>AI-Light-003D3605-6E86-4C81-85BF-0C3A8B9170FB</GUID>
+<Name>Yellow Purple Light</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Yellow Purple Light.conf</ConfigFile>
+</GPUFilter>
+</Filter>

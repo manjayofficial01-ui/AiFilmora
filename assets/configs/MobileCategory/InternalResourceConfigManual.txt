@@ -1,0 +1,16 @@
+1、按需向crc申请资源类型;
+
+2、给内置资源定义唯一的 slug;
+
+3、资源文件夹以type_slug命名;
+
+3、配置好资源的resInfo.json 文件，确保资源类型 和 slug字段保持一致，在titles 字段内配置好多语言;
+
+4、准备资源封面，按资源目录结构存放;
+
+5、在后端配置加载内置资源的目录节点,定义好目录节点slug;
+
+6、在VBL configs\MobileCategory下新建以目录节点slug.json命名的内置资源目录配置文件，格式如：AIPainting_Age_Preset.json
+
+7、app 将所有的内置资源按照 VBL 存放资源分类目录拷贝到对应目录下。
+

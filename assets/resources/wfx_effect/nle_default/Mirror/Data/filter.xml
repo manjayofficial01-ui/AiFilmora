@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>4D34F72D-3307-4f4a-9BED-72E6B7B8FF99</GUID>
+        <Name>Mirror</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Mirror.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

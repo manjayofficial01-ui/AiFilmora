@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>8B086E1E-BB01-4f3e-934B-5DB4ADA2567F</GUID>
+        <Name>Holiday</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Holiday.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

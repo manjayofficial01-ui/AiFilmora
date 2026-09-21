@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>66DD6E22-4209-F8FF-A312-B09CBAA94D4C</GUID>
+<Name>Beam Saber Fire</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Beam Saber Fire.conf</ConfigFile>
+</GPUFilter>
+</Filter>

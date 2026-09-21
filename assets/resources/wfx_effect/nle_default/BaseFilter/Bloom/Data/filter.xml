@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+    <GUID>D8450CCC-B075-43D2-BD5A-72E4A69C255C</GUID>
+    <Name>Bloom</Name>
+    <Transition>0</Transition>
+    <GPUFilter>
+        <ConfigFile>bloom.conf</ConfigFile>
+    </GPUFilter>
+</Filter>

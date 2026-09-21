@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>2FFCED76-6277-41a5-B1AD-4BB27C8D44D3</GUID>
+        <Name>Radio Explike FX</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>RadioExplikeFX.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

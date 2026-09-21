@@ -1,0 +1,11 @@
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <Filter>
+        <GUID>AB623CB4-A037-4734-ABE3-E11528C2F878</GUID>
+        <Name>Jigsaw_F</Name>
+        <Transition>0</Transition>
+        <GPUFilter>
+    	<ConfigFile>Jigsaw_F.conf</ConfigFile>
+    	</GPUFilter>
+    	</Filter>
+    	

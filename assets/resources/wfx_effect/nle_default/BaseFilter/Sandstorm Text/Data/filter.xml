@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Filter>
+<GUID>18BA37E8-56EC-648C-33FC-12FEEFE3A151</GUID>
+<Name>Sandstorm Text</Name>
+<Transition>0</Transition>
+<GPUFilter>
+<ConfigFile>Sandstorm Text.conf</ConfigFile>
+</GPUFilter>
+</Filter>
