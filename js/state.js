@@ -390,6 +390,10 @@ class Store {
       duration: 4,
       name: "Clip",
       mediaId: null,
+      // Source in-point (seconds into the media file where this clip begins).
+      // Split / trim-left advance it so the right half continues the picture
+      // instead of restarting from the media head (Filmora behaviour).
+      offset: 0,
       fx: { ...DEFAULT_FX },
       text: "",
       speed: 1,
@@ -502,6 +506,8 @@ class Store {
 
   /**
    * Trim clip start to playhead (Filmora-style left trim).
+   * The clip's start moves to the playhead and its source offset advances,
+   * so the remaining head shows the correct later frame (not the old head).
    * Ripple shifts the clip (and later clips if rippleGap).
    */
   trimStartAtPlayhead(id, playhead, { rippleGap = false } = {}) {
@@ -512,12 +518,13 @@ class Store {
     if (t >= clip.start + clip.duration - 0.05) return { ok: false, reason: "Playhead is at/after clip end" };
     this.pushUndo("Trim start");
     const cut = t - clip.start;
-    const newStart = clip.start;
-    const newDur = clip.duration - cut;
+    const newStart = t;
+    const newDur = clip.start + clip.duration - t;
+    const newOffset = Math.max(0, (Number(clip.offset) || 0) + cut);
     this.state.clips = this.state.clips.map((c) => {
-      if (c.id === id) return { ...c, start: newStart, duration: Math.max(0.1, newDur) };
+      if (c.id === id) return { ...c, start: newStart, duration: Math.max(0.1, newDur), offset: newOffset };
       if (clip.linkedAudioId && c.id === clip.linkedAudioId) {
-        return { ...c, start: newStart, duration: Math.max(0.1, newDur) };
+        return { ...c, start: newStart, duration: Math.max(0.1, newDur), offset: newOffset };
       }
       if (rippleGap && c.trackId === clip.trackId && c.start >= clip.start + clip.duration - 0.001) {
         return { ...c, start: Math.max(0, c.start - cut) };
@@ -655,6 +662,8 @@ class Store {
       mediaId: src.mediaId,
       start: insertAt,
       duration: hold,
+      // Hold the exact frame at the insert point, not the media head.
+      offset: Math.max(0, (Number(src.offset) || 0) + Math.max(0, insertAt - src.start)),
       speed: 1,
       freeze: true,
       fx: { ...(src.fx || DEFAULT_FX) },
@@ -700,7 +709,8 @@ class Store {
       start: clip.start,
       duration: clip.duration,
       speed: clip.speed || 1,
-      // The sound now lives here: inherit the video's level + fades.
+      // The sound now lives here: inherit the video's level + fades + source offset.
+      offset: Math.max(0, Number(clip.offset) || 0),
       volume: clip.volume ?? 100,
       fadeIn: clip.fadeIn || 0,
       fadeOut: clip.fadeOut || 0,
@@ -950,6 +960,13 @@ class Store {
         this._lastSplitReason = "Playhead is not inside the selected clip";
         return 0;
       }
+      // Detached audio lives in its own clip: cutting the video must cut
+      // the linked audio at the same frame (Filmora behaviour).
+      for (const id of [...scope]) {
+        const c = this.getClip(id);
+        if (c?.linkedAudioId && this.getClip(c.linkedAudioId)) scope.add(c.linkedAudioId);
+        if (c?.linkedFromId && this.getClip(c.linkedFromId)) scope.add(c.linkedFromId);
+      }
     }
     this.pushUndo(scope && scope.size > 1 ? `Split ${scope.size} clips` : "Split clip");
     let count = 0;
@@ -960,12 +977,18 @@ class Store {
         next.push(c);
         continue;
       }
-      const left = { ...c, duration: t - c.start };
+      // The right half continues the source where the left half ends:
+      // its source offset advances by the length of the left half, so both
+      // halves no longer restart from the same frame.
+      const cutLen = t - c.start;
+      const baseOffset = Math.max(0, Number(c.offset) || 0);
+      const left = { ...c, duration: cutLen };
       const right = {
         ...c,
         id: this.uid("clip"),
         start: t,
         duration: end - t,
+        offset: baseOffset + cutLen,
         name: c.name + " (B)",
         fx: { ...c.fx },
       };
@@ -1130,6 +1153,7 @@ function sanitizeClip(c) {
     trackId: c.trackId || "v1",
     start: Math.max(0, Number(c.start) || 0),
     duration: Math.max(0.1, Number(c.duration) || 4),
+    offset: Math.max(0, Number(c.offset) || 0),
     name: typeof c.name === "string" ? c.name : "Clip",
     fx: { ...DEFAULT_FX, ...(c.fx || {}), crop: { x: 0, y: 0, w: 1, h: 1, ...(c.fx?.crop || {}) } },
     shape: c.shape || null,

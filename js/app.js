@@ -43,6 +43,8 @@ import { hydrateIcons } from "./icons.js";
 import { initLibraryWorkspace } from "./library-workspace.js";
 import { initMediaMenu } from "./media-menu.js";
 import { initFilmoraParity, renderSourceMonitor as paintSource } from "./filmora-parity.js";
+import { initFilmoraChrome } from "./filmora-chrome.js";
+import { initFilmoraTools } from "./filmora-tools.js";
 
 function $(sel) {
   return document.querySelector(sel);
@@ -647,6 +649,8 @@ function main() {
   initLibraryWorkspace();
   initMediaMenu();
   initFilmoraParity();
+  initFilmoraChrome();
+  initFilmoraTools();
 
   // Apply persisted preferences (theme + master volume) at boot
   settings.applyTheme();

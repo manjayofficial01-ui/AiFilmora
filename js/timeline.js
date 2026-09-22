@@ -985,6 +985,7 @@ function buildClipEl(clip, totalWidth) {
       clientY: e.clientY,
       origStart: clip.start,
       origDur: clip.duration,
+      origOffset: Math.max(0, Number(clip.offset) || 0),
       trackId: clip.trackId,
       type: clip.type,
       moved: false,
@@ -1167,7 +1168,15 @@ function onGlobalDragMove(e) {
       duration = 0.2;
       start = drag.origStart + drag.origDur - 0.2;
     }
-    store.updateClip(drag.id, { start, duration }, { silent: true });
+    // Left-trim moves the in-point: advancing start must advance the source
+    // offset by the same delta (extending left consumes offset, never below 0).
+    let offset = (drag.origOffset || 0) + (start - drag.origStart);
+    if (offset < 0) {
+      start = Math.max(0, drag.origStart - (drag.origOffset || 0));
+      duration = drag.origStart + drag.origDur - start;
+      offset = 0;
+    }
+    store.updateClip(drag.id, { start, duration, offset }, { silent: true });
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "aifilmora",
-  "version": "2.2.2",
+  "version": "2.2.6",
   "description": "AiFilmora — Windows-first AI video editor suite",
   "main": "electron/main.cjs",
   "type": "module",

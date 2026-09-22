@@ -406,6 +406,7 @@ export function detectScenes() {
     const parts = Math.max(1, Math.floor(clip.duration / cutEvery));
     if (parts <= 1) return;
     const partDur = clip.duration / parts;
+    const baseOffset = Math.max(0, Number(clip.offset) || 0);
     const pieces = [];
     for (let i = 0; i < parts; i++) {
       pieces.push({
@@ -414,6 +415,8 @@ export function detectScenes() {
         name: `${clip.name} · scene ${i + 1}`,
         start: clip.start + i * partDur,
         duration: partDur,
+        // Each scene continues the source where the previous one ended.
+        offset: baseOffset + i * partDur,
       });
     }
     next.splice(idx, 1, ...pieces);

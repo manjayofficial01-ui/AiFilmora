@@ -1,0 +1,342 @@
+/* filmora-chrome.css — Filmora 14/15 shell polish
+   Properties accordion, dock collapse, export menu, transport glyphs,
+   timeline icon strip, titlebar extras. Loaded after app.css. */
+
+/* ---------------- Titlebar right cluster (Filmora) ----------------------------- */
+.filmora-titlebar .titlebar-right {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  -webkit-app-region: no-drag;
+}
+
+.export-pill {
+  position: relative;
+  font-weight: 700;
+  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.export-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 240px;
+  display: none;
+  z-index: 80;
+  padding: 6px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+.export-menu.open { display: grid; gap: 2px; }
+
+.export-menu button {
+  display: grid;
+  gap: 2px;
+  text-align: left;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink-body);
+  cursor: pointer;
+  font: inherit;
+}
+
+.export-menu button:hover { background: var(--surface-2); color: var(--ink); }
+.export-menu button strong { font-size: 12px; }
+.export-menu button span { font-size: 11px; color: var(--muted); }
+
+.project-pill { display: inline-flex; align-items: center; gap: 6px; }
+.project-pill .dirty-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  display: inline-block;
+}
+.project-pill.is-dirty .dirty-dot { background: var(--warn); }
+
+/* Window controls (Electron frameless) */
+.win-controls {
+  display: inline-flex;
+  margin-left: 4px;
+  border-left: 1px solid var(--border-soft);
+  padding-left: 4px;
+  -webkit-app-region: no-drag;
+}
+.win-btn {
+  width: 36px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1;
+}
+.win-btn:hover { background: var(--surface-3); color: var(--ink); }
+.win-btn.close:hover { background: #e81123; color: #fff; }
+
+/* ---------------- Dock collapse ------------------------------------------------ */
+#app.lib-collapsed .sidebar,
+#app.lib-collapsed > .workspace > #resizeSidebar {
+  display: none !important;
+}
+#app.insp-collapsed .inspector,
+#app.insp-collapsed > .workspace > #resizeInspector {
+  display: none !important;
+}
+#app.tl-collapsed .tl-body { display: none !important; }
+#app.tl-collapsed #timelinePanel { height: auto !important; min-height: 0 !important; }
+#app.tl-collapsed #resizeTimeline { display: none !important; }
+
+.dock-btn {
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-1);
+  color: var(--ink-muted);
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  font-size: 12px;
+  line-height: 1;
+}
+.dock-btn:hover { color: var(--ink); background: var(--surface-3); }
+.sidebar > .dock-btn,
+.inspector > .dock-btn {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  z-index: 5;
+}
+.inspector > .dock-btn { right: auto; left: 6px; }
+#app.lib-collapsed .sidebar .dock-chev,
+#app.insp-collapsed .inspector .dock-chev { transform: rotate(180deg); }
+.tl-toolbar > .dock-btn { margin-right: 4px; }
+
+/* restore stubs (created by bindDockCollapse; CSS-only before = no way back) */
+.dock-restore {
+  display: none;
+  width: 30px;
+  background: var(--surface-1);
+  border: 0;
+  border-right: 1px solid var(--border);
+  color: var(--muted);
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  padding-top: 12px;
+  font-size: 14px;
+}
+.dock-restore:hover { color: var(--accent); background: var(--surface-2); }
+.dock-restore .dock-lbl {
+  writing-mode: vertical-rl;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.dock-restore[data-dock="library"] { grid-column: 1; grid-row: 1; }
+.dock-restore[data-dock="inspector"] {
+  grid-column: 5;
+  grid-row: 1 / -1;
+  border-right: 0;
+  border-left: 1px solid var(--border);
+}
+#app.lib-collapsed .dock-restore[data-dock="library"],
+#app.insp-collapsed .dock-restore[data-dock="inspector"] { display: flex; }
+
+/* Collapsed panels must not leave dead grid tracks (the blank void). */
+#app.lib-collapsed > .workspace { grid-template-columns: auto 0 minmax(280px, 1fr) 5px minmax(220px, var(--inspector-w)); }
+#app.insp-collapsed > .workspace { grid-template-columns: minmax(180px, var(--sidebar-w)) 5px minmax(280px, 1fr) 0 auto; }
+#app.lib-collapsed.insp-collapsed > .workspace { grid-template-columns: auto 0 minmax(280px, 1fr) 0 auto; }
+#app.lib-collapsed > .workspace.split-right-ai { grid-template-columns: auto 0 1fr 6px 360px; }
+#app.insp-collapsed > .workspace.split-right-ai { grid-template-columns: var(--sidebar-w) 6px 1fr 0 auto; }
+
+/* ---------------- Unified Properties panel ---------------------------------------
+ * One window: PROJECT card + PROPERTIES title + tab navigator on top, the
+ * content-aware accordion docked directly below it in the same column.
+ * Tabs reveal their section; selection filters sections; an empty-state
+ * fills the void when nothing matches. */
+.inspector:has(.props-accordion) { display: flex; flex-direction: column; min-height: 0; }
+.props-title { font-size: 12px; font-weight: 700; margin: 0 0 6px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.props-nav { gap: 0; }
+.props-nav #inspectorTabs { width: 100%; }
+/* Off-context tabs stay clickable (explicit choice wins) but read dimmed. */
+.props-nav #inspectorTabs .tab.is-off { opacity: 0.45; }
+.props-nav #inspectorTabs .tab.is-off:hover { opacity: 1; }
+
+.props-accordion {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+  border-top: 1px solid var(--border-soft);
+}
+.props-scroll {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+.props-empty {
+  margin: 12px;
+  padding: 14px 12px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  color: var(--ink-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.props-empty[hidden] { display: none !important; }
+.props-empty-title { margin: 0 0 4px; font-weight: 700; color: var(--ink-body); }
+.props-empty p { margin: 0 0 8px; }
+.props-sec {
+  border-bottom: 1px solid var(--border-soft);
+}
+.props-sec[hidden] { display: none !important; }
+.props-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 0;
+  background: var(--surface-1);
+  color: var(--ink-body);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+}
+.props-head:hover { background: var(--surface-2); color: var(--ink); }
+.props-caret { width: 12px; color: var(--muted); transition: transform 0.15s ease; }
+.props-sec.open .props-caret { transform: rotate(0deg); }
+.props-sec:not(.open) .props-caret { transform: rotate(-90deg); }
+.props-lbl { flex: 1; text-align: left; }
+.props-kind {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.props-body { display: none; padding: 4px 0 10px; }
+.props-sec.open .props-body { display: block; }
+.props-body .panel-body { padding: 0 8px; }
+.props-body .inspector-view { display: none; }
+.props-body .inspector-view.active { display: block; }
+
+/* ---------------- Transport glyphs --------------------------------------------- */
+.transport-btn {
+  width: 32px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink-body);
+  cursor: pointer;
+  border-radius: 6px;
+}
+.transport-btn:hover { background: var(--surface-2); color: var(--ink); }
+.transport-btn.play {
+  width: 36px;
+  background: var(--surface-3);
+  color: var(--ink-strong);
+}
+.transport-btn svg { width: 16px; height: 16px; }
+
+/* ---------------- Timeline icon strip ------------------------------------------ */
+.tl-toolbar.tl-toolbar-icons { gap: 2px; }
+.tl-toolbar.tl-toolbar-icons .tl-tool {
+  min-width: 28px;
+  width: 28px;
+  height: 26px;
+  padding: 0;
+  display: inline-grid;
+  place-items: center;
+}
+.tl-toolbar .btn.sm.tl-tool .ico { display: inline-grid; place-items: center; }
+.tl-toolbar .btn.sm.tl-tool .ico svg { width: 14px; height: 14px; }
+
+/* ---------------- Export dialog Filmora tabs ----------------------------------- */
+.export-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-soft);
+  padding-bottom: 8px;
+}
+.export-tabs button {
+  border: 0;
+  background: transparent;
+  color: var(--ink-muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+}
+.export-tabs button.active {
+  background: var(--surface-3);
+  color: var(--ink-strong);
+}
+.export-settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+  margin-bottom: 12px;
+}
+.export-settings-grid label {
+  display: grid;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.export-settings-grid select,
+.export-settings-grid input { width: 100%; }
+.export-quality {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.export-quality button {
+  flex: 1;
+  border: 1px solid var(--stroke-1);
+  background: var(--surface-1);
+  color: var(--ink-body);
+  border-radius: 6px;
+  padding: 6px 8px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+}
+.export-quality button.active {
+  background: var(--surface-3);
+  color: var(--ink-strong);
+  border-color: var(--accent);
+}
+
+/* dark export pill (Filmora mint/cyan filled CTA) */
+.btn.primary.export-pill,
+.export-pill {
+  background: linear-gradient(135deg, #58ffda 0%, #00f0ff 100%);
+  color: #0a0d0f;
+  border: 0;
+}
+.export-pill:hover { filter: brightness(1.05); }
+
+/* library category bar sits full-width above workspace (already in library-workspace.css) */
+.library-category-bar { z-index: 4; }

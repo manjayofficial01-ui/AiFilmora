@@ -1,0 +1,150 @@
+/* filmora-tools.css — workspace layouts, keyframe graph, Filmora tool rows */
+
+.fm-layout-list {
+  display: grid;
+  gap: 2px;
+  padding: 4px 0;
+}
+
+.fm-layout-list button {
+  text-align: left;
+}
+
+.kf-rows {
+  display: grid;
+  gap: 6px;
+  padding: 8px 4px 4px;
+}
+
+.kf-rows .section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.kf-prop-row {
+  display: grid;
+  grid-template-columns: 72px 28px 1fr;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink-body);
+}
+
+.kf-prop-row label {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.kf-prop-row:has(label) {
+  grid-template-columns: 1fr;
+}
+
+.kf-prop-row select {
+  width: 100%;
+}
+
+.kf-diamond {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  background: var(--surface-1);
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.kf-diamond:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.kf-diamond.on {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  box-shadow: var(--accent-glow);
+}
+
+.kf-prop-row input[type="range"] {
+  width: 100%;
+}
+
+.kf-graph {
+  display: grid;
+  gap: 8px;
+  padding: 10px 8px 12px;
+  border-top: 1px solid var(--border-soft);
+  background: var(--panel-2);
+}
+
+.kf-graph[hidden] {
+  display: none !important;
+}
+
+.kf-graph-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--ink-body);
+}
+
+.kf-graph-head strong {
+  font-size: 12px;
+}
+
+.kf-graph-hint {
+  flex: 1;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.kf-graph canvas {
+  width: 100%;
+  height: 160px;
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  background: #0a0d0f;
+  display: block;
+}
+
+.kf-graph-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filmora-tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 0 8px;
+  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 8px;
+}
+
+.filmora-tool-row .btn {
+  flex: 0 0 auto;
+}
+
+/* Short-video layout: taller player column */
+#app[data-layout="short-video"] .player-col,
+#app[data-layout="short-video"] .stage {
+  min-height: 280px;
+}
+
+#app[data-layout="classic"] .tl-toolbar {
+  gap: 1px;
+}
+
+#app[data-layout="dual"] .preview-frame {
+  max-height: none;
+}

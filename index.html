@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/timeline.css" />
     <link rel="stylesheet" href="css/theme-vip.css" />
     <link rel="stylesheet" href="css/library-workspace.css" />
+    <link rel="stylesheet" href="css/filmora-chrome.css" />
+    <link rel="stylesheet" href="css/filmora-tools.css" />
   </head>
   <body>
     <div id="app">
@@ -105,7 +107,7 @@
           <details class="fm-item" id="fmVersion">
             <summary>Version</summary>
             <div class="fm-pop" role="menu">
-              <div class="fm-info-row"><strong>AiFilmora 2.2.2</strong> — 15 Filmora shader transitions · Toolbar order · ruler-drag zoom · drag auto-scroll</div>
+              <div class="fm-info-row"><strong>AiFilmora 2.2.6</strong> — library collapse fix: visible restore stubs, no dead void, tabs auto-expand</div>
               <div class="fm-info-row">Full-width library bar · searchable Filters &amp; Audio</div>
               <div class="fm-info-row">6 Pan &amp; Zoom presets · Filmora's own curves</div>
               <div class="fm-info-row">29 Filmora colour presets · real per-pixel grade</div>
@@ -117,7 +119,7 @@
               <div class="fm-info-row">Collapsible Project Info card · remembered choice</div>
               <div class="fm-info-row">Theme: <span id="fmThemeLabel">dark</span></div>
               <hr/>
-              <button data-fm="release-notes">What's new in 2.2.2…</button>
+              <button data-fm="release-notes">What's new in 2.2.6…</button>
             </div>
           </details>
         </nav>
@@ -139,9 +141,15 @@
         </div>
         <div class="titlebar-right">
           <div class="credits-chip" id="creditsChip" title="AI credit meter">AI Credits —</div>
+          <button class="tb-ico" id="btnAccount" title="Account / Login" data-icon="mate" aria-label="Account"></button>
           <button class="tb-ico" id="menuRecentTop" title="Recent projects" data-icon="recent" aria-label="Recent projects"></button>
           <button class="tb-ico" id="menuPreferencesTop" title="Preferences" data-icon="settings" aria-label="Preferences"></button>
-          <button class="btn primary export-pill" id="btnExportTop" title="Export (Ctrl+E)" data-icon="export"><span>Export</span><span class="chev" aria-hidden="true">▾</span></button>
+          <button class="btn primary export-pill" id="btnExportTop" title="Export (Ctrl+E)"><span>Export</span><span class="chev" aria-hidden="true">▾</span></button>
+          <div class="win-controls" aria-label="Window controls">
+            <button class="win-btn" id="winMin" title="Minimize" aria-label="Minimize">—</button>
+            <button class="win-btn" id="winMax" title="Maximize" aria-label="Maximize">▢</button>
+            <button class="win-btn close" id="winClose" title="Close" aria-label="Close">✕</button>
+          </div>
         </div>
       </header>
 
@@ -1526,7 +1534,7 @@
       <!-- Status -->
       <footer class="statusbar">
         <span class="status-dot" id="statusDot"></span>
-        <span>AiFilmora 2.2.2 · Electron-ready Windows suite</span>
+        <span>AiFilmora 2.2.6 · Electron-ready Windows suite</span>
         <span id="statClips">0 clips</span>
         <span id="statLastAction" style="color:var(--muted)"></span>
         <div class="right">
@@ -1575,6 +1583,66 @@
       <div class="modal">
         <h3>Export</h3>
         <p>Duration <strong id="exportDuration">00:00</strong> · credits metered like Filmora / PowerDirector.</p>
+        <div class="export-tabs" id="exportTabs" role="tablist" aria-label="Export destination">
+          <button type="button" role="tab" class="active" data-edest="local">Local</button>
+          <button type="button" role="tab" data-edest="device">Device</button>
+          <button type="button" role="tab" data-edest="youtube">YouTube</button>
+          <button type="button" role="tab" data-edest="tiktok">TikTok</button>
+          <button type="button" role="tab" data-edest="vimeo">Vimeo</button>
+          <button type="button" role="tab" data-edest="dvd">DVD</button>
+        </div>
+        <div class="export-quality" id="exportQuality" role="group" aria-label="Quality level">
+          <button type="button" data-qual="lower">Lower</button>
+          <button type="button" data-qual="recommend" class="active">Recommend</button>
+          <button type="button" data-qual="higher">Higher</button>
+        </div>
+        <div class="export-settings-grid" id="exportSettingsGrid">
+          <label>Format
+            <select id="exportFormat">
+              <option value="mp4">MP4</option>
+              <option value="mov">MOV</option>
+              <option value="avi">AVI</option>
+              <option value="mkv">MKV</option>
+              <option value="webm">WEBM</option>
+              <option value="gif">GIF</option>
+              <option value="mp3">MP3</option>
+            </select>
+          </label>
+          <label>Encoder
+            <select id="exportCodec">
+              <option value="h264">H.264</option>
+              <option value="hevc">HEVC (H.265)</option>
+              <option value="av1">AV1</option>
+            </select>
+          </label>
+          <label>Resolution
+            <select id="exportRes">
+              <option value="1920x1080">1920×1080</option>
+              <option value="3840x2160">3840×2160</option>
+              <option value="1280x720">1280×720</option>
+              <option value="1080x1920">1080×1920</option>
+            </select>
+          </label>
+          <label>Frame rate
+            <select id="exportFps">
+              <option value="24">24 fps</option>
+              <option value="25">25 fps</option>
+              <option value="30" selected>30 fps</option>
+              <option value="60">60 fps</option>
+            </select>
+          </label>
+          <label>Bit rate (Mbps)
+            <input id="exportBitrate" type="number" min="1" max="200" value="16" />
+          </label>
+          <label>Hardware accel
+            <select id="exportHw">
+              <option value="auto">Auto</option>
+              <option value="off">Off</option>
+              <option value="nvenc">NVENC</option>
+              <option value="qsv">Intel QSV</option>
+            </select>
+          </label>
+        </div>
         <div class="export-dest" id="exportDest">
           <div class="export-dest-row">
             <label for="exportFileName">File name</label>
@@ -1616,14 +1684,40 @@
       </div>
     </div>
 
-    <!-- Release notes modal (2.2.2 Shader transitions + Toolbar order + ruler zoom + drag auto-scroll + wrapping tabs) -->
+    <!-- Release notes modal (2.2.6 library collapse fix) -->
     <div class="modal-backdrop" id="releaseNotesModal" role="dialog" aria-modal="true" aria-label="Release notes">
       <div class="modal">
-        <h3>AiFilmora 2.2.2 — 15 Filmora shader transitions · Toolbar order · ruler-drag zoom · drag auto-scroll</h3>
+        <h3>AiFilmora 2.2.6 — library collapse fix: restore stubs, no dead void, tabs auto-expand</h3>
         <p style="font-size:12px;color:var(--ink-dim);margin:0 0 8px">
           Filmora-style library shell around the real Filmora 14 assets in <code>assets/</code>.
         </p>
         <ul style="font-size:12px;line-height:1.75;color:var(--ink-dim);padding-left:18px;max-height:46vh;overflow:auto">
+          <li><strong>Library collapse fix</strong> — collapsing the library or
+              properties panel no longer leaves a dead blank area: the grid
+              track shrinks to a labeled restore stub (› Library /
+              ‹ Properties), clicking any library tab re-opens a collapsed
+              library, and View → Reset panels &amp; layout clears any stuck
+              panel state.</li>
+          <li><strong>Library never blank</strong> — a selection guard keeps
+              exactly one library tab + view active (fallback to Media), and
+              the empty media bin offers Import files… / Browse stock
+              shortcuts.</li>
+          <li><strong>Unified Properties panel</strong> — the tab strip and the
+              content-aware Video/Color/Animation/Speed/Audio/Text/AI sections
+              now share one panel window. Tabs reveal their section on click,
+              selection filters sections (off-context tabs dim but stay
+              clickable), and a "No clip selected" empty-state replaces the
+              old blank void.</li>
+          <li><strong>True split &amp; trim</strong> — clips carry a source
+              in-point, so split halves, left trims, Scene Detect pieces and
+              Paper Edit clips all continue mid-media instead of restarting.
+              Split also cuts linked detached audio at the same frame.</li>
+          <li><strong>Working master mute</strong> — the transport speaker
+              button now silences the program monitor.</li>
+          <li><strong>Reliable save/open</strong> — project files keep the
+              IndexedDB media link (no more FILE MISSING on reopen), Open
+              re-hydrates media immediately, folder Browse writes into the
+              granted folder, and Save As renames the project.</li>
           <li><strong>15 Filmora shader transitions</strong> — canvas ports of the real
               GPU shaders in <code>assets/resources/wfx_effect/Transition/*.frag</code>:
               Cross Zoom, Push, Drop Bands, Erase Wipe, Linear Wipe, Pinwheel,

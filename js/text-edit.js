@@ -183,6 +183,9 @@ function paperEdit() {
       trackId: "v1",
       start: cursor,
       duration: dur,
+      // Transcript times are media times: the clip must open at the spoken
+      // line, not at the media head.
+      offset: Math.max(0, Number(seg.start) || 0),
       text: seg.text,
       fx: { ...DEFAULT_FX },
     });

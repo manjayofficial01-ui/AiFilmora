@@ -405,6 +405,40 @@ function buildPlayerHeader() {
   bar.querySelector(".preview-spacer")?.before(full);
 }
 
+/* ---------------- library selection guard -----------------------------------------
+ * The left panel must never render blank: exactly one tab and its matching
+ * view stay active. A click that targets a tab with no matching view falls
+ * back to Media instead of leaving zero active views. */
+function ensureLibrarySelection() {
+  const tabs = document.getElementById("libraryTabs");
+  const sidebar = document.querySelector(".sidebar");
+  if (!tabs || !sidebar) return;
+  const repair = () => {
+    let activeBtn = tabs.querySelector('[data-sidebar].active');
+    let view = activeBtn && sidebar.querySelector(`#side-${activeBtn.dataset.sidebar}`);
+    if (!activeBtn || !view || !view.classList.contains("active")) {
+      activeBtn = tabs.querySelector('[data-sidebar="media"]') || tabs.querySelector("[data-sidebar]");
+      view = activeBtn && sidebar.querySelector(`#side-${activeBtn.dataset.sidebar}`);
+    }
+    if (!activeBtn || !view) return;
+    tabs.querySelectorAll("[data-sidebar]").forEach((b) => {
+      b.classList.toggle("active", b === activeBtn);
+      b.setAttribute("aria-pressed", String(b === activeBtn));
+    });
+    sidebar.querySelectorAll(".sidebar-view").forEach((p) =>
+      p.classList.toggle("active", p === view)
+    );
+    document.getElementById("libraryHeading").textContent =
+      activeBtn.dataset.sidebar === "media" ? "Project Media" : activeBtn.textContent.trim();
+  };
+  if (!tabs.dataset.guardBound) {
+    tabs.dataset.guardBound = "1";
+    // Bubble listener: runs after the per-button switch handlers, then repairs.
+    tabs.addEventListener("click", () => queueMicrotask(repair));
+  }
+  repair();
+}
+
 /* ---------------- main -------------------------------------------------------------- */
 export function initMediaMenu() {
   restructureTabs();
@@ -430,6 +464,7 @@ export function initMediaMenu() {
     if (view) fn(view);
   }
   buildPlayerHeader();
+  ensureLibrarySelection();
   hydrateIcons(sidebar);
 }
 

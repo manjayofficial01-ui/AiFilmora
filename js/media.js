@@ -563,8 +563,18 @@ export function renderMediaBin(container, filter = "", cat = "all") {
 
   if (!media.length) {
     const empty = document.createElement("div");
-    empty.className = "empty";
-    empty.textContent = "No media yet. Import files or generate clips in GenAI Lab.";
+    empty.className = "empty media-empty-cta";
+    empty.innerHTML = `<p>No media yet. Import files or generate clips in GenAI Lab.</p>
+      <div class="btn-row">
+        <button type="button" class="btn sm primary" data-media-cta="import">Import files…</button>
+        <button type="button" class="btn sm" data-media-cta="stock">Browse stock</button>
+      </div>`;
+    empty.querySelector('[data-media-cta="import"]')?.addEventListener("click", () =>
+      document.getElementById("btnImport")?.click()
+    );
+    empty.querySelector('[data-media-cta="stock"]')?.addEventListener("click", () =>
+      document.querySelector('#libraryTabs [data-sidebar="assets"]')?.click()
+    );
     container.appendChild(empty);
     return;
   }

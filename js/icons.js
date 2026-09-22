@@ -37,6 +37,14 @@ export const iconUndo         = _icon(`<path d="M3 8a5 5 0 0 1 5-5h5M3 5l3 3-3 3
 export const iconRedo         = _icon(`<path d="M13 8a5 5 0 0 0-5-5H3M13 5l-3 3 3 3"/>`);
 export const iconFullscreen   = _icon(`<path d="M2 5V2h3M14 5V2h-3M2 11v3h3M14 11v3h-3"/>`);
 export const iconPlay         = _icon(`<path d="M5 3l9 5-9 5z" fill="currentColor" stroke="currentColor"/>`);
+export const iconPause        = _icon(`<path d="M5 3h2.2v10H5zM8.8 3H11v10H8.8z" fill="currentColor" stroke="none"/>`);
+export const iconHome         = _icon(`<path d="M2 8l6-5 6 5"/><path d="M4 7.5V13h8V7.5"/><path d="M2 13h12"/>`);
+export const iconEnd          = _icon(`<path d="M14 8l-6-5-6 5"/><path d="M4 7.5V13h8V7.5"/>`);
+export const iconPrev         = _icon(`<path d="M10 4L5 8l5 4"/><path d="M4 3.5v9"/>`);
+export const iconNext         = _icon(`<path d="M6 4l5 4-5 4"/><path d="M12 3.5v9"/>`);
+export const iconCamera       = _icon(`<rect x="2" y="5" width="9" height="7" rx="1"/><path d="M11 8l3-2v6l-3-2z"/><circle cx="6.5" cy="8.5" r="1.5"/>`);
+export const iconMarkIn       = _icon(`<path d="M3 3v10M3 8h8"/><path d="M8 5l3 3-3 3" fill="currentColor"/>`);
+export const iconMarkOut      = _icon(`<path d="M13 3v10M13 8H5"/><path d="M8 5L5 8l3 3" fill="currentColor"/>`);
 export const iconSplit        = _icon(`<path d="M3 4h10M3 12h10M8 4v8" stroke-width="1.6"/><path d="M8 8l-3 2 3 2 3-2-3-2z" fill="currentColor" stroke="currentColor"/>`);
 export const iconTrim         = _icon(`<rect x="2" y="5" width="12" height="6" rx="1"/><path d="M2 8h5M9 8h5"/>`);
 export const iconDelete       = _icon(`<path d="M3 4h10M5 4V2.5h6V4M4 4l1 9h6l1-9" stroke-width="1.4"/>`);
@@ -96,6 +104,14 @@ export const ICONS = {
   redo: iconRedo,
   fullscreen: iconFullscreen,
   play: iconPlay,
+  pause: iconPause,
+  home: iconHome,
+  end: iconEnd,
+  prev: iconPrev,
+  next: iconNext,
+  camera: iconCamera,
+  markIn: iconMarkIn,
+  markOut: iconMarkOut,
   split: iconSplit,
   trim: iconTrim,
   delete: iconDelete,

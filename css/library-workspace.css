@@ -93,3 +93,7 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 /* Stock Media: hide the legacy chip row (rail replaces it) */
 #side-assets #assetCats { display: none; }
 
+/* Media empty-state actions (Filmora always offers Import + stock entry points) */
+.media-empty-cta p { margin: 0 0 10px; }
+.media-empty-cta .btn-row { justify-content: center; }
+

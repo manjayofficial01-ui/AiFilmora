@@ -148,7 +148,12 @@ export function initVolumePanel() {
   let masterMuted = localStorage.getItem("aifimora.masterMuted") === "1";
 
   const paintMaster = () => {
-    if (master) master.value = String(masterVol);
+    if (master) {
+      master.value = String(masterVol);
+      // Owned by this panel now: stop settings.applyMasterVolume() from
+      // clobbering the slider on later theme/appearance applies.
+      master.dataset.touched = "1";
+    }
     if (masterOut) masterOut.textContent = masterMuted ? "Mute" : `${masterVol}%`;
     if (muteMaster) muteMaster.textContent = masterMuted || masterVol === 0 ? "🔇" : masterVol < 50 ? "🔉" : "🔊";
   };

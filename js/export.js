@@ -39,6 +39,8 @@ let cancelFlag = false;
 let saveTarget = { dir: "", name: "" };
 /** Handle returned by the browser save picker (File System Access API). */
 let fileHandle = null;
+/** Directory handle granted via folder Browse (File System Access API). */
+let dirHandle = null;
 
 const KNOWN_EXT = /\.(mp4|mov|gif|webm|mkv|m4v|avi)$/i;
 
@@ -206,12 +208,14 @@ async function browseFolder() {
   if (exporting || picking) return;
   const api = desktopApi();
   if (!api?.openFolder) {
-    // Chromium directory picker as a middle ground.
+    // Chromium directory picker as a middle ground. The bare folder name
+    // is only a label — the granted handle is what the writer uses.
     if (window.showDirectoryPicker) {
       try {
         const h = await window.showDirectoryPicker({ mode: "readwrite" });
         if (h?.name) {
           saveTarget.dir = h.name;
+          dirHandle = h || null;
           syncDestInputs();
         }
         return;
@@ -258,6 +262,7 @@ async function pickSaveTarget() {
     saveTarget.dir = prefs.defaultDir;
     saveTarget.name = base;
     fileHandle = null;
+    dirHandle = null;
     syncDestInputs();
     return { dir: saveTarget.dir, name: base, fullPath: fullPath(), fileHandle: null, silent: true };
   }
@@ -269,6 +274,8 @@ async function pickSaveTarget() {
   if (api?.saveVideo) {
     const picked = await api.saveVideo({ defaultPath: joinPathLocal(dir, base + "." + ext), ext });
     if (!picked) return null;
+    fileHandle = null;
+    dirHandle = null;
     const sp = splitPathLocal(picked);
     if (sp.dir) {
       saveTarget.dir = sp.dir;
@@ -322,10 +329,54 @@ async function pickSaveTarget() {
   const askChk = document.getElementById("exportAskAlways");
   if (askChk) setSavePrefs("video", { ask: !!askChk.checked });
   syncDestInputs();
-  return { dir: saveTarget.dir, name: saveTarget.name, fullPath: fullPath(), fileHandle: null, silent: false };
+  // Only reuse the browsed directory handle when the folder field still
+  // names that same folder — typed edits after browsing invalidate it.
+  const dh = dirHandle && (!saveTarget.dir || saveTarget.dir === dirHandle.name) ? dirHandle : null;
+  return { dir: saveTarget.dir, name: saveTarget.name, fullPath: fullPath(), fileHandle: null, dirHandle: dh, silent: false };
+}
+
+function readFilmoraExportSettings() {
+  const g = (id) => document.getElementById(id);
+  return {
+    dest: window.__exportDest || "local",
+    format: g("exportFormat")?.value || "mp4",
+    codec: g("exportCodec")?.value || "h264",
+    resolution: g("exportRes")?.value || "1920x1080",
+    fps: Number(g("exportFps")?.value || 30),
+    bitrateMbps: Number(g("exportBitrate")?.value || 16),
+    hardware: g("exportHw")?.value || "auto",
+  };
+}
+
+function applyFilmoraExportDefaults() {
+  const def = settings.get().exportDefaults || {};
+  const g = (id) => document.getElementById(id);
+  const map = {
+    exportFormat: def.format || def.codec === "hevc" ? "mp4" : def.format || "mp4",
+    exportCodec: def.codec || "h264",
+    exportRes: def.resolution || "1920x1080",
+    exportFps: String(def.fps || 30),
+    exportBitrate: String(def.bitrateMbps || def.bitrate || 16),
+    exportHw: def.hardware || "auto",
+  };
+  for (const [id, val] of Object.entries(map)) {
+    const el = g(id);
+    if (el) el.value = val;
+  }
+  if (def.format && g("exportFormat")) g("exportFormat").value = def.format;
+  const dest = window.__exportDest || def.dest || "local";
+  document.querySelectorAll("#exportTabs [data-edest]").forEach((b) => {
+    b.classList.toggle("active", b.dataset.edest === dest);
+  });
 }
 
 function openExport() {
+  applyFilmoraExportDefaults();
+  if (window.__exportDest) {
+    document.querySelectorAll("#exportTabs [data-edest]").forEach((b) => {
+      b.classList.toggle("active", b.dataset.edest === window.__exportDest);
+    });
+  }
   document.getElementById("exportModal")?.classList.add("open");
   renderPresets();
   if (!saveTarget.name) saveTarget.name = defaultBaseName();
@@ -583,7 +634,7 @@ async function startExport() {
     const baseName = stripExt(dest.name || defaultBaseName());
     const actualName = `${baseName}.${actualExt}`;
     const actualPath = dest.dir ? joinPath(dest.dir, actualName) : actualName;
-    const saveLoc = { dir: dest.dir, name: baseName, fullPath: actualPath, fileHandle: dest.fileHandle || fileHandle };
+    const saveLoc = { dir: dest.dir, name: baseName, fullPath: actualPath, fileHandle: dest.fileHandle || fileHandle, dirHandle: dest.dirHandle || null };
     let savedPath = actualPath;
     const api = desktopApi();
     if (api?.writeFile && saveLoc.fullPath) {
@@ -603,9 +654,9 @@ async function startExport() {
       }
       savedPath = out.path || actualPath;
     } else if (api?.saveVideo && !api?.writeFile) {
-      // Legacy stub (automated check): dialog already returned a path; the
-      // bytes cannot be written without the bridge, so record the path.
-      savedPath = dest.fullPath || actualPath;
+      // Legacy stub (automated check): dialog already returned a path, but the
+      // capture may have switched the extension to WebM — report the actual file.
+      savedPath = actualPath;
       // Still trigger a download so a human gets the file.
       try {
         const url = URL.createObjectURL(blob);

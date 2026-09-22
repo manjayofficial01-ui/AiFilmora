@@ -147,16 +147,22 @@ function applyElementLevel(el, mediaUrl, total, muted) {
 
 function masterVolume() {
   try {
+    // The transport mute button (volume-panel.js) stores its state here and
+    // only repaints the icon — it never zeroes the slider — so the player
+    // must honour the flag or mute appears broken.
+    if (localStorage.getItem("aifimora.masterMuted") === "1") return 0;
     const v = Number(document.getElementById("masterVolume")?.value);
     if (Number.isFinite(v)) return Math.max(0, Math.min(1, v / 100));
   } catch { /* ignore */ }
   return 0.8;
 }
 
-/** Media timestamp for a clip-local time (speed aware). Reverse = mirrored. */
+/** Media timestamp for a clip-local time (speed + source-offset aware). Reverse = mirrored. */
 function mediaTimeFor(clip, localT, mediaDur) {
   const speed = Math.max(0.25, Math.min(8, Number(clip.speed) || 1));
-  let t = Math.max(0, localT) * speed;
+  // Clips carry a source in-point (clip.offset): split halves and left-trims
+  // continue mid-media instead of restarting from the media head.
+  let t = Math.max(0, Number(clip.offset) || 0) + Math.max(0, localT) * speed;
   if (clip.reversed) {
     const src = Number.isFinite(mediaDur) && mediaDur > 0 ? mediaDur : clip.duration * speed;
     t = Math.max(0, src - t - 0.04);

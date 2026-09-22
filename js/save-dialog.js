@@ -178,6 +178,7 @@ export function askSaveLocation({ kind = "project", suggestedName = "", ext = "j
   m.ext.textContent = "." + cleanExt;
   m.name.value = base;
   m.dir.value = prefs.defaultDir || "";
+  m._dirHandle = null; // stale grants from a cancelled round must not leak in
   m.useDefault.checked = !prefs.defaultDir;
   m.ask.checked = prefs.ask !== false;
   m.hint.textContent = hintForApi();
@@ -297,6 +298,20 @@ export async function saveTextToLocation(text, location, { ext = "json", mime = 
       // fall through to download
     }
   }
+  // 1b) Directory handle granted via Browse (save modal / export folder):
+  // create the file inside it instead of falling back to Downloads.
+  if (location.dirHandle?.getFileHandle) {
+    try {
+      const fh = await location.dirHandle.getFileHandle(filename, { create: true });
+      const w = await fh.createWritable();
+      await w.write(text);
+      await w.close();
+      return { ok: true, via: "dirHandle", path: joinPath(location.dir || location.dirHandle.name || "", filename) };
+    } catch (err) {
+      if (err?.name === "AbortError") return { ok: false, cancelled: true };
+      // fall through
+    }
+  }
   // 2) Desktop bridge writes exactly to fullPath
   const api = desktopApi();
   if (api?.writeFile && location.fullPath) {
@@ -322,6 +337,17 @@ export async function saveBlobToLocation(blob, location, { filename = null, mime
       if (err?.name === "AbortError") return { ok: false, cancelled: true };
     }
   }
+  if (location.dirHandle?.getFileHandle) {
+    try {
+      const fh = await location.dirHandle.getFileHandle(name, { create: true });
+      const w = await fh.createWritable();
+      await w.write(mime ? new Blob([blob], { type: mime }) : blob);
+      await w.close();
+      return { ok: true, via: "dirHandle", path: joinPath(location.dir || location.dirHandle.name || "", name) };
+    } catch (err) {
+      if (err?.name === "AbortError") return { ok: false, cancelled: true };
+    }
+  }
   const api = desktopApi();
   if (api?.writeFile && location.fullPath) {
     const b64 = await blobToBase64(blob);
@@ -340,9 +366,11 @@ function serializableProject() {
   const media = (s.media || []).map((m) => {
     const copy = { ...m };
     if (copy?.url && String(copy.url).startsWith("blob:")) {
-      copy.url = null;
+      // Same placeholder scheme as the autosave (store.save): the real bytes
+      // live in IndexedDB and re-hydrate on open. Writing url:null here used
+      // to strand project files as FILE MISSING on the same machine.
+      copy.url = `idb:${m.id}`;
       copy._offline = true;
-      copy._needsRelink = true;
     }
     if (copy?.thumb && String(copy.thumb).startsWith("blob:")) copy.thumb = null;
     return copy;
@@ -383,6 +411,8 @@ export async function saveProjectFlow({ saveAs = false } = {}) {
     return false;
   }
   window.__aifimoraProjectFile = location;
+  // "Save as" renames the open project to the file name (Filmora convention).
+  if (location?.name && store.get().name !== location.name) store.set({ name: location.name });
   try {
     const { rememberRecentProject } = await import("./workflows.js");
     rememberRecentProject(store.get().name);
@@ -396,10 +426,23 @@ export async function saveProjectFlow({ saveAs = false } = {}) {
 /** Open a project from disk (desktop bridge or browser file picker). */
 export async function openProjectFlow() {
   const api = desktopApi();
-  const applyJson = (text, label) => {
-    const obj = JSON.parse(text);
+  const applyJson = async (text, label) => {
+    let obj = null;
+    try {
+      obj = JSON.parse(text);
+    } catch {
+      toast("Import failed: not valid JSON", "err");
+      return false;
+    }
     if (store.importProject(obj)) {
       window.__aifimoraProjectFile = label ? { dir: splitPath(label).dir, name: stripKnownExt(splitPath(label).name), fullPath: label } : null;
+      // Project files carry idb: placeholders for imported files — rehydrate
+      // them now so media is playable without a reload.
+      try {
+        const { restoreMediaUrls } = await import("./media.js");
+        const r = await restoreMediaUrls();
+        if (r?.missing) toast(`${r.missing} imported file${r.missing === 1 ? "" : "s"} missing — re-import to relink`, "err");
+      } catch { /* rehydration is best-effort */ }
       toast(`Project loaded ← ${label || "file"}`, "ok");
       window.dispatchEvent(new CustomEvent("aifimora:timeline-dirty"));
       return true;
@@ -426,8 +469,22 @@ export async function openProjectFlow() {
   input.type = "file";
   input.accept = ".aifimora.json,.json,application/json";
   const picked = await new Promise((resolve) => {
-    input.onchange = () => resolve(input.files?.[0] || null);
-    input.oncancel = () => resolve(null);
+    let done = false;
+    const fin = (v) => {
+      if (done) return;
+      done = true;
+      window.removeEventListener("focus", onFocus);
+      resolve(v);
+    };
+    input.onchange = () => fin(input.files?.[0] || null);
+    input.oncancel = () => fin(null);
+    // Browsers without a file-cancel event leave the promise hanging when
+    // the user dismisses the picker: regaining focus with no selection
+    // means cancelled.
+    const onFocus = () => setTimeout(() => {
+      if (!done && !input.files?.length) fin(null);
+    }, 400);
+    window.addEventListener("focus", onFocus);
     input.click();
   });
   if (!picked) return false;
