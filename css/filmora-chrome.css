@@ -257,18 +257,24 @@
 }
 .transport-btn svg { width: 16px; height: 16px; }
 
-/* ---------------- Timeline icon strip ------------------------------------------ */
-.tl-toolbar.tl-toolbar-icons { gap: 2px; }
-.tl-toolbar.tl-toolbar-icons .tl-tool {
-  min-width: 28px;
-  width: 28px;
-  height: 26px;
+/* ---------------- Timeline icon strip ------------------------------------------
+ * Airy icon buttons with hidden text labels (tooltips carry the names).
+ * Fixed sizing applies only to converted buttons (:has(.ico)) so a button
+ * that still shows its text label never gets squeezed into 32px. */
+.tl-toolbar.tl-toolbar-icons { gap: 6px; }
+.tl-toolbar.tl-toolbar-icons .tl-tool:has(.ico) {
+  min-width: 32px;
+  width: 32px;
+  height: 30px;
   padding: 0;
   display: inline-grid;
   place-items: center;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .tl-toolbar .btn.sm.tl-tool .ico { display: inline-grid; place-items: center; }
-.tl-toolbar .btn.sm.tl-tool .ico svg { width: 14px; height: 14px; }
+.tl-toolbar .btn.sm.tl-tool .ico svg { width: 15px; height: 15px; }
+.tl-toolbar .btn.sm.tl-tool { border-radius: 7px; }
 
 /* ---------------- Export dialog Filmora tabs ----------------------------------- */
 .export-tabs {

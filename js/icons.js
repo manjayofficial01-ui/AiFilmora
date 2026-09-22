@@ -45,8 +45,18 @@ export const iconNext         = _icon(`<path d="M6 4l5 4-5 4"/><path d="M12 3.5v
 export const iconCamera       = _icon(`<rect x="2" y="5" width="9" height="7" rx="1"/><path d="M11 8l3-2v6l-3-2z"/><circle cx="6.5" cy="8.5" r="1.5"/>`);
 export const iconMarkIn       = _icon(`<path d="M3 3v10M3 8h8"/><path d="M8 5l3 3-3 3" fill="currentColor"/>`);
 export const iconMarkOut      = _icon(`<path d="M13 3v10M13 8H5"/><path d="M8 5L5 8l3 3" fill="currentColor"/>`);
-export const iconSplit        = _icon(`<path d="M3 4h10M3 12h10M8 4v8" stroke-width="1.6"/><path d="M8 8l-3 2 3 2 3-2-3-2z" fill="currentColor" stroke="currentColor"/>`);
+export const iconSplit        = _icon(`<circle cx="4" cy="4.5" r="1.8"/><circle cx="4" cy="11.5" r="1.8"/><path d="M5.5 5.5L14 12M5.5 10.5L14 4"/>`);
 export const iconTrim         = _icon(`<rect x="2" y="5" width="12" height="6" rx="1"/><path d="M2 8h5M9 8h5"/>`);
+export const iconTrimStart    = _icon(`<path d="M11.5 2.5v11"/><path d="M8.5 5.5L5 8l3.5 2.5"/>`);
+export const iconTrimEnd      = _icon(`<path d="M4.5 2.5v11"/><path d="M7.5 5.5L11 8l-3.5 2.5"/>`);
+export const iconDetach       = _icon(`<rect x="2" y="2.5" width="12" height="5" rx="1"/><path d="M2.5 12.5c1.2-1.8 2.4-1.8 3.6 0s2.4 1.8 3.6 0 2.4-1.8 3.6 0"/>`);
+export const iconBeat         = _icon(`<path d="M6.5 11.5V4.8A1.6 1.6 0 0 1 8 3.2h2.6a1.6 1.6 0 0 1 1.6 1.6v6.7"/><circle cx="4.7" cy="11.7" r="1.8"/><circle cx="10.4" cy="11.7" r="1.8"/>`);
+export const iconSliders      = _icon(`<path d="M2.5 5.5h11M2.5 10.5h11"/><circle cx="6" cy="5.5" r="1.7"/><circle cx="10" cy="10.5" r="1.7"/>`);
+export const iconEraser       = _icon(`<path d="M9.3 3.3l2.8 2.8L7.5 10.7H4.7L3 9z"/><path d="M2.5 13.5h11"/>`);
+export const iconCrop         = _icon(`<path d="M2.5 5.5v-3h3M10.5 2.5h3v3M13.5 10.5v3h-3M5.5 13.5h-3v-3"/>`);
+export const iconMarker       = _icon(`<path d="M4 14.5V2"/><path d="M4 2.8h8l-2.2 3L12 8.8H4"/>`);
+export const iconSilence      = _icon(`<path d="M1.5 8h1M3.5 5.5v5M5.5 4v8"/><path d="M7.5 8H14.5"/>`);
+export const iconDuck         = _icon(`<path d="M2.5 5.5h1.8L7.5 3v7L4.3 7.5H2.5z" fill="currentColor" stroke="currentColor"/><path d="M10.5 8v4M8.5 10l2 2 2-2"/>`);
 export const iconDelete       = _icon(`<path d="M3 4h10M5 4V2.5h6V4M4 4l1 9h6l1-9" stroke-width="1.4"/>`);
 export const iconSnap         = _icon(`<path d="M2 5h3v3M14 5h-3v3M2 11h3v-3M14 11h-3v-3" />`);
 export const iconMute         = _icon(`<path d="M2.5 6h2L8 3v10L4.5 10h-2z" fill="currentColor" stroke="currentColor"/><path d="M10 6l4 4M14 6l-4 4" stroke-width="1.5"/>`);
@@ -114,6 +124,16 @@ export const ICONS = {
   markOut: iconMarkOut,
   split: iconSplit,
   trim: iconTrim,
+  trimStart: iconTrimStart,
+  trimEnd: iconTrimEnd,
+  detach: iconDetach,
+  beat: iconBeat,
+  sliders: iconSliders,
+  eraser: iconEraser,
+  crop: iconCrop,
+  marker: iconMarker,
+  silence: iconSilence,
+  duck: iconDuck,
   delete: iconDelete,
   snap: iconSnap,
   mute: iconMute,

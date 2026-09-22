@@ -107,7 +107,7 @@
           <details class="fm-item" id="fmVersion">
             <summary>Version</summary>
             <div class="fm-pop" role="menu">
-              <div class="fm-info-row"><strong>AiFilmora 2.2.6</strong> — library collapse fix: visible restore stubs, no dead void, tabs auto-expand</div>
+              <div class="fm-info-row"><strong>AiFilmora 2.2.7</strong> — honest timeline icons + airy toolbar spacing</div>
               <div class="fm-info-row">Full-width library bar · searchable Filters &amp; Audio</div>
               <div class="fm-info-row">6 Pan &amp; Zoom presets · Filmora's own curves</div>
               <div class="fm-info-row">29 Filmora colour presets · real per-pixel grade</div>
@@ -119,7 +119,7 @@
               <div class="fm-info-row">Collapsible Project Info card · remembered choice</div>
               <div class="fm-info-row">Theme: <span id="fmThemeLabel">dark</span></div>
               <hr/>
-              <button data-fm="release-notes">What's new in 2.2.6…</button>
+              <button data-fm="release-notes">What's new in 2.2.7…</button>
             </div>
           </details>
         </nav>
@@ -1534,7 +1534,7 @@
       <!-- Status -->
       <footer class="statusbar">
         <span class="status-dot" id="statusDot"></span>
-        <span>AiFilmora 2.2.6 · Electron-ready Windows suite</span>
+        <span>AiFilmora 2.2.7 · Electron-ready Windows suite</span>
         <span id="statClips">0 clips</span>
         <span id="statLastAction" style="color:var(--muted)"></span>
         <div class="right">
@@ -1684,14 +1684,24 @@
       </div>
     </div>
 
-    <!-- Release notes modal (2.2.6 library collapse fix) -->
+    <!-- Release notes modal (2.2.7 honest timeline icons) -->
     <div class="modal-backdrop" id="releaseNotesModal" role="dialog" aria-modal="true" aria-label="Release notes">
       <div class="modal">
-        <h3>AiFilmora 2.2.6 — library collapse fix: restore stubs, no dead void, tabs auto-expand</h3>
+        <h3>AiFilmora 2.2.7 — honest timeline icons + airy toolbar spacing</h3>
         <p style="font-size:12px;color:var(--ink-dim);margin:0 0 8px">
           Filmora-style library shell around the real Filmora 14 assets in <code>assets/</code>.
         </p>
         <ul style="font-size:12px;line-height:1.75;color:var(--ink-dim);padding-left:18px;max-height:46vh;overflow:auto">
+          <li><strong>Honest timeline icons</strong> — every toolbar button now
+              shows what its tool does: scissors for Split, directional trims,
+              clip-over-waveform for Detach Audio, beamed notes for Beat Sync,
+              sliders for Beat Options, eraser for Clear Beats, flag for
+              Marker, decaying waveform for Silence detect, speaker +
+              down-arrow for Auto duck, corners for Crop. No two tools share a
+              glyph.</li>
+          <li><strong>Airy toolbar</strong> — 32px targets on a 6px rhythm with
+              rounded corners; text labels stay accessible but never squeeze or
+              overlap.</li>
           <li><strong>Library collapse fix</strong> — collapsing the library or
               properties panel no longer leaves a dead blank area: the grid
               track shrinks to a labeled restore stub (› Library /

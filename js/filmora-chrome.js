@@ -517,16 +517,16 @@ export function bindTimelineIconStrip() {
     btnUndo: "undo",
     btnRedo: "redo",
     btnMuteClip: "mute",
-    btnTrimStart: "trim",
-    btnTrimEnd: "trim",
+    btnTrimStart: "trimStart",
+    btnTrimEnd: "trimEnd",
     btnSplit: "split",
-    btnDetachAudio: "volume",
-    btnBeatSync: "spark",
-    btnBeatOptions: "snap",
-    btnClearBeats: "delete",
+    btnDetachAudio: "detach",
+    btnBeatSync: "beat",
+    btnBeatOptions: "sliders",
+    btnClearBeats: "eraser",
     btnDeleteClip: "delete",
-    btnCrop: "aspect",
-    btnMarker: "recent",
+    btnCrop: "crop",
+    btnMarker: "marker",
     btnSnap: "snap",
   };
   for (const [id, icon] of Object.entries(iconFor)) {
@@ -550,7 +550,7 @@ export function bindTimelineIconStrip() {
     sil.className = "btn sm tl-tool";
     sil.id = "btnSilence";
     sil.title = "Silence detect";
-    sil.dataset.icon = "volume";
+    sil.dataset.icon = "silence";
     sil.innerHTML = `<span class="ico"></span><span class="sr-only">Silence</span>`;
     sil.addEventListener("click", () =>
       window.dispatchEvent(new CustomEvent("aifimora:fm", { detail: "silence" }))
@@ -561,7 +561,7 @@ export function bindTimelineIconStrip() {
     duck.className = "btn sm tl-tool";
     duck.id = "btnDuck";
     duck.title = "Auto duck";
-    duck.dataset.icon = "spark";
+    duck.dataset.icon = "duck";
     duck.innerHTML = `<span class="ico"></span><span class="sr-only">Duck</span>`;
     duck.addEventListener("click", () =>
       window.dispatchEvent(new CustomEvent("aifimora:fm", { detail: "auto-duck" }))
