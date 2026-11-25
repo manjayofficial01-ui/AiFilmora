@@ -22,6 +22,7 @@ export function initScopes() {
 
   let dirty = true;
   let lastDraw = 0;
+  let pendingDraw = 0;
 
   function lumaCoefs() {
     return paritySel && paritySel.value === "rec2020"
@@ -183,8 +184,17 @@ export function initScopes() {
 
   function maybeDraw() {
     const now = performance.now();
-    if (now - lastDraw < 50) {
+    const wait = 50 - (now - lastDraw);
+    if (wait > 0) {
+      // Too soon — but a repaint is owed. Remember it and schedule the
+      // trailing draw, or the scope freezes for the rest of the session.
       dirty = true;
+      if (!pendingDraw) {
+        pendingDraw = setTimeout(() => {
+          pendingDraw = 0;
+          if (dirty) { dirty = false; maybeDraw(); }
+        }, wait);
+      }
       return;
     }
     lastDraw = now;
@@ -193,12 +203,10 @@ export function initScopes() {
   }
 
   window.addEventListener("aifimora:frame", () => {
-    if (dirty) return;
     maybeDraw();
   });
   // when paused / scrubbing we still want a repaint; redraw on playhead too
   window.addEventListener("aifimora:playhead", () => {
-    if (dirty) return;
     maybeDraw();
   });
   if (modeSel) modeSel.addEventListener("change", draw);

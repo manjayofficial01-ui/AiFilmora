@@ -28,7 +28,13 @@ const videoElCache = new Map(); // mediaId -> HTMLVideoElement
 const audioElCache = new Map(); // mediaId -> HTMLAudioElement
 
 function isPlayableUrl(u) {
-  return typeof u === "string" && (u.startsWith("blob:") || u.startsWith("http") || u.startsWith("data:") || u.startsWith("file:"));
+  // app:// is how the Electron shell serves files the media sidecar produced
+  // (converted proxies, poster frames). Without it the sidecar's output
+  // loads, shows a filmstrip, and then plays nothing at all.
+  return typeof u === "string" && (
+    u.startsWith("blob:") || u.startsWith("http") || u.startsWith("data:") ||
+    u.startsWith("file:") || u.startsWith("app:")
+  );
 }
 
 export function getVideoEl(media) {

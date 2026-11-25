@@ -253,7 +253,12 @@ function bindFilmoraMenus() {
     "export-srt": () => window.dispatchEvent(new CustomEvent("aifimora:export-srt")),
     "export-chapters": () => window.dispatchEvent(new CustomEvent("aifimora:export-chapters")),
     thumbnail: () => window.dispatchEvent(new CustomEvent("aifimora:ai-action", { detail: { id: "thumbnail" } })),
-    about: () => toast("AiFilmora 2.2.2 — Filmora cyan theme · Split Screen · working Source monitor · " + (window.__aifimoraStore?.get()?.clips?.length ?? 0) + " clips in project"),
+    about: () => {
+      // Read the version from the DOM instead of hard-coding it: the About
+      // toast used to claim 2.2.2 while the app was 2.2.7.
+      const v = document.querySelector("#fmVersion .fm-info-row strong")?.textContent?.trim() || "AiFilmora";
+      toast(v + " — Filmora cyan theme · Split Screen · working Source monitor · " + (window.__aifimoraStore?.get()?.clips?.length ?? 0) + " clips in project");
+    },
     docs: () => toast("See research/FILMORA-INSPIRED-REDESIGN.md"),
     "release-notes": () => document.getElementById("releaseNotesModal")?.classList.add("open"),
   };
@@ -303,6 +308,17 @@ function bindFilmoraMenus() {
     document.querySelectorAll(".fm-item[open]").forEach((d) => {
       if (!d.contains(e.target)) d.removeAttribute("open");
     });
+  });
+
+  // Escape closes an open menu, like every other menu in every other app.
+  // A native <details> has no keyboard dismissal of its own, so without this
+  // the panel stays open over the UI and swallows the next click.
+  window.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    const open = document.querySelectorAll(".fm-item[open]");
+    if (!open.length) return;
+    open.forEach((d) => d.removeAttribute("open"));
+    e.preventDefault();
   });
 
   // Any dropdown item closes its menu — the data-fm handler used to do this,
@@ -605,17 +621,22 @@ function main() {
   if (!store.get().media.length) seedLibrary();
   // Re-hydrate imported files (IndexedDB -> fresh blob: URLs) so
   // imported video/audio survives reload and stays playable.
-  restoreMediaUrls().then((r) => {
-    if (r?.missing) toast(`${r.missing} imported file${r.missing === 1 ? "" : "s"} missing — re-import to relink`, "err");
-    refreshMediaBin();
-    window.__aifimoraPlayer?.render();
-  });
-  // A proxy made by the FFmpeg sidecar is addressed by a token that dies with
-  // the main process, so re-address the cached file before anything uses it.
-  rehydrateProxies().then(() => {
-    refreshMediaBin();
-    window.__aifimoraPlayer?.render();
-  });
+  //
+  // These two must run in sequence: both rewrite the whole media array, so
+  // running them concurrently lets the last writer discard the other's work.
+  restoreMediaUrls()
+    .then((r) => {
+      if (r?.missing) toast(`${r.missing} imported file${r.missing === 1 ? "" : "s"} missing — re-import to relink`, "err");
+    })
+    // A proxy made by the FFmpeg sidecar is addressed by a token that dies
+    // with the main process, so re-address the cached file before anything
+    // uses it.
+    .then(() => rehydrateProxies())
+    .then(() => {
+      refreshMediaBin();
+      window.__aifimoraPlayer?.render();
+    })
+    .catch((e) => console.warn("media restore failed", e));
   bootDemoIfEmpty();
   initFirstRun();
 

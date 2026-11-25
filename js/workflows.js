@@ -152,14 +152,66 @@ export function listBackups() {
   return loadBackupStore().versions;
 }
 
+/** JSON.stringify with a stable key order, so two equal objects compare equal. */
+function stableStringify(o) {
+  if (Array.isArray(o)) return "[" + o.map(stableStringify).join(",") + "]";
+  if (o && typeof o === "object") {
+    return (
+      "{" +
+      Object.keys(o)
+        .sort()
+        .map((k) => JSON.stringify(k) + ":" + stableStringify(o[k]))
+        .join(",") +
+      "}"
+    );
+  }
+  return JSON.stringify(o ?? null);
+}
+
+/**
+ * A signature of the parts of a project a backup could differ in.
+ *
+ * It answers "does this backup hold anything the live project does not
+ * already have?" without diffing whole projects. Volatile fields are
+ * dropped: blob: and idb: URLs and thumbnails are re-created on boot and
+ * would make every comparison look different.
+ */
+function projectSignature(p) {
+  const strip = (o) => {
+    if (!o || typeof o !== "object") return o;
+    const c = { ...o };
+    for (const k of ["url", "src", "blob", "thumb", "_offline", "unplayable", "unsupportedReason"]) {
+      delete c[k];
+    }
+    return c;
+  };
+  const media = (p?.media || [])
+    .map((m) => `${m.id}|${m.name || ""}|${m.kind || ""}|${m.type || ""}`)
+    .join(";");
+  return stableStringify({
+    name: p?.name || "",
+    clips: (p?.clips || []).map(strip),
+    tracks: (p?.tracks || []).map(strip),
+    markers: (p?.markers || []).map(strip),
+    media,
+  });
+}
+
 function promptCrashRecovery() {
   const bk = loadBackupStore();
   if (!bk.versions.length) return;
   if (settings.get().backup?.recoverPrompt === false) return;
   const latest = bk.versions[0];
   const ageMin = (Date.now() - latest.ts) / 60000;
-  // only prompt if backup is newer than the live autosave slot and not from this same minute
-  if (ageMin > 24 * 60) return;
+  // Not from this same minute — a snapshot taken seconds ago is not a
+  // recovery candidate.
+  if (ageMin < 1) return;
+  // Only when the backup holds something the live project does not already
+  // have. The old guard never made this comparison — it only checked the
+  // backup's age — so the app showed a blocking "Recover unsaved work?"
+  // dialog on EVERY boot, including the boot right after the user closed
+  // it, when there was nothing at all to recover.
+  if (projectSignature(latest.project) === projectSignature(store.get())) return;
   const ok = confirm(
     `Recover unsaved work?\n\nA ${latest.label} backup from ${new Date(latest.ts).toLocaleString()} is available.\n\nOK = restore · Cancel = keep current project`
   );

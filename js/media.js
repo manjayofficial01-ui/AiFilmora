@@ -220,14 +220,15 @@ if (typeof window !== "undefined") {
  */
 export async function rehydrateProxies() {
   const { media } = store.get();
-  const withProxy = media.filter((m) => m?.proxyPath && !String(m.url || "").startsWith("media://"));
+  const PROXY_URL = "app://local/_media/";
+  const withProxy = media.filter((m) => m?.proxyPath && !String(m.url || "").startsWith(PROXY_URL));
   if (!withProxy.length) return { rehydrated: 0, failed: 0 };
   let rehydrated = 0;
   let failed = 0;
   const next = [...media];
   for (let i = 0; i < next.length; i++) {
     const m = next[i];
-    if (!m?.proxyPath || String(m.url || "").startsWith("media://")) continue;
+    if (!m?.proxyPath || String(m.url || "").startsWith(PROXY_URL)) continue;
     const token = await registerProxy(m.proxyPath);
     if (token) {
       next[i] = { ...m, url: sidecarUrl(token), _offline: false, unplayable: false };
@@ -292,6 +293,9 @@ export async function importFileList(files) {
         // build gets the honest "cannot decode" card as before.
         const rescued = await rescueWithSidecar(file);
         if (rescued) {
+          // The sidecar's copy replaces the browser's — release the original
+          // blob URL rather than leaking it for the life of the session.
+          try { URL.revokeObjectURL(url); } catch { /* already released */ }
           url = rescued.url;
           thumb = rescued.thumb || thumb;
           duration = rescued.duration || duration;
@@ -313,6 +317,7 @@ export async function importFileList(files) {
         // sidecar a chance before calling it dead.
         const rescued = await rescueWithSidecar(file);
         if (rescued) {
+          try { URL.revokeObjectURL(url); } catch { /* already released */ }
           url = rescued.url;
           duration = rescued.duration || duration;
           proxyPath = rescued.path || "";

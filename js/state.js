@@ -1445,6 +1445,9 @@ function sanitizeProject(data) {
           // rather than silently looking like a healthy import.
           unplayable: !!m.unplayable,
           unsupportedReason: m.unsupportedReason || null,
+          // The converted proxy the sidecar made. Without this the file is
+          // orphaned on disk and the clip goes black after a reload.
+          proxyPath: typeof m.proxyPath === "string" ? m.proxyPath : null,
           // blob: URLs can't survive reload — flag for IDB re-hydration
           _offline: m.url && String(m.url).startsWith("idb:") ? true : !!m._offline,
         }))
