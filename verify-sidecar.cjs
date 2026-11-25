@@ -14,6 +14,8 @@
  * Groups:
  *   1. discovery   — where the tools are looked for, and what is missing
  *   2. worker      — the sidecar itself, over newline-delimited JSON
+ *   2b. encoder    — the `encode` op: the arguments, the probe of the
+ *                     result, and the honest refusal when ffmpeg is absent
  *   3. manager     — the main-process bridge, request/response correlation
  *   4. electron    — the real Electron shell: IPC, media:// delivery, range
  *   5. browser     — the web build still works with no sidecar at all
@@ -89,6 +91,79 @@ if (args.includes("-ar")) {
   fs.writeFileSync(out, JSON.stringify({ kind: "audio", codec: "pcm_s16le", sampleRate: 16000, channels: 1, duration: src.duration || 10, audio: null }));
   process.exit(0);
 }
+
+/* ---- the encoder path (APP-037) ----
+ * The encode op always passes -r and a scale filter, which is how this
+ * stand-in tells an encode apart from the conversion ladder's transcode
+ * rung (that one has no -r). */
+const vIdx = args.indexOf("-c:v");
+const encoder = vIdx >= 0 ? args[vIdx + 1] : "";
+const vfIdx = args.indexOf("-vf");
+const vf = vfIdx >= 0 ? args[vfIdx + 1] : "";
+const rIdx = args.indexOf("-r");
+const fps = rIdx >= 0 ? Number(args[rIdx + 1]) : (src.fps || 25);
+const silent = args.includes("-an");
+
+const readSize = () => {
+  const m = /scale=(\\d+):(\\d+)/.exec(vf);
+  if (m) return { width: Number(m[1]), height: Number(m[2]) };
+  return { width: src.width || 1920, height: src.height || 1080 };
+};
+
+/* No hardware encoder exists on the test machine. Failing here is what
+ * lets the software fallback be observed. */
+if (encoder && /nvenc|qsv/.test(encoder)) {
+  process.stderr.write("Unknown encoder '" + encoder + "'\\n");
+  process.exit(1);
+}
+
+/* Audio only (MP3). */
+if (!encoder && args.includes("-vn") && args.includes("libmp3lame")) {
+  fs.writeFileSync(out, JSON.stringify({
+    kind: "audio", codec: "mp3", audio: "mp3", duration: src.duration || 5, container: "mp3"
+  }));
+  process.exit(0);
+}
+
+/* Animated GIF: the palette pass. */
+if (!encoder && /palettegen/.test(vf)) {
+  const size = readSize();
+  fs.writeFileSync(out, JSON.stringify({
+    kind: "video", codec: "gif", audio: null, width: size.width, height: size.height,
+    fps, duration: src.duration || 5, container: "gif"
+  }));
+  process.exit(0);
+}
+
+if (encoder && rIdx >= 0) {
+  let codec = src.codec || "vp9";
+  if (/264/.test(encoder)) codec = "h264";
+  else if (/265/.test(encoder)) codec = "hevc";
+  else if (/av1|svtav1|aom/.test(encoder)) codec = "av1";
+  else if (/vpx/.test(encoder)) codec = "vp9";
+  else if (/prores/.test(encoder)) codec = "prores";
+  else if (/mpeg4/.test(encoder)) codec = "mpeg4";
+  let audio = silent ? null : (src.audio || "aac");
+  const aIdx = args.indexOf("-c:a");
+  if (aIdx >= 0) {
+    const ac = args[aIdx + 1];
+    if (ac === "aac") audio = "aac";
+    else if (ac === "libopus") audio = "opus";
+    else if (ac === "libmp3lame") audio = "mp3";
+  }
+  const size = readSize();
+  const container = out.endsWith(".mov") ? "mov,mp4,m4a"
+    : out.endsWith(".webm") ? "matroska,webm"
+    : out.endsWith(".gif") ? "gif"
+    : out.endsWith(".mp3") ? "mp3"
+    : "mov,mp4,m4a,3gp,3g2,mj2";
+  fs.writeFileSync(out, JSON.stringify({
+    kind: "video", codec, audio, width: size.width, height: size.height, fps,
+    duration: src.duration || 5, container
+  }));
+  process.exit(0);
+}
+
 let codec = src.codec;
 let audio = src.audio;
 let kind = src.kind || "video";
@@ -345,6 +420,128 @@ async function testWorker(stubs, tmp) {
 }
 
 /* ------------------------------------------------------------------ *
+ * 2b. The encoder (APP-037)
+ *
+ * The `encode` op is what turns a recorded WebM into the file the export
+ * sheet promised. The arguments are checked one by one, the op is run end to
+ * end against the stand-in ffmpeg, and the output is probed — because the
+ * sidecar's rule is that nothing is claimed that was not verified.
+ * ------------------------------------------------------------------ */
+async function testEncoder(stubs, tmp) {
+  const svc = require(path.join(ROOT, "electron", "sidecar", "media-service.cjs"));
+
+  /* ---- the argument builder, on its own ---- */
+  // A build without the encoder must report each missing piece rather than
+  // take the whole suite down with it.
+  const hasBuilder = typeof svc.buildEncodeArgs === "function" && typeof svc.encoderPlans === "function";
+  const build = (opts) => {
+    if (!hasBuilder) return { args: [], notes: [] };
+    try { return svc.buildEncodeArgs(opts); } catch { return { args: [], notes: [] }; }
+  };
+  const plans = (opts) => {
+    if (!hasBuilder) return { family: "", plans: [] };
+    try { return svc.encoderPlans(opts); } catch { return { family: "", plans: [] }; }
+  };
+
+  const h264 = build({
+    container: "mp4", family: "h264", encoder: "libx264",
+    width: 1920, height: 1080, fps: 30, bitrateMbps: 16, audio: true, audioBitrate: 192,
+  });
+  const h264s = h264.args.join(" ");
+  ok("encoder: the argument builder exists", hasBuilder);
+  ok("encoder: MP4/H.264 asks for libx264", h264.args.includes("libx264"), h264s);
+  ok("encoder: the requested size is in the scale filter", /scale=1920:1080/.test(h264s), h264s);
+  ok("encoder: the frame rate is set", h264.args.includes("-r") && h264.args[h264.args.indexOf("-r") + 1] === "30", h264s);
+  ok("encoder: the bit rate is set", h264.args.includes("-b:v") && h264.args[h264.args.indexOf("-b:v") + 1] === "16M", h264s);
+  ok("encoder: the sound track is AAC", h264.args.includes("aac"), h264s);
+  ok("encoder: MP4 is written faststart", /faststart/.test(h264s), h264s);
+  ok("encoder: the source is fitted, not stretched", /force_original_aspect_ratio=decrease/.test(h264s) && /pad=/.test(h264s), h264s);
+
+  const hevc = build({
+    container: "mov", family: "hevc", encoder: "libx265",
+    width: 3840, height: 2160, fps: 60, bitrateMbps: 40, audio: true,
+  });
+  ok("encoder: HEVC is tagged hvc1 so Apple and Windows play it", hevc.args.includes("hvc1"), hevc.args.join(" "));
+
+  const silent = build({
+    container: "mp4", family: "h264", encoder: "libx264",
+    width: 1280, height: 720, fps: 24, bitrateMbps: 8, audio: false,
+  });
+  ok("encoder: no audio means -an, not a silent track", silent.args.includes("-an") && !silent.args.includes("aac"), silent.args.join(" "));
+
+  const gif = build({ container: "gif", family: "gif", encoder: null, width: 640, height: 360, fps: 15 });
+  ok("encoder: a GIF is made with a palette, not posterised", /palettegen/.test(gif.args.join(" ")), gif.args.join(" "));
+
+  const webm = build({
+    container: "webm", family: "vp9", encoder: "libvpx-vp9",
+    width: 1280, height: 720, fps: 30, bitrateMbps: 8, audio: true,
+  });
+  ok("encoder: WebM carries Opus, not AAC", webm.args.includes("libopus"), webm.args.join(" "));
+
+  /* ---- which encoder gets used ---- */
+  const webmPlan = plans({ container: "webm", codec: "h264", hardware: "auto" });
+  ok("encoder: WebM cannot hold H.264, so it does not try", webmPlan.family === "vp9", webmPlan.family);
+  const nvPlan = plans({ container: "mp4", codec: "h264", hardware: "nvenc" });
+  ok("encoder: NVENC is tried before the software encoder", (nvPlan.plans[0] || {}).id === "hw:h264_nvenc", nvPlan.plans.map((p) => p.id).join(","));
+  ok("encoder: the software encoder is the fallback", nvPlan.plans.some((p) => p.id === "sw:libx264"), nvPlan.plans.map((p) => p.id).join(","));
+
+  /* ---- the op, end to end ---- */
+  const src = path.join(tmp, "capture.webm");
+  fs.writeFileSync(src, JSON.stringify({
+    kind: "video", codec: "vp9", audio: "opus", width: 1280, height: 720, fps: 30, duration: 4.25,
+  }));
+  const env = {
+    AIFIMORA_FFMPEG: stubs.ffmpeg,
+    AIFIMORA_FFPROBE: stubs.probe,
+    AIFIMORA_SIDECAR_CACHE: path.join(tmp, "enc-cache"),
+  };
+  const w = startWorker(env);
+
+  const enc = await w.call("encode", {
+    path: src, container: "mp4", codec: "h264", width: 1920, height: 1080,
+    fps: 30, bitrateMbps: 16, audio: true, hardware: "auto",
+  });
+  const e = enc.result || {};
+  ok("encoder: the op writes a file", enc.ok && !!e.path && fs.existsSync(e.path), JSON.stringify(e).slice(0, 160));
+  ok("encoder: the result is probed, not assumed", e.verified === true && !!e.probe, JSON.stringify(e.probe || {}).slice(0, 120));
+  ok("encoder: the file is the codec that was asked for", e.probe?.video?.codec === "h264", e.probe?.video?.codec);
+  ok("encoder: the file is the resolution that was asked for", e.probe?.video?.width === 1920 && e.probe?.video?.height === 1080, `${e.probe?.video?.width}x${e.probe?.video?.height}`);
+  ok("encoder: the file carries the sound track", e.probe?.hasAudio === true, String(e.probe?.hasAudio));
+  ok("encoder: the encoder that ran is named", e.encoder === "libx264", e.encoder);
+  ok("encoder: a successful encode raises no warnings", (e.warnings || []).length === 0, JSON.stringify(e.warnings));
+
+  // A container that cannot hold the requested codec says so out loud.
+  const mismatch = await w.call("encode", {
+    path: src, container: "webm", codec: "h264", width: 1280, height: 720,
+    fps: 30, bitrateMbps: 8, audio: true, hardware: "auto",
+  });
+  const m = mismatch.result || {};
+  ok("encoder: an impossible codec/container pair is reported, not hidden", (m.warnings || []).some((w2) => /cannot hold/i.test(w2)), JSON.stringify(m.warnings));
+  ok("encoder: the codec that was really used is reported", m.codec === "vp9", m.codec);
+
+  // Hardware asked for, hardware absent: software takes over, and says so.
+  const nvEnc = await w.call("encode", {
+    path: src, container: "mp4", codec: "h264", width: 1280, height: 720,
+    fps: 30, bitrateMbps: 16, audio: true, hardware: "nvenc",
+  });
+  const n = nvEnc.result || {};
+  ok("encoder: a missing hardware encoder falls back to software", n.ok === true && n.hardware === false, JSON.stringify(n.attempts));
+  ok("encoder: the software fallback is named, not hidden", (n.warnings || []).some((w2) => /hardware/i.test(w2)), JSON.stringify(n.warnings));
+  ok("encoder: the failed hardware attempt is still listed", (n.attempts || []).some((a) => /hw:/.test(a.id)), JSON.stringify(n.attempts));
+
+  w.kill();
+
+  // With no tools at all the op must refuse rather than pretend.
+  const bare = startWorker({
+    AIFIMORA_FFMPEG: "", AIFIMORA_FFPROBE: "",
+    AIFIMORA_SIDECAR_CACHE: path.join(tmp, "enc-bare"),
+  });
+  const bareEnc = await bare.call("encode", { path: src, container: "mp4", codec: "h264" });
+  ok("encoder: without ffmpeg it says ffmpeg is missing", bareEnc.ok === false && bareEnc.error.code === "no-ffmpeg", JSON.stringify(bareEnc.error));
+  bare.kill();
+}
+
+/* ------------------------------------------------------------------ *
  * 3. The manager
  * ------------------------------------------------------------------ */
 async function testManager(stubs, tmp) {
@@ -376,6 +573,25 @@ async function testManager(stubs, tmp) {
 
   const bad = await mgr.call("not-an-op", {});
   ok("manager: an unknown operation comes back as data, not a crash", bad?.ok === false && bad.code === "unknown-op", JSON.stringify(bad).slice(0, 120));
+
+  /* The encoder, through the manager: bytes in, a finished file at the
+   * destination out. The bytes never travel back to the caller. */
+  const capture = JSON.stringify({
+    kind: "video", codec: "vp9", audio: "opus", width: 1280, height: 720, fps: 30, duration: 4.25,
+  });
+  const dest = path.join(tmp, "manager-export.mp4");
+  const encoded = typeof mgr.encode === "function"
+    ? await mgr.encode({
+      bytes: Buffer.from(capture, "utf-8"),
+      name: "capture.webm",
+      container: "mp4", codec: "h264", width: 1280, height: 720, fps: 30,
+      bitrateMbps: 8, audio: true, hardware: "auto", dest,
+    })
+    : { ok: false, code: "no-encode-op" };
+  ok("manager: encode returns the finished file", encoded?.ok === true && !!encoded.path, JSON.stringify(encoded).slice(0, 160));
+  ok("manager: the finished file is copied to the destination", fs.existsSync(dest), dest);
+  ok("manager: the captured bytes arrived intact", Math.abs((encoded?.probe?.duration || 0) - 4.25) < 0.01, String(encoded?.probe?.duration));
+  ok("manager: the encoded file is the size that was asked for", encoded?.probe?.video?.width === 1280 && encoded?.probe?.video?.height === 720, `${encoded?.probe?.video?.width}x${encoded?.probe?.video?.height}`);
 
   mgr.stop();
   for (const [k, v] of Object.entries(saved)) {
@@ -488,6 +704,61 @@ async function testElectron(stubs, tmp) {
       } catch (e) { return { hasEl: false, error: String(e) }; }
     }, served);
     ok("electron: the app can play a file the sidecar produced", playable?.hasEl === true, JSON.stringify(playable).slice(0, 160));
+
+    /* The export path, end to end: the renderer hands a captured video to
+     * the encoder over IPC and a real file appears at the destination. The
+     * bytes are the ones the renderer sent — the probe says so. */
+    const destFile = path.join(tmp, "electron-export.mp4");
+    const capture = JSON.stringify({
+      kind: "video", codec: "vp9", audio: "opus", width: 1280, height: 720, fps: 30, duration: 4.25,
+    });
+    const encoded = await page.evaluate(async ({ bytes, dest }) => {
+      try {
+        return await window.aifimoraDesktop.media.encode({
+          name: "capture.webm",
+          bytes: new Uint8Array(bytes),
+          opts: {
+            container: "mp4", codec: "h264", width: 1280, height: 720, fps: 30,
+            bitrateMbps: 8, audio: true, hardware: "auto", dest,
+          },
+        });
+      } catch (e) { return { ok: false, error: String(e) }; }
+    }, { bytes: Array.from(Buffer.from(capture, "utf-8")), dest: destFile });
+    ok("electron: the renderer can encode a capture", encoded?.ok === true, JSON.stringify(encoded).slice(0, 160));
+    ok("electron: the encoded file lands at the destination", fs.existsSync(destFile), destFile);
+    ok("electron: the captured bytes arrived intact", Math.abs((encoded?.probe?.duration || 0) - 4.25) < 0.01, String(encoded?.probe?.duration));
+    ok("electron: the encoded file is the size that was asked for", encoded?.probe?.video?.width === 1280 && encoded?.probe?.video?.height === 720, `${encoded?.probe?.video?.width}x${encoded?.probe?.video?.height}`);
+
+    /* A file the sidecar produced must reach a Web Audio graph. If it did
+     * not, the export would record a silent video. */
+    const graphed = await page.evaluate(async (filePath) => {
+      try {
+        const api = window.aifimoraDesktop.media;
+        const token = (await api.register(filePath)).token;
+        const url = api.url(token);
+        const mod = await import("./js/audio-fx.js");
+        const el = document.createElement("video");
+        el.src = url;
+        el.crossOrigin = "anonymous";
+        document.body.appendChild(el);
+        const rec = mod.ensureGraph(el, url);
+        let busTracks = -1;
+        let busErr = "";
+        try {
+          const bus = typeof mod.mixBusStream === "function" ? mod.mixBusStream() : null;
+          busTracks = bus ? bus.getAudioTracks().length : 0;
+        } catch (e) { busErr = String(e?.message || e); }
+        return {
+          url,
+          hasGraph: !!rec,
+          hasGain: !!(rec && rec.gain),
+          busTracks,
+          busErr,
+        };
+      } catch (e) { return { hasGraph: false, error: String(e?.message || e) }; }
+    }, served);
+    ok("electron: a sidecar file reaches a Web Audio graph (so it is not silent)", graphed.hasGraph === true, graphed.error || graphed.url);
+    ok("electron: the mix bus has an audio track to record", graphed.busTracks === 1, String(graphed.busTracks) + " " + (graphed.busErr || ""));
   } finally {
     try { await app.close(); } catch { /* already closed */ }
   }
@@ -557,6 +828,9 @@ async function testBrowser(server) {
 
     console.log("\n— worker —");
     await testWorker(stubs, tmp);
+
+    console.log("\n— encoder —");
+    await testEncoder(stubs, tmp);
 
     console.log("\n— manager —");
     await testManager(stubs, tmp);

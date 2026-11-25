@@ -1,6 +1,19 @@
-/* Export happy-path: short timeline + stubbed desktop dialog → real file saved. */
+/* Export happy-path: short timeline + stubbed desktop dialog → real file saved.
+ *
+ * This is the suite that caught the mix-bus regression: a project whose
+ * timeline has no imported media has no Web Audio graph, so the bus track
+ * stalled — and a MediaRecorder carrying a stalled audio track records
+ * nothing at all, not even the video. The export produced an empty file.
+ * The assertions below are that guard.
+ */
 const { chromium } = require("playwright");
 const URL = "http://127.0.0.1:8765/index.html";
+
+const checks = [];
+const ok = (name, pass, extra = "") => {
+  checks.push({ name, pass });
+  console.log(`${pass ? "PASS" : "FAIL"}  ${name}${extra ? " — " + extra : ""}`);
+};
 
 (async () => {
   const browser = await chromium.launch({ headless: true });
@@ -53,20 +66,54 @@ const URL = "http://127.0.0.1:8765/index.html";
   console.log("midStatus=" + (await page.locator("#exportStatus").textContent()));
   // Realtime capture of ~2s + overhead.
   await page.waitForTimeout(9000);
-  console.log("finalStatus=" + (await page.locator("#exportStatus").textContent()));
-  console.log("savedFiles=" + (await page.evaluate(() => JSON.stringify(window.__savedFiles))));
+  const finalStatus = await page.locator("#exportStatus").textContent();
+  console.log("finalStatus=" + finalStatus);
+  const savedFiles = await page.evaluate(() => JSON.stringify(window.__savedFiles));
+  console.log("savedFiles=" + savedFiles);
   console.log("historyPath=" + (await page.evaluate(() => {
     const p = JSON.parse(localStorage.getItem("aifimora.project.v1") || "{}");
     const h = (p.history || []).filter((x) => x && x.type === "export").pop();
     return h ? h.outputPath + " bytes=" + h.bytes : "none";
   })));
+
+  /* The assertions. */
+  const files = JSON.parse(savedFiles);
+  const written = Object.keys(files);
+  ok("the export wrote a file", written.length === 1, savedFiles);
+  ok("the file has real content", (files[written[0]] || 0) > 1000, `${files[written[0]] || 0} bytes`);
+  ok("the export reports success", /Saved/.test(finalStatus || ""), finalStatus);
+  ok("the export says what it produced", /preview export|WebM|MP4/.test(finalStatus || ""), finalStatus);
+
+  /* The extension must be the one this build can really deliver. The stub
+   * has no media sidecar, so there is no encoder and the honest answer is
+   * a WebM — never a .mp4 it cannot write. */
+  const ext = written[0] ? written[0].split(".").pop().toLowerCase() : "";
+  ok("the extension is the one this build can deliver", ext === "webm", `ext=${ext}`);
+  const callExt = await page.evaluate(() => window.__saveCalls[0]?.ext || "");
+  ok("the save dialog was asked for that extension", callExt === "webm", `ext=${callExt}`);
+
+  const history = await page.evaluate(() => {
+    const p = JSON.parse(localStorage.getItem("aifimora.project.v1") || "{}");
+    const h = (p.history || []).filter((x) => x && x.type === "export").pop();
+    return h ? { path: h.outputPath, bytes: h.bytes } : null;
+  });
+  ok("the export is in the undo history", !!history && history.bytes > 1000, JSON.stringify(history));
+
   // Cancel path.
   await page.evaluate(() => { window.aifimoraDesktop.saveVideo = async () => null; });
   await page.click("#btnExport");
   await page.waitForTimeout(200);
   await page.click("#exportStart");
   await page.waitForTimeout(700);
-  console.log("cancelStatus=" + (await page.locator("#exportStatus").textContent()));
+  const cancelStatus = await page.locator("#exportStatus").textContent();
+  console.log("cancelStatus=" + cancelStatus);
+  ok("cancelling the save writes no second file", Object.keys(await page.evaluate(() => window.__savedFiles)).length === 1, "one file");
+
   console.log("errors: " + (errors.length ? errors.join(" | ") : "none"));
+  ok("no page errors", errors.length === 0, errors.join(" | "));
+
   await browser.close();
+  const failed = checks.filter((c) => !c.pass).length;
+  console.log(`\n${checks.length - failed}/${checks.length} checks passed`);
+  process.exit(failed ? 1 : 0);
 })().catch((e) => { console.error("CRASH: " + (e?.stack || e)); process.exit(1); });

@@ -155,7 +155,14 @@ function materialise({ bytes, name }) {
   const hash = crypto.createHash("sha1").update(String(bytes)).digest("hex").slice(0, 16);
   const dir = ensureDir(path.join(cacheDir(), "in"));
   const file = path.join(dir, `${hash}${ext}`);
-  if (!fs.existsSync(file)) fs.writeFileSync(file, Buffer.from(String(bytes), "base64"));
+  if (!fs.existsSync(file)) {
+    let buf;
+    if (Buffer.isBuffer(bytes)) buf = bytes;
+    else if (bytes instanceof ArrayBuffer) buf = Buffer.from(new Uint8Array(bytes));
+    else if (ArrayBuffer.isView(bytes)) buf = Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    else buf = Buffer.from(String(bytes || ""), "base64");
+    fs.writeFileSync(file, buf);
+  }
   return file;
 }
 
@@ -573,6 +580,281 @@ async function transcribeFile(input, tools, { language } = {}) {
 }
 
 /* ------------------------------------------------------------------ *
+ * Encoding
+ *
+ * The export path records the program monitor as WebM (that is all a
+ * browser can capture) and then needs a real file: H.264 in MP4, HEVC in
+ * MOV, AV1 in MKV, a GIF, an MP3. ffmpeg does that; this module decides
+ * *which* ffmpeg, and verifies the answer afterwards.
+ *
+ * Two rules hold here as everywhere else in this file:
+ *   1. The file that comes back is probed, not assumed. What was actually
+ *      written is reported, even when it is not what was asked for.
+ *   2. A failed attempt never hides the next one. Every attempt is listed.
+ * ------------------------------------------------------------------ */
+
+/** Container -> file extension. */
+const CONTAINER_EXT = {
+  mp4: ".mp4", m4v: ".m4v", mov: ".mov", mkv: ".mkv", avi: ".avi",
+  webm: ".webm", gif: ".gif", mp3: ".mp3",
+};
+
+/** Which codec families a container can legally hold. */
+const CONTAINER_CODECS = {
+  mp4: ["h264", "hevc", "av1"],
+  m4v: ["h264", "hevc", "av1"],
+  mov: ["h264", "hevc", "prores"],
+  mkv: ["h264", "hevc", "av1"],
+  avi: ["mpeg4"],
+  webm: ["vp9", "av1"],
+  gif: ["gif"],
+  mp3: ["mp3"],
+};
+
+/** Software encoders, best first. */
+const SOFTWARE_ENCODERS = {
+  h264: ["libx264"],
+  hevc: ["libx265"],
+  av1: ["libsvtav1", "libaom-av1"],
+  prores: ["prores_ks"],
+  vp9: ["libvpx-vp9"],
+  mpeg4: ["mpeg4"],
+};
+
+/** Hardware encoders, by vendor and codec family. */
+const HARDWARE_ENCODERS = {
+  nvenc: { h264: ["h264_nvenc"], hevc: ["hevc_nvenc"], av1: ["av1_nvenc"] },
+  qsv: { h264: ["h264_qsv"], hevc: ["hevc_qsv"], av1: ["av1_qsv"] },
+};
+
+/** Audio encoder per container. GIF and MP3 have their own paths. */
+const CONTAINER_AUDIO = {
+  mp4: "aac", m4v: "aac", mov: "aac", mkv: "aac",
+  avi: "libmp3lame", webm: "libopus",
+};
+
+/** Containers that want the moov atom up front so they start playing fast. */
+const FASTSTART = new Set(["mp4", "m4v", "mov"]);
+
+function round1(n) {
+  return Math.round(Number(n) * 10) / 10;
+}
+
+/**
+ * Which codec family this request can actually use.
+ * The container wins: WebM cannot hold H.264, AVI cannot hold HEVC.
+ */
+function resolveFamily(container, codec) {
+  const allowed = CONTAINER_CODECS[container] || CONTAINER_CODECS.mp4;
+  const want = String(codec || "").toLowerCase();
+  if (allowed.includes(want)) return { family: want, changed: false };
+  return { family: allowed[0], changed: true, wanted: want };
+}
+
+/**
+ * The encoders to try, best first: the hardware one when it was asked for,
+ * then software. Every entry is a real attempt — a hardware encoder that is
+ * not present fails, and the software one takes over.
+ */
+function encoderPlans({ container, codec, hardware } = {}) {
+  const c = String(container || "mp4").toLowerCase();
+  const { family } = resolveFamily(c, codec);
+  const hw = String(hardware || "auto").toLowerCase();
+
+  // GIF and MP3 are not codecs with encoders; they have their own pipelines.
+  if (family === "gif") return { family, plans: [{ id: "sw:gif", encoder: null, family, hardware: false }] };
+  if (family === "mp3") return { family, plans: [{ id: "sw:mp3", encoder: null, family, hardware: false }] };
+
+  const plans = [];
+  const hwMap = HARDWARE_ENCODERS[hw];
+  if (hwMap && hwMap[family]) {
+    for (const enc of hwMap[family]) plans.push({ id: `hw:${enc}`, encoder: enc, family, hardware: true });
+  }
+  for (const enc of SOFTWARE_ENCODERS[family] || []) {
+    plans.push({ id: `sw:${enc}`, encoder: enc, family, hardware: false });
+  }
+  return { family, plans };
+}
+
+/** Encoder-specific flags. */
+function encoderExtra(encoder, family, hardware) {
+  if (hardware) {
+    // HEVC needs the hvc1 tag to play on Apple and Windows.
+    return family === "hevc" ? ["-tag:v", "hvc1"] : [];
+  }
+  switch (encoder) {
+    case "libx264": return ["-preset", "medium", "-pix_fmt", "yuv420p"];
+    case "libx265": return ["-preset", "medium", "-pix_fmt", "yuv420p", "-tag:v", "hvc1"];
+    case "libsvtav1": return ["-preset", "6", "-pix_fmt", "yuv420p"];
+    case "libaom-av1": return ["-cpu-used", "4", "-pix_fmt", "yuv420p"];
+    case "libvpx-vp9": return ["-row-mt", "1", "-pix_fmt", "yuv420p"];
+    case "prores_ks": return ["-profile:v", "3"];
+    case "mpeg4": return ["-vtag", "XVID", "-pix_fmt", "yuv420p"];
+    default: return [];
+  }
+}
+
+/**
+ * Build the ffmpeg argument list for one encoder plan.
+ * The source is fitted inside the target box and the remainder is padded
+ * black — never stretched.
+ */
+function buildEncodeArgs(opts = {}) {
+  const container = String(opts.container || "mp4").toLowerCase();
+  const family = String(opts.family || "h264");
+  const encoder = opts.encoder || null;
+  const width = Math.max(2, Math.round(Number(opts.width) || 1920));
+  const height = Math.max(2, Math.round(Number(opts.height) || 1080));
+  const fps = Math.max(1, Math.min(120, Math.round(Number(opts.fps) || 30)));
+  const bitrate = Number(opts.bitrateMbps) || 0;
+  const withAudio = opts.audio !== false;
+  const audioBitrate = Math.max(32, Math.round(Number(opts.audioBitrate) || 192));
+  const notes = [];
+
+  // Audio-only export.
+  if (family === "mp3") {
+    return {
+      args: ["-vn", "-c:a", "libmp3lame", "-b:a", `${audioBitrate}k`],
+      notes,
+      audioOnly: true,
+      width, height, fps,
+    };
+  }
+
+  // Animated GIF: a two-pass palette, so the colours are not posterised.
+  if (family === "gif") {
+    const vf = `fps=${fps},scale=${width}:${height}:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`;
+    return { args: ["-vf", vf, "-loop", "0"], notes, animated: true, width, height, fps };
+  }
+
+  const vf = `scale=${width}:${height}:force_original_aspect_ratio=decrease,`
+    + `pad=${width}:${height}:(ow-iw)/2:(oh-ih)/2,setsar=1`;
+  const args = ["-vf", vf, "-r", String(fps)];
+  args.push("-c:v", encoder, ...encoderExtra(encoder, family, opts.hardware));
+  if (bitrate > 0 && family !== "prores") args.push("-b:v", `${round1(bitrate)}M`);
+
+  const ac = CONTAINER_AUDIO[container];
+  if (withAudio && ac) {
+    args.push("-c:a", ac, "-b:a", `${audioBitrate}k`);
+  } else {
+    args.push("-an");
+    if (withAudio && !ac) notes.push(`${container.toUpperCase()} has no audio track; the file is silent.`);
+  }
+  if (FASTSTART.has(container)) args.push("-movflags", "+faststart");
+  return { args, notes, width, height, fps };
+}
+
+/** The last three lines of a tool's stderr — the useful part. */
+function tailOf(text, n = 3) {
+  return String(text || "").trim().split("\n").slice(-n).join(" ").trim();
+}
+
+/**
+ * Encode one file into the requested container, codec and size.
+ * The output is probed afterwards; what was really written is reported.
+ */
+async function encodeFile(input, tools, opts = {}) {
+  if (!tools.ffmpeg) {
+    return {
+      ok: false,
+      code: "no-ffmpeg",
+      error: "ffmpeg was not found, so the video could not be encoded.",
+      missing: tools.missing,
+    };
+  }
+  if (!input || !fs.existsSync(input)) {
+    return { ok: false, code: "no-file", error: `File not found: ${input || "(no path)"}` };
+  }
+
+  const container = String(opts.container || "mp4").toLowerCase();
+  const ext = CONTAINER_EXT[container] || ".mp4";
+  const dir = ensureDir(path.join(cacheDir(), "encode"));
+  const key = crypto
+    .createHash("sha1")
+    .update(`${input}|${container}|${opts.codec}|${opts.width}x${opts.height}|${opts.fps}|${opts.bitrateMbps}|${opts.hardware}|${opts.audio}`)
+    .digest("hex")
+    .slice(0, 16);
+  const out = path.join(dir, `export-${key}${ext}`);
+
+  const { family, plans } = encoderPlans(opts);
+  const wanted = resolveFamily(container, opts.codec);
+  const attempts = [];
+  const notes = [];
+  if (wanted.changed) {
+    notes.push(
+      `${String(container).toUpperCase()} cannot hold ${String(wanted.wanted || "").toUpperCase()}; encoded ${family.toUpperCase()} instead.`
+    );
+  }
+  const askedForHardware = !!(HARDWARE_ENCODERS[String(opts.hardware || "auto").toLowerCase()] || {})[family];
+
+  for (const plan of plans) {
+    const built = buildEncodeArgs({ ...opts, container, family, encoder: plan.encoder, hardware: plan.hardware });
+    const res = await toolCall(
+      tools.ffmpeg,
+      ["-y", "-i", input, ...built.args, out],
+      { timeout: 1800000 }
+    );
+    if (!res.ok) {
+      attempts.push({ id: plan.id, ok: false, note: tailOf(res.stderr) });
+      continue;
+    }
+    if (!fs.existsSync(out) || fs.statSync(out).size === 0) {
+      attempts.push({ id: plan.id, ok: false, note: "ffmpeg wrote no file" });
+      continue;
+    }
+
+    // Verify what was actually written. Without ffprobe the file cannot be
+    // checked, and the app is told so rather than left to assume.
+    let probe = null;
+    if (tools.ffprobe) {
+      probe = await analyzeFile(out, tools);
+      if (!probe.ok) {
+        attempts.push({ id: plan.id, ok: false, note: "the output did not probe cleanly" });
+        continue;
+      }
+    } else {
+      notes.push("The result was not checked: ffprobe was not found.");
+    }
+
+    if (probe) {
+      const w = probe.video?.width || 0;
+      const h = probe.video?.height || 0;
+      if (w !== built.width || h !== built.height) {
+        notes.push(`The file is ${w}×${h}, not the requested ${built.width}×${built.height}.`);
+      }
+      const wantedAudio = built.audioOnly ? true : (opts.audio !== false && !!CONTAINER_AUDIO[container]);
+      if (wantedAudio && !probe.hasAudio) notes.push("The file has no audio track.");
+      if (!wantedAudio && probe.hasAudio) notes.push("The file has an audio track although none was asked for.");
+    }
+    if (askedForHardware && !plan.hardware) {
+      notes.push("No hardware encoder was available, so the file was encoded in software.");
+    }
+
+    attempts.push({ id: plan.id, ok: true, note: "wrote " + path.basename(out) });
+    return {
+      ok: true,
+      path: out,
+      container,
+      codec: family,
+      encoder: plan.encoder || family,
+      hardware: !!plan.hardware,
+      verified: !!probe,
+      probe,
+      warnings: notes,
+      attempts,
+    };
+  }
+
+  return {
+    ok: false,
+    code: "encode-failed",
+    error: "Every encoding step failed.",
+    attempts,
+    warnings: notes,
+  };
+}
+
+/* ------------------------------------------------------------------ *
  * Operations
  * ------------------------------------------------------------------ */
 
@@ -613,6 +895,26 @@ const OPS = {
   async poster(params, tools) {
     const file = resolveInput(params);
     return posterFrame(file, tools, { at: Number(params.at) || 1, outDir: params.outDir });
+  },
+
+  /**
+   * Encode a recorded capture into the file the export sheet promised:
+   * the requested container, codec, resolution, frame rate and bit rate.
+   * The result is probed before it is reported as a success.
+   */
+  async encode(params, tools) {
+    const file = resolveInput(params);
+    return encodeFile(file, tools, {
+      container: params.container,
+      codec: params.codec,
+      width: params.width,
+      height: params.height,
+      fps: params.fps,
+      bitrateMbps: params.bitrateMbps,
+      audio: params.audio,
+      audioBitrate: params.audioBitrate,
+      hardware: params.hardware,
+    });
   },
 
   /** Transcribe speech with real word timings. */
@@ -732,4 +1034,15 @@ if (process.parentPort) {
   startStdioTransport();
 }
 
-module.exports = { handle, discover, parseWhisperJson, normaliseProbe, planLadder, OPS };
+module.exports = {
+  handle,
+  discover,
+  parseWhisperJson,
+  normaliseProbe,
+  planLadder,
+  buildEncodeArgs,
+  encoderPlans,
+  resolveFamily,
+  encodeFile,
+  OPS,
+};

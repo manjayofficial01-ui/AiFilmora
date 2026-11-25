@@ -184,12 +184,12 @@ function onMessage(msg) {
 
 /**
  * Run one sidecar operation.
- * @param {string} op      ping | analyze | convert | poster | transcribe | ingest
+ * @param {string} op      ping | analyze | convert | encode | poster | transcribe | ingest
  * @param {object} params
  * @param {object} opts    { timeout }
  */
 async function call(op, params = {}, { timeout } = {}) {
-  const limit = timeout || (op === "convert" || op === "transcribe" ? LONG_TIMEOUT : DEFAULT_TIMEOUT);
+  const limit = timeout || (op === "convert" || op === "transcribe" || op === "encode" ? LONG_TIMEOUT : DEFAULT_TIMEOUT);
   let child;
   try {
     child = start();
@@ -246,11 +246,27 @@ function materialise(bytes, name) {
   const ext = path.extname(String(name || "")).toLowerCase() || ".bin";
   const dir = path.join(cacheRoot(), "src");
   fs.mkdirSync(dir, { recursive: true });
-  const buf = Buffer.isBuffer(bytes) ? bytes : Buffer.from(String(bytes || ""), "base64");
+  const buf = toBuffer(bytes);
   const hash = crypto.createHash("sha1").update(buf).digest("hex").slice(0, 16);
   const file = path.join(dir, `${hash}${ext}`);
   fs.writeFileSync(file, buf);
   return file;
+}
+
+/**
+ * Bytes arrive in three shapes: a Node Buffer, a typed array over IPC
+ * (Electron's structured clone keeps it a Uint8Array), or a base64 string
+ * (the worker's JSON transport). Only the last one may be decoded as
+ * base64 — treating a Uint8Array as a base64 string turns "1,2,3" into
+ * garbage, which is how a captured file ends up corrupt.
+ */
+function toBuffer(bytes) {
+  if (!bytes) return Buffer.alloc(0);
+  if (Buffer.isBuffer(bytes)) return bytes;
+  if (bytes instanceof ArrayBuffer) return Buffer.from(new Uint8Array(bytes));
+  if (ArrayBuffer.isView(bytes)) return Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  if (typeof bytes === "string") return Buffer.from(bytes, "base64");
+  return Buffer.alloc(0);
 }
 
 /* ------------------------------------------------------------------ *
@@ -333,6 +349,53 @@ async function poster(params) {
   return res;
 }
 
+/**
+ * Encode a recorded capture into the file the export sheet promised.
+ *
+ * The bytes never come back to the renderer: they are written into the
+ * cache here, the worker encodes that file in place, and the finished
+ * video is copied straight to the destination the user chose.
+ */
+async function encode(params = {}) {
+  let file = params.path ? String(params.path) : "";
+  if (!file && params.bytes) file = materialise(params.bytes, params.name || "capture.webm");
+  if (!file) {
+    return { ok: false, code: "no-file", error: "No capture was supplied to encode." };
+  }
+  const res = await call("encode", {
+    path: file,
+    container: params.container,
+    codec: params.codec,
+    width: params.width,
+    height: params.height,
+    fps: params.fps,
+    bitrateMbps: params.bitrateMbps,
+    audio: params.audio,
+    audioBitrate: params.audioBitrate,
+    hardware: params.hardware,
+  });
+  if (!res?.ok) return res;
+  if (res.path) res.token = registerFile(res.path);
+
+  const dest = params.dest ? String(params.dest) : "";
+  if (dest && res.path) {
+    try {
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      fs.copyFileSync(res.path, dest);
+      res.savedTo = dest;
+      res.bytes = fs.statSync(dest).size;
+    } catch (err) {
+      return {
+        ok: false,
+        code: "copy-failed",
+        error: `The video was encoded but could not be copied to ${dest}: ${err?.message || err}`,
+        encoded: res,
+      };
+    }
+  }
+  return res;
+}
+
 async function transcribe(params) {
   let file = params?.path ? String(params.path) : "";
   if (!file && params?.bytes) file = materialise(params.bytes, params.name);
@@ -355,11 +418,13 @@ module.exports = {
   ingest,
   analyze,
   convert,
+  encode,
   poster,
   transcribe,
   registerFile,
   resolveToken,
   materialise,
+  toBuffer,
   setCacheRoot,
   cacheRoot,
 };

@@ -600,6 +600,9 @@ export function bindExportTabs() {
     window.__exportDest = b.dataset.edest;
     const hint = $("#exportDestHint");
     if (hint) hint.textContent = `Destination: ${b.textContent.trim()}`;
+    // The export sheet owns that hint — it knows the real folder, the real
+    // extension and what this build can really produce.
+    window.dispatchEvent(new CustomEvent("aifimora:export-dest", { detail: { dest: b.dataset.edest } }));
   });
   const start = window.__exportDest;
   if (start) {

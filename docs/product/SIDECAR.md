@@ -35,7 +35,7 @@ Four files:
 | File | Role |
 |---|---|
 | `electron/sidecar/tools.cjs` | **Discovery only.** Finds the tools and reports what is missing. Never installs anything. |
-| `electron/sidecar/media-service.cjs` | **The worker.** Owns the tools; implements `ping`, `analyze`, `convert`, `poster`, `transcribe`, `ingest`. |
+| `electron/sidecar/media-service.cjs` | **The worker.** Owns the tools; implements `ping`, `analyze`, `convert`, `encode`, `poster`, `transcribe`, `ingest`. |
 | `electron/sidecar/index.cjs` | **The manager.** Starts the worker, correlates requests, owns the cache, registers files for delivery. |
 | `js/media-sidecar.js` | **The renderer facade.** The only place the app asks "can we do real media work?". |
 
@@ -67,9 +67,46 @@ plain Node child (stdio). Both are exercised — see §5.
 | `ping` | Reports which tools exist | `{ tools, canTranscode, canProbe, canTranscribe, missing[] }` |
 | `analyze` | `ffprobe -show_format -show_streams` | duration, codecs, fps, resolution, `browserSafe`, `unsafeReason` |
 | `convert` | Runs the conversion ladder | `{ path, rung, browserSafe, attempts[] }` |
+| `encode` | Encodes a recorded capture into the requested container, codec, resolution, frame rate and bit rate | `{ path, codec, encoder, hardware, verified, probe, warnings[], attempts[] }` |
 | `poster` | `ffmpeg -frames:v 1` | `{ path, at, bytes }` |
 | `transcribe` | 16 kHz WAV → whisper → parsed JSON | `{ segments[], words[], wordsEstimated, model }` |
 | `ingest` | analyze → convert if needed → poster | the whole picture of one file |
+
+### The encoder
+
+`encode` (added by APP-037) is the operation that turns a recorded WebM into the
+file the export sheet promised. Its arguments are built by `buildEncodeArgs()`
+and `encoderPlans()` — both pure functions, both checked directly by the test
+suite.
+
+| Requested | Encoder | Notes |
+|---|---|---|
+| H.264 | `libx264` | `-pix_fmt yuv420p`, `-preset medium` |
+| HEVC | `libx265` | `-tag:v hvc1`, so Apple and Windows play it |
+| AV1 | `libsvtav1` → `libaom-av1` | two candidates; the first that works wins |
+| ProRes | `prores_ks` | the "editing master" preset |
+| VP9 (WebM) | `libvpx-vp9` | WebM cannot hold H.264 — the container decides |
+| GIF | `palettegen` + `paletteuse` | a two-pass palette, so the colours are not posterised |
+| MP3 | `libmp3lame` | audio only, `-vn` |
+
+Video filter: `scale=W:H:force_original_aspect_ratio=decrease,pad=W:H:(ow-iw)/2:(oh-ih)/2,setsar=1`
+— the source is fitted, never stretched, and the remainder is black.
+
+Audio: AAC 192 k for MP4/MOV/MKV, Opus for WebM, MP3 for AVI, none for GIF.
+
+**The container wins.** WebM cannot hold H.264 and AVI cannot hold HEVC, so the
+codec is adjusted and the app *says* it: *"WEBM cannot hold H264; encoded VP9
+instead."*
+
+**Hardware is tried first, and its absence is named.** `nvenc` and `qsv` are
+tried when asked for; when the encoder is not there the software encoder takes
+over and the op reports *"No hardware encoder was available, so the file was
+encoded in software."*
+
+**The result is probed, not assumed.** After ffmpeg runs, the output is probed
+with the same `analyzeFile()` the rest of the sidecar uses, and the probe is
+returned. The UI reports the codec, resolution and audio that were *actually
+written* — not the ones that were asked for.
 
 ### The conversion ladder
 
@@ -153,21 +190,24 @@ system software is not something a test may do on its own. The suite therefore
 drives the real sidecar against **stand-in tools** — the binaries are replaced,
 everything else is real.
 
-`verify-sidecar.cjs` → **48/48 checks pass**.
+`verify-sidecar.cjs` → **87/87 checks pass**.
 
 | Group | Checks | What is real |
 |---|---|---|
 | Discovery | 7 | env override, Node-script runner, "missing" reporting |
 | Worker | 21 | the spawn, the command construction, ffprobe/ffmpeg/whisper output parsing, the conversion ladder (video **and** audio-only), the whisper `-ojf`→`-oj` fallback, the "tool missing" paths |
-| Manager | 6 | request/response correlation, the cache, the token registry |
-| **Electron** | 8 | **the real Electron shell**: the utility process starts, the renderer reaches it over IPC, a file is probed, a registered file is served over `app://` with **byte ranges**, an unregistered file is refused, no console errors |
+| **Encoder** | **26** | the argument builder for every codec and container; the plan order (hardware before software); the op end to end; **the probe of its own output**; the honest refusal when ffmpeg is absent; the software fallback when the hardware encoder is not there |
+| Manager | 10 | request/response correlation, the cache, the token registry, **the encode round trip: bytes in, a finished file at the destination out, and the bytes proven intact** |
+| **Electron** | 12 | **the real Electron shell**: the utility process starts, the renderer reaches it over IPC, a file is probed, a registered file is served over `app://` with **byte ranges**, an unregistered file is refused, no console errors, **the renderer encodes a capture and the file lands at the destination**, **a sidecar file reaches a Web Audio graph (so it is not silent)** |
 | Browser build | 6 | the web build still works with no sidecar; the sample transcript is labelled |
 
 ### Not verified
 
 - ❌ **A real FFmpeg was never run.** The command lines are constructed
   correctly and the output is parsed correctly, but real FFmpeg's behaviour on
-  real footage is untested here.
+  real footage is untested here. This applies to the encoder too: the stand-in
+  records the arguments, but it does not validate them against FFmpeg's own
+  parser.
 - ❌ **A real Whisper was never run.** The JSON shapes are handled correctly
   against whisper.cpp's documented format, but no model was transcribed.
 - ❌ `npm run dist` was not run; no packaged build was produced.
@@ -211,6 +251,7 @@ proxy (`rehydrateProxies()` in `js/media.js`) before anything uses it.
 |---|---|
 | **APP-006** — importing a file the browser cannot decode | The card is badged and dimmed with the reason (the Wave 0 behaviour) |
 | **APP-009** — the transcript panel | The sample transcript, now labelled as a sample instead of passed off as real |
+| **APP-037** — exporting a video | The capture is written as a WebM and the app says so in its own words: *"Quick preview export · WebM · 720p · with audio — a real MP4 needs the desktop app with FFmpeg."* The extension shown in the sheet is `.webm`, never `.mp4`. |
 | Accurate duration / metadata | The browser's own probe, which is usually right and occasionally not |
 
 ---
@@ -218,10 +259,10 @@ proxy (`rehydrateProxies()` in `js/media.js`) before anything uses it.
 ## 8. Commands
 
 ```powershell
-# the sidecar suite (46 checks, includes a real Electron run)
+# the sidecar suite (87 checks, includes a real Electron run)
 node verify-sidecar.cjs
 
-# the focused Wave 0/1 suite (28 checks)
+# the focused Wave 0/1 suite (50 checks)
 node verify-wave0.cjs
 
 # the whole regression suite

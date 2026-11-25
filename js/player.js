@@ -1153,6 +1153,14 @@ export function createPlayer(canvas) {
   let playing = false;
   let playhead = 0;
   let last = 0;
+  /* Export mode. Two changes, both of them about telling the truth:
+   *   - the canvas backing store IS the output resolution, so the timeline
+   *     is composited at full size instead of being upscaled afterwards;
+   *   - the playhead stops at the end of the sequence instead of wrapping
+   *     to zero, and the render is told the moment the last frame is drawn.
+   * A render ends when the timeline ends, not fifteen seconds later. */
+  let exportMode = false;
+  let exportSize = { width: 0, height: 0 };
 
   function resize() {
     const wrap = canvas.parentElement;
@@ -1176,6 +1184,17 @@ export function createPlayer(canvas) {
     canvas.style.width = `${cssW}px`;
     canvas.style.height = `${cssH}px`;
 
+    // Export mode: the backing store is the output resolution. The CSS size
+    // above stays, so the panel keeps its layout while the pixels behind it
+    // are the full-size frame that is being recorded.
+    if (exportMode && exportSize.width && exportSize.height) {
+      if (canvas.width !== exportSize.width || canvas.height !== exportSize.height) {
+        canvas.width = exportSize.width;
+        canvas.height = exportSize.height;
+      }
+      return;
+    }
+
     const dpr = Math.min(window.devicePixelRatio || 1, 2) * settings.previewScale();
     const w = Math.max(320, Math.floor(cssW * dpr));
     const h = Math.max(180, Math.round(w / aspect));
@@ -1189,7 +1208,9 @@ export function createPlayer(canvas) {
     resize();
     const w = canvas.width;
     const h = canvas.height;
-    drawFrame(ctx, w, h, time, { safe: !!store.get().exportSafe });
+    // The title-safe guides are a preview aid. Burning them into the file
+    // would be wrong, so they stay out of every exported frame.
+    drawFrame(ctx, w, h, time, { safe: exportMode ? false : !!store.get().exportSafe });
     // Glue real media clocks to the timeline even while paused/seeking
     try { syncMediaElements(time, playing); } catch { /* non-critical */ }
   }
@@ -1327,6 +1348,21 @@ export function createPlayer(canvas) {
     const dur = Math.max(store.sequenceDuration(), 1);
     playhead += dt;
     if (playhead >= dur) {
+      if (exportMode) {
+        // The render ends here. The playhead stops at the end of the
+        // sequence — it does not wrap — and the export is told, so it can
+        // close the recorder instead of filming a frozen frame.
+        playhead = dur;
+        playing = false;
+        last = 0;
+        try { syncMediaElements(playhead, false); } catch { /* ignore */ }
+        window.dispatchEvent(new CustomEvent("aifimora:playhead", { detail: { time: playhead, playing } }));
+        render();
+        window.dispatchEvent(new CustomEvent("aifimora:render-complete", {
+          detail: { time: playhead, duration: dur },
+        }));
+        return;
+      }
       playhead = 0;
       playing = false;
       last = 0;
@@ -1383,6 +1419,33 @@ export function createPlayer(canvas) {
     return playing;
   }
 
+  /**
+   * Turn export mode on or off.
+   *
+   * On: the canvas backing store becomes the output resolution and the
+   * render ends at the end of the sequence. Off: the preview goes back to
+   * fitting its panel, at the panel's own scale.
+   *
+   * @returns {boolean} whether export mode was on before this call.
+   */
+  function setExportMode(on, size = {}) {
+    const was = exportMode;
+    exportMode = !!on;
+    exportSize = {
+      width: Math.max(0, Math.round(Number(size.width) || 0)),
+      height: Math.max(0, Math.round(Number(size.height) || 0)),
+    };
+    // resize() inside render() puts the backing store back to the panel
+    // size when export mode is off, so the preview recovers by itself.
+    render();
+    return was;
+  }
+
+  /** Is the player in export mode? */
+  function getExportMode() {
+    return exportMode;
+  }
+
   // initial
   render(0);
   window.addEventListener("resize", () => render());
@@ -1392,7 +1455,7 @@ export function createPlayer(canvas) {
     ro.observe(canvas.parentElement);
   }
 
-  return { play, pause, toggle, seek, setTime, getTime, isPlaying, render };
+  return { play, pause, toggle, seek, setTime, getTime, isPlaying, render, setExportMode, getExportMode };
 }
 
 export function formatTC(t) {

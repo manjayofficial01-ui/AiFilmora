@@ -424,6 +424,197 @@ function startServer() {
   const promptsClip = await readPrompts();
   ok("a backup with an extra clip still offers recovery", promptsClip.length === 1 && /Recover unsaved work/.test(promptsClip[0]), JSON.stringify(promptsClip).slice(0, 140));
 
+  /* -------------------------------------------------------------- APP-037 */
+  // The export sheet used to be decoration: six live controls, and a
+  // resolveExportConfig() that read none of them. Every export came out as
+  // a 720p WebM with no sound. These checks assert that the controls now
+  // decide the file, that a preset writes into them, and that a build
+  // without an encoder says so in its own words.
+
+  const sheet = await page.evaluate(async () => {
+    const btn = document.getElementById("btnExport") || document.getElementById("menuExport");
+    if (btn) btn.click();
+    await new Promise((r) => setTimeout(r, 600));
+    const read = () => ({
+      meta: document.getElementById("exportMeta")?.textContent || "",
+      ext: document.getElementById("exportExt")?.textContent || "",
+      hint: document.getElementById("exportDestHint")?.textContent || "",
+      res: document.getElementById("exportRes")?.value || "",
+      codec: document.getElementById("exportCodec")?.value || "",
+      fps: document.getElementById("exportFps")?.value || "",
+      bitrate: document.getElementById("exportBitrate")?.value || "",
+      hw: document.getElementById("exportHw")?.value || "",
+      fmt: document.getElementById("exportFormat")?.value || "",
+      active: document.querySelector("#presetGrid .preset.active")?.textContent?.trim() || "",
+    });
+    const setSel = (id, v) => {
+      const el = document.getElementById(id);
+      if (!el) return false;
+      el.value = v;
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+      return true;
+    };
+    const before = read();
+    setSel("exportRes", "3840x2160");
+    setSel("exportFps", "60");
+    setSel("exportCodec", "hevc");
+    setSel("exportBitrate", "40");
+    setSel("exportHw", "nvenc");
+    await new Promise((r) => setTimeout(r, 150));
+    const after = read();
+
+    const preset = [...document.querySelectorAll("#presetGrid .preset")]
+      .find((b) => /YouTube 1080p/i.test(b.textContent || ""));
+    preset?.click();
+    await new Promise((r) => setTimeout(r, 200));
+    const afterPreset = read();
+
+    // The 4K preset claims H.265 and the ProRes preset claims ProRes. The
+    // encoder control says "hevc" and "prores" — if the two vocabularies
+    // are not bridged, the preset silently writes H.264 into the control
+    // and the file is not what the chip says it is.
+    const preset4k = [...document.querySelectorAll("#presetGrid .preset")]
+      .find((b) => /YouTube 4K/i.test(b.textContent || ""));
+    preset4k?.click();
+    await new Promise((r) => setTimeout(r, 200));
+    const after4k = read();
+
+    const presetPro = [...document.querySelectorAll("#presetGrid .preset")]
+      .find((b) => /ProRes/i.test(b.textContent || ""));
+    presetPro?.click();
+    await new Promise((r) => setTimeout(r, 200));
+    const afterPro = read();
+
+    return { before, after, afterPreset, after4k, afterPro, opened: !!document.getElementById("exportModal")?.classList.contains("open") };
+  });
+
+  ok("APP-037 the export sheet opens", sheet.opened);
+  ok("APP-037 the resolution control reaches the export config", /3840×2160/.test(sheet.after.meta), sheet.after.meta);
+  ok("APP-037 the frame-rate control reaches the export config", /60fps/.test(sheet.after.meta), sheet.after.meta);
+  ok("APP-037 the encoder control reaches the export config", /HEVC/.test(sheet.after.meta), sheet.after.meta);
+  ok("APP-037 the bit-rate control reaches the export config", /40\s*Mbps/.test(sheet.after.meta), sheet.after.meta);
+  ok("APP-037 editing a control moves the preset chip to Custom", /Custom/i.test(sheet.after.active), sheet.after.active);
+  ok("APP-037 a preset writes its own numbers into the controls", sheet.afterPreset.res === "1920x1080" && sheet.afterPreset.fps === "30" && sheet.afterPreset.codec === "h264",
+    `${sheet.afterPreset.res} ${sheet.afterPreset.fps} ${sheet.afterPreset.codec}`);
+  ok("APP-037 a preset's numbers reach the export config", /1920×1080/.test(sheet.afterPreset.meta), sheet.afterPreset.meta);
+  ok("APP-037 the 4K preset really asks for HEVC", sheet.after4k.codec === "hevc" && sheet.after4k.res === "3840x2160" && sheet.after4k.fps === "30",
+    `${sheet.after4k.codec} ${sheet.after4k.res} ${sheet.after4k.fps}`);
+  ok("APP-037 the ProRes preset really asks for ProRes in a MOV", sheet.afterPro.codec === "prores" && sheet.afterPro.fmt === "mov",
+    `${sheet.afterPro.codec} ${sheet.afterPro.fmt}`);
+
+  // The browser build has no encoder, so it must not promise an MP4.
+  ok("APP-037 a build without an encoder offers a WebM, not an MP4", sheet.before.ext === ".webm", `ext=${sheet.before.ext}`);
+  ok("APP-037 the sheet says what it will really produce", /preview|FFmpeg|no encoder/i.test(sheet.before.hint), sheet.before.hint.slice(0, 160));
+
+  // The player's export mode: the render happens at the output resolution,
+  // and it ends when the timeline ends instead of wrapping to zero.
+  const exportMode = await page.evaluate(async () => {
+    const player = window.__aifimoraPlayer;
+    if (!player) return { skip: true };
+    if (typeof player.setExportMode !== "function") return { skip: true, missing: "setExportMode" };
+    try {
+      const s = window.__aifimoraStore;
+      const canvas = document.getElementById("previewCanvas");
+      const before = { w: canvas.width, h: canvas.height };
+      player.setExportMode(true, { width: 1280, height: 720 });
+      const during = { w: canvas.width, h: canvas.height };
+
+      let fired = null;
+      const onDone = (e) => { fired = e.detail; };
+      window.addEventListener("aifimora:render-complete", onDone);
+      // A short sequence, so the check does not have to wait long.
+      const vidTrack = s.get().tracks.find((t) => t.kind === "video");
+      s.set({ clips: [{ id: "exp-clip", type: "video", trackId: vidTrack?.id, start: 0, duration: 0.8, name: "exp" }] });
+      const dur = Math.max(s.sequenceDuration(), 1);
+      player.seek(0);
+      player.play();
+      await new Promise((r) => setTimeout(r, 2200));
+      window.removeEventListener("aifimora:render-complete", onDone);
+      const t = player.getTime();
+      const playing = player.isPlaying();
+      player.setExportMode(false);
+      return { skip: false, before, during, fired, t, playing, dur, after: { w: canvas.width, h: canvas.height } };
+    } catch (err) {
+      return { skip: true, error: String(err?.message || err) };
+    }
+  });
+  const modeSkip = exportMode.skip ? (exportMode.error || exportMode.missing || "no player") : "";
+  ok("APP-037 the render happens at the requested resolution", !exportMode.skip && exportMode.during.w === 1280 && exportMode.during.h === 720,
+    modeSkip || `${exportMode.during.w}x${exportMode.during.h}`);
+  ok("APP-037 the player stops at the end of the timeline", !exportMode.skip && exportMode.fired && !exportMode.playing,
+    modeSkip || `t=${exportMode.t} fired=${!!exportMode.fired}`);
+  ok("APP-037 the playhead does not wrap back to zero", !exportMode.skip && exportMode.t > 0.2, modeSkip || `t=${exportMode.t}`);
+  ok("APP-037 the render-complete signal is dispatched", !exportMode.skip && !!exportMode.fired && exportMode.fired.duration > 0,
+    modeSkip || JSON.stringify(exportMode.fired));
+  ok("APP-037 the preview goes back to being a preview", !exportMode.skip && exportMode.after.w !== 1280,
+    modeSkip || `${exportMode.after.w}x${exportMode.after.h}`);
+
+  // The mix bus: the export's sound comes from here.
+  const bus = await page.evaluate(async () => {
+    try {
+      const mod = await import("./js/audio-fx.js");
+      if (typeof mod.mixBusStream !== "function") return { ready: false, tracks: 0, missing: "mixBusStream" };
+      const s = mod.mixBusStream();
+      return { ready: !!mod.mixBusReady?.(), tracks: s ? s.getAudioTracks().length : 0 };
+    } catch (err) {
+      return { ready: false, tracks: 0, error: String(err?.message || err) };
+    }
+  });
+  ok("APP-037 the mix bus has one audio track to record", bus.ready && bus.tracks === 1, `ready=${bus.ready} tracks=${bus.tracks} ${bus.missing || bus.error || ""}`);
+
+  /* The bus must keep rendering even when the timeline is silent.
+   *
+   * An idle Web Audio graph produces no frames, so the bus's track delivers
+   * nothing — and a MediaRecorder carrying a stalled audio track records
+   * NOTHING AT ALL, not even the video. That is not a theory: it is what
+   * broke the export for a project with no imported media, and the fix is
+   * a silent keep-alive source on the bus. This check is that fix's
+   * regression guard. */
+  const busRecords = await page.evaluate(async () => {
+    try {
+      const mod = await import("./js/audio-fx.js");
+      const bus = mod.mixBusStream();
+      if (!bus) return { skip: true, reason: "no bus" };
+      const track = bus.getAudioTracks()[0];
+      if (!track) return { skip: true, reason: "no bus track" };
+      const canvas = document.createElement("canvas");
+      canvas.width = 320; canvas.height = 180;
+      const c2 = canvas.getContext("2d");
+      const stream = canvas.captureStream(25);
+      stream.addTrack(track);
+      const chunks = [];
+      const rec = new MediaRecorder(stream, { mimeType: "video/webm;codecs=vp9,opus" });
+      rec.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
+      rec.start(250);
+      let f = 0;
+      const paint = () => {
+        f++;
+        c2.fillStyle = `hsl(${f * 9 % 360} 70% 45%)`;
+        c2.fillRect(0, 0, 320, 180);
+        if (f < 60) requestAnimationFrame(paint);
+      };
+      paint();
+      await new Promise((r) => setTimeout(r, 1500));
+      try { rec.stop(); } catch { /* already stopped */ }
+      await new Promise((r) => setTimeout(r, 300));
+      const blob = new Blob(chunks, { type: "video/webm" });
+      let decodable = false;
+      try {
+        const buf = await blob.arrayBuffer();
+        const ac = new (window.AudioContext || window.webkitAudioContext)();
+        const audio = await ac.decodeAudioData(buf);
+        decodable = audio.length > 0 && audio.numberOfChannels > 0;
+      } catch { decodable = false; }
+      return { skip: false, chunks: chunks.length, bytes: blob.size, decodable };
+    } catch (err) {
+      return { skip: true, error: String(err?.message || err) };
+    }
+  });
+  ok("APP-037 the mix bus records even when the timeline is silent", !busRecords.skip && busRecords.chunks > 0,
+    busRecords.error || busRecords.reason || `chunks=${busRecords.chunks} bytes=${busRecords.bytes}`);
+  ok("APP-037 the recording carries a decodable sound track", !busRecords.skip && busRecords.decodable === true,
+    busRecords.skip ? "" : `decodable=${busRecords.decodable}`);
+
   /* ------------------------------------------------------------------ done */
   const passed = checks.filter((c) => c.pass).length;
   console.log(`\n${passed}/${checks.length} checks passed`);

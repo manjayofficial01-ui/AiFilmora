@@ -10,7 +10,15 @@ function withBytes(payload) {
     if (p.bytes instanceof ArrayBuffer) bytes = new Uint8Array(p.bytes);
     else if (ArrayBuffer.isView(p.bytes)) bytes = new Uint8Array(p.bytes.buffer, p.bytes.byteOffset, p.bytes.byteLength);
   }
-  return { name: p.name || "", path: p.path || "", at: p.at || 0, language: p.language || "", bytes };
+  return {
+    name: p.name || "",
+    path: p.path || "",
+    at: p.at || 0,
+    language: p.language || "",
+    bytes,
+    // The encoder's own settings travel beside the bytes.
+    opts: p.opts && typeof p.opts === "object" ? p.opts : {},
+  };
 }
 
 contextBridge.exposeInMainWorld("aifimoraDesktop", {
@@ -34,6 +42,9 @@ contextBridge.exposeInMainWorld("aifimoraDesktop", {
     ingest: (payload) => ipcRenderer.invoke("media:ingest", withBytes(payload)),
     analyze: (payload) => ipcRenderer.invoke("media:analyze", withBytes(payload)),
     convert: (payload) => ipcRenderer.invoke("media:convert", withBytes(payload)),
+    // Encode a recorded capture into the file the export sheet promised.
+    // The bytes go one way; only a path and a size come back.
+    encode: (payload) => ipcRenderer.invoke("media:encode", withBytes(payload)),
     poster: (payload) => ipcRenderer.invoke("media:poster", withBytes(payload)),
     transcribe: (payload) => ipcRenderer.invoke("media:transcribe", withBytes(payload)),
     // Re-address a file the sidecar already made (e.g. a proxy from a

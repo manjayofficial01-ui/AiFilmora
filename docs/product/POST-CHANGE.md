@@ -10,66 +10,67 @@ exits 0, reports at least one `PASS`, and reports no `FAIL`.
 
 | Suite | Result | PASS | FAIL | Exit | ms |
 |---|---|---|---|---|---|
-| `verify-ai-timeline.cjs` | ✅ green | 35 | 0 | 0 | 4611 |
-| `verify-app.cjs` | ✅ green | 0 | 0 | 0 | 19271 |
-| `verify-assets.cjs` | ✅ green | 14 | 0 | 0 | 13183 |
-| `verify-audiofx.cjs` | ✅ green | 17 | 0 | 0 | 11004 |
-| `verify-audiotrans.cjs` | ✅ green | 27 | 0 | 0 | 8495 |
-| `verify-beats.cjs` | ✅ green | 0 | 0 | 0 | 6745 |
-| `verify-canvas.cjs` | ✅ green | 0 | 0 | 0 | 13215 |
-| `verify-color.cjs` | ✅ green | 22 | 0 | 0 | 11135 |
-| `verify-crop.cjs` | ✅ green | 0 | 0 | 0 | 7877 |
-| `verify-density.cjs` | ✅ green | 0 | 0 | 0 | 3038 |
-| `verify-detach.cjs` | ❌ failing | 3 | 7 | 1 | 8742 |
-| `verify-electron.cjs` | ✅ green | 1 | 0 | 0 | 8250 |
-| `verify-err.cjs` | ✅ green | 0 | 0 | 0 | 2192 |
-| `verify-export22.cjs` | ✅ green | 0 | 0 | 0 | 25111 |
-| `verify-filmora-chrome.cjs` | ✅ green | 0 | 0 | 0 | 35755 |
-| `verify-filmora-gaps.cjs` | ❌ failing | 13 | 0 | 1 | 32760 |
-| `verify-filmora-shell.cjs` | ✅ green | 0 | 0 | 0 | 7890 |
-| `verify-filmora-theme.cjs` | ✅ green | 0 | 0 | 0 | 4069 |
-| `verify-filmora-tools.cjs` | ✅ green | 0 | 0 | 0 | 3691 |
-| `verify-filmora-working.cjs` | ✅ green | 12 | 0 | 0 | 6400 |
-| `verify-filmora15.cjs` | ❌ failing | 2 | 0 | 1 | 34470 |
-| `verify-final.cjs` | ✅ green | 0 | 0 | 0 | 10330 |
-| `verify-fonts.cjs` | ✅ green | 19 | 0 | 0 | 9302 |
-| `verify-icon-compact.cjs` | ❌ failing | 1 | 1 | 1 | 4936 |
-| `verify-layout.cjs` | ✅ green | 0 | 0 | 0 | 5372 |
-| `verify-lut.cjs` | ✅ green | 1 | 0 | 0 | 6868 |
-| `verify-media-fix.cjs` | ✅ green | 17 | 0 | 0 | 3545 |
-| `verify-name-shape.cjs` | ✅ green | 0 | 0 | 0 | 6321 |
-| `verify-new.cjs` | ✅ green | 0 | 0 | 0 | 8878 |
-| `verify-panzoom.cjs` | ❌ failing (retried) | 0 | 0 | 1 | 6044 |
-| `verify-parity.cjs` | ❌ failing | 19 | 4 | 1 | 6239 |
-| `verify-pi-toggle.cjs` | ✅ green | 1 | 0 | 0 | 4312 |
-| `verify-rebuild.cjs` | ❌ failing (retried) | 0 | 0 | 1 | 5002 |
-| `verify-regress.cjs` | ✅ green | 0 | 0 | 0 | 7796 |
-| `verify-save-fallback.cjs` | ❌ failing (retried) | 0 | 0 | 1 | 32642 |
-| `verify-save-location.cjs` | ❌ failing (retried) | 0 | 0 | 1 | 34995 |
-| `verify-shader-transitions.cjs` | ✅ green | 0 | 0 | 0 | 14529 |
-| `verify-shape-fix.cjs` | ✅ green | 0 | 0 | 0 | 8500 |
-| `verify-shapes.cjs` | ✅ green | 0 | 0 | 0 | 5738 |
-| `verify-sidecar.cjs` | ✅ green | 49 | 0 | 0 | 13439 |
-| `verify-speed.cjs` | ✅ green | 0 | 0 | 0 | 6909 |
-| `verify-speed2.cjs` | ✅ green | 0 | 0 | 0 | 5996 |
-| `verify-tabs.cjs` | ✅ green | 0 | 0 | 0 | 4187 |
-| `verify-tracks.cjs` | ✅ green | 0 | 0 | 0 | 4136 |
-| `verify-upgrade.cjs` | ✅ green | 0 | 0 | 0 | 7214 |
-| `verify-upgrades.cjs` | ✅ green | 0 | 0 | 0 | 7810 |
-| `verify-v22.cjs` | ✅ green | 0 | 0 | 0 | 11232 |
-| `verify-vertical.cjs` | ✅ green | 0 | 0 | 0 | 5700 |
-| `verify-vip.cjs` | ✅ green | 0 | 0 | 0 | 5427 |
-| `verify-vol-split.cjs` | ❌ failing | 6 | 0 | 1 | 33536 |
-| `verify-vol.cjs` | ✅ green | 0 | 0 | 0 | 7880 |
-| `verify-vol2.cjs` | ✅ green | 0 | 0 | 0 | 3568 |
-| `verify-vscroll.cjs` | ✅ green | 0 | 0 | 0 | 7524 |
-| `verify-wave0.cjs` | ✅ green | 34 | 0 | 0 | 35124 |
+| `verify-ai-timeline.cjs` | ✅ green | 35 | 0 | 0 | 4037 |
+| `verify-app.cjs` | ✅ green | 0 | 0 | 0 | 18204 |
+| `verify-assets.cjs` | ✅ green | 14 | 0 | 0 | 11573 |
+| `verify-audiofx.cjs` | ✅ green | 17 | 0 | 0 | 9371 |
+| `verify-audiotrans.cjs` | ✅ green | 27 | 0 | 0 | 7345 |
+| `verify-beats.cjs` | ✅ green | 0 | 0 | 0 | 6165 |
+| `verify-canvas.cjs` | ✅ green | 0 | 0 | 0 | 10582 |
+| `verify-color.cjs` | ✅ green | 22 | 0 | 0 | 10268 |
+| `verify-crop.cjs` | ✅ green | 0 | 0 | 0 | 7213 |
+| `verify-density.cjs` | ✅ green | 0 | 0 | 0 | 2747 |
+| `verify-detach.cjs` | ❌ failing | 3 | 7 | 1 | 8728 |
+| `verify-electron.cjs` | ✅ green | 1 | 0 | 0 | 7677 |
+| `verify-err.cjs` | ✅ green | 0 | 0 | 0 | 1868 |
+| `verify-export22.cjs` | ✅ green | 9 | 0 | 0 | 14254 |
+| `verify-filmora-chrome.cjs` | ✅ green | 0 | 0 | 0 | 35381 |
+| `verify-filmora-gaps.cjs` | ❌ failing | 13 | 0 | 1 | 33233 |
+| `verify-filmora-shell.cjs` | ✅ green | 0 | 0 | 0 | 8564 |
+| `verify-filmora-theme.cjs` | ✅ green | 0 | 0 | 0 | 4708 |
+| `verify-filmora-tools.cjs` | ✅ green | 0 | 0 | 0 | 4085 |
+| `verify-filmora-working.cjs` | ✅ green | 12 | 0 | 0 | 5079 |
+| `verify-filmora15.cjs` | ❌ failing | 2 | 0 | 1 | 32408 |
+| `verify-final.cjs` | ✅ green | 0 | 0 | 0 | 8181 |
+| `verify-fonts.cjs` | ✅ green | 19 | 0 | 0 | 9859 |
+| `verify-icon-compact.cjs` | ❌ failing | 1 | 1 | 1 | 4306 |
+| `verify-layout.cjs` | ✅ green | 0 | 0 | 0 | 4623 |
+| `verify-lut.cjs` | ✅ green | 1 | 0 | 0 | 6547 |
+| `verify-media-fix.cjs` | ✅ green | 17 | 0 | 0 | 3712 |
+| `verify-name-shape.cjs` | ✅ green | 0 | 0 | 0 | 4882 |
+| `verify-new.cjs` | ✅ green | 0 | 0 | 0 | 7878 |
+| `verify-panzoom.cjs` | ❌ failing (retried) | 0 | 0 | 1 | 6263 |
+| `verify-parity.cjs` | ❌ failing | 19 | 4 | 1 | 6244 |
+| `verify-pi-toggle.cjs` | ✅ green | 1 | 0 | 0 | 4962 |
+| `verify-rebuild.cjs` | ❌ failing (retried) | 0 | 0 | 1 | 4652 |
+| `verify-regress.cjs` | ✅ green | 0 | 0 | 0 | 7186 |
+| `verify-save-fallback.cjs` | ❌ failing (retried) | 0 | 0 | 1 | 32539 |
+| `verify-save-location.cjs` | ❌ failing (retried) | 0 | 0 | 1 | 35032 |
+| `verify-shader-transitions.cjs` | ✅ green | 0 | 0 | 0 | 14825 |
+| `verify-shape-fix.cjs` | ✅ green | 0 | 0 | 0 | 8936 |
+| `verify-shapes.cjs` | ✅ green | 0 | 0 | 0 | 5226 |
+| `verify-sidecar.cjs` | ✅ green | 87 | 0 | 0 | 13749 |
+| `verify-speed.cjs` | ✅ green | 0 | 0 | 0 | 7514 |
+| `verify-speed2.cjs` | ✅ green | 0 | 0 | 0 | 6592 |
+| `verify-tabs.cjs` | ✅ green | 0 | 0 | 0 | 4509 |
+| `verify-tracks.cjs` | ✅ green | 0 | 0 | 0 | 4371 |
+| `verify-upgrade.cjs` | ✅ green | 0 | 0 | 0 | 6843 |
+| `verify-upgrades.cjs` | ✅ green | 0 | 0 | 0 | 8282 |
+| `verify-v22.cjs` | ✅ green | 0 | 0 | 0 | 11900 |
+| `verify-vertical.cjs` | ✅ green | 0 | 0 | 0 | 6276 |
+| `verify-vip.cjs` | ✅ green | 0 | 0 | 0 | 5751 |
+| `verify-vol-split.cjs` | ❌ failing | 6 | 0 | 1 | 33798 |
+| `verify-vol.cjs` | ✅ green | 0 | 0 | 0 | 8082 |
+| `verify-vol2.cjs` | ✅ green | 0 | 0 | 0 | 2350 |
+| `verify-vscroll.cjs` | ✅ green | 0 | 0 | 0 | 7464 |
+| `verify-wave0.cjs` | ✅ green | 54 | 0 | 0 | 42743 |
 
 ## Retried suites
 
-These failed once with a **connection error** — the dev server refused a connection under
-load, so the suite never reached its first assertion. The runner pinged the server and
-re-ran them; the result shown above is the retry.
+These failed once **without rendering a verdict** — either the dev server refused a
+connection under load, or the suite died before its first assertion (a navigation
+timeout, a crashed page, a killed process). The runner pinged the server and re-ran
+them; the result shown above is the retry.
 
 - `verify-panzoom.cjs` → ❌ still failing
 - `verify-rebuild.cjs` → ❌ still failing

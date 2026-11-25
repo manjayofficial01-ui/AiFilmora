@@ -156,6 +156,62 @@ export async function registerProxy(absPath) {
   }
 }
 
+/** A capture larger than this is refused rather than half-transferred. */
+const MAX_CAPTURE_BYTES = 2 * 1024 * 1024 * 1024;
+
+/**
+ * Hand a captured video to the encoder and get the finished file back.
+ *
+ * The bytes travel to the main process once and are never sent back: the
+ * main process writes them into its own cache, the worker encodes that file
+ * in place, and the finished video is copied to the destination the user
+ * chose. The renderer only ever sees a path and a size.
+ *
+ * @returns {Promise<object|null>} null when there is no encoder available.
+ */
+export async function encodeCapture(blob, opts = {}) {
+  const api = mediaApi();
+  if (!api) return null;
+  const caps = await sidecarCapabilities();
+  if (!caps.available || !caps.canTranscode) return null;
+  if (!blob || !blob.size) {
+    return { ok: false, code: "empty-capture", error: "The capture held no data to encode." };
+  }
+  if (blob.size > MAX_CAPTURE_BYTES) {
+    return {
+      ok: false,
+      code: "too-large",
+      error: `The capture is ${(blob.size / 1073741824).toFixed(1)} GB — too large to encode.`,
+    };
+  }
+  let bytes = null;
+  try {
+    bytes = await blob.arrayBuffer();
+  } catch (err) {
+    return { ok: false, code: "read-failed", error: String(err?.message || err) };
+  }
+  try {
+    return await api.encode({
+      name: opts.name || "capture.webm",
+      bytes,
+      opts: {
+        container: opts.container || "mp4",
+        codec: opts.codec || "h264",
+        width: Math.round(Number(opts.width) || 1920),
+        height: Math.round(Number(opts.height) || 1080),
+        fps: Math.round(Number(opts.fps) || 30),
+        bitrateMbps: Number(opts.bitrateMbps) || 16,
+        audio: opts.audio !== false,
+        audioBitrate: Math.round(Number(opts.audioBitrate) || 192),
+        hardware: opts.hardware || "auto",
+        dest: opts.dest || "",
+      },
+    });
+  } catch (err) {
+    return { ok: false, code: "ipc-failed", error: String(err?.message || err) };
+  }
+}
+
 /** Forget the cached capability answer (used after the user installs a tool). */
 export function resetSidecarCache() {
   cachedCaps = null;

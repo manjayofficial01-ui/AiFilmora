@@ -141,6 +141,7 @@ ipcMain.handle("media:capabilities", async () => sidecar.capabilities());
 ipcMain.handle("media:ingest", async (_e, p) => sidecar.ingest(p || {}));
 ipcMain.handle("media:analyze", async (_e, p) => sidecar.analyze(p || {}));
 ipcMain.handle("media:convert", async (_e, p) => sidecar.convert(p || {}));
+ipcMain.handle("media:encode", async (_e, p) => sidecar.encode({ ...(p?.opts || {}), bytes: p?.bytes, name: p?.name, path: p?.path }));
 ipcMain.handle("media:poster", async (_e, p) => sidecar.poster(p || {}));
 ipcMain.handle("media:transcribe", async (_e, p) => sidecar.transcribe(p || {}));
 ipcMain.handle("media:register", async (_e, absPath) => {

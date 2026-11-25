@@ -75,6 +75,10 @@ export function normParam(p, value) {
 
 /* ------------------------------------------------------------ audio graph --- */
 let actx = null;
+/* The mix bus. Every graph's gain feeds it as well as the speakers, so the
+ * exported video carries the same mix the user heard: fades, ducking,
+ * per-clip gain, the master volume and the whole Filmora FX chain. */
+let mixDest = null;
 const graphs = typeof WeakMap !== "undefined" ? new WeakMap() : new Map();
 
 export function audioContext() {
@@ -82,7 +86,45 @@ export function audioContext() {
   const AC = window.AudioContext || window.webkitAudioContext;
   if (!AC) return null;
   try { actx = new AC(); } catch { return null; }
+  // The bus is created with the context, so every graph built afterwards
+  // connects to it on creation and none is ever left out of the mix.
+  try {
+    mixDest = actx.createMediaStreamDestination();
+    /* A keep-alive source. Without it the bus only renders when something
+     * is playing: an idle Web Audio graph produces no frames, so the bus's
+     * track delivers nothing — and a MediaRecorder carrying a stalled audio
+     * track records *nothing at all*, not even the video. A silent constant
+     * keeps the graph alive, so the exported file always has a sound track
+     * (silence when the timeline is silent). */
+    const keepAlive = actx.createConstantSource();
+    keepAlive.offset.value = 0;
+    keepAlive.connect(mixDest);
+    keepAlive.start();
+  } catch { mixDest = null; }
   return actx;
+}
+
+/**
+ * The mix bus as a MediaStream, with one audio track.
+ * The export path adds this track to the canvas capture stream, so the
+ * recorded video has a real sound track.
+ * @returns {MediaStream|null}
+ */
+export function mixBusStream() {
+  const ctx = audioContext();
+  if (!ctx || !mixDest) return null;
+  try {
+    const stream = mixDest.stream;
+    if (!stream || !stream.getAudioTracks().length) return null;
+    return stream;
+  } catch {
+    return null;
+  }
+}
+
+/** Is there a mix bus to record? (False when Web Audio is unavailable.) */
+export function mixBusReady() {
+  return !!mixBusStream();
 }
 
 /* One graph per media element. `createMediaElementSource` may only be called
@@ -92,7 +134,10 @@ export function ensureGraph(el, mediaUrl) {
   try {
     const existing = graphs.get(el);
     if (existing) return existing;
-    if (!/^(blob|data|file):/.test(String(mediaUrl || ""))) return null;
+    // app:// is how the Electron shell serves the files the media sidecar
+    // produced (converted proxies). It is same-origin with the page, so Web
+    // Audio can read it — refusing it left a rescued clip silent.
+    if (!/^(blob|data|file|app):/.test(String(mediaUrl || ""))) return null;
     const ctx = audioContext();
     if (!ctx) return null;
     const src = ctx.createMediaElementSource(el);
@@ -103,6 +148,8 @@ export function ensureGraph(el, mediaUrl) {
     fxIn.connect(fxOut);
     fxOut.connect(gain);
     gain.connect(ctx.destination);
+    // …and into the mix bus, so the export carries the sound.
+    if (mixDest) { try { gain.connect(mixDest); } catch { /* ignore */ } }
     const rec = { ctx, src, fxIn, fxOut, gain, nodes: [], sig: "" };
     try { graphs.set(el, rec); } catch { /* ignore */ }
     return rec;

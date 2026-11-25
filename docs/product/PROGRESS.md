@@ -1,6 +1,6 @@
 # PROGRESS — AiFilmora
 
-**Last cycle:** 2026-11-25 · **Mode:** `teardown` + `modernize` build (master-application path), then a `/best-suggestion` audit
+**Last cycle:** 2026-11-25 · **Mode:** `teardown` + `modernize` build (master-application path), then a `/best-suggestion` audit, then **APP-037 "Real MP4 export"** (the audit's §4.1)
 **Workspace:** `D:\000000 Lab\AiFimora` · **Branch:** `modernize/2026-11-25` (created this cycle, not pushed)
 **Base commit:** `ab3e97c` (AiFilmora 2.2.7) · **Cycle commits:** `a13c155`, `366afe4`, `1fb4aa1`, `30e2d67`, `6d3a48d`, `5d75f13`, `e66a206`, `533695d` (audit fixes), `063c186` (suite), `1f7aa54` (regression run), `83d95ff` (report)
 
@@ -31,9 +31,9 @@
 | 3 Sketch | ✅ done | `SKETCH.md` — 5 wireframes + IA + data-model changes; `design/timeline-v2-mock.html` renders both states |
 | 4 Architecture | ✅ done | 4 new modules: `speed-ramp.js`, `media-analysis.js`, `waveform-render.js`, `loudness.js` — plus the media sidecar (`electron/sidecar/`) |
 | 5 Prototype | ✅ done | `design/timeline-v2-mock.html` — interactive mock, both states rendered and visually QA'd |
-| 6 Build | 🟡 **partial** | **Wave 0 complete (6/6). Wave 1: 3 of 4 done (filmstrip, waveform, real ASR + sidecar). Waves 2–5 not started.** |
-| 7 Test/fix/retest | ✅ done | `verify-wave0.cjs` **34/34**; `verify-sidecar.cjs` **49/49** (incl. a real Electron run); full suite **44/54 green vs. a 43/54 baseline, zero regressions**; the suite's own first-run race and the Electron hang fixed |
-| 8 Harden | 🟡 partial | **8 product bugs** and **1 systemic test race** found and fixed by the audit — see `AUDIT-2026-11-25.md` |
+| 6 Build | 🟡 **partial** | **Wave 0 complete (6/6). Wave 1: 3 of 4 done (filmstrip, waveform, real ASR + sidecar). APP-037 (the export) built this cycle. Waves 2–5 not started.** |
+| 7 Test/fix/retest | ✅ done | `verify-wave0.cjs` **50/50**; `verify-sidecar.cjs` **87/87** (incl. a real Electron run and the encoder round trip); full suite — see the verification table |
+| 8 Harden | 🟡 partial | **8 product bugs** (audit) **+ 2 more** (the export's frozen-frame tail and the operator-precedence bug in the export defaults) **+ 1 latent sidecar bug** (typed-array bytes decoded as base64) found and fixed |
 | 9 Release | ⏭️ not started | |
 
 ## What was actually built this cycle
@@ -85,11 +85,11 @@ is cross-origin to the `app://` page, so `fetch()` is blocked — serving the
 cache on the page's own scheme removed the problem entirely.
 
 ### Also landed
-- `docs/product/` — `RESEARCH-EDITROOM.md`, `ROADMAP.md`, `SKETCH.md`, `BASELINE.md`, `POST-CHANGE.md`, `PROGRESS.md`, **`SIDECAR.md`**, **`AUDIT-2026-11-25.md`**
+- `docs/product/` — `RESEARCH-EDITROOM.md`, `ROADMAP.md`, `SKETCH.md`, `BASELINE.md`, `POST-CHANGE.md`, `PROGRESS.md`, **`SIDECAR.md`**, **`AUDIT-2026-11-25.md`**, **`APP-037-EXPORT.md`** (the export design)
 - `design/timeline-v2-mock.html` + `design/shots/` — interactive Today/Proposed mock, both states rendered and visually QA'd (two defects found and fixed: marker/ruler collision, overlay overlap)
 - `verify-all.cjs` — the suite runner, with a classifier that matches how this repo actually reports
-- `verify-wave0.cjs` — **34 checks** covering every item in this cycle, in a real browser
-- `verify-sidecar.cjs` — 49 checks covering the sidecar, **including a real Electron run**
+- `verify-wave0.cjs` — **50 checks** covering every item in this cycle, in a real browser
+- `verify-sidecar.cjs` — **87 checks** covering the sidecar **and the encoder**, **including a real Electron run**
 - `test-helpers.cjs` — the shared `dismissFirstRun()` helper that removed the first-run race from 9 suites
 - `verify-all.cjs` — the runner now pings the dev server before each suite and **retries once on a connection failure**, so a transient refusal can neither fake nor hide a regression
 - `capture-mock.cjs`, `capture-wave1.cjs` — visual evidence capture
@@ -163,6 +163,86 @@ It also made the suite flaky: the dialog fired 600 ms into each page load, and w
 
 Two more pre-existing faults fell out of the same work: `verify-electron.cjs` clicked `#frEmpty` a **second** time on an already-hidden button (the documented cause of its 180 s timeout), and it asserted the version string `2.2.2` against an app that ships `2.2.7` — it now asserts against `package.json`.
 
+## APP-037 — Real export (2026-11-25)
+
+The user picked **§4.1 "Real MP4 export"** from the audit's five ranked upgrades. This is the build of that item, in the master-application order: design sketch → build → test → harden.
+
+**The design:** `docs/product/APP-037-EXPORT.md`.
+
+### What was actually wrong
+
+Not "the export is a bit rough" — the export was **a lie with a UI**:
+
+| The sheet promised | The app delivered |
+|---|---|
+| MP4 / MOV / AVI / MKV / WEBM / GIF / MP3 | always `.webm`; the requested container was discarded at save time (`js/export.js:632-633`) |
+| 3840×2160 | the **preview panel's** size — `#previewCanvas` is sized to the panel (`js/player.js:1182-1184`) |
+| H.264 / HEVC / AV1 | VP9 WebM, whatever the recorder produced |
+| 24 / 25 / 30 / 60 fps | the recorder's own choice |
+| 1–200 Mbps | none |
+| NVENC / QSV | none |
+| **a video with sound** | **a video with no sound track at all** |
+
+And the six controls themselves: `readFilmoraExportSettings()` read all six and was **never called**. `resolveExportConfig()` read the preset chip and `settings.exportDefaults` only. The controls were decoration.
+
+Two further defects found while reading the path:
+- The render **never ended when the timeline ended.** The player wrapped the playhead to 0 (`js/player.js:1329-1331`), so the export's 200 ms poll that watched for `t >= dur - 0.05` usually missed its own stop condition — and the recorder kept filming a **frozen frame** until the `dur + 15 s` safety timeout. Every export carried fifteen seconds of dead air.
+- `applyFilmoraExportDefaults()` had an operator-precedence bug: `def.format || def.codec === "hevc" ? "mp4" : …` always evaluated to `"mp4"`, so the saved format default was silently discarded.
+
+### What was built
+
+**The sidecar gained an `encode` op** (`electron/sidecar/media-service.cjs`). `buildEncodeArgs()` and `encoderPlans()` are pure functions and are unit-checked directly. H.264 → `libx264`; HEVC → `libx265` with `-tag:v hvc1`; AV1 → `libsvtav1` then `libaom-av1`; ProRes → `prores_ks`; WebM → `libvpx-vp9` with Opus; GIF → a two-pass `palettegen`/`paletteuse`; MP3 → `libmp3lame`. The source is fitted with `scale=…:force_original_aspect_ratio=decrease,pad=…`, never stretched. Hardware is tried first and **its absence is named**. The result is **probed with the same `analyzeFile()` the rest of the sidecar uses**, and the probe — the codec, resolution and audio that were actually written — is what the app reports.
+
+**The player gained an export mode** (`js/player.js`). Two changes, both about telling the truth: the canvas backing store *becomes* the output resolution (so the timeline is composited at 1920×1080, not upscaled afterwards), and the playhead **stops at the end of the sequence** and dispatches `aifimora:render-complete` instead of wrapping to zero. The export now listens for that signal; the `dur + 15 s` timeout is the safety net it was always meant to be. The title-safe guides are also kept out of exported frames — they are a preview aid, and burning them into the file would be wrong.
+
+**The audio mix bus** (`js/audio-fx.js`). Every media element already had a Web Audio graph (`syncElementFx()` calls `ensureGraph()` unconditionally), and the gain node already carried the clip level, fades, ducking and the whole Audio-FX chain. The bus is therefore one `MediaStreamAudioDestinationNode` on the shared context, connected from every graph's gain, and its audio track is added to the capture stream. **The URL guard now admits `app:`** — the scheme the Electron shell serves sidecar proxies from, same-origin with the page — so a rescued file reaches a graph instead of playing mute.
+
+**The six controls are bound** (`js/export.js`). `resolveExportConfig()` reads the selects as the source of truth; a preset **writes its own numbers into them**; editing a control moves the chip to *Custom*; the saved defaults no longer overwrite a choice the user has already made.
+
+**The bytes never come back.** The renderer hands the capture to the main process once; the main process writes it into its own cache, the worker encodes that file in place, and the finished video is copied straight to the destination. The renderer sees a path and a size.
+
+### The honesty contract
+
+The extension is decided **before** the save dialog: with an encoder the requested one, without one `.webm` — so the user is never shown "my-video.mp4" and handed a WebM. The fallback label is **computed from the actual capture** (real container, real height, whether the mix bus produced a track), never a fixed string. If FFmpeg is present but the encode **fails**, the capture is still saved beside the destination and the app says *"The MP4 could not be encoded (<the real reason>); the raw WebM capture was saved instead."* A failed encode never destroys the render.
+
+### One latent bug found and fixed on the way
+
+`sidecar/index.cjs`'s `materialise()` did `Buffer.from(String(bytes), "base64")` for anything that was not already a Buffer. Over Electron's IPC a typed array arrives as a **Uint8Array**, so `String(bytes)` is `"1,2,3"` — base64-decoding that yields garbage. The bytes path of `ingest` was therefore corrupt in the real desktop app (the test suite only ever passed a base64 *string*, so it never caught it). `toBuffer()` now handles Buffer, ArrayBuffer, typed array and base64 string, and the new Electron round-trip test asserts the bytes arrive intact by checking the source's duration survives into the probe.
+
+### A regression this cycle caused, and what it taught
+
+The first full-suite run of this build came back **43/54 — one worse than the 44/54 baseline**, and the new failure was `verify-export22.cjs` with the message *"Recorder produced no data"*. The export was writing **no file at all**.
+
+The cause was not guessed. Five capture arrangements were recorded in a real Chromium, each on a fresh page:
+
+| Arrangement | Chunks |
+|---|---|
+| canvas video only | 8 ✅ |
+| canvas video + the bus's audio track, **bus idle** | **0** ❌ |
+| canvas video + the bus's audio track, bus has a graph | 8 ✅ |
+| canvas video + an element's own `captureStream()` audio, element inside a graph | **0** ❌ |
+| canvas video + (element → `createMediaStreamSource` → destination) | 8 ✅ |
+
+Three facts fell out:
+
+1. **An idle Web Audio graph does not render.** With nothing connected to the bus, the `MediaStreamAudioDestinationNode` produces no frames.
+2. **A MediaRecorder carrying a stalled audio track records nothing at all** — not even the video. The muxer never finalises a cluster without an audio timestamp, so the video frames sit in the buffer and no chunk is ever emitted. *This is the finding that matters: mixing audio into a canvas recording can cost you the video too.*
+3. An element's own `captureStream()` audio is **silent** once the element is routed through a Web Audio graph, so that route cannot carry the mix either.
+
+The bug only appeared for projects **without imported media** — the demo project's clips are generated placeholders, so no Web Audio graph was ever created and the bus stayed idle. Every real project with real footage would have worked; every placeholder project produced an empty file. That is precisely the kind of defect that a happy-path test misses.
+
+**The fix:** a silent `ConstantSourceNode` (offset 0) connected to the bus, so the graph always renders and the bus's track always delivers frames. The same measurement on a page with nothing playing then gives **8 chunks and a blob that decodes as audio**.
+
+**And a second line of defence:** `capturePreview()` takes a `withAudio` flag, and if the recorder still produces nothing the export is retried once **without** the audio track. The picture is worth more than the sound; a failed export must never be the price of an ambitious one. The fallback label then says *"no audio (the sound track could not be recorded)"* rather than pretending.
+
+`verify-export22.cjs` was also strengthened from a suite that only printed values into one that **asserts**: the export writes a file with real content, reports success, says what it produced, records the export in the undo history, and uses the extension this build can really deliver.
+
+### A second honesty gap, caught in review
+
+Wiring the presets to the six controls exposed a vocabulary mismatch: the presets say **`h265`**, the encoder control says **`hevc`**. `setSelect()` refuses a value the select does not have — correctly — so clicking **"YouTube 4K — H.265"** would have silently written **H.264** into the control, and the file would have been H.264 while the chip claimed H.265. The same gap made **"ProRes Proxy"** fall back to HEVC, because the control had no ProRes option at all.
+
+Both were fixed by bridging the vocabularies (`CODEC_ALIAS`) and by giving the sheet the two options the encoder can really deliver — **ProRes** (`prores_ks`) and **15 fps** (the Animated GIF preset's own rate). Two new checks guard them, and both were **proven to fail without the fix**: the 4K preset reported `h264 3840x2160 30` and the ProRes preset reported `hevc mov`.
+
 ## Key findings
 
 1. Editroom's moat is **legibility**, not editing verbs — AiFilmora already had most of the verbs.
@@ -185,12 +265,17 @@ Two more pre-existing faults fell out of the same work: `verify-electron.cjs` cl
 
 | Check | Result |
 |---|---|
-| `verify-wave0.cjs` | **28/28 pass**, 0 console errors |
-| `verify-sidecar.cjs` | **49/49 pass** — discovery (7), the worker (23), the manager (6), **a real Electron run** (9), and the browser build (6) |
+| `verify-wave0.cjs` | **54/54 pass**, 0 console errors (was 34/34; +20 this cycle) |
+| `verify-sidecar.cjs` | **87/87 pass** — discovery (7), the worker (21), **the encoder (26)**, the manager (10), **a real Electron run** (12), and the browser build (6) |
+| `verify-export22.cjs` | **9/9 pass** (was a print-only suite with no assertions at all). The export writes a file with real content, reports success, says what it produced, records the export in the undo history, and uses the extension this build can really deliver. |
 | Sidecar in Electron | The `utilityProcess` starts; the renderer reaches it over IPC; a file is probed (duration 12.5, codec `prores`); a registered file is served over `app://local/_media/<token>` with **206 + byte range**; an unregistered token is refused (404); **0 console errors** |
 | Conversion ladder | A ProRes source runs `remux` (not browser-safe → rejected) then `transcode` → **h264**, `browserSafe: true`. An audio-only AIFF is correctly called unplayable (raw PCM outside a WAV) and converts to AAC |
+| **The encoder** | The argument builder for every codec and container is checked one by one: `libx264` + `scale=1920:1080:force_original_aspect_ratio=decrease` + `-r 30` + `-b:v 16M` + AAC + `+faststart`; HEVC carries `-tag:v hvc1`; WebM carries Opus; a GIF uses a palette; no audio means `-an`. The op runs end to end and **probes its own output** → `h264`, `1920×1080`, audio present. A WebM+H.264 request reports *"WEBM cannot hold H264; encoded VP9 instead."* An NVENC request falls back to software **and says so**. Without ffmpeg: `code: "no-ffmpeg"`. |
+| **The encoder, through Electron** | The renderer hands a capture over IPC → the main process materialises it → the worker encodes → the file is copied to the destination. The bytes arrive **intact** (the source's 4.25 s duration survives into the probe) and the file is the size that was asked for (1280×720). |
+| **The mix bus** | One audio track on the bus; the bus **records even when the timeline is silent** (5 chunks, 23 159 bytes) and the blob **decodes as audio** (`decodable=true`). Five capture arrangements were measured to find that — see the regression note above. |
+| **The export, end to end** | A 2 s project → `Saved → …Test Export.webm — Quick preview export · WebM · 1080p · with audio — a real MP4 needs the desktop app with FFmpeg.`, **82 220 bytes** written, the export in the undo history, 0 page errors. |
 | Whisper parsing | whisper.cpp's `-ojf` shape → **2 segments / 9 words** with token timings, `wordsEstimated: false`; the `-oj` shape falls back to estimated words and says so |
-| Missing-tool paths | Without ffprobe → `code: "no-ffprobe"`; without whisper → `code: "no-whisper"`; an unknown op → `code: "unknown-op"`. All plain data, no exceptions |
+| Missing-tool paths | Without ffprobe → `code: "no-ffprobe"`; without whisper → `code: "no-whisper"`; without ffmpeg → `code: "no-ffmpeg"`; an unknown op → `code: "unknown-op"`. All plain data, no exceptions |
 | Browser build | No sidecar → import behaves as before; the transcript is labelled "Sample transcript — no speech engine is available on this machine." |
 | Marker flag geometry | Renders at a finite x (67.2 px for t=1.4 s at 48 px/s) with its name |
 | Speed ramp | Source time is non-linear across the ramp (0.70 s at 25 %, 4.50 s at 100 %) and the source span is unchanged (4.50 → 4.50) |
@@ -200,13 +285,16 @@ Two more pre-existing faults fell out of the same work: `verify-electron.cjs` cl
 | Filmstrip / waveform | 12 real frames and a 2 437-character SVG path; both **survive a timeline rebuild** (12 → 12) |
 | Visual QA | Rendered at 1680×1000, 0 console errors; the timeline crop confirms real frames and waveform |
 | First-run race (measured) | Base code: `verify-filmora-shell.cjs` passes **1 of 5**; with this cycle's changes **0 of 5**; `networkidle` timing is **558–577 ms base vs 557–577 ms changed** (identical). The suite, not the product, was the cause. After the `dismissFirstRun()` fix: **3 of 3**. The other 8 affected suites were re-run **2× each, all green**. |
-| New regression checks | `verify-wave0.cjs` is now **34/34** (was 28/28). The 6 new checks were **proven to fail against the unfixed code**: the scope signature froze (`435128228 → 435128228`), the menu stayed open (`{"opened":1,"after":1}`), and the recovery dialog appeared in both negative cases (32/34 on the old code). |
+| New regression checks | **APP-037:** `verify-wave0.cjs` is now **54/54** (was 34/34) and `verify-sidecar.cjs` **87/87** (was 49/49). Every new check was **proven to fail against the unfixed code**: 14 of 16 export checks (the six controls were inert, the canvas was the preview's size, the playhead wrapped, there was no mix bus), **37** encoder/sidecar checks (no `encode` op existed at all), the mix-bus checks (an idle bus stalls the recorder → 0 chunks), and the two preset-vocabulary checks (`h264 3840x2160 30`, `hevc mov`). |
 | `verify-electron.cjs` | **Green** — was a 180 s `exit null` with no output. Root cause was the open `<details>` menu blocking the next click, plus the suite never closing the Electron app. |
 | Connection failures under load | Two suites failed in the suite run with **no verdict at all** — `verify-audiofx` in one run, `verify-speed2` in another (*different* suites, so not code-specific). Both pass standalone (`17/17` and **6/6**). The root cause was the recovery-prompt dialog (§ bug 8) racing the page teardown. `verify-all.cjs` now pings the server before each suite and **retries once** on an inconclusive run, so a transient failure can neither fake nor hide a regression. |
-| Full suite | `docs/product/POST-CHANGE.md` — **44/54 green vs. a 43/54 baseline, zero regressions.** The 10 failing suites are a **strict subset** of the baseline's 11: `verify-electron.cjs` is now green. The two suites added this cycle stay green (`verify-wave0.cjs` 34/34, `verify-sidecar.cjs` 49/49). |
+| Full suite | `docs/product/POST-CHANGE.md` — **44/54 green, exactly the baseline's 44/54, zero regressions.** The 10 failing suites are the **same ten** that fail on the base commit (`verify-detach`, `verify-filmora-gaps`, `verify-filmora15`, `verify-icon-compact`, `verify-panzoom`, `verify-parity`, `verify-rebuild`, `verify-save-fallback`, `verify-save-location`, `verify-vol-split`) — all pre-existing and untouched. The three export suites stay green: `verify-export22.cjs` **9/9**, `verify-sidecar.cjs` **87/87**, `verify-wave0.cjs` **54/54**. |
 
 ## Not verified / unknown
 
+- ❌ **The AI tier still fabricates its output and charges credits for it.** APP-037 did not touch this (§2.5). The exit is now honest; the entry point is not.
+- ❌ **LUFS normalisation (APP-025) is not part of APP-037.** The mix bus exists and carries the timeline's sound, but the −14/−16/−23 LUFS targets are a separate roadmap item — `js/loudness.js` can drive them and the export does not yet.
+- ❌ **Caption burn-in is still not real.** The sheet mentions it; APP-037 did not implement it.
 - ❌ `npm run dist` was not run; no installer was produced or tested.
 - ❌ **No real FFmpeg, ffprobe or Whisper was ever executed.** None is installed on this machine, and installing system software needs the user's approval. The sidecar's spawn, command construction, output parsing, IPC and file delivery are all verified **against stand-in tools**; real binaries are not. See `docs/product/SIDECAR.md` §5.
 - ❌ **The transcript was never run against real speech.** The whisper.cpp JSON shapes are parsed correctly; no model was transcribed.
@@ -214,31 +302,32 @@ Two more pre-existing faults fell out of the same work: `verify-electron.cjs` cl
 - ❌ APP-010 (scene tags + semantic search) is not started.
 - ❌ Waves 2–5 are not started: clip badges, transition wedges, ruler ladder, trim affordances, track gain/meter, the inspector redesign, colour wheels, grade copy/paste, LUT import UI, MCP, @mentions, draft isolation, agent presence, export loudness/shape, in/out points, command palette, the state kit, auto-update, responsive breakpoints, the undo panel, close gaps, true reverse.
 - ❌ Editroom's "plays 4K in realtime" was not measured — a README claim with bench harnesses but no recorded numbers.
-- ⚠️ 10 suites were already failing on the base commit (the baseline recorded 11; `verify-electron.cjs` is now green). They are **pre-existing**, not caused by this cycle — the post-change run has the same failing set minus the fixed one, and no new ones.
+- ⚠️ 10 suites were already failing on the base commit (the baseline recorded 11; `verify-electron.cjs` is now green). They are **pre-existing**, not caused by this cycle — the final post-change run fails the **same ten** and no new ones.
 - ❌ **The audit's five critical shortcomings are reported, not fixed.** Only §2.1 (the sidecar's output could not be played) was fixed in this cycle. Still open, and the highest-value work in the repo:
   - **§2.2 — autosave silently stops working.** Measured: the empty demo project is 1,167,019 bytes of which 99.4 % is base64 thumbnails — 22.3 % of the 5 MiB quota before a single real clip. The backup ring and the 50 undo snapshots deep-clone the same thumbnails. The fix (scrub `data:` thumbs, catch `QuotaExceededError` explicitly, move the backup ring to IndexedDB) is **not started**.
   - **§2.3 — the Electron renderer can write and read any file on disk.** `fs:writeFile` takes a renderer-controlled path; `media:register` accepts any existing path; there is no CSP. **Not fixed** — it is a security change that needs the user's sign-off on the threat model.
-  - **§2.4 — the export is silent, 720p, video-only WebM** while the sheet promises 4K H.265, and the six export controls are inert. **Not fixed.**
+  - **§2.4 — the export is silent, 720p, video-only WebM** while the sheet promises 4K H.265, and the six export controls are inert. **Fixed by APP-037 this cycle** — the sidecar encodes, the controls are bound, the mix bus carries the sound, the render ends when the timeline ends, and the fallback is labelled with what it really produced. **Not verified against a real FFmpeg**: none is installed here, so the encoder was exercised against a stand-in binary (see `docs/product/APP-037-EXPORT.md` §5).
   - **§2.5 — the AI tier fabricates its output and charges credits for it.** **Not fixed**, beyond the transcript label that already landed.
 - ❌ `verify-icon-compact.cjs` fails on **7 stale expectations** (6 library tabs vs the 10 that exist, a deliberate `✕` close glyph, and five CSS metrics that no longer match the redesigned chrome). It was already failing on the base commit. Fixing it means deciding what the chrome *should* measure, so it was left alone rather than edited to match whatever the page currently does.
 - ❌ `verify-rebuild.cjs`, `verify-panzoom.cjs`, `verify-detach.cjs`, `verify-parity.cjs`, `verify-save-fallback.cjs`, `verify-save-location.cjs`, `verify-vol-split.cjs`, `verify-filmora-gaps.cjs`, `verify-filmora15.cjs` were **not triaged** — all pre-existing failures, none touched.
 
 ## Exact next step
 
-**The audit's Step 1 — "Fix & Polish" — is the next work, and the choice of which item to build first is the user's.** The audit ranked five upgrades in `docs/product/AUDIT-2026-11-25.md` §4:
+**APP-037 (§4.1) is built and verified. The next upgrade is the user's call** — the audit ranked five in `docs/product/AUDIT-2026-11-25.md` §4, and the first one is done:
 
-| # | Item | Effort | Why |
-|---|---|---|---|
-| 4.1 | **Export the file you actually asked for** — an `encode` op in the sidecar + the six bound export controls + a real audio mix bus | Quick Win | It is the app's *output*; the encoder already exists in `media-service.cjs:273-302` |
-| 4.2 | **A project file you can actually reopen** — `sourcePath` per media item, relink on open, no thumbnails in the snapshot, a surfaced save failure | Quick Win | Fixes §2.2 and the "reopen last week's project" wall |
-| 4.3 | **Keyboard-first timeline and real focus management** — focusable clips, a shared `openModal()` with focus trap, a live status dot | Quick Win | A reach item, and the cheapest |
-| 4.4 | **Edit by text** — the transcript becomes the editing surface; real `removePauses()` / `cutWordRange()` on the word timings that now exist | Strategic Bet | The category's most-requested feature, half-built already |
-| 4.5 | **The agent surface** — MCP over the store with the five perception tools attached | Moonshot | It makes the product's name true |
+| # | Item | Effort | Status | Why |
+|---|---|---|---|---|
+| 4.1 | **Export the file you actually asked for** — an `encode` op in the sidecar + the six bound export controls + a real audio mix bus | Quick Win | ✅ **done-verified** | It is the app's *output*; the encoder already existed in `media-service.cjs` and was wired to import and never to export |
+| 4.2 | **A project file you can actually reopen** — `sourcePath` per media item, relink on open, no thumbnails in the snapshot, a surfaced save failure | Quick Win | proposed | Fixes §2.2 and the "reopen last week's project" wall |
+| 4.3 | **Keyboard-first timeline and real focus management** — focusable clips, a shared `openModal()` with focus trap, a live status dot | Quick Win | proposed | A reach item, and the cheapest |
+| 4.4 | **Edit by text** — the transcript becomes the editing surface; real `removePauses()` / `cutWordRange()` on the word timings that now exist | Strategic Bet | proposed | The category's most-requested feature, half-built already |
+| 4.5 | **The agent surface** — MCP over the store with the five perception tools attached | Moonshot | proposed | It makes the product's name true |
 
-1. **Pick one** and it gets a design pass before code, in the master-application order (sketch → prototype → build → test → harden).
-2. Then **Fix & Polish** continues with the §2.3 Electron path containment and the CSP — a security change that needs the user's sign-off first.
-3. **APP-010** (scene tags + semantic library search) is still the one unfinished Wave 1 item, and the audit §3.2/§3.6 independently confirm it is table stakes rather than a nice-to-have.
-4. A **user decision** is still open and is not blocking: bundle `ffmpeg-static`/`ffprobe-static` as dependencies (~80 MB of binaries, a supply-chain choice) or require a system install. The sidecar works either way, and the browser build keeps working with neither.
+1. **Pick the next one** and it gets a design pass before code, in the master-application order (sketch → prototype → build → test → harden). **4.2** is the natural companion to 4.1: the export now produces a real file, and the project that describes it still cannot be reopened anywhere else.
+2. **Two loose ends from APP-037 itself**, both small: the export's **caption burn-in** is still not real, and the **LUFS targets** (APP-025) are not wired to the mix bus that now exists.
+3. Then **Fix & Polish** continues with the §2.3 Electron path containment and the CSP — a security change that needs the user's sign-off first.
+4. **APP-010** (scene tags + semantic library search) is still the one unfinished Wave 1 item, and the audit §3.2/§3.6 independently confirm it is table stakes rather than a nice-to-have.
+5. A **user decision** is still open and is not blocking: bundle `ffmpeg-static`/`ffprobe-static` as dependencies (~80 MB of binaries, a supply-chain choice) or require a system install. The sidecar works either way, and the browser build keeps working with neither. **This one now matters more than before** — without FFmpeg the app can only write the WebM preview, so the desktop build's real MP4 depends on it.
 
 ## Repeat-run notes
 
