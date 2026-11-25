@@ -292,6 +292,29 @@ function startServer() {
   });
   ok("APP-008 the CSS-gradient placeholder is gone", !noPlaceholder.hasGradient);
 
+  // A zoom rebuilds every clip element — the media must come back, and it
+  // must not cost a re-decode.
+  const zoom = await page.evaluate(async () => {
+    const before = {
+      frames: document.querySelectorAll('.tl-clip[data-clip-id="w0-vclip"] .tl-strip img').length,
+      wave: !!document.querySelector('.tl-clip[data-clip-id="w0-aclip"] .tl-wave svg'),
+    };
+    const z = document.getElementById("tlZoom");
+    if (z) {
+      z.value = "2";
+      z.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+    await new Promise((r) => setTimeout(r, 1500));
+    const after = {
+      frames: document.querySelectorAll('.tl-clip[data-clip-id="w0-vclip"] .tl-strip img').length,
+      wave: !!document.querySelector('.tl-clip[data-clip-id="w0-aclip"] .tl-wave svg'),
+    };
+    if (z) { z.value = "1"; z.dispatchEvent(new Event("input", { bubbles: true })); }
+    return { before, after };
+  });
+  ok("APP-007 the filmstrip survives a timeline rebuild", zoom.after.frames > 0, `${zoom.before.frames} → ${zoom.after.frames}`);
+  ok("APP-008 the waveform survives a timeline rebuild", zoom.after.wave);
+
   /* ------------------------------------------------------------------ done */
   const passed = checks.filter((c) => c.pass).length;
   console.log(`\n${passed}/${checks.length} checks passed`);

@@ -2,7 +2,7 @@
 import { store, DEFAULT_FX } from "./state.js";
 import { mediaById, toast } from "./media.js";
 import { getThumbnails, getPeaks } from "./media-analysis.js";
-import { waveformPath } from "./waveform-render.js";
+import { waveformPath, waveformCacheKey } from "./waveform-render.js";
 import { formatTC } from "./player.js";
 import { activateClipOnCanvas, openEditorForClip } from "./canvas-edit.js";
 import { settings } from "./settings.js";
@@ -778,9 +778,11 @@ function renderTimeline() {
   const seqEl = document.getElementById("seqDuration");
   if (seqEl) seqEl.textContent = formatTC(store.sequenceDuration());
   updateMultiCount();
-  // Fill in the real media (filmstrip frames, decoded waveform). Decoding is
+  // Put back the media we already analysed (the clip elements were just
+  // rebuilt), then fill in anything we have not analysed yet. Decoding is
   // asynchronous, so this runs after the synchronous layout and repaints the
   // clip elements in place rather than rebuilding the timeline.
+  repaintHeldMedia();
   hydrateClipMedia();
 }
 
@@ -909,21 +911,31 @@ function buildTrackLabel(track, index) {
  * cached per media id (see media-analysis.js), so this runs once per asset.
  */
 
-/** clipId -> the analysis key currently painted, so we only repaint on change. */
+/**
+ * clipId -> the analysis we already hold for that clip.
+ *
+ * The analysis (frames + peaks) is expensive to obtain and cheap to redraw,
+ * so it is kept here and reused whenever the timeline is rebuilt — a zoom
+ * must not make the media vanish.
+ */
 const mediaHydration = new Map();
+/** Set while a hydration pass is running, so renders never stack passes. */
+let hydrationRunning = false;
+/** Generated waveform paths, keyed so a zoom reuses the ones that still fit. */
+const wavePathCache = new Map();
 
 function clipSourceSpan(clip) {
   const speed = Math.max(0.25, Math.min(8, Number(clip.speed) || 1));
   return Math.max(0.05, (Number(clip.duration) || 0) * speed);
 }
 
-/** Paint the waveform for one clip element from cached peaks. */
-function paintWaveform(el, clip, analysis) {
-  const wave = el?.querySelector(".tl-wave");
-  if (!wave || !analysis?.peaks) return;
+/** The waveform path for a clip, cached by media + slice + pixel width. */
+function cachedWavePath(analysis, clip, width) {
   const offset = Number(clip.offset) || 0;
   const span = clipSourceSpan(clip);
-  const width = Math.max(8, Math.round(el.getBoundingClientRect().width || el.offsetWidth || 60));
+  const key = `${waveformCacheKey(clip.mediaId, { offset, duration: span, width, height: 18 })}|${analysis.resolution}`;
+  const hit = wavePathCache.get(key);
+  if (hit !== undefined) return hit;
   const path = waveformPath(analysis.peaks, {
     resolution: analysis.resolution,
     offset,
@@ -931,11 +943,22 @@ function paintWaveform(el, clip, analysis) {
     width,
     height: 18,
   });
+  if (wavePathCache.size > 300) wavePathCache.clear();
+  wavePathCache.set(key, path);
+  return path;
+}
+
+/** Paint the waveform for one clip element from held analysis. */
+function paintWaveform(el, clip, analysis) {
+  const wave = el?.querySelector(".tl-wave");
+  if (!wave || !analysis?.peaks) return;
+  const width = Math.max(8, Math.round(el.getBoundingClientRect().width || el.offsetWidth || 60));
+  const path = cachedWavePath(analysis, clip, width);
   if (!path) return;
   wave.innerHTML = `<svg viewBox="0 0 ${width} 18" preserveAspectRatio="none" aria-hidden="true"><path d="${path}"/></svg>`;
 }
 
-/** Paint the filmstrip for one clip element from cached thumbnails. */
+/** Paint the filmstrip for one clip element from held thumbnails. */
 function paintFilmstrip(el, clip, thumbs) {
   const strip = el?.querySelector(".tl-strip");
   if (!strip || !thumbs?.length) return;
@@ -949,33 +972,74 @@ function paintFilmstrip(el, clip, thumbs) {
     .join("");
 }
 
-/** Ask the analysis layer for what a clip needs, then paint it. */
-async function hydrateClipMedia() {
+/**
+ * Repaint the media we already hold, synchronously.
+ *
+ * renderTimeline() rebuilds the clip elements, so every rebuild has to put
+ * the filmstrip and the waveform back. The analysis itself is cached, so this
+ * is only path generation and DOM work.
+ */
+function repaintHeldMedia() {
+  if (!mediaHydration.size) return;
   const state = store.get();
-  const jobs = [];
   for (const clip of state.clips) {
-    if (clip.type !== "video" && clip.type !== "audio") continue;
-    const media = clip.mediaId ? mediaById(clip.mediaId) : null;
-    if (!media || !media.url || media._offline || media.unplayable) continue;
+    const held = mediaHydration.get(clip.id);
+    if (!held) continue;
     const el = els.lanes?.querySelector(`.tl-clip[data-clip-id="${clip.id}"]`);
     if (!el) continue;
-
-    if (clip.type === "video" && !el.querySelector(".tl-strip img")) {
-      jobs.push(
-        getThumbnails(media, { count: 12 }).then((res) => {
-          if (res?.ok && res.thumbs?.length) paintFilmstrip(el, clip, res.thumbs);
-        })
-      );
-    }
-    if (!el.querySelector(".tl-wave svg")) {
-      jobs.push(
-        getPeaks(media).then((res) => {
-          if (res?.ok && res.peaks) paintWaveform(el, clip, res);
-        })
-      );
-    }
+    if (held.peaks && !el.querySelector(".tl-wave svg")) paintWaveform(el, clip, held.peaks);
+    if (held.thumbs?.length && !el.querySelector(".tl-strip img")) paintFilmstrip(el, clip, held.thumbs);
   }
-  if (jobs.length) await Promise.allSettled(jobs);
+}
+
+/**
+ * Ask the analysis layer for what a clip needs, then paint it.
+ *
+ * Only clips we have never analysed are requested. Decoding audio and
+ * extracting frames is expensive, and renderTimeline() runs on every drag
+ * frame and zoom step — re-requesting on each one made the whole app crawl.
+ * A single pass runs at a time; renders that arrive mid-pass are picked up by
+ * the next one.
+ */
+async function hydrateClipMedia() {
+  if (hydrationRunning) return;
+  const state = store.get();
+  const pending = state.clips.filter(
+    (c) =>
+      (c.type === "video" || c.type === "audio") &&
+      c.mediaId &&
+      !mediaHydration.has(c.id)
+  );
+  if (!pending.length) return;
+
+  hydrationRunning = true;
+  try {
+    for (const clip of pending) {
+      const media = mediaById(clip.mediaId);
+      if (!media || !media.url || media._offline || media.unplayable) {
+        mediaHydration.set(clip.id, { thumbs: null, peaks: null });
+        continue;
+      }
+      const el = els.lanes?.querySelector(`.tl-clip[data-clip-id="${clip.id}"]`);
+      const held = { thumbs: null, peaks: null };
+
+      if (clip.type === "video") {
+        const res = await getThumbnails(media, { count: 12 });
+        if (res?.ok && res.thumbs?.length) {
+          held.thumbs = res.thumbs;
+          if (el) paintFilmstrip(el, clip, held.thumbs);
+        }
+      }
+      const peaks = await getPeaks(media);
+      if (peaks?.ok && peaks.peaks) {
+        held.peaks = { peaks: peaks.peaks, resolution: peaks.resolution };
+        if (el) paintWaveform(el, clip, held.peaks);
+      }
+      mediaHydration.set(clip.id, held);
+    }
+  } finally {
+    hydrationRunning = false;
+  }
 }
 
 function buildClipEl(clip, totalWidth) {
