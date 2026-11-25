@@ -1,0 +1,11 @@
+{"inspector":"fx","icon":"fx"}|FX
+{"inspector":"motion","icon":"motion"}|Motion
+{"inspector":"speed","icon":"speed"}|Speed
+{"inspector":"volume","icon":"volume"}|Audio
+{"inspector":"textpanel","icon":"textInspector"}|Text
+{"inspector":"mate","icon":"mate"}|Mate
+{"inspector":"lab","icon":"lab"}|Lab
+{"inspector":"text","icon":"transcript"}|Text edit
+{"inspector":"scopes","icon":"scopes"}|Scopes
+{"inspector":"aisettings","icon":"ai"}|AI
+{"inspector":"creative","icon":"creative"}|Creative
