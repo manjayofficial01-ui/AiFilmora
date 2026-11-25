@@ -85,7 +85,7 @@
 | Loudness | −3.004 LUFS on a full-scale sine; `gainForTarget(−20→−14, peak .5)` = +6 dB; with peak 1.0 it clamps to −1 dBFS |
 | Filmstrip / waveform | 12 real frames and a 2 437-character SVG path; both **survive a timeline rebuild** (12 → 12) |
 | Visual QA | Rendered at 1680×1000, 0 console errors; the timeline crop confirms real frames and waveform |
-| Full suite | `docs/product/POST-CHANGE.md` — compare against `BASELINE.md` |
+| Full suite | `docs/product/POST-CHANGE.md` — **41/53 green vs. a 39/52 baseline, zero regressions.** The only change is `verify-app.cjs`, which failed in the baseline and passes now. `verify-wave0.cjs` adds 28/28. |
 
 ## Not verified / unknown
 
@@ -95,7 +95,7 @@
 - ❌ APP-009 (ASR) and APP-010 (semantic search) are not started.
 - ❌ Waves 2–5 are not started: clip badges, transition wedges, ruler ladder, trim affordances, track gain/meter, the inspector redesign, colour wheels, grade copy/paste, LUT import UI, MCP, @mentions, draft isolation, agent presence, export loudness/shape, in/out points, command palette, the state kit, auto-update, responsive breakpoints, the undo panel, close gaps, true reverse.
 - ❌ Editroom's "plays 4K in realtime" was not measured — a README claim with bench harnesses but no recorded numbers.
-- ⚠️ 13 suites were already failing on the base commit. They are **pre-existing**, not caused by this cycle.
+- ⚠️ 13 suites were already failing on the base commit. They are **pre-existing**, not caused by this cycle — the post-change run has the same 13 failing and no new ones.
 
 ## Exact next step
 
