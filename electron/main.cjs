@@ -24,6 +24,16 @@ protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { standard: true, secure: true, supportFetchAPI: true, stream: true } },
 ]);
 
+/* One source of truth for the version: package.json. The preload runs
+ * sandboxed and cannot read files itself, so the main process reads it and
+ * hands it to the renderer as an extra command-line argument. */
+let APP_VERSION = "";
+try {
+  APP_VERSION = require("../package.json").version || "";
+} catch {
+  APP_VERSION = "";
+}
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1440,
@@ -37,6 +47,7 @@ function createWindow() {
       preload: path.join(__dirname, "preload.cjs"),
       contextIsolation: true,
       nodeIntegration: false,
+      additionalArguments: [`--aifimora-version=${APP_VERSION}`],
     },
   });
 

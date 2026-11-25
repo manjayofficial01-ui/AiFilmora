@@ -485,7 +485,24 @@ function bindMediaSearch() {
   });
 }
 
+/* The version is read from package.json by the desktop shell, so the status
+ * bar, the About panel and the release notes can never disagree with the
+ * build. Without the shell there is no version to show, and the bar says so
+ * rather than inventing one. */
+function paintVersion() {
+  const v = window.aifimoraDesktop?.version || "";
+  const bar = $("#statVersion");
+  if (bar) {
+    bar.textContent = v
+      ? `AiFilmora ${v} · Electron-ready Windows suite`
+      : "AiFilmora · Browser preview";
+  }
+  const about = $("#fmVersionText");
+  if (about) about.textContent = v ? `AiFilmora ${v}` : "AiFilmora";
+}
+
 function bindStatus(player) {
+  paintVersion();
   const paint = (s) => {
     const clips = s.clips.length;
     const left = store.creditLeft();

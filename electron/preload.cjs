@@ -21,7 +21,22 @@ function withBytes(payload) {
   };
 }
 
+/* One source of truth for the version: package.json, read by the main
+ * process and handed over as a command-line argument (a sandboxed preload
+ * cannot read files itself). The status bar, the About panel and the
+ * release notes all read it from here, so it cannot drift the way the old
+ * hard-coded strings did. */
+const APP_VERSION = (() => {
+  try {
+    const arg = process.argv.find((a) => a.startsWith("--aifimora-version="));
+    return arg ? arg.slice("--aifimora-version=".length) : "";
+  } catch {
+    return "";
+  }
+})();
+
 contextBridge.exposeInMainWorld("aifimoraDesktop", {
+  version: APP_VERSION,
   openFiles: () => ipcRenderer.invoke("dialog:openFiles"),
   // Returns the chosen full path (folder + file name), or null when cancelled.
   saveVideo: (opts) => ipcRenderer.invoke("dialog:saveVideo", opts),

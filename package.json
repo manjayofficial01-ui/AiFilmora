@@ -1,6 +1,6 @@
 {
   "name": "aifilmora",
-  "version": "2.2.7",
+  "version": "2.3.0",
   "description": "AiFilmora — Windows-first AI video editor suite",
   "main": "electron/main.cjs",
   "type": "module",
@@ -17,14 +17,30 @@
     "video-editor",
     "nle",
     "ai",
-    "windows"
+    "windows",
+    "electron",
+    "ffmpeg",
+    "timeline",
+    "color-grading",
+    "non-linear-editor"
   ],
-  "author": "AiFilmora",
+  "author": {
+    "name": "Manjay Dongol",
+    "url": "https://github.com/manjayofficial01-ui"
+  },
   "license": "MIT",
+  "homepage": "https://github.com/manjayofficial01-ui/AiFilmora#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manjayofficial01-ui/AiFilmora.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manjayofficial01-ui/AiFilmora/issues"
+  },
   "build": {
     "appId": "com.aifilmora.app",
     "productName": "AiFilmora",
-    "copyright": "Copyright © 2026 AiFilmora",
+    "copyright": "Copyright © 2026 Manjay Dongol",
     "directories": {
       "output": "dist"
     },
