@@ -17,6 +17,7 @@ import { ensureGraph, graphFor, resumeAudio, syncElementFx } from "./audio-fx.js
 import { clipAnimTransform } from "./preset-ui.js";
 import { colorPresetById } from "./color-presets.js";
 import { applyColorGradeToCanvasRegion } from "./color-engine.js";
+import { hasRamp, rampSpeedAt, rampSourceTime } from "./speed-ramp.js";
 import { panZoomById, effectiveRect } from "./panzoom.js";
 import { curveOf, fadeInGain, fadeOutGain, DEFAULT_AUDIO_TRANSITION } from "./audio-transitions.js";
 
@@ -162,7 +163,14 @@ function mediaTimeFor(clip, localT, mediaDur) {
   const speed = Math.max(0.25, Math.min(8, Number(clip.speed) || 1));
   // Clips carry a source in-point (clip.offset): split halves and left-trims
   // continue mid-media instead of restarting from the media head.
-  let t = Math.max(0, Number(clip.offset) || 0) + Math.max(0, localT) * speed;
+  //
+  // A speed ramp makes the rate vary across the clip, so the source time is
+  // the INTEGRAL of the rate over the clip — not `localT × speed`. Without
+  // this the ramp was stored and displayed but never actually played back.
+  const base = hasRamp(clip)
+    ? rampSourceTime(clip, localT)
+    : Math.max(0, localT) * speed;
+  let t = Math.max(0, Number(clip.offset) || 0) + base;
   if (clip.reversed) {
     const src = Number.isFinite(mediaDur) && mediaDur > 0 ? mediaDur : clip.duration * speed;
     t = Math.max(0, src - t - 0.04);
@@ -1204,6 +1212,12 @@ export function createPlayer(canvas) {
       const trackMuted = !!track?.muted;
       const localT = time - clip.start;
       const speed = Math.max(0.25, Math.min(8, Number(clip.speed) || 1));
+      // With a speed ramp the effective rate varies across the clip, so the
+      // element's playback rate has to follow the ramp or the audio drifts
+      // against the picture.
+      const effSpeed = hasRamp(clip)
+        ? rampSpeedAt(clip, Math.min(1, Math.max(0, localT / Math.max(0.001, Number(clip.duration) || 1))))
+        : speed;
 
       if ((clip.type === "video" || clip.type === "gen" || clip.type === "ai") && media.kind === "video") {
         const v = getVideoEl(media);
@@ -1218,7 +1232,7 @@ export function createPlayer(canvas) {
           // Detached video carries no sound — audio lives in the linked clip.
           const silent = trackMuted || clip.audioMuted || store.isDetachSilent(clip);
           applyElementLevel(v, media.url, clipVol * mv, !!silent);
-          try { v.playbackRate = clip.reversed ? 1 : speed; } catch { /* ignore */ }
+          try { v.playbackRate = clip.reversed ? 1 : effSpeed; } catch { /* ignore */ }
           const drift = Math.abs((v.currentTime || 0) - want);
           if (clip.reversed) {
             // No native reverse: hold the mirrored frame, stay paused.
@@ -1262,7 +1276,7 @@ export function createPlayer(canvas) {
           }
           syncElementFx(a, media.url, clip.audioFx);
           applyElementLevel(a, media.url, clipVol * mv * fade, !!(trackMuted || clip.audioMuted));
-          try { a.playbackRate = clip.reversed ? 1 : speed; } catch { /* ignore */ }
+          try { a.playbackRate = clip.reversed ? 1 : effSpeed; } catch { /* ignore */ }
           const drift = Math.abs((a.currentTime || 0) - want);
           if (isPlaying && !clip.reversed) {
             if (drift > 0.4 && Number.isFinite(want)) {

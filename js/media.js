@@ -227,6 +227,8 @@ export async function importFileList(files) {
 
     let duration = isImage ? 4 : 6;
     let thumb = null;
+    let unplayable = false;
+    let unsupportedReason = null;
     const url = URL.createObjectURL(file);
 
     if (isImage) {
@@ -237,6 +239,10 @@ export async function importFileList(files) {
         duration = meta.duration;
         thumb = meta.thumb;
       } catch {
+        // The browser could not decode this file. Say so instead of handing
+        // back a pretty gradient that hides the fact the media is dead.
+        unplayable = true;
+        unsupportedReason = `The browser cannot decode ${extOf(file.name)} — convert it to MP4/MOV or install the FFmpeg sidecar.`;
         thumb = makeThumbDataURL(Math.floor(Math.random() * 999), file.name);
       }
       if (!Number.isFinite(duration) || duration <= 0) duration = Math.min(60, Math.max(2, file.size / 1_000_000));
@@ -259,17 +265,20 @@ export async function importFileList(files) {
       fileType: type || null,
       fileSize: file.size || 0,
       _offline: false,
+      unplayable,
+      unsupportedReason,
     });
     idbPutMediaFile(item.id, file);
     imported.push(item);
   }
   if (imported.length) {
     store.setSelectedMedia([imported[imported.length - 1].id]);
+    const dead = imported.filter((m) => m.unplayable).length;
     toast(
-      skipped
-        ? `Imported ${imported.length} file${imported.length === 1 ? "" : "s"} · skipped ${skipped}`
+      skipped || dead
+        ? `Imported ${imported.length} file${imported.length === 1 ? "" : "s"}${dead ? ` · ${dead} could not be decoded` : ""}${skipped ? ` · skipped ${skipped}` : ""}`
         : `Imported ${imported.length} file${imported.length === 1 ? "" : "s"} — drag onto the timeline, double-click to insert`,
-      "ok"
+      dead || skipped ? "err" : "ok"
     );
   } else {
     toast("No supported media in selection (video / audio / image)", "err");
@@ -277,12 +286,34 @@ export async function importFileList(files) {
   return { imported, skipped };
 }
 
+function extOf(name) {
+  return String(name || "").split(".").pop()?.toUpperCase() || "this file";
+}
+
+/**
+ * The real MIME type for a file name.
+ *
+ * This used to return "video/mp4" for MKV and AVI and "audio/mpeg" for WAV and
+ * FLAC — types the file is not. That mattered because the importer used the
+ * type to decide the media kind, and a wrong type makes an undecodable file
+ * look like a fine one.
+ */
 function guessMimeByName(name) {
   const ext = String(name || "").split(".").pop()?.toLowerCase() || "";
-  if (["mp4", "mov", "m4v", "webm", "mkv", "avi"].includes(ext)) return "video/mp4";
-  if (["mp3", "wav", "ogg", "m4a", "flac", "aac"].includes(ext)) return "audio/mpeg";
-  if (["png", "jpg", "jpeg", "gif", "bmp", "svg", "webp"].includes(ext)) return "image/png";
-  return "";
+  const VIDEO = {
+    mp4: "video/mp4", m4v: "video/x-m4v", mov: "video/quicktime", webm: "video/webm",
+    mkv: "video/x-matroska", avi: "video/x-msvideo", mxf: "application/mxf",
+    mpg: "video/mpeg", mpeg: "video/mpeg", "3gp": "video/3gpp", wmv: "video/x-ms-wmv",
+  };
+  const AUDIO = {
+    mp3: "audio/mpeg", wav: "audio/wav", ogg: "audio/ogg", m4a: "audio/mp4",
+    flac: "audio/flac", aac: "audio/aac", opus: "audio/opus", wma: "audio/x-ms-wma",
+  };
+  const IMAGE = {
+    png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", gif: "image/gif",
+    bmp: "image/bmp", svg: "image/svg+xml", webp: "image/webp", avif: "image/avif",
+  };
+  return VIDEO[ext] || AUDIO[ext] || IMAGE[ext] || "";
 }
 
 function probeAudio(url, file) {
@@ -609,13 +640,13 @@ export function renderMediaBin(container, filter = "", cat = "all") {
     card.title = `${m.name} — click select · Ctrl+click multi · double-click insert · right-click more`;
     const thumbSrc = m.thumb || makeThumbDataURL(m.seed || 1, m.name);
     const isSel = selected.has(m.id);
-    const playable = (m.kind === "video" || m.kind === "audio") && !!m.url && !m._offline;
+    const playable = (m.kind === "video" || m.kind === "audio") && !!m.url && !m._offline && !m.unplayable;
     card.innerHTML = `
       <label class="media-check" title="Select this media (multi-select)">
         <input type="checkbox" ${isSel ? "checked" : ""} aria-label="Select ${escapeAttr(m.name)}" />
       </label>
       <img class="media-thumb" alt="" src="${thumbSrc}" draggable="false" />
-      ${m.generated ? `<span class="media-badge ai">AI</span>` : `<span class="media-badge">${escapeHtml(m.kind)}${fileMissing ? " · missing" : ""}</span>`}
+      ${m.generated ? `<span class="media-badge ai">AI</span>` : `<span class="media-badge${m.unplayable ? " bad" : ""}">${escapeHtml(m.kind)}${m.unplayable ? " · unsupported" : fileMissing ? " · missing" : ""}</span>`}
       ${playable ? `<button class="media-play" title="Preview ${escapeAttr(m.name)}" aria-label="Preview ${escapeAttr(m.name)}">▶</button>` : ""}
       <button class="media-del" title="Delete ${escapeAttr(m.name)}" aria-label="Delete ${escapeAttr(m.name)}">✕</button>
       <div class="media-meta">
@@ -623,6 +654,10 @@ export function renderMediaBin(container, filter = "", cat = "all") {
         <span>${formatDur(m.duration)}${m.model ? " · " + escapeHtml(m.model) : ""}${m.fileSize ? " · " + formatBytes(m.fileSize) : ""}</span>
       </div>
     `;
+    if (m.unplayable) {
+      card.classList.add("is-unplayable");
+      card.title = m.unsupportedReason || `${m.name} — this browser cannot decode the file`;
+    }
     // Checkbox toggles multi-select without disturbing others
     card.querySelector(".media-check input")?.addEventListener("click", (e) => {
       e.stopPropagation();

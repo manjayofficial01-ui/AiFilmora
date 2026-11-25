@@ -541,6 +541,17 @@ input::placeholder {
   background: rgba(139, 92, 246, 0.85);
   border-color: transparent;
 }
+/* A file the browser could not decode. The badge says so out loud and the
+   card is dimmed, so an unsupported import never looks like a working one. */
+.media-badge.bad {
+  background: rgba(255, 92, 122, 0.92);
+  border-color: transparent;
+  color: #1a0509;
+}
+.media-card.is-unplayable .media-thumb {
+  opacity: 0.35;
+  filter: grayscale(0.8);
+}
 
 .btn {
   display: inline-flex;

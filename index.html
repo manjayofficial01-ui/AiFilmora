@@ -879,7 +879,7 @@
                   type uses the standard curve its name denotes.
                 </div>
               </div>
-              <div class="section-title">Normalize (Filmora LUFS)</div>
+              <div class="section-title">Normalize (measured LUFS)</div>
               <label class="field" style="display:flex;gap:8px;align-items:center">
                 <input id="volNormalize" type="checkbox" />
                 Auto normalize
@@ -887,10 +887,10 @@
               <div class="field">
                 <label for="volLufs">Target LUFS</label>
                 <select id="volLufs">
-                  <option value="-16">Web −16 LUFS</option>
-                  <option value="-14" selected>Streaming −14 LUFS</option>
-                  <option value="-23">Broadcast −23 LUFS</option>
                   <option value="-10">Loud social −10 LUFS</option>
+                  <option value="-14" selected>Streaming −14 LUFS (web, YouTube)</option>
+                  <option value="-16">Podcasts −16 LUFS</option>
+                  <option value="-23">Broadcast −23 LUFS</option>
                 </select>
               </div>
               <div class="section-title">Equalizer & Cleanup (Filmora)</div>

@@ -244,7 +244,15 @@ export function bindMarkerTool() {
   const add = () => {
     const t = window.__aifimoraPlayer?.getTime?.() ?? 0;
     const markers = [...(store.get().markers || [])];
-    markers.push({ t, name: `M${markers.length + 1}` });
+    // Canonical marker shape — see normalizeMarker() in state.js. A point
+    // marker has `t` and no `end`.
+    markers.push({
+      id: `mk-${Date.now().toString(36)}-${markers.length}`,
+      t,
+      end: null,
+      name: `M${markers.length + 1}`,
+      color: "accent",
+    });
     store.pushUndo("Add marker");
     store.set({ markers });
     store.save();

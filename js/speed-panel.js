@@ -165,19 +165,19 @@ export function initSpeedPanel() {
       const ramp = RAMPS[btn.dataset.ramp];
       if (!ramp) return;
       const ripple = !!document.getElementById("speedRipple")?.checked;
-      store.pushUndo(`Speed ramp ${ramp.label}`);
-      store.setClipSpeed(clip.id, ramp.speed, { ripple });
-      store.updateClip(clip.id, {
-        speedRamp: {
-          name: ramp.label,
-          peak: Math.max(...ramp.curve),
-          curve: ramp.curve,
-          maintainPitch: !!document.getElementById("speedPitch")?.checked,
-        },
+      const maintainPitch = !!document.getElementById("speedPitch")?.checked;
+      // Applied as one atomic step: the clip keeps covering the same source
+      // media, and the ramp's curve is what the player will actually honour.
+      const res = store.applySpeedRamp(clip.id, {
+        curve: ramp.curve,
+        name: ramp.label,
+        maintainPitch,
+        ripple,
       });
-      toast(`${ramp.label} ramp · base ${ramp.speed}×`, "ok");
+      if (!res?.ok) return toast(res?.reason || "Could not apply the ramp", "err");
+      toast(`${ramp.label} ramp · average ${res.avg.toFixed(2)}×`, "ok");
       const hint = document.getElementById("rampHint");
-      if (hint) hint.textContent = `Applied “${ramp.label}” — curve ${ramp.curve.join(" → ")}×. Adjust base rate above.`;
+      if (hint) hint.textContent = `Applied “${ramp.label}” — curve ${ramp.curve.join(" → ")}×, averaging ${res.avg.toFixed(2)}×. The clip still covers the same footage.`;
       syncSpeedUI();
       window.dispatchEvent(new CustomEvent("aifimora:timeline-dirty"));
     });

@@ -1,5 +1,45 @@
 /* AiFimora project state — pub/sub store */
+import { meanSpeed, scaleCurve, clampSpeed, hasRamp } from "./speed-ramp.js";
+
 const STORAGE_KEY = "aifimora.project.v1";
+
+/**
+ * The ONE marker shape.
+ *
+ * Markers used to be written two different ways — a point `{ t, name }` by the
+ * marker tool and a range `{ start, end, label }` by the AI rough cut — while
+ * the timeline renderer only ever read `start`/`end`. A point marker therefore
+ * rendered at `NaN`. Everything now normalises through this function:
+ *
+ *   { id, t, end, name, color }
+ *     t   — the marker's position in seconds (always present)
+ *     end — optional; when set and > t the marker spans a range
+ *
+ * `normalizeMarkers` migrates anything older, so a saved project keeps working.
+ */
+export function normalizeMarker(m, index = 0) {
+  const src = m && typeof m === "object" ? m : {};
+  const num = (v) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  };
+  // Legacy range markers stored { start, end }.
+  const t = num(src.t) ?? num(src.start) ?? 0;
+  const rawEnd = num(src.end) ?? num(src.start) ?? null;
+  const end = rawEnd != null && rawEnd > t ? rawEnd : null;
+  return {
+    id: src.id || `mk-${index}-${t.toFixed(3)}`,
+    t,
+    end,
+    name: String(src.name || src.label || "Marker"),
+    color: src.color || "accent",
+  };
+}
+
+export function normalizeMarkers(list) {
+  if (!Array.isArray(list)) return [];
+  return list.filter((m) => m && typeof m === "object").map(normalizeMarker);
+}
 
 const DEFAULT_FX = {
   exposure: 0,
@@ -120,6 +160,60 @@ class Store {
     this._undo = [];
     this._redo = [];
     this._undoCap = 50;
+    // Which state the newest undo snapshot describes (see _sig / _ensureUndo).
+    this._snapSig = this._sig();
+    // Coalescing state: consecutive edits to the same thing collapse into one
+    // undo step (see _ensureUndo).
+    this._coalesceKey = null;
+    this._coalesceTs = 0;
+  }
+
+  /**
+   * A fingerprint of the undoable part of the project.
+   *
+   * The store used to rely entirely on every call site remembering to call
+   * pushUndo() before it mutated the timeline. Several AI actions forgot, and
+   * the edit they made was simply not undoable. This fingerprint lets the
+   * store check for itself: the newest snapshot says which state it captured,
+   * and before a mutation we compare that against the state as it is now.
+   */
+  _sig() {
+    const s = this.state;
+    return JSON.stringify([
+      JSON.stringify(s.clips || []),
+      JSON.stringify(s.tracks || []),
+      JSON.stringify(s.markers || []),
+      JSON.stringify(s.captions || []),
+    ]);
+  }
+
+  /**
+   * Guarantee the current state can be restored before we change it.
+   *
+   * A no-op when the newest snapshot already describes the current state, so
+   * a caller that pushed its own snapshot does not get a duplicate.
+   *
+   * `coalesce` groups consecutive mutations of the same thing (a drag of one
+   * clip, say) into ONE undo step: the snapshot is taken when the drag starts
+   * and every later frame of that drag reuses it. Without this, dragging a
+   * clip would push an undo entry per pointer move and bury the real edits.
+   */
+  _ensureUndo(label = "Edit", { coalesce = null } = {}) {
+    const now = Date.now();
+    const sameGroup = !!coalesce && this._coalesceKey === coalesce && now - this._coalesceTs < 800;
+    // Remember the group even when no snapshot is taken. A drag's FIRST frame
+    // often finds the current state already covered by an older snapshot; the
+    // frames after it must still coalesce together rather than each taking a
+    // snapshot of the previous frame.
+    if (coalesce) {
+      this._coalesceKey = coalesce;
+      this._coalesceTs = now;
+    }
+    const sig = this._sig();
+    if (sig === this._snapSig) return false;
+    if (sameGroup) return false; // still the same drag
+    this.pushUndo(label);
+    return true;
   }
 
   /** Snapshot project fields for undo. Call BEFORE a mutation. */
@@ -140,9 +234,14 @@ class Store {
       credits: { ...this.state.credits },
       name: this.state.name,
     };
+    const sig = this._sig();
+    snap.sig = sig;
     this._undo.push(snap);
     if (this._undo.length > this._undoCap) this._undo.shift();
     this._redo = [];
+    // Remember which state this snapshot describes, so _ensureUndo() can tell
+    // whether the next mutation is already covered.
+    this._snapSig = sig;
     // Do not emit here — callers emit after the actual mutation
   }
 
@@ -198,6 +297,10 @@ class Store {
     };
     this.emit();
     this.save();
+    // After an undo the NEWEST undo snapshot is the one below the one we just
+    // popped — that is the state a further undo would restore. _snapSig must
+    // describe THAT, not the state we are in now.
+    this._snapSig = this._undo[this._undo.length - 1]?.sig ?? null;
     return snap.label;
   }
 
@@ -207,6 +310,7 @@ class Store {
     this._undo.push({
       label: snap.label,
       ts: Date.now(),
+      sig: this._sig(),
       clips: JSON.parse(JSON.stringify(this.state.clips)),
       tracks: JSON.parse(JSON.stringify(this.state.tracks)),
       media: JSON.parse(JSON.stringify(this.state.media || [])),
@@ -237,6 +341,7 @@ class Store {
     };
     this.emit();
     this.save();
+    this._snapSig = this._undo[this._undo.length - 1]?.sig ?? null;
     return snap.label;
   }
 
@@ -245,6 +350,17 @@ class Store {
   }
 
   set(patch, { silent = false } = {}) {
+    // Any patch that replaces timeline data must be recoverable, even if the
+    // caller forgot to push a snapshot. _ensureUndo() is a no-op when the
+    // caller already did.
+    if (
+      Object.hasOwn(patch, "clips") ||
+      Object.hasOwn(patch, "tracks") ||
+      Object.hasOwn(patch, "markers") ||
+      Object.hasOwn(patch, "captions")
+    ) {
+      this._ensureUndo("Edit timeline");
+    }
     const next = { ...this.state, ...patch };
     // Keep single/multi clip selection in sync for legacy callers that
     // only set selectedClipId (inspector, context menu, drops, AI tools).
@@ -428,6 +544,10 @@ class Store {
 
   updateClip(id, patch, { silent = false, undo = false } = {}) {
     if (undo) this.pushUndo("Edit clip");
+    // Timeline drags used to bypass the undo stack entirely — they call
+    // updateClip() on every pointer move with no snapshot. Coalescing by clip
+    // id makes the whole drag one undo step.
+    else this._ensureUndo("Edit clip", { coalesce: `clip:${id}` });
     this.state.clips = this.state.clips.map((c) => {
       if (c.id !== id) return c;
       const next = { ...c, ...patch };
@@ -505,6 +625,33 @@ class Store {
   }
 
   /**
+   * Which tracks a ripple should move.
+   *
+   * Editroom's rule, and the one users expect: when clips are selected the
+   * ripple moves the tracks those clips live on (so a music track under a
+   * selected video stays put); when nothing is selected it moves every track,
+   * so the whole timeline closes up together.
+   *
+   * Returns null for "every track".
+   */
+  rippleTrackScope() {
+    const sel = this.state.selectedClipIds || [];
+    if (!sel.length) return null;
+    const ids = new Set();
+    for (const id of sel) {
+      const c = this.getClip(id);
+      if (!c) continue;
+      ids.add(c.trackId);
+      // A linked audio clip travels with its video.
+      if (c.linkedAudioId) {
+        const a = this.getClip(c.linkedAudioId);
+        if (a) ids.add(a.trackId);
+      }
+    }
+    return ids.size ? ids : null;
+  }
+
+  /**
    * Trim clip start to playhead (Filmora-style left trim).
    * The clip's start moves to the playhead and its source offset advances,
    * so the remaining head shows the correct later frame (not the old head).
@@ -521,12 +668,13 @@ class Store {
     const newStart = t;
     const newDur = clip.start + clip.duration - t;
     const newOffset = Math.max(0, (Number(clip.offset) || 0) + cut);
+    const scope = rippleGap ? this.rippleTrackScope() : null;
     this.state.clips = this.state.clips.map((c) => {
       if (c.id === id) return { ...c, start: newStart, duration: Math.max(0.1, newDur), offset: newOffset };
       if (clip.linkedAudioId && c.id === clip.linkedAudioId) {
         return { ...c, start: newStart, duration: Math.max(0.1, newDur), offset: newOffset };
       }
-      if (rippleGap && c.trackId === clip.trackId && c.start >= clip.start + clip.duration - 0.001) {
+      if (rippleGap && (scope === null || scope.has(c.trackId)) && c.start >= clip.start + clip.duration - 0.001) {
         return { ...c, start: Math.max(0, c.start - cut) };
       }
       return c;
@@ -534,7 +682,7 @@ class Store {
     this.pushHistory({ type: "trimStart", id });
     this.emit();
     this.save();
-    return { ok: true, cut };
+    return { ok: true, cut, scope: scope === null ? "all" : [...scope] };
   }
 
   /** Trim clip end to playhead. */
@@ -548,12 +696,13 @@ class Store {
     this.pushUndo("Trim end");
     const cut = end - t;
     const newDur = Math.max(0.1, clip.duration - cut);
+    const scope = rippleGap ? this.rippleTrackScope() : null;
     this.state.clips = this.state.clips.map((c) => {
       if (c.id === id) return { ...c, duration: newDur };
       if (clip.linkedAudioId && c.id === clip.linkedAudioId) {
         return { ...c, duration: newDur };
       }
-      if (rippleGap && c.trackId === clip.trackId && c.start >= end - 0.001) {
+      if (rippleGap && (scope === null || scope.has(c.trackId)) && c.start >= end - 0.001) {
         return { ...c, start: Math.max(0, c.start - cut) };
       }
       return c;
@@ -561,7 +710,7 @@ class Store {
     this.pushHistory({ type: "trimEnd", id });
     this.emit();
     this.save();
-    return { ok: true, cut };
+    return { ok: true, cut, scope: scope === null ? "all" : [...scope] };
   }
 
   /** Clip volume 0–500 (100 = unity). Stored on clip. */
@@ -606,6 +755,11 @@ class Store {
   /**
    * Rescale clip length for a new rate.
    * When ripple=true, later clips on the same track (and linked audio) shift by the length delta.
+   *
+   * When the clip carries a speed ramp, the whole curve is scaled by the same
+   * factor. The curve holds absolute multipliers, so scaling it keeps the
+   * profile's shape and keeps the clip covering the same source media — the
+   * alternative (scaling only `speed`) would silently change the ramp's shape.
    */
   setClipSpeed(id, speed, { ripple = true, muteWhenNot1x = false } = {}) {
     const clip = this.getClip(id);
@@ -622,6 +776,17 @@ class Store {
       reversed: false,
     };
     if (muteWhenNot1x) patch.audioMuted = Math.abs(next - 1) > 0.01;
+    // Keep the ramp in step with the base rate.
+    if (hasRamp(clip)) {
+      patch.speedRamp = {
+        ...clip.speedRamp,
+        curve: scaleCurve(clip.speedRamp.curve, next / prev),
+        peak: Math.max(...scaleCurve(clip.speedRamp.curve, next / prev)),
+      };
+      // `speed` is the MEAN of the curve (see speed-ramp.js) — recompute it so
+      // the fallback rate and the ramp never disagree.
+      patch.speed = clampSpeed(meanSpeed(patch.speedRamp.curve));
+    }
 
     this.state.clips = this.state.clips.map((c) => {
       if (c.id === id) return { ...c, ...patch };
@@ -635,6 +800,76 @@ class Store {
       return c;
     });
     this.pushHistory({ type: "speed", id, next, delta });
+    this.emit();
+    this.save();
+    return true;
+  }
+
+  /**
+   * Apply a speed ramp to a clip.
+   *
+   * `curve` holds absolute playback-rate multipliers sampled evenly across the
+   * clip. The clip keeps covering exactly the same source media: we take the
+   * source span the clip had before, then give the clip back the timeline
+   * length that the ramp's own average rate needs for that span.
+   *
+   * This has to be one atomic step rather than "set speed, then store a curve"
+   * — otherwise the ripple is computed against the wrong length and the clip
+   * ends up showing more (or less) media than it should.
+   */
+  applySpeedRamp(id, { curve, name = "Ramp", maintainPitch = false, ripple = true } = {}) {
+    const clip = this.getClip(id);
+    if (!clip || clip.type === "text") return { ok: false, reason: "Select a video clip" };
+    if (!Array.isArray(curve) || curve.length < 2) return { ok: false, reason: "Ramp needs at least two points" };
+
+    const scaled = curve.map((v) => clampSpeed(v));
+    const avg = clampSpeed(meanSpeed(scaled));
+    // Source span the clip covers today.
+    const sourceSpan = Math.max(0.1, (Number(clip.duration) || 1) * (Number(clip.speed) || 1));
+    const newDuration = Math.max(0.1, sourceSpan / avg);
+    const delta = newDuration - clip.duration;
+
+    this.pushUndo(`Speed ramp ${name}`);
+    const ramp = {
+      name,
+      peak: Math.max(...scaled),
+      curve: scaled,
+      maintainPitch: !!maintainPitch,
+    };
+    const patch = { speed: avg, duration: newDuration, speedRamp: ramp, reversed: false };
+
+    this.state.clips = this.state.clips.map((c) => {
+      if (c.id === id) return { ...c, ...patch };
+      if (clip.linkedAudioId && c.id === clip.linkedAudioId) {
+        return { ...c, speed: avg, duration: newDuration };
+      }
+      if (ripple && c.trackId === clip.trackId && c.start >= clip.start + clip.duration - 0.001) {
+        return { ...c, start: Math.max(0, c.start + delta) };
+      }
+      return c;
+    });
+    this.pushHistory({ type: "speedRamp", id, name, avg, delta });
+    this.emit();
+    this.save();
+    return { ok: true, avg, duration: newDuration, delta };
+  }
+
+  /** Remove a speed ramp, returning the clip to a constant rate. */
+  clearSpeedRamp(id) {
+    const clip = this.getClip(id);
+    if (!clip || !hasRamp(clip)) return false;
+    const sourceSpan = Math.max(0.1, (Number(clip.duration) || 1) * (Number(clip.speed) || 1));
+    this.pushUndo("Clear speed ramp");
+    const speed = clampSpeed(clip.speed);
+    const newDuration = Math.max(0.1, sourceSpan / speed);
+    this.state.clips = this.state.clips.map((c) => {
+      if (c.id === id) {
+        const { speedRamp, ...rest } = c;
+        return { ...rest, speed, duration: newDuration };
+      }
+      return c;
+    });
+    this.pushHistory({ type: "speedRampClear", id });
     this.emit();
     this.save();
     return true;
@@ -1199,6 +1434,10 @@ function sanitizeProject(data) {
           seed: m.seed ?? null,
           model: m.model || null,
           prompt: m.prompt || null,
+          // A file the browser could not decode — surfaced in the media bin
+          // rather than silently looking like a healthy import.
+          unplayable: !!m.unplayable,
+          unsupportedReason: m.unsupportedReason || null,
           // blob: URLs can't survive reload — flag for IDB re-hydration
           _offline: m.url && String(m.url).startsWith("idb:") ? true : !!m._offline,
         }))
@@ -1210,7 +1449,7 @@ function sanitizeProject(data) {
   );
   merged.mateLog = Array.isArray(data.mateLog) && data.mateLog.length ? data.mateLog : base.mateLog;
   merged.captions = Array.isArray(data.captions) ? data.captions : [];
-  merged.markers = Array.isArray(data.markers) ? data.markers : [];
+  merged.markers = normalizeMarkers(Array.isArray(data.markers) ? data.markers : []);
   merged.chapters = Array.isArray(data.chapters)
     ? data.chapters.filter((c) => c && Number.isFinite(Number(c.t))).map((c) => ({ t: Number(c.t) || 0, name: String(c.name || "Chapter") }))
     : [];

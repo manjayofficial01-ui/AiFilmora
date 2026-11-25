@@ -1015,7 +1015,9 @@ function buildRoughCut() {
 
   store.set({
     clips,
-    markers: [{ start: 0, end: cursor, label: "AI rough cut" }],
+    // Canonical marker shape — see normalizeMarker() in state.js. A range
+    // marker carries `t` AND `end`.
+    markers: [{ id: "mk-roughcut", t: 0, end: cursor, name: "AI rough cut", color: "ai" }],
   });
   store.pushHistory({ type: "roughcut" });
   store.mateSay("sys", `Rough cut built — ${clips.length} clips from media bin (12 credits).`);

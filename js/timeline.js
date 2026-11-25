@@ -1,6 +1,8 @@
 /* Multi-track magnetic-ish timeline interactions */
 import { store, DEFAULT_FX } from "./state.js";
 import { mediaById, toast } from "./media.js";
+import { getThumbnails, getPeaks } from "./media-analysis.js";
+import { waveformPath } from "./waveform-render.js";
 import { formatTC } from "./player.js";
 import { activateClipOnCanvas, openEditorForClip } from "./canvas-edit.js";
 import { settings } from "./settings.js";
@@ -622,15 +624,43 @@ function renderTimeline() {
   }
   els.lanes.appendChild(ruler);
 
-  // AI markers
+  // Markers.
+  //
+  // One shape, two readings (see normalizeMarker() in state.js):
+  //   - a POINT marker has `t` and no `end` → drawn as a flag on the ruler
+  //   - a RANGE marker has `t` and `end`     → drawn as a bar under the ruler
+  // The old renderer only ever read `start`/`end`, so a point marker rendered
+  // at NaN and was invisible.
+  const markerList = state.markers || [];
+  const pointMarkers = markerList.filter((m) => !(Number(m.end) > Number(m.t)));
+  const rangeMarkers = markerList.filter((m) => Number(m.end) > Number(m.t));
+
+  // Point markers live on the ruler, where a user expects to find them.
+  const flagLayer = document.createElement("div");
+  flagLayer.className = "tl-marker-flags";
+  flagLayer.style.width = width + "px";
+  pointMarkers.forEach((m) => {
+    const flag = document.createElement("div");
+    flag.className = "tl-marker-flag";
+    flag.dataset.markerId = m.id || "";
+    flag.style.left = timeToX(Number(m.t) || 0) + "px";
+    flag.title = `${m.name || "Marker"} — ${formatTC(Number(m.t) || 0)}`;
+    flag.setAttribute("aria-label", flag.title);
+    flag.innerHTML = `<i></i><span>${escape(m.name || "Marker")}</span>`;
+    flagLayer.appendChild(flag);
+  });
+  ruler.appendChild(flagLayer);
+
+  // Range markers keep the thin bar under the ruler.
   const markers = document.createElement("div");
   markers.className = "ai-markers";
   markers.style.width = width + "px";
-  (state.markers || []).forEach((m) => {
+  rangeMarkers.forEach((m) => {
     const el = document.createElement("div");
     el.className = "ai-mark";
-    el.style.left = timeToX(m.start) + "px";
-    el.style.width = Math.max(2, timeToX(m.end - m.start)) + "px";
+    el.style.left = timeToX(Number(m.t) || 0) + "px";
+    el.style.width = Math.max(2, timeToX((Number(m.end) || 0) - (Number(m.t) || 0))) + "px";
+    el.title = m.name || "Marker";
     markers.appendChild(el);
   });
   els.lanes.appendChild(markers);
@@ -748,6 +778,10 @@ function renderTimeline() {
   const seqEl = document.getElementById("seqDuration");
   if (seqEl) seqEl.textContent = formatTC(store.sequenceDuration());
   updateMultiCount();
+  // Fill in the real media (filmstrip frames, decoded waveform). Decoding is
+  // asynchronous, so this runs after the synchronous layout and repaints the
+  // clip elements in place rather than rebuilding the timeline.
+  hydrateClipMedia();
 }
 
 function buildTransitionHandle(clip, cutTime) {
@@ -862,6 +896,88 @@ function buildTrackLabel(track, index) {
   return div;
 }
 
+/* Real media on the timeline.
+ *
+ * The timeline used to draw clips as flat colour blocks: a CSS gradient stood
+ * in for a waveform and a clip never showed the footage it held. Now a clip
+ * carries the media it actually contains — filmstrip frames for video, the
+ * decoded waveform for audio and video.
+ *
+ * Both need decoded media, so they cannot be drawn during the synchronous
+ * render pass. renderTimeline() lays out the placeholder elements and this
+ * hydration fills them once the analysis has arrived. The analysis itself is
+ * cached per media id (see media-analysis.js), so this runs once per asset.
+ */
+
+/** clipId -> the analysis key currently painted, so we only repaint on change. */
+const mediaHydration = new Map();
+
+function clipSourceSpan(clip) {
+  const speed = Math.max(0.25, Math.min(8, Number(clip.speed) || 1));
+  return Math.max(0.05, (Number(clip.duration) || 0) * speed);
+}
+
+/** Paint the waveform for one clip element from cached peaks. */
+function paintWaveform(el, clip, analysis) {
+  const wave = el?.querySelector(".tl-wave");
+  if (!wave || !analysis?.peaks) return;
+  const offset = Number(clip.offset) || 0;
+  const span = clipSourceSpan(clip);
+  const width = Math.max(8, Math.round(el.getBoundingClientRect().width || el.offsetWidth || 60));
+  const path = waveformPath(analysis.peaks, {
+    resolution: analysis.resolution,
+    offset,
+    duration: span,
+    width,
+    height: 18,
+  });
+  if (!path) return;
+  wave.innerHTML = `<svg viewBox="0 0 ${width} 18" preserveAspectRatio="none" aria-hidden="true"><path d="${path}"/></svg>`;
+}
+
+/** Paint the filmstrip for one clip element from cached thumbnails. */
+function paintFilmstrip(el, clip, thumbs) {
+  const strip = el?.querySelector(".tl-strip");
+  if (!strip || !thumbs?.length) return;
+  const srcStart = Number(clip.offset) || 0;
+  const srcEnd = srcStart + clipSourceSpan(clip);
+  // Show the frames that fall inside this clip's slice of the source.
+  const inside = thumbs.filter((t) => t.t >= srcStart - 0.02 && t.t <= srcEnd + 0.02);
+  const use = inside.length ? inside : thumbs;
+  strip.innerHTML = use
+    .map((t) => `<img src="${t.url}" alt="" draggable="false" />`)
+    .join("");
+}
+
+/** Ask the analysis layer for what a clip needs, then paint it. */
+async function hydrateClipMedia() {
+  const state = store.get();
+  const jobs = [];
+  for (const clip of state.clips) {
+    if (clip.type !== "video" && clip.type !== "audio") continue;
+    const media = clip.mediaId ? mediaById(clip.mediaId) : null;
+    if (!media || !media.url || media._offline || media.unplayable) continue;
+    const el = els.lanes?.querySelector(`.tl-clip[data-clip-id="${clip.id}"]`);
+    if (!el) continue;
+
+    if (clip.type === "video" && !el.querySelector(".tl-strip img")) {
+      jobs.push(
+        getThumbnails(media, { count: 12 }).then((res) => {
+          if (res?.ok && res.thumbs?.length) paintFilmstrip(el, clip, res.thumbs);
+        })
+      );
+    }
+    if (!el.querySelector(".tl-wave svg")) {
+      jobs.push(
+        getPeaks(media).then((res) => {
+          if (res?.ok && res.peaks) paintWaveform(el, clip, res);
+        })
+      );
+    }
+  }
+  if (jobs.length) await Promise.allSettled(jobs);
+}
+
 function buildClipEl(clip, totalWidth) {
   const el = document.createElement("div");
   const isSel = store.selectedClipIdList().includes(clip.id);
@@ -879,7 +995,8 @@ function buildClipEl(clip, totalWidth) {
   const vol = clip.volume != null && Math.abs(clip.volume - 100) > 1 ? ` · ${Math.round(clip.volume)}%` : "";
   el.innerHTML = `
     <div class="fill"></div>
-    ${clip.type === "audio" ? '<div class="wave"></div>' : ""}
+    ${clip.type === "video" ? '<div class="tl-strip"></div>' : ""}
+    ${clip.type === "audio" || clip.type === "video" ? '<div class="tl-wave"></div>' : ""}
     <div class="label">${escape(clip.name)}</div>
     <div class="sub">${clip.duration.toFixed(1)}s${speed}${rev}${freeze}${vol}${muted}</div>
     <div class="tl-handle l" data-handle="l"></div>
