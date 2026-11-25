@@ -4,6 +4,8 @@ const fs = require("node:fs");
 const path = require("path");
 const { pathToFileURL } = require("node:url");
 
+const sidecar = require("./sidecar/index.cjs");
+
 const inAsar = __dirname.includes(".asar");
 /* In the packaged build __dirname lives inside app.asar; files under
  * resources/app.asar.unpacked (large assets) sit beside the archive, so map
@@ -13,7 +15,11 @@ const UNPACKED_ROOT = inAsar ? path.join(process.resourcesPath, "app.asar.unpack
 
 /* The renderer fetch()es bundled assets (LUT .CUBE files, manifests, audio samples).
  * fetch() is blocked on file:// origins, so the window loads via a standard app://
- * scheme with fetch support instead of loadFile(). */
+ * scheme with fetch support instead of loadFile().
+ *
+ * The same scheme carries the sidecar's cache under /_media/<token>. Using
+ * app:// rather than a second scheme keeps those URLs same-origin with the
+ * page, so no CORS handshake is needed for a converted proxy to load. */
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { standard: true, secure: true, supportFetchAPI: true, stream: true } },
 ]);
@@ -42,7 +48,15 @@ function createWindow() {
 ipcMain.handle("dialog:openFiles", async () => {
   const res = await dialog.showOpenDialog({
     properties: ["openFile", "multiSelections"],
-    filters: [{ name: "Media", extensions: ["mp4", "mov", "webm", "mp3", "wav", "png", "jpg", "jpeg"] }],
+    filters: [
+      // The wide list is what the FFmpeg sidecar can actually open; the
+      // browser-only build can only play a small part of it, and says so
+      // on the card when a file cannot be decoded.
+      { name: "Media", extensions: ["mp4", "mov", "m4v", "webm", "mkv", "avi", "mxf", "mpg", "mpeg", "wmv", "3gp"] },
+      { name: "Audio", extensions: ["mp3", "wav", "aac", "m4a", "flac", "ogg", "opus", "wma", "aiff", "aif"] },
+      { name: "Images", extensions: ["png", "jpg", "jpeg", "gif", "webp", "bmp", "svg"] },
+      { name: "All files", extensions: ["*"] },
+    ],
   });
   return res.filePaths || [];
 });
@@ -116,6 +130,24 @@ ipcMain.handle("fs:writeFile", async (_e, targetPath, dataBase64) => {
   }
 });
 
+/* ---- Media sidecar ----
+ *
+ * The browser build cannot decode MXF, MKV, ProRes or HEVC, and cannot
+ * transcribe speech. The sidecar can. These handlers are the only way the
+ * renderer reaches those tools, and every one of them answers with plain
+ * data — including the failures, so the UI can say what is missing.
+ */
+ipcMain.handle("media:capabilities", async () => sidecar.capabilities());
+ipcMain.handle("media:ingest", async (_e, p) => sidecar.ingest(p || {}));
+ipcMain.handle("media:analyze", async (_e, p) => sidecar.analyze(p || {}));
+ipcMain.handle("media:convert", async (_e, p) => sidecar.convert(p || {}));
+ipcMain.handle("media:poster", async (_e, p) => sidecar.poster(p || {}));
+ipcMain.handle("media:transcribe", async (_e, p) => sidecar.transcribe(p || {}));
+ipcMain.handle("media:register", async (_e, absPath) => {
+  const token = sidecar.registerFile(String(absPath || ""));
+  return { ok: !!token, token };
+});
+
 /* ---- Lifecycle ---- */
 
 const MIME = {
@@ -139,9 +171,87 @@ const MIME = {
   ".mp3": "audio/mpeg",
   ".wav": "audio/wav",
   ".mp4": "video/mp4",
+  ".m4v": "video/x-m4v",
+  ".mov": "video/quicktime",
+  ".webm": "video/webm",
+  ".mkv": "video/x-matroska",
+  ".m4a": "audio/mp4",
+  ".aac": "audio/aac",
+  ".flac": "audio/flac",
+  ".ogg": "audio/ogg",
 };
 
+/**
+ * Serve a file the sidecar registered (a converted proxy, a poster frame).
+ *
+ * The renderer may only load files it was given a token for — it cannot
+ * address the disk by path. Byte ranges are honoured so <video> can seek
+ * inside a converted proxy.
+ */
+async function serveRegisteredMedia(request, token) {
+  const file = sidecar.resolveToken(token);
+  if (!file) return new Response("Not found", { status: 404 });
+  let stat;
+  try {
+    stat = fs.statSync(file);
+  } catch {
+    return new Response("Not found", { status: 404 });
+  }
+  const type = MIME[path.extname(file).toLowerCase()] || "application/octet-stream";
+
+  const range = request.headers.get("Range");
+  const m = range ? /^bytes=(\d*)-(\d*)$/.exec(String(range).trim()) : null;
+  if (m) {
+    let start = m[1] === "" ? null : parseInt(m[1], 10);
+    let end = m[2] === "" ? null : parseInt(m[2], 10);
+    if (start === null && end !== null) {
+      start = Math.max(0, stat.size - end);
+      end = stat.size - 1;
+    } else if (start === null) {
+      start = 0;
+    }
+    if (end === null || end >= stat.size) end = stat.size - 1;
+    if (start > end || start >= stat.size) {
+      return new Response(null, {
+        status: 416,
+        headers: { "Content-Range": `bytes */${stat.size}` },
+      });
+    }
+    // createReadStream owns its file descriptor for the life of the stream.
+    // (FileHandle.readableWebStream() loses the descriptor to the garbage
+    // collector and the response dies mid-transfer.)
+    const stream = fs.createReadStream(file, { start, end });
+    return new Response(stream, {
+      status: 206,
+      headers: {
+        "Content-Type": type,
+        "Content-Length": String(end - start + 1),
+        "Content-Range": `bytes ${start}-${end}/${stat.size}`,
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "no-cache",
+      },
+    });
+  }
+
+  const stream = fs.createReadStream(file);
+  return new Response(stream, {
+    status: 200,
+    headers: {
+      "Content-Type": type,
+      "Content-Length": String(stat.size),
+      "Accept-Ranges": "bytes",
+      "Cache-Control": "no-cache",
+    },
+  });
+}
+
 app.whenReady().then(() => {
+  /* The sidecar's cache belongs to the app, not to the temp folder: a
+   * converted proxy should survive a restart of the app but not leak into
+   * the system temp dir forever. */
+  try {
+    sidecar.setCacheRoot(path.join(app.getPath("userData"), "media-cache"));
+  } catch { /* keep the temp default */ }
   /* Serve the bundled app over app:// so relative asset fetches succeed.
    * Files are read with fs (which understands asar archives) instead of
    * net.fetch(file://), which cannot address paths inside app.asar. */
@@ -150,6 +260,12 @@ app.whenReady().then(() => {
     try {
       const { pathname } = new URL(request.url);
       const rel = decodeURIComponent(pathname).replace(/^\/+/, "");
+      // The sidecar's cache lives outside the app folder, so it is addressed
+      // by token rather than by path. Serving it on the same scheme as the
+      // page keeps the URL same-origin — no CORS handshake needed.
+      if (rel.startsWith("_media/")) {
+        return await serveRegisteredMedia(request, rel.slice("_media/".length));
+      }
       // Prefer unpacked large assets; everything else lives inside app.asar (dev: plain files).
       if (UNPACKED_ROOT && fs.existsSync(path.join(UNPACKED_ROOT, rel))) {
         file = path.join(UNPACKED_ROOT, rel);
@@ -185,4 +301,8 @@ app.whenReady().then(() => {
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
+});
+
+app.on("before-quit", () => {
+  sidecar.stop();
 });

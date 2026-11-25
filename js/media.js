@@ -1,6 +1,19 @@
 /* Synthetic media library + import helpers — with marquee/checkbox multi-select,
    deletable imports, real-file persistence (IndexedDB) and quick preview. */
 import { store, DEFAULT_TEXT_STYLE } from "./state.js";
+import { ingestFile, sidecarUrl, registerProxy } from "./media-sidecar.js";
+
+/* The original File objects, kept for the session.
+ *
+ * The transcript engine needs the bytes to hand them to the sidecar, and a
+ * blob: URL cannot be read back into a File. IndexedDB holds a copy for
+ * reloads; this map holds the live object for the work you are doing now. */
+const mediaFiles = new Map();
+
+/** The File an item was imported from, if this session imported it. */
+export function getMediaFile(mediaId) {
+  return mediaFiles.get(mediaId) || null;
+}
 
 const PALETTES = [
   ["#1a2a4a", "#5b8cff", "#9ec1ff"],
@@ -200,6 +213,39 @@ if (typeof window !== "undefined") {
   window.addEventListener("aifimora:media-removed", () => {});
 }
 
+/**
+ * A proxy made by the sidecar is addressed by a token that only lives in the
+ * main process, so after a restart the old URL is dead. The converted file is
+ * still on disk — ask the main process to re-address it.
+ */
+export async function rehydrateProxies() {
+  const { media } = store.get();
+  const withProxy = media.filter((m) => m?.proxyPath && !String(m.url || "").startsWith("media://"));
+  if (!withProxy.length) return { rehydrated: 0, failed: 0 };
+  let rehydrated = 0;
+  let failed = 0;
+  const next = [...media];
+  for (let i = 0; i < next.length; i++) {
+    const m = next[i];
+    if (!m?.proxyPath || String(m.url || "").startsWith("media://")) continue;
+    const token = await registerProxy(m.proxyPath);
+    if (token) {
+      next[i] = { ...m, url: sidecarUrl(token), _offline: false, unplayable: false };
+      rehydrated++;
+    } else {
+      // The proxy is gone (cache cleared). The original file is still in
+      // IndexedDB, so fall back to it and keep the honest reason.
+      next[i] = { ...m, unplayable: true };
+      failed++;
+    }
+  }
+  if (rehydrated || failed) {
+    store.set({ media: next }, { silent: true });
+    store.emit();
+  }
+  return { rehydrated, failed };
+}
+
 export function bindImport(inputEl) {
   inputEl.addEventListener("change", async () => {
     const files = [...(inputEl.files || [])];
@@ -229,7 +275,8 @@ export async function importFileList(files) {
     let thumb = null;
     let unplayable = false;
     let unsupportedReason = null;
-    const url = URL.createObjectURL(file);
+    let proxyPath = "";
+    let url = URL.createObjectURL(file);
 
     if (isImage) {
       thumb = url;
@@ -239,18 +286,44 @@ export async function importFileList(files) {
         duration = meta.duration;
         thumb = meta.thumb;
       } catch {
-        // The browser could not decode this file. Say so instead of handing
-        // back a pretty gradient that hides the fact the media is dead.
-        unplayable = true;
-        unsupportedReason = `The browser cannot decode ${extOf(file.name)} — convert it to MP4/MOV or install the FFmpeg sidecar.`;
-        thumb = makeThumbDataURL(Math.floor(Math.random() * 999), file.name);
+        // The browser could not decode this file. Before calling it dead, ask
+        // the sidecar: ffmpeg may be able to turn it into something the
+        // browser can play. Only the Electron build has one; the browser
+        // build gets the honest "cannot decode" card as before.
+        const rescued = await rescueWithSidecar(file);
+        if (rescued) {
+          url = rescued.url;
+          thumb = rescued.thumb || thumb;
+          duration = rescued.duration || duration;
+          proxyPath = rescued.path || "";
+          unplayable = false;
+          unsupportedReason = null;
+        } else {
+          unplayable = true;
+          unsupportedReason = `The browser cannot decode ${extOf(file.name)} — convert it to MP4/MOV or install the FFmpeg sidecar.`;
+          thumb = makeThumbDataURL(Math.floor(Math.random() * 999), file.name);
+        }
       }
       if (!Number.isFinite(duration) || duration <= 0) duration = Math.min(60, Math.max(2, file.size / 1_000_000));
     } else {
-      try {
-        duration = await probeAudio(url, file);
-      } catch {
-        duration = 6;
+      const meta = await probeAudio(url, file);
+      duration = meta.duration;
+      if (!meta.ok) {
+        // Same story as video: the browser could not read this file. Give the
+        // sidecar a chance before calling it dead.
+        const rescued = await rescueWithSidecar(file);
+        if (rescued) {
+          url = rescued.url;
+          duration = rescued.duration || duration;
+          proxyPath = rescued.path || "";
+          unplayable = false;
+          unsupportedReason = null;
+        } else if (meta.reason === "decode-error") {
+          // A timeout is only "we did not find out" — do not call the file
+          // dead on that evidence.
+          unplayable = true;
+          unsupportedReason = `The browser cannot decode ${extOf(file.name)} — convert it to MP3/WAV or install the FFmpeg sidecar.`;
+        }
       }
       thumb = makeThumbDataURL(Math.floor(Math.random() * 999), file.name);
     }
@@ -267,23 +340,47 @@ export async function importFileList(files) {
       _offline: false,
       unplayable,
       unsupportedReason,
+      proxyPath: proxyPath || null,
     });
     idbPutMediaFile(item.id, file);
+    mediaFiles.set(item.id, file);
     imported.push(item);
   }
   if (imported.length) {
     store.setSelectedMedia([imported[imported.length - 1].id]);
     const dead = imported.filter((m) => m.unplayable).length;
+    const rescued = imported.filter((m) => m.proxyPath).length;
+    const parts = [`Imported ${imported.length} file${imported.length === 1 ? "" : "s"}`];
+    if (rescued) parts.push(`${rescued} converted by FFmpeg`);
+    if (dead) parts.push(`${dead} could not be decoded`);
+    if (skipped) parts.push(`skipped ${skipped}`);
     toast(
-      skipped || dead
-        ? `Imported ${imported.length} file${imported.length === 1 ? "" : "s"}${dead ? ` · ${dead} could not be decoded` : ""}${skipped ? ` · skipped ${skipped}` : ""}`
-        : `Imported ${imported.length} file${imported.length === 1 ? "" : "s"} — drag onto the timeline, double-click to insert`,
+      parts.join(" · "),
       dead || skipped ? "err" : "ok"
     );
   } else {
     toast("No supported media in selection (video / audio / image)", "err");
   }
   return { imported, skipped };
+}
+
+/**
+ * Ask the sidecar to rescue a file the browser cannot decode.
+ * @returns {Promise<null|{url:string, thumb:string, duration:number, path:string}>}
+ *   null when there is no sidecar, or it could not help.
+ */
+async function rescueWithSidecar(file) {
+  const res = await ingestFile(file);
+  if (!res) return null;                       // no sidecar in this build
+  if (!res.ok) return null;                     // the sidecar tried and failed
+  const playable = sidecarUrl(res.playableToken);
+  if (!playable) return null;
+  return {
+    url: playable,
+    thumb: sidecarUrl(res.posterToken) || null,
+    duration: Number(res.probe?.duration) || 0,
+    path: res.playablePath || "",
+  };
 }
 
 function extOf(name) {
@@ -316,23 +413,33 @@ function guessMimeByName(name) {
   return VIDEO[ext] || AUDIO[ext] || IMAGE[ext] || "";
 }
 
+/**
+ * Read an audio file's duration from the browser.
+ *
+ * Returns { duration, ok }. `ok` is false when the browser could not decode
+ * the file at all — the caller needs to know the difference between "this
+ * clip is 6 seconds long" and "we could not read this file".
+ */
 function probeAudio(url, file) {
   return new Promise((resolve) => {
     try {
       const a = document.createElement("audio");
       a.preload = "metadata";
-      const timer = setTimeout(() => resolve(6), 4000);
+      // A timeout is not a verdict: the file may be fine but slow. Only a
+      // decode error proves the browser cannot read it.
+      const timer = setTimeout(() => resolve({ duration: 6, ok: false, reason: "timeout" }), 4000);
       a.onloadedmetadata = () => {
         clearTimeout(timer);
-        resolve(Number.isFinite(a.duration) && a.duration > 0 ? a.duration : 6);
+        const d = Number(a.duration);
+        resolve({ duration: Number.isFinite(d) && d > 0 ? d : 6, ok: true, reason: "" });
       };
       a.onerror = () => {
         clearTimeout(timer);
-        resolve(6);
+        resolve({ duration: 6, ok: false, reason: "decode-error" });
       };
       a.src = url;
     } catch {
-      resolve(6);
+      resolve({ duration: 6, ok: false, reason: "decode-error" });
     }
   });
 }

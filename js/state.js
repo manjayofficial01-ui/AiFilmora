@@ -399,6 +399,13 @@ class Store {
           copy.url = `idb:${m.id}`;
           copy._offline = true;
         }
+        // A sidecar proxy is addressed by a token that only lives in the main
+        // process, so the token is worthless after a restart. Keep the path
+        // and re-register it on boot (see restoreMediaUrls in js/media.js).
+        if (copy?.url && String(copy.url).startsWith("app://local/_media/")) {
+          copy.url = `idb:${m.id}`;
+          copy._offline = true;
+        }
         // Image thumbs are often the same blob: URL — drop dead thumbs
         // (player falls back to media.url / generated thumb).
         if (copy?.thumb && String(copy.thumb).startsWith("blob:")) {

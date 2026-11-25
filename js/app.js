@@ -1,6 +1,6 @@
 /* AiFimora bootstrap */
 import { store, DEFAULT_FX } from "./state.js";
-import { seedLibrary, bindImport, renderMediaBin, restoreMediaUrls } from "./media.js";
+import { seedLibrary, bindImport, renderMediaBin, restoreMediaUrls, rehydrateProxies } from "./media.js";
 import { createPlayer } from "./player.js";
 import { initTimeline } from "./timeline.js";
 import { initAIStudio } from "./ai-studio.js";
@@ -607,6 +607,12 @@ function main() {
   // imported video/audio survives reload and stays playable.
   restoreMediaUrls().then((r) => {
     if (r?.missing) toast(`${r.missing} imported file${r.missing === 1 ? "" : "s"} missing — re-import to relink`, "err");
+    refreshMediaBin();
+    window.__aifimoraPlayer?.render();
+  });
+  // A proxy made by the FFmpeg sidecar is addressed by a token that dies with
+  // the main process, so re-address the cached file before anything uses it.
+  rehydrateProxies().then(() => {
     refreshMediaBin();
     window.__aifimoraPlayer?.render();
   });

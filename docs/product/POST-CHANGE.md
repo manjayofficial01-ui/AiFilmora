@@ -2,7 +2,7 @@
 
 **Recorded:** 2026-11-25 · **Branch:** `modernize/2026-11-25` · **Base commit:** `ab3e97c` (AiFilmora 2.2.7)
 
-**Result: 41/53 suites green, 12 failing.**
+**Result: 43/54 suites green, 11 failing.**
 
 Regenerate with `node verify-all.cjs`. The runner starts `server.cjs` on 127.0.0.1:8765, waits for the
 port to accept connections, then runs every `verify-*.cjs` suite. A suite counts as green only if it
@@ -10,59 +10,60 @@ exits 0, reports at least one `PASS`, and reports no `FAIL`.
 
 | Suite | Result | PASS | FAIL | Exit | ms |
 |---|---|---|---|---|---|
-| `verify-ai-timeline.cjs` | ✅ green | 35 | 0 | 0 | 3904 |
-| `verify-app.cjs` | ✅ green | 0 | 0 | 0 | 17580 |
-| `verify-assets.cjs` | ✅ green | 14 | 0 | 0 | 10415 |
-| `verify-audiofx.cjs` | ✅ green | 17 | 0 | 0 | 9051 |
-| `verify-audiotrans.cjs` | ✅ green | 27 | 0 | 0 | 7237 |
-| `verify-beats.cjs` | ✅ green | 0 | 0 | 0 | 6026 |
-| `verify-canvas.cjs` | ✅ green | 0 | 0 | 0 | 9201 |
-| `verify-color.cjs` | ✅ green | 22 | 0 | 0 | 9728 |
-| `verify-crop.cjs` | ✅ green | 0 | 0 | 0 | 6113 |
-| `verify-density.cjs` | ✅ green | 0 | 0 | 0 | 4389 |
-| `verify-detach.cjs` | ❌ failing | 3 | 7 | 1 | 8472 |
-| `verify-electron.cjs` | ❌ failing | 0 | 0 | null | 180026 |
-| `verify-err.cjs` | ✅ green | 0 | 0 | 0 | 2152 |
-| `verify-export22.cjs` | ✅ green | 0 | 0 | 0 | 14994 |
-| `verify-filmora-chrome.cjs` | ✅ green | 0 | 0 | 0 | 35278 |
-| `verify-filmora-gaps.cjs` | ❌ failing | 13 | 0 | 1 | 33040 |
-| `verify-filmora-shell.cjs` | ❌ failing | 0 | 0 | 1 | 33124 |
-| `verify-filmora-theme.cjs` | ✅ green | 0 | 0 | 0 | 3518 |
-| `verify-filmora-tools.cjs` | ✅ green | 0 | 0 | 0 | 4351 |
-| `verify-filmora-working.cjs` | ✅ green | 12 | 0 | 0 | 4705 |
-| `verify-filmora15.cjs` | ❌ failing | 2 | 0 | 1 | 32827 |
-| `verify-final.cjs` | ✅ green | 0 | 0 | 0 | 10196 |
-| `verify-fonts.cjs` | ✅ green | 19 | 0 | 0 | 10485 |
-| `verify-icon-compact.cjs` | ❌ failing | 1 | 1 | 1 | 4604 |
-| `verify-layout.cjs` | ✅ green | 0 | 0 | 0 | 4168 |
-| `verify-lut.cjs` | ✅ green | 1 | 0 | 0 | 6917 |
-| `verify-media-fix.cjs` | ✅ green | 17 | 0 | 0 | 3833 |
-| `verify-name-shape.cjs` | ✅ green | 0 | 0 | 0 | 4535 |
-| `verify-new.cjs` | ✅ green | 0 | 0 | 0 | 8339 |
-| `verify-panzoom.cjs` | ❌ failing | 0 | 0 | 1 | 5996 |
-| `verify-parity.cjs` | ❌ failing | 19 | 4 | 1 | 5226 |
-| `verify-pi-toggle.cjs` | ✅ green | 1 | 0 | 0 | 3239 |
-| `verify-rebuild.cjs` | ❌ failing | 0 | 0 | 1 | 4105 |
-| `verify-regress.cjs` | ✅ green | 0 | 0 | 0 | 5498 |
-| `verify-save-fallback.cjs` | ❌ failing | 0 | 0 | 1 | 32558 |
-| `verify-save-location.cjs` | ❌ failing | 0 | 0 | 1 | 35438 |
-| `verify-shader-transitions.cjs` | ✅ green | 0 | 0 | 0 | 14812 |
-| `verify-shape-fix.cjs` | ✅ green | 0 | 0 | 0 | 8278 |
-| `verify-shapes.cjs` | ✅ green | 0 | 0 | 0 | 5678 |
-| `verify-speed.cjs` | ✅ green | 0 | 0 | 0 | 8210 |
-| `verify-speed2.cjs` | ✅ green | 0 | 0 | 0 | 6164 |
-| `verify-tabs.cjs` | ✅ green | 0 | 0 | 0 | 3980 |
-| `verify-tracks.cjs` | ✅ green | 0 | 0 | 0 | 4107 |
-| `verify-upgrade.cjs` | ✅ green | 0 | 0 | 0 | 6520 |
-| `verify-upgrades.cjs` | ✅ green | 0 | 0 | 0 | 8249 |
-| `verify-v22.cjs` | ✅ green | 0 | 0 | 0 | 6061 |
-| `verify-vertical.cjs` | ✅ green | 0 | 0 | 0 | 6359 |
-| `verify-vip.cjs` | ✅ green | 0 | 0 | 0 | 5554 |
-| `verify-vol-split.cjs` | ❌ failing | 6 | 0 | 1 | 33471 |
-| `verify-vol.cjs` | ✅ green | 0 | 0 | 0 | 6532 |
-| `verify-vol2.cjs` | ✅ green | 0 | 0 | 0 | 2149 |
-| `verify-vscroll.cjs` | ✅ green | 0 | 0 | 0 | 6407 |
-| `verify-wave0.cjs` | ✅ green | 28 | 0 | 0 | 19707 |
+| `verify-ai-timeline.cjs` | ✅ green | 35 | 0 | 0 | 14918 |
+| `verify-app.cjs` | ✅ green | 0 | 0 | 0 | 19311 |
+| `verify-assets.cjs` | ✅ green | 14 | 0 | 0 | 11533 |
+| `verify-audiofx.cjs` | ✅ green | 17 | 0 | 0 | 10224 |
+| `verify-audiotrans.cjs` | ✅ green | 27 | 0 | 0 | 8280 |
+| `verify-beats.cjs` | ✅ green | 0 | 0 | 0 | 6856 |
+| `verify-canvas.cjs` | ✅ green | 0 | 0 | 0 | 11016 |
+| `verify-color.cjs` | ✅ green | 22 | 0 | 0 | 10404 |
+| `verify-crop.cjs` | ✅ green | 0 | 0 | 0 | 7588 |
+| `verify-density.cjs` | ✅ green | 0 | 0 | 0 | 2698 |
+| `verify-detach.cjs` | ❌ failing | 3 | 7 | 1 | 8671 |
+| `verify-electron.cjs` | ❌ failing | 0 | 0 | null | 180036 |
+| `verify-err.cjs` | ✅ green | 0 | 0 | 0 | 2946 |
+| `verify-export22.cjs` | ✅ green | 0 | 0 | 0 | 24824 |
+| `verify-filmora-chrome.cjs` | ✅ green | 0 | 0 | 0 | 35979 |
+| `verify-filmora-gaps.cjs` | ❌ failing | 13 | 0 | 1 | 33513 |
+| `verify-filmora-shell.cjs` | ✅ green | 0 | 0 | 0 | 7891 |
+| `verify-filmora-theme.cjs` | ✅ green | 0 | 0 | 0 | 4772 |
+| `verify-filmora-tools.cjs` | ✅ green | 0 | 0 | 0 | 4586 |
+| `verify-filmora-working.cjs` | ✅ green | 12 | 0 | 0 | 5317 |
+| `verify-filmora15.cjs` | ❌ failing | 2 | 0 | 1 | 32688 |
+| `verify-final.cjs` | ✅ green | 0 | 0 | 0 | 9767 |
+| `verify-fonts.cjs` | ✅ green | 19 | 0 | 0 | 11455 |
+| `verify-icon-compact.cjs` | ❌ failing | 1 | 1 | 1 | 5453 |
+| `verify-layout.cjs` | ✅ green | 0 | 0 | 0 | 5213 |
+| `verify-lut.cjs` | ✅ green | 1 | 0 | 0 | 7398 |
+| `verify-media-fix.cjs` | ✅ green | 17 | 0 | 0 | 13805 |
+| `verify-name-shape.cjs` | ✅ green | 0 | 0 | 0 | 6900 |
+| `verify-new.cjs` | ✅ green | 0 | 0 | 0 | 9324 |
+| `verify-panzoom.cjs` | ❌ failing | 0 | 0 | 1 | 7222 |
+| `verify-parity.cjs` | ❌ failing | 19 | 4 | 1 | 5608 |
+| `verify-pi-toggle.cjs` | ✅ green | 1 | 0 | 0 | 4739 |
+| `verify-rebuild.cjs` | ❌ failing | 0 | 0 | 1 | 5983 |
+| `verify-regress.cjs` | ✅ green | 0 | 0 | 0 | 8306 |
+| `verify-save-fallback.cjs` | ❌ failing | 0 | 0 | 1 | 32966 |
+| `verify-save-location.cjs` | ❌ failing | 0 | 0 | 1 | 35420 |
+| `verify-shader-transitions.cjs` | ✅ green | 0 | 0 | 0 | 14894 |
+| `verify-shape-fix.cjs` | ✅ green | 0 | 0 | 0 | 8628 |
+| `verify-shapes.cjs` | ✅ green | 0 | 0 | 0 | 5768 |
+| `verify-sidecar.cjs` | ✅ green | 48 | 0 | 0 | 19150 |
+| `verify-speed.cjs` | ✅ green | 0 | 0 | 0 | 7777 |
+| `verify-speed2.cjs` | ✅ green | 0 | 0 | 0 | 7012 |
+| `verify-tabs.cjs` | ✅ green | 0 | 0 | 0 | 4492 |
+| `verify-tracks.cjs` | ✅ green | 0 | 0 | 0 | 5017 |
+| `verify-upgrade.cjs` | ✅ green | 0 | 0 | 0 | 7371 |
+| `verify-upgrades.cjs` | ✅ green | 0 | 0 | 0 | 8408 |
+| `verify-v22.cjs` | ✅ green | 0 | 0 | 0 | 6131 |
+| `verify-vertical.cjs` | ✅ green | 0 | 0 | 0 | 6589 |
+| `verify-vip.cjs` | ✅ green | 0 | 0 | 0 | 6266 |
+| `verify-vol-split.cjs` | ❌ failing | 6 | 0 | 1 | 33858 |
+| `verify-vol.cjs` | ✅ green | 0 | 0 | 0 | 8815 |
+| `verify-vol2.cjs` | ✅ green | 0 | 0 | 0 | 2446 |
+| `verify-vscroll.cjs` | ✅ green | 0 | 0 | 0 | 7234 |
+| `verify-wave0.cjs` | ✅ green | 28 | 0 | 0 | 19949 |
 
 ## Pre-existing failures
 
@@ -82,11 +83,6 @@ after a code change is a regression; a failure that was already here is not.
 ### `verify-filmora-gaps.cjs`
 
 - exit 1, 13 pass, 0 fail
-- tail: `exit 1`
-
-### `verify-filmora-shell.cjs`
-
-- exit 1, 0 pass, 0 fail
 - tail: `exit 1`
 
 ### `verify-filmora15.cjs`

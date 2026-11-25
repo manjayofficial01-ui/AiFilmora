@@ -1,6 +1,7 @@
 /* Text-based editing — transcript paper edit */
 import { store, DEFAULT_FX } from "./state.js";
-import { toast } from "./media.js";
+import { toast, getMediaFile } from "./media.js";
+import { sidecarCapabilities, transcribeFile } from "./media-sidecar.js";
 
 const SAMPLE_TRANSCRIPT = [
   { id: "s1", start: 0.0, end: 2.4, speaker: "Host", text: "Welcome back to the channel." },
@@ -35,7 +36,36 @@ export function initTextEdit() {
   renderTranscript();
 }
 
-function transcribe() {
+/**
+ * The File to transcribe: the selected clip's media, else the first imported
+ * clip that carries audio.
+ */
+function pickTranscribeTarget() {
+  const s = store.get();
+  const clip =
+    s.clips.find((c) => c.id === s.selectedClipId) ||
+    s.clips.find((c) => c.type === "audio" || c.type === "video");
+  if (clip?.mediaId) {
+    const file = getMediaFile(clip.mediaId);
+    if (file) return file;
+  }
+  for (const m of s.media) {
+    if (m.kind !== "video" && m.kind !== "audio") continue;
+    const file = getMediaFile(m.id);
+    if (file) return file;
+  }
+  return null;
+}
+
+/**
+ * Transcribe.
+ *
+ * With the Electron sidecar this is a real speech-to-text run with real word
+ * timings. Without one there is no speech engine at all, so the panel falls
+ * back to a sample transcript — which is now labelled as a sample instead of
+ * being passed off as the truth.
+ */
+async function transcribe() {
   const s = store.get();
   const hasAudio = s.clips.some((c) => c.type === "audio" || c.type === "video");
   if (!hasAudio) {
@@ -43,9 +73,51 @@ function transcribe() {
     return;
   }
 
+  const caps = await sidecarCapabilities();
+  const target = caps.available && caps.canTranscribe ? pickTranscribeTarget() : null;
+
+  if (target) {
+    const job = store.addJob({
+      title: "whisper · local model",
+      detail: "Local ASR · word-level timestamps",
+      progress: 5,
+    });
+    const res = await transcribeFile(target);
+    if (res?.ok && res.segments?.length) {
+      const transcript = res.segments.map((seg, i) => ({
+        id: `s${i + 1}`,
+        start: Number(seg.start) || 0,
+        end: Number(seg.end) || 0,
+        speaker: "Speaker",
+        text: String(seg.text || ""),
+        selected: false,
+        fillers: extractFillers(String(seg.text || "")),
+        source: "whisper",
+      }));
+      store.set({ transcript });
+      store.updateJob(job.id, {
+        progress: 100,
+        status: "done",
+        detail: `${transcript.length} segments · ${res.words?.length || 0} words`,
+      });
+      toast(`Transcript ready — ${res.words?.length || 0} words`, "ok");
+      store.mateSay?.("sys", `Transcript ready — ${res.words?.length || 0} real words with timings.`);
+      return;
+    }
+    const why = res?.error || "The speech engine returned nothing.";
+    store.updateJob(job.id, { progress: 100, status: "fail", detail: why });
+    toast(why, "err");
+    return;
+  }
+
+  simulateTranscript();
+}
+
+/** No speech engine available — show a sample, and say that it is a sample. */
+function simulateTranscript() {
   const job = store.addJob({
-    title: "faster-whisper · large-v2",
-    detail: "Local ASR simulation · word timestamps + Silero VAD",
+    title: "Sample transcript",
+    detail: "No speech engine on this machine — showing a sample, not a transcription.",
     progress: 0,
   });
 
@@ -58,6 +130,7 @@ function transcribe() {
         ...seg,
         selected: false,
         fillers: extractFillers(seg.text),
+        source: "simulated",
       }));
       store.set({ transcript });
       store.updateJob(job.id, { progress: 100, status: "done", detail: "8 segments · 3 filler hits" });
@@ -82,13 +155,23 @@ function renderTranscript() {
   if (!root) return;
   const tr = store.get().transcript;
   if (!tr) {
-    root.innerHTML = `<div class="empty">Click <strong>Transcribe</strong> to run text-based editing (simulated faster-whisper).</div>`;
+    root.innerHTML = `<div class="empty">Click <strong>Transcribe</strong> to run text-based editing.</div>`;
     return;
   }
 
   root.innerHTML = "";
   const wrap = document.createElement("div");
   wrap.className = "transcript";
+
+  // Say where the words came from. A sample transcript that looks like a real
+  // one is exactly the kind of lie this project has been removing.
+  const real = tr.some((s) => s.source === "whisper");
+  const banner = document.createElement("div");
+  banner.className = "t-source" + (real ? " real" : "");
+  banner.textContent = real
+    ? "Real transcript — local speech engine, word-level timings."
+    : "Sample transcript — no speech engine is available on this machine.";
+  wrap.appendChild(banner);
 
   tr.forEach((seg) => {
     const line = document.createElement("div");

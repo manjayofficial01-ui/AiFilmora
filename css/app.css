@@ -1343,6 +1343,19 @@ input::placeholder {
   font-size: 10px;
   color: var(--muted);
 }
+/* Where the words came from — a sample transcript must never look real. */
+.t-source {
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--muted);
+  padding: 4px 8px 6px;
+  margin-bottom: 2px;
+  border-left: 2px solid var(--border);
+}
+.t-source.real {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
 
 /* Timeline panel spans full width bottom */
 .timeline-panel {
