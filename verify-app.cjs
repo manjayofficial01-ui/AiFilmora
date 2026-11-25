@@ -1,5 +1,6 @@
 const { chromium } = require('playwright');
 const path = require('path');
+const { dismissFirstRun } = require('./test-helpers.cjs');
 
 const OUT = path.join(__dirname, 'output-playwright.png');
 
@@ -24,12 +25,11 @@ const OUT = path.join(__dirname, 'output-playwright.png');
   await page.reload({ waitUntil: 'networkidle' });
   await page.waitForTimeout(800);
 
-  // Dismiss the first-run chooser with the Demo seed (restores demo timeline)
-  const firstRun = await page.evaluate(() =>
-    document.getElementById('firstRunModal')?.classList.contains('open')
-  );
+  // Dismiss the first-run chooser with the Demo seed (restores demo timeline).
+  // It opens 400 ms after boot, so wait for it rather than sampling a
+  // boolean at an arbitrary moment.
+  const firstRun = await dismissFirstRun(page, "#frDemo");
   if (firstRun) {
-    await page.click('#frDemo');
     await page.waitForTimeout(900);
     notes.push('firstRun=demo');
   }

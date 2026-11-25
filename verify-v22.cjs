@@ -1,6 +1,7 @@
 /* 2.2.0 acceptance: save locations, full-height inspector, ruler zoom, custom AI. */
 const { chromium } = require("playwright");
 const path = require("path");
+const { dismissFirstRun } = require("./test-helpers.cjs");
 
 const OUT = path.join(__dirname, "output-v22.png");
 const URL = "http://127.0.0.1:8765/index.html";
@@ -39,10 +40,8 @@ const URL = "http://127.0.0.1:8765/index.html";
   await page.goto(URL, { waitUntil: "networkidle" });
   await page.waitForTimeout(900);
   // Dismiss the first-run chooser if it appears (covers fresh profiles).
-  if (await page.locator("#firstRunModal.open").count()) {
-    await page.click("#frSkip");
-    await page.waitForTimeout(200);
-  }
+  await dismissFirstRun(page, "#frSkip");
+  await page.waitForTimeout(200);
   notes.push("title=" + (await page.title()));
 
   // 1) Export modal: new checkboxes exist.

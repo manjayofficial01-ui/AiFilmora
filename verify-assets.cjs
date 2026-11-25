@@ -4,6 +4,7 @@
  * Run: node verify-assets.cjs   (needs server.cjs on 127.0.0.1:8765) */
 const { chromium } = require("playwright");
 const path = require("path");
+const { dismissFirstRun } = require("./test-helpers.cjs");
 
 const OUT = path.join(__dirname, "output-assets-integration.png");
 const URL = "http://127.0.0.1:8765/index.html";
@@ -26,10 +27,10 @@ const check = (name, ok, detail = "") => {
   await page.evaluate(() => localStorage.clear());
   await page.reload({ waitUntil: "networkidle" });
   await page.waitForTimeout(600);
-  if (await page.evaluate(() => document.getElementById("firstRunModal")?.classList.contains("open"))) {
-    await page.click("#frSkip"); // standard layout so sidebar panels are live
-    await page.waitForTimeout(900);
-  }
+  // The chooser opens 400 ms after boot; wait for it instead of sampling a
+  // boolean at an arbitrary moment.
+  await dismissFirstRun(page, "#frSkip"); // standard layout so sidebar panels are live
+  await page.waitForTimeout(900);
 
   // 1. Fonts injected + loadable
   const fonts = await page.evaluate(async () => {

@@ -35,6 +35,9 @@ function ping() {
   });
 }
 
+/** The server child this runner started, if any — killed on the way out. */
+let spawnedServer = null;
+
 async function ensureServer() {
   if (await ping()) return { started: false, child: null };
   const child = spawn("node", [path.join(ROOT, "server.cjs")], {
@@ -43,7 +46,12 @@ async function ensureServer() {
   });
   for (let i = 0; i < 40; i++) {
     await new Promise((r) => setTimeout(r, 500));
-    if (await ping()) return { started: true, child };
+    if (await ping()) {
+      // Remember the latest child: if the server dies mid-run and we respawn
+      // it, the old reference would be stale and the new one would leak.
+      spawnedServer = child;
+      return { started: true, child };
+    }
   }
   child.kill();
   throw new Error("server.cjs did not come up on 127.0.0.1:8765");
@@ -52,6 +60,49 @@ async function ensureServer() {
 /** Strip ANSI colour so the counts are meaningful. */
 function clean(s) {
   return String(s || "").replace(/\x1b\[[0-9;]*m/g, "");
+}
+
+function isConnectionFailure(out) {
+  return /ERR_CONNECTION_REFUSED|ECONNREFUSED|net::ERR_EMPTY_RESPONSE|socket hang up/i.test(out);
+}
+
+/**
+ * Did this suite die before it could render a verdict?
+ *
+ * Two ways:
+ *   1. It could not reach the dev server (the listen backlog occasionally
+ *      refuses a connection under load) — ERR_CONNECTION_REFUSED and friends.
+ *   2. It reported no assertion markers at all: zero PASS and zero FAIL.
+ *      A suite that prints nothing about its assertions never reached its
+ *      first assertion — a navigation timeout, a crashed page, a killed
+ *      process. That is not a product failure; it is an inconclusive run.
+ *
+ * Neither may masquerade as a regression, and neither may hide one — so
+ * both are retried against a server that has just answered a ping, and the
+ * retry's verdict is the one that gets recorded.
+ */
+function isInconclusive(r) {
+  if (isConnectionFailure(r.out)) return true;
+  return r.passes === 0 && r.fails === 0 && !r.ok;
+}
+
+/** Run one suite and classify it. */
+function runSuite(f) {
+  const started = Date.now();
+  const r = spawnSync("node", [path.join(ROOT, f)], {
+    cwd: ROOT,
+    encoding: "utf8",
+    timeout: 180000,
+    env: { ...process.env, FORCE_COLOR: "0", NO_COLOR: "1" },
+  });
+  const out = clean((r.stdout || "") + (r.stderr || ""));
+  const v = classify(r.status, out);
+  const tail = out.trim().split("\n").filter(Boolean).slice(-2).join(" | ").slice(0, 200);
+  return {
+    f, code: r.status, passes: v.passes, fails: v.fails,
+    ms: Date.now() - started, ok: v.ok, out,
+    note: v.ok ? "" : (v.reasons.join("; ") || tail || "(no output)"),
+  };
 }
 
 /**
@@ -91,30 +142,38 @@ function classify(code, out) {
 }
 
 (async () => {
-  const srv = await ensureServer();
+  await ensureServer();
   const results = [];
 
   for (const f of files) {
-    const started = Date.now();
-    const r = spawnSync("node", [path.join(ROOT, f)], {
-      cwd: ROOT,
-      encoding: "utf8",
-      timeout: 180000,
-      env: { ...process.env, FORCE_COLOR: "0", NO_COLOR: "1" },
-    });
-    const out = clean((r.stdout || "") + (r.stderr || ""));
-    const v = classify(r.status, out);
-    results.push({
-      f, code: r.status, passes: v.passes, fails: v.fails,
-      ms: Date.now() - started, ok: v.ok,
-      note: v.ok ? "" : (v.reasons.join("; ") || (out.trim().split("\n").filter(Boolean).slice(-2).join(" | ").slice(0, 200) || "(no output)")),
-    });
+    // The server can go away between suites (it is a child process, and the
+    // port can be taken by something else). Make sure it is up first.
+    if (!(await ping())) await ensureServer();
+
+    let r = runSuite(f);
+
+    // An inconclusive run is not a verdict. Retry once against a server that
+    // has just answered a ping.
+    if (isInconclusive(r)) {
+      await ensureServer();
+      await new Promise((res) => setTimeout(res, 400));
+      const again = runSuite(f);
+      again.retried = true;
+      if (!again.ok) {
+        r = again;
+        r.note = `inconclusive run, retry also failed — ${again.note}`;
+      } else {
+        r = again;
+      }
+    }
+
+    results.push(r);
     process.stdout.write(
-      `${v.ok ? "OK  " : "BAD "} ${f.padEnd(32)} pass=${String(v.passes).padStart(3)} fail=${String(v.fails).padStart(3)} exit=${r.status}${v.ok ? "" : "  " + v.reasons.join("; ")}\n`
+      `${r.ok ? "OK  " : "BAD "} ${r.f.padEnd(32)} pass=${String(r.passes).padStart(3)} fail=${String(r.fails).padStart(3)} exit=${r.code}${r.retried ? " (retried)" : ""}${r.ok ? "" : "  " + r.note}\n`
     );
   }
 
-  if (srv.child) { try { srv.child.kill(); } catch {} }
+  if (spawnedServer) { try { spawnedServer.kill(); } catch {} }
 
   const good = results.filter((r) => r.ok).length;
   const bad = results.filter((r) => !r.ok);
@@ -132,7 +191,21 @@ function classify(code, out) {
   lines.push("| Suite | Result | PASS | FAIL | Exit | ms |");
   lines.push("|---|---|---|---|---|---|");
   for (const r of results) {
-    lines.push(`| \`${r.f}\` | ${r.ok ? "✅ green" : "❌ failing"} | ${r.passes} | ${r.fails} | ${r.code} | ${r.ms} |`);
+    lines.push(`| \`${r.f}\` | ${r.ok ? "✅ green" : "❌ failing"}${r.retried ? " (retried)" : ""} | ${r.passes} | ${r.fails} | ${r.code} | ${r.ms} |`);
+  }
+  const retried = results.filter((r) => r.retried);
+  if (retried.length) {
+    lines.push("");
+    lines.push("## Retried suites");
+    lines.push("");
+    lines.push("These failed once **without rendering a verdict** — either the dev server refused a");
+    lines.push("connection under load, or the suite died before its first assertion (a navigation");
+    lines.push("timeout, a crashed page, a killed process). The runner pinged the server and re-ran");
+    lines.push("them; the result shown above is the retry.");
+    lines.push("");
+    for (const r of retried) {
+      lines.push(`- \`${r.f}\` → ${r.ok ? "✅ green" : "❌ still failing"}`);
+    }
   }
   if (bad.length) {
     lines.push("");

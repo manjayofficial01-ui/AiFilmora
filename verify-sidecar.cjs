@@ -473,6 +473,21 @@ async function testElectron(stubs, tmp) {
       } catch (e) { return { status: -1, error: String(e) }; }
     });
     ok("electron: an unregistered file is refused", unregistered?.status === 404, String(unregistered?.status));
+
+    // The transport is not the feature. The app has to be able to PLAY the
+    // file the sidecar produced — that is what the player's URL allowlist
+    // decides, and it is easy to ship a sidecar whose output never plays.
+    const playable = await page.evaluate(async (filePath) => {
+      try {
+        const mod = await import("./js/player.js");
+        const api = window.aifimoraDesktop.media;
+        const token = (await api.register(filePath));
+        const url = api.url(token.token);
+        const el = mod.getVideoEl({ id: "probe_media", kind: "video", url, _offline: false });
+        return { url, hasEl: !!el, src: el ? el.getAttribute("src") : "" };
+      } catch (e) { return { hasEl: false, error: String(e) }; }
+    }, served);
+    ok("electron: the app can play a file the sidecar produced", playable?.hasEl === true, JSON.stringify(playable).slice(0, 160));
   } finally {
     try { await app.close(); } catch { /* already closed */ }
   }

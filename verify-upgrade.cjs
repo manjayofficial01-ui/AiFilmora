@@ -1,4 +1,5 @@
 const { chromium } = require('playwright');
+const { dismissFirstRun } = require('./test-helpers.cjs');
 (async () => {
   const browser = await chromium.launch({ headless: true, channel: 'chrome' });
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
@@ -9,8 +10,7 @@ const { chromium } = require('playwright');
   await page.reload({ waitUntil: 'networkidle' });
   await page.waitForTimeout(600);
 
-  const firstRun = await page.evaluate(() => document.getElementById('firstRunModal')?.classList.contains('open'));
-  await page.click('#frDemo');
+  const firstRun = await dismissFirstRun(page, "#frDemo");
   await page.waitForTimeout(300);
 
   const after = await page.evaluate(() => ({

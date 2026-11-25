@@ -2,6 +2,7 @@
 // Key risk: 87 MB of TTFs must NOT be downloaded at boot; only tiles scrolled into
 // view may fetch their face.
 const { chromium } = require('playwright');
+const { dismissFirstRun } = require('./test-helpers.cjs');
 
 const results = [];
 const ok = (name, cond, extra) => results.push({ name, pass: !!cond, extra });
@@ -19,11 +20,10 @@ const ok = (name, cond, extra) => results.push({ name, pass: !!cond, extra });
   await page.evaluate(() => localStorage.clear());
   await page.reload({ waitUntil: 'networkidle' });
   await page.waitForTimeout(500);
-  // Dismiss the first-run chooser so it doesn't intercept later clicks
-  if (await page.evaluate(() => document.getElementById('firstRunModal')?.classList.contains('open'))) {
-    await page.click('#frSkip');
-    await page.waitForTimeout(400);
-  }
+  // Dismiss the first-run chooser so it doesn't intercept later clicks.
+  // It opens 400 ms after boot, so wait for it rather than sampling a
+  // boolean at an arbitrary moment.
+  await dismissFirstRun(page, "#frSkip");
   const fontsAtBoot = fontReqs.length;
 
   // ---------- manifest ----------

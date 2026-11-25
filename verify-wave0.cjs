@@ -315,6 +315,115 @@ function startServer() {
   ok("APP-007 the filmstrip survives a timeline rebuild", zoom.after.frames > 0, `${zoom.before.frames} → ${zoom.after.frames}`);
   ok("APP-008 the waveform survives a timeline rebuild", zoom.after.wave);
 
+  /* ------------------------------------------------- audit fixes (2026-11-25) */
+
+  // The colour scopes used to freeze permanently: a throttled draw set the
+  // `dirty` flag, and the frame listener's `if (dirty) return;` guard then
+  // suppressed every draw after that. A second frame event inside the 50 ms
+  // window must still land.
+  const scopeSig = () => page.evaluate(() => {
+    const c = document.getElementById("scopeCanvas");
+    if (!c) return "no-canvas";
+    const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
+    let s = 0;
+    for (let i = 0; i < d.length; i += 97) s = (s * 31 + d[i]) >>> 0;
+    return String(s);
+  });
+  const paintPreview = (color) => page.evaluate((c) => {
+    const p = document.getElementById("previewCanvas");
+    if (!p) return false;
+    const ctx = p.getContext("2d");
+    ctx.fillStyle = c;
+    ctx.fillRect(0, 0, p.width, p.height);
+    return true;
+  }, color);
+
+  const painted = await paintPreview("#ff0000");
+  await page.evaluate(() => window.dispatchEvent(new CustomEvent("aifimora:frame")));
+  await page.waitForTimeout(250);
+  const sigA = await scopeSig();
+  await paintPreview("#00ff00");
+  await page.evaluate(() => {
+    window.dispatchEvent(new CustomEvent("aifimora:frame"));
+    window.dispatchEvent(new CustomEvent("aifimora:frame"));
+  });
+  await page.waitForTimeout(350);
+  const sigB = await scopeSig();
+  ok("the colour scopes keep repainting (the dirty-flag freeze is fixed)", painted && sigA !== "no-canvas" && sigA !== sigB, `${sigA} → ${sigB}`);
+
+  // A native <details> has no keyboard dismissal, so the Filmora menu used to
+  // stay open over the UI after Escape and swallow the next click.
+  const menuEscape = await page.evaluate(async () => {
+    const summary = document.querySelector("#fmVersion > summary");
+    if (!summary) return { skipped: true };
+    summary.click();
+    await new Promise((r) => setTimeout(r, 150));
+    const opened = document.querySelectorAll(".fm-item[open]").length;
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    await new Promise((r) => setTimeout(r, 150));
+    return { opened, after: document.querySelectorAll(".fm-item[open]").length };
+  });
+  ok("Escape closes the open Filmora menu", !menuEscape.skipped && menuEscape.opened > 0 && menuEscape.after === 0, JSON.stringify(menuEscape));
+
+  /* ------------------------------------------------ crash-recovery prompt */
+  // The app showed a blocking "Recover unsaved work?" dialog on EVERY boot:
+  // the guard never compared the backup against the live autosave, even
+  // though its own comment said it did. A native dialog that fires on every
+  // launch also made the test suite flaky.
+  await page.addInitScript(() => {
+    window.__confirmCalls = [];
+    window.confirm = (msg) => { window.__confirmCalls.push(String(msg)); return false; };
+  });
+
+  const seedBackup = (opts) => page.evaluate((o) => {
+    const live = window.__aifimoraStore.get();
+    const project = JSON.parse(JSON.stringify(live));
+    if (o.different) project.name = (project.name || "Project") + " (from a backup)";
+    if (o.extraClip) {
+      project.clips = (project.clips || []).concat([{ id: "cl_extra", start: 99, end: 103, type: "video" }]);
+    }
+    localStorage.setItem("aifimora.backup.v1", JSON.stringify({
+      versions: [{ ts: o.ts, label: "auto", project }],
+    }));
+    // Turn the exit-time snapshot off for this check. Otherwise the unload
+    // handler writes an "exit" copy of the live project on top of the
+    // seeded backup, and that copy — holding nothing new — is the newest
+    // entry, so the prompt is (correctly) never offered.
+    try {
+      const s = JSON.parse(localStorage.getItem("aifimora.settings.v2") || "{}");
+      s.backup = { ...(s.backup || {}), enabled: false };
+      localStorage.setItem("aifimora.settings.v2", JSON.stringify(s));
+    } catch { /* no settings yet */ }
+  }, opts);
+
+  const readPrompts = async () => {
+    await page.reload({ waitUntil: "networkidle" });
+    await page.waitForTimeout(1400);   // the prompt is scheduled 600 ms after boot
+    return page.evaluate(() => window.__confirmCalls || []);
+  };
+
+  // (a) the backup holds exactly what the live project holds -> nothing to
+  //     recover. This is the case that used to prompt on every single boot.
+  await seedBackup({ ts: Date.now() - 10 * 60 * 1000, different: false });
+  const promptsSame = await readPrompts();
+  ok("no recovery prompt when the backup holds nothing new", promptsSame.length === 0, JSON.stringify(promptsSame).slice(0, 140));
+
+  // (b) a backup taken seconds ago is not a recovery candidate
+  await seedBackup({ ts: Date.now() - 5 * 1000, different: true });
+  const promptsSameMinute = await readPrompts();
+  ok("no recovery prompt for a backup from this same minute", promptsSameMinute.length === 0, JSON.stringify(promptsSameMinute).slice(0, 140));
+
+  // (c) positive control: a backup that really does hold different work must
+  //     still offer the recovery
+  await seedBackup({ ts: Date.now() - 10 * 60 * 1000, different: true });
+  const promptsDiff = await readPrompts();
+  ok("a backup that holds different work still offers recovery", promptsDiff.length === 1 && /Recover unsaved work/.test(promptsDiff[0]), JSON.stringify(promptsDiff).slice(0, 140));
+
+  // (d) and one that differs only in the timeline, not just the name
+  await seedBackup({ ts: Date.now() - 10 * 60 * 1000, different: false, extraClip: true });
+  const promptsClip = await readPrompts();
+  ok("a backup with an extra clip still offers recovery", promptsClip.length === 1 && /Recover unsaved work/.test(promptsClip[0]), JSON.stringify(promptsClip).slice(0, 140));
+
   /* ------------------------------------------------------------------ done */
   const passed = checks.filter((c) => c.pass).length;
   console.log(`\n${passed}/${checks.length} checks passed`);

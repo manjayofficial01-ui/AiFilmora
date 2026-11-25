@@ -10,6 +10,7 @@
  *   6. no console/page errors
  */
 const { chromium } = require("playwright");
+const { dismissFirstRun } = require("./test-helpers.cjs");
 const URL = "http://127.0.0.1:8765/index.html";
 
 const fail = [];
@@ -25,10 +26,8 @@ const check = (cond, msg) => (cond ? ok.push(msg) : fail.push(msg));
 
   await page.goto(URL, { waitUntil: "networkidle" });
   await page.waitForTimeout(700);
-  if (await page.locator("#firstRunModal.open").count()) {
-    await page.click("#frSkip");
-    await page.waitForTimeout(200);
-  }
+  await dismissFirstRun(page, "#frSkip");
+  await page.waitForTimeout(200);
 
   /* 1 — icon hydration ---------------------------------------------------- */
   const icons = await page.evaluate(() => {

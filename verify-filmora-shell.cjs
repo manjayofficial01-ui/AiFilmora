@@ -1,6 +1,7 @@
 /* Smoke test: Filmora-inspired shell + asset bridge. */
 const { chromium } = require("playwright");
 const path = require("path");
+const { dismissFirstRun } = require("./test-helpers.cjs");
 const URL = "http://127.0.0.1:8765/index.html";
 
 (async () => {
@@ -12,11 +13,11 @@ const URL = "http://127.0.0.1:8765/index.html";
   page.on("console", (m) => { if (m.type() === "error") errors.push("console: " + m.text()); });
 
   await page.goto(URL, { waitUntil: "networkidle" });
-  // Dismiss the first-run chooser (added after this script was written)
-  if (await page.evaluate(() => document.getElementById("firstRunModal")?.classList.contains("open"))) {
-    await page.click("#frSkip");
-    await page.waitForTimeout(400);
-  }
+  // Dismiss the first-run chooser (added after this script was written).
+  // It opens 400 ms after boot, so wait for it rather than sampling a
+  // boolean at an arbitrary moment — that race made this suite fail ~80 %
+  // of the time.
+  await dismissFirstRun(page, "#frSkip");
   await page.waitForTimeout(900);
 
   const menus = await page.evaluate(() =>

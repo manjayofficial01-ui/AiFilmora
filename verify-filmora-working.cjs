@@ -3,6 +3,7 @@ const { chromium } = require("playwright");
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const { dismissFirstRun } = require("./test-helpers.cjs");
 
 function startServer() {
   return new Promise((resolve) => {
@@ -55,10 +56,8 @@ function startServer() {
   });
   ok("Export pill uses cyan fill", /85,\s*229,\s*197|55e5c5|69,\s*243,\s*191|45f3bf|111,\s*240,\s*212/i.test(exportBg), exportBg.slice(0, 80));
 
-  if (await page.evaluate(() => document.getElementById("firstRunModal")?.classList.contains("open"))) {
+  if (await dismissFirstRun(page, "#frDemo")) {
     ok("first-run aspect chips", await page.locator("[data-fr-aspect]").count() >= 4);
-    await page.click("#frDemo");
-    await page.waitForTimeout(300);
   } else {
     ok("first-run already dismissed", true);
   }
