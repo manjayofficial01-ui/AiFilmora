@@ -2,7 +2,7 @@
 
 **Last cycle:** 2026-11-25 · **Mode:** `teardown` + `modernize` build (master-application path)
 **Workspace:** `D:\000000 Lab\AiFimora` · **Branch:** `modernize/2026-11-25` (created this cycle, not pushed)
-**Base commit:** `ab3e97c` (AiFilmora 2.2.7) · **Cycle commits:** `a13c155`, `366afe4`, `1fb4aa1` (+ a follow-up for the hydration performance fix)
+**Base commit:** `ab3e97c` (AiFilmora 2.2.7) · **Cycle commits:** `a13c155`, `366afe4`, `1fb4aa1`, `30e2d67`, `6d3a48d`, `5d75f13`
 
 ---
 
