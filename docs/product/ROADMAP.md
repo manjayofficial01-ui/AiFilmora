@@ -8,6 +8,8 @@ Status: `proposed` · `approved` · `in-progress` · `done-verified` · `done-un
 
 **Thesis:** *Make the timeline tell the truth.* Build one media-understanding layer (frames, peaks, transcript, tags); render it in the timeline; then make every agent action visible on the timeline and land as one undo step.
 
+> **Superseded for the next phase by `docs/product/AUDIT-2026-11-25.md`** (2026-11-25). The waves below are still the right shape, but the audit found that the app's *middle* is real while its *two ends* are not — there is **no encoder**, so ~40 capabilities cannot reach the user's screen, and the AI tier charges credits for fabricated output. The audit's §4 ranks five upgrades (4.1 real export · 4.2 portable projects · 4.3 keyboard-first · 4.4 edit-by-text · 4.5 MCP agent surface); the next build item is **the user's choice** between them.
+
 ---
 
 ## Wave 0 — Truth fixes (correctness; do these before anything else)
@@ -104,6 +106,20 @@ Status: `proposed` · `approved` · `in-progress` · `done-verified` · `done-un
 
 ---
 
+## Wave 6 — Audit upgrades (2026-11-25)
+
+> Added by `docs/product/AUDIT-2026-11-25.md`. The audit's core diagnosis: **the middle of this app is real; the two ends are not.** The entry point is 8 gradient placeholders and the exit is a silent 720p WebM while the export sheet promises 4K H.265 — and the AI tier charges credits for fabricated output. These five items are the ranked way out. **Which one to build first is the user's call**; each is still `proposed` until then.
+
+| ID | Title | Pri | Value | Effort | Conf | Status | Acceptance criteria | Verification |
+|---|---|---|---|---|---|---|---|---|
+| APP-037 | Real export: encode the file you actually asked for | P0 | There is **no encoder**, so ~40 capabilities (LUFS targets, caption burn-in, the music/voiceover/Audio-FX/fade/duck stack, per-clip gain, per-track solo) terminate in a file that cannot hold any of them | M | High | proposed | The sidecar gains an `encode` op (WebM → the requested container/codec/resolution/fps); `readFilmoraExportSettings()` is bound so the six export controls are live; the audio mix bus is tapped into the output so the file has a sound track; the fallback is explicitly labelled ("Quick preview export · 720p · no audio") when FFmpeg is absent | Export a 4-clip project → assert the file is H.264/AAC MP4 at the requested resolution, with an audible audio track; assert the browser-only fallback says so in its own words |
+| APP-038 | A project file you can actually reopen | P0 | The project file carries **no media** — opening it elsewhere gives "N imported files missing"; the autosave also dies early (measured: the empty demo project is 1,167,019 bytes, **99.4 % base64 thumbnails**, 22.3 % of the 5 MiB quota) | M | High | proposed | Every media item records its `sourcePath`; the snapshot omits `data:` thumbnails (they live in IndexedDB); opening relinks by path and offers relink for anything missing; `QuotaExceededError` is caught specifically and surfaced as a persistent toast, not a `console.warn` | Open a saved project on a second profile → assert every clip is relinked without re-import; fill the quota → assert a visible error appears instead of a silent freeze |
+| APP-039 | Keyboard-first timeline and real focus management | P1 | `js/timeline.js:1046` builds clips as inert `<div>`s — **the entire inspector is unreachable without a mouse**; modals never take, trap or restore focus; the status dot is dead code that is always reassuringly green | M | High | proposed | Clips are focusable with a keyboard handler (Enter/Space/Delete/arrows) and `role="option"`; a shared `openModal()` moves focus in, traps Tab and restores it on close; `#statusDot` reflects real job state with an `aria-live` sibling | Tab to a clip → assert focus lands on it; open a modal → assert focus moved inside and Tab cycles; trigger a failing job → assert the dot goes to the error state |
+| APP-040 | Edit by text: the transcript becomes the editing surface | P1 | The category's most-requested feature (r/Filmora_Official: *"gaps in sound and filler words cut automatically"*). The word timings **already exist** (APP-009); the cutting does not — "Silence & filler removal" currently scales every clip by a fixed ratio and charges 8 credits | L | Med | proposed | Words are selectable inside a transcript line; selecting a sentence cuts the timeline to it; `cutWordRange()`, `removePauses(threshold)` and `removeRetakes()` are store verbs that each take **one** undo step; the fake silence removal is replaced by the real one and stops charging credits | Transcribe a fixture → select a sentence → assert the timeline cut matches the word timings exactly; assert one Ctrl+Z restores it |
+| APP-041 | The agent surface: MCP over the store, with the perception tools attached | P2 | Five independent 2026 projects (vedit, Cutline, WeftCut, MakeMyClip, OpenChatCut) converged on MCP + perception. AiFilmora already owns the timeline, the shared undo, and **all five perception tools** — frames, peaks, word timings, beats, loudness. Only the transport is missing | L | Med | proposed | A loopback MCP server exposes the store's 60+ verbs plus `get_frames`, `get_waveform_summary`, `get_transcript`, `detect_scenes`, `detect_silence`, `music_beats`, `loudness` and `preview_frame` (the real rendered frame); every mutating tool supports `dry_run` and lands as one undo step; bound to `127.0.0.1` with a bearer token and DNS-rebinding protection | Connect an MCP client → call `get_transcript` → assert real word timings; call `splitAtPlayhead` → assert the timeline changed and one Ctrl+Z undoes it |
+
+---
+
 ## Deliberately not on this roadmap
 
 | Item | Reason |
@@ -129,4 +145,5 @@ Status: `proposed` · `approved` · `in-progress` · `done-verified` · `done-un
 | 3 | 4 | Inspector redesign | The inspector cannot hide a change silently |
 | 4 | 7 | Agent + export + interop | An external agent can drive the editor, and every run is one undo step |
 | 5 | 9 | Shell, states, shipping | The app has fast surfaces, honest states, and installs itself |
-| — | 36 total | | |
+| 6 | 5 | Audit upgrades | The user gets a real file out of the app, can reopen the project, can drive it from the keyboard or by text, and an agent can drive it too |
+| — | 41 total | | |
