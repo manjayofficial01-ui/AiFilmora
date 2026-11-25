@@ -6,9 +6,16 @@
  *   ffprobe  — read a file's streams, duration and codecs
  *   whisper  — transcribe speech into word-level timings
  *
- * This module only DISCOVERS them. It never installs anything and never
- * assumes they exist: when a tool is missing the sidecar says so, and the
- * app reports that plainly instead of pretending the work was done.
+ * This module only DISCOVERS them. It never installs anything on the user's
+ * machine and never assumes they exist: when a tool is missing the sidecar
+ * says so, and the app reports that plainly instead of pretending the work
+ * was done.
+ *
+ * ffmpeg and ffprobe now SHIP with the app (ffmpeg-static, ffprobe-static).
+ * The bundled copy is preferred over one found on PATH, so the app behaves
+ * the same on every machine. A user who wants their own build to win points
+ * AIFIMORA_FFMPEG / AIFIMORA_FFPROBE at it, or sets
+ * AIFIMORA_DISABLE_BUNDLED_TOOLS=1 and lets the search fall through.
  *
  * Search order, first hit wins:
  *   1. an explicit environment variable (AIFIMORA_FFMPEG, …)
@@ -153,18 +160,46 @@ function findExecutable(name, { envVar, extraFiles = [] } = {}) {
   return null;
 }
 
-/** npm static binaries, when the project has them. */
-function staticCandidates(pkg, rel) {
+/**
+ * npm static binaries, when the project has them.
+ *
+ * Two layouts matter. In development the package sits in node_modules. In a
+ * packaged app it lives inside app.asar — and an executable inside an asar
+ * archive cannot be run — so electron-builder unpacks it and the binary is
+ * addressed under resources/app.asar.unpacked.
+ *
+ * The unpacked copy is therefore preferred over the archived one, and a path
+ * that is still inside an asar is never offered at all: Electron's filesystem
+ * will happily *report* such a file as existing (it redirects reads to the
+ * unpacked copy), and the app would then try to execute a path that is not a
+ * program.
+ *
+ * The package's own export is consulted LAST, because in a packaged app it
+ * points *into* the archive.
+ */
+function staticCandidates(pkg, rels) {
   const out = [];
+  // An escape hatch: a bundled binary must never be able to shadow a system
+  // one the user deliberately installed. (The test suite uses it to prove
+  // the "tool missing" paths.)
+  if (process.env.AIFIMORA_DISABLE_BUNDLED_TOOLS === "1") return out;
+  const list = Array.isArray(rels) ? rels : [rels];
+  const roots = [];
+  if (process.resourcesPath) {
+    roots.push(path.join(process.resourcesPath, "app.asar.unpacked", "node_modules", pkg));
+  }
+  const inArchive = path.join(__dirname, "..", "..", "node_modules", pkg);
+  if (!inArchive.includes("app.asar")) roots.push(inArchive);
+  for (const root of roots) {
+    for (const rel of list) out.push(path.join(root, rel));
+  }
   try {
-    const p = require.resolve(pkg, { paths: [path.join(__dirname, "..", "..")] });
-    out.push(p);
+    const mod = require(pkg);
+    const p = typeof mod === "string" ? mod : mod && mod.path;
+    if (p) out.push(p);
   } catch {
     /* not installed — fine */
   }
-  const root = path.join(__dirname, "..", "..", "node_modules", pkg);
-  out.push(path.join(root, rel));
-  out.push(path.join(root, "bin", "win32", "x64", `${path.basename(rel, EXE)}${EXE}`));
   return out;
 }
 
@@ -196,17 +231,19 @@ function findWhisperModel() {
 function discover() {
   const ffmpeg = findExecutable("ffmpeg", {
     envVar: "AIFIMORA_FFMPEG",
-    extraFiles: staticCandidates("ffmpeg-static", path.join("ffmpeg", `ffmpeg${EXE}`)),
+    extraFiles: staticCandidates("ffmpeg-static", [`ffmpeg${EXE}`]),
   });
   const ffprobe = findExecutable("ffprobe", {
     envVar: "AIFIMORA_FFPROBE",
-    extraFiles: staticCandidates("ffprobe-static", path.join("bin", "win32", "x64", `ffprobe${EXE}`)),
+    extraFiles: staticCandidates("ffprobe-static", [
+      path.join("bin", process.platform, process.arch, `ffprobe${EXE}`),
+    ]),
   });
   // whisper.cpp ships its binary as whisper-cli (older builds call it main).
   const whisper = findExecutable("whisper-cli", {
     envVar: "AIFIMORA_WHISPER",
     extraFiles: [
-      ...staticCandidates("whisper-node", `whisper-cli${EXE}`),
+      ...staticCandidates("whisper-node", [`whisper-cli${EXE}`]),
       ...appBinDirs().map((d) => path.join(d, `whisper${EXE}`)),
     ],
   }) || findExecutable("whisper", { envVar: "AIFIMORA_WHISPER" });
@@ -237,8 +274,9 @@ function discover() {
       appBin: appBinDirs().slice(0, 4),
       system: systemDirs().slice(0, 6),
       envVars: ["AIFIMORA_FFMPEG", "AIFIMORA_FFPROBE", "AIFIMORA_WHISPER", "AIFIMORA_WHISPER_MODEL"],
+      bundledDisabled: process.env.AIFIMORA_DISABLE_BUNDLED_TOOLS === "1",
     },
   };
 }
 
-module.exports = { discover, findExecutable, usable, isNodeScript, runnerFor };
+module.exports = { discover, findExecutable, usable, isNodeScript, runnerFor, staticCandidates };

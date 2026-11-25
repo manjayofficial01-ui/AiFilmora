@@ -1,19 +1,19 @@
 # SIDECAR — the FFmpeg / Whisper bridge
 
-**Status:** built and verified this cycle · **Added:** 2026-11-25 · **Branch:** `modernize/2026-11-25`
+**Status:** built and verified this cycle · **Added:** 2026-11-25 · **Updated:** 2026-11-25 (bundled FFmpeg) · **Branch:** `modernize/2026-11-25`
 
 The browser build can decode mp4/webm/mp3 and nothing else. Real footage arrives
 as MXF, MKV, ProRes, HEVC, AIFF, FLAC. The Electron build can reach three
 external programs that Node does not ship:
 
-| Tool | What it does for AiFilmora |
-|---|---|
-| `ffmpeg` | Converts footage the browser cannot decode; extracts poster frames; pulls 16 kHz mono audio out for the speech engine |
-| `ffprobe` | Reads a file's real duration, codecs, frame rate, resolution — instead of guessing |
-| `whisper` | Transcribes speech with **real word-level timings** |
+| Tool | What it does for AiFilmora | Ships with the app? |
+|---|---|---|
+| `ffmpeg` | Converts footage the browser cannot decode; extracts poster frames; pulls 16 kHz mono audio out for the speech engine; **encodes the exported file** | **Yes** — `ffmpeg-static` |
+| `ffprobe` | Reads a file's real duration, codecs, frame rate, resolution — instead of guessing | **Yes** — `ffprobe-static` |
+| `whisper` | Transcribes speech with **real word-level timings** | No — the user supplies it |
 
-This document is the operating manual: how the pieces fit, how to install the
-tools, what the app says when they are missing, and — precisely — what was
+This document is the operating manual: how the pieces fit, how the tools are
+found, what the app says when they are missing, and — precisely — what was
 verified and what was not.
 
 ---
@@ -141,27 +141,67 @@ estimated word timings as measured ones.
 
 ---
 
-## 3. Installing the tools
+## 3. Finding the tools
 
-Nothing is installed automatically. The app finds what is already there.
+**ffmpeg and ffprobe now ship with the app.** They are real, bundled binaries —
+the app no longer depends on the user having installed anything.
+
+| Package | Binary | Unpacked size | In the installer |
+|---|---|---|---|
+| `ffmpeg-static@5.3.0` | `ffmpeg.exe` (FFmpeg 6.1.1 essentials build) | 79.0 MB | compressed |
+| `ffprobe-static@3.1.0` | `bin/win32/x64/ffprobe.exe` | 60.1 MB | compressed |
+
+`ffprobe-static` publishes a binary for **every** platform (335 MB in
+`node_modules`). The packaging config excludes all but the Windows x64 one, so
+the other five platforms never ship. `electron-builder` unpacks both binaries
+out of the asar — an executable inside an archive cannot be run — and they are
+addressed under `resources/app.asar.unpacked/node_modules/`.
 
 **Search order** (first hit wins):
 
 1. `AIFIMORA_FFMPEG` / `AIFIMORA_FFPROBE` / `AIFIMORA_WHISPER` / `AIFIMORA_WHISPER_MODEL` — an explicit path
 2. a copy bundled next to the app (`bin/`)
-3. the npm statics `ffmpeg-static` / `ffprobe-static`
+3. the npm statics `ffmpeg-static` / `ffprobe-static`, in `node_modules` (dev) or `resources/app.asar.unpacked/node_modules` (packaged)
 4. `PATH`
 5. the usual hand-installed locations (`C:\ffmpeg\bin`, `%LOCALAPPDATA%\Microsoft\WinGet\Links`, `C:\ProgramData\scoop\shims`, `/opt/homebrew/bin`, `/usr/local/bin`, …)
 
-**On Windows, the easiest route:**
+**Whose FFmpeg runs.** An explicit path always wins — point
+`AIFIMORA_FFMPEG` / `AIFIMORA_FFPROBE` at your own build and it is used. After
+that, the **bundled** binary is preferred over one found on `PATH`, so the app
+behaves the same on every machine and every export is produced by the FFmpeg
+that was tested with it. If you would rather use your own installation, set
+`AIFIMORA_DISABLE_BUNDLED_TOOLS=1` and the search falls through to `PATH` and
+the usual install locations:
+
+```powershell
+$env:AIFIMORA_DISABLE_BUNDLED_TOOLS = '1'
+```
+
+The same switch is useful when testing the "no tools" paths, because it is
+what makes the bundled binaries stand down:
+
+```powershell
+$env:AIFIMORA_DISABLE_BUNDLED_TOOLS = '1'
+```
+
+**Whisper** still has to be supplied. It needs both the binary and a model file
+(`ggml-*.bin`). Point `AIFIMORA_WHISPER` at `whisper-cli.exe` and
+`AIFIMORA_WHISPER_MODEL` at the model.
+
+**On Windows, to install FFmpeg yourself:**
 
 ```powershell
 winget install Gyan.FFmpeg
 ```
 
-**Whisper** needs both the binary and a model file (`ggml-*.bin`). Point
-`AIFIMORA_WHISPER` at `whisper-cli.exe` and `AIFIMORA_WHISPER_MODEL` at the
-model.
+> **A note on the lookup, because it was wrong once.** A bundled static must
+> resolve to the **binary**. `require.resolve("ffmpeg-static")` returns the
+> package's JavaScript entry point (`index.js`), and running that as a script
+> fails in a way that looks like a broken FFmpeg rather than a broken lookup.
+> `staticCandidates()` therefore addresses the binary by path, in
+> `node_modules` and in `app.asar.unpacked/node_modules`, and consults the
+> package's own export only last — in a packaged app it points *into* the
+> archive, where nothing can be executed.
 
 **A tool may be a Node script.** If the resolved path ends in `.js`/`.cjs`/`.mjs`
 it is run as `node <script> <args>`. This is how the test suite substitutes a
@@ -185,37 +225,59 @@ stand-in without installing anything.
 
 ## 5. What was verified, and what was not
 
-**No FFmpeg, ffprobe or Whisper is installed on this machine**, and installing
-system software is not something a test may do on its own. The suite therefore
-drives the real sidecar against **stand-in tools** — the binaries are replaced,
-everything else is real.
+**ffmpeg and ffprobe now ship with the app**, so the sidecar can finally be
+driven against the **real binaries** rather than stand-ins. The stand-in group
+is still there — it is how the "tool missing" paths are proven — but it is no
+longer the only evidence.
 
-`verify-sidecar.cjs` → **87/87 checks pass**.
+`verify-sidecar.cjs` → **118/118 checks pass**.
 
 | Group | Checks | What is real |
 |---|---|---|
-| Discovery | 7 | env override, Node-script runner, "missing" reporting |
+| Discovery | 11 | env override, Node-script runner, "missing" reporting, **a bundled static resolving to the binary rather than to the package's `index.js`**, **the bundled tools being switchable off**, **the unpacked copy being preferred over a path still inside an asar** |
 | Worker | 21 | the spawn, the command construction, ffprobe/ffmpeg/whisper output parsing, the conversion ladder (video **and** audio-only), the whisper `-ojf`→`-oj` fallback, the "tool missing" paths |
-| **Encoder** | **26** | the argument builder for every codec and container; the plan order (hardware before software); the op end to end; **the probe of its own output**; the honest refusal when ffmpeg is absent; the software fallback when the hardware encoder is not there |
+| **Encoder** | **28** | the argument builder for every codec and container; the plan order (hardware before software); the op end to end; **the probe of its own output**; the honest refusal when ffmpeg is absent; the software fallback when the hardware encoder is not there |
+| **The real tools** | **27** | **real FFmpeg 6.1.1**: a real source built from `lavfi` (`testsrc` + `sine`); a real probe of it; **five real encodes** (MP4/H.264+AAC, MP4/HEVC, WebM/VP9+Opus, MP4/AV1, MOV/ProRes) each written **and probed back**; **the AV1 fallback chain** (`libsvtav1` is absent, so `libaom-av1` took over — and the op names the encoder that ran); a real two-pass GIF; a real MP3 |
 | Manager | 10 | request/response correlation, the cache, the token registry, **the encode round trip: bytes in, a finished file at the destination out, and the bytes proven intact** |
-| **Electron** | 12 | **the real Electron shell**: the utility process starts, the renderer reaches it over IPC, a file is probed, a registered file is served over `app://` with **byte ranges**, an unregistered file is refused, no console errors, **the renderer encodes a capture and the file lands at the destination**, **a sidecar file reaches a Web Audio graph (so it is not silent)** |
+| **Electron** | 15 | **the real Electron shell**: the utility process starts, the renderer reaches it over IPC, a file is probed, a registered file is served over `app://` with **byte ranges**, an unregistered file is refused, no console errors, **the renderer encodes a capture and the file lands at the destination**, **a sidecar file reaches a Web Audio graph (so it is not silent)**, **the mix bus carries a recordable track** |
 | Browser build | 6 | the web build still works with no sidecar; the sample transcript is labelled |
+
+### The packaged build
+
+`npx electron-builder --dir` and `--win nsis` were **run**, and the result was
+**measured, not assumed**. A baseline build without the bundled binaries was
+produced for comparison:
+
+| Artifact | Without the statics | With the statics | Delta |
+|---|---|---|---|
+| `dist/win-unpacked` | 452.1 MB | 591.6 MB | **+139.5 MB** |
+| `resources/app.asar` | 184.0 MB | 184.4 MB | +0.4 MB |
+| `resources/app.asar.unpacked` | — | 139.2 MB (`ffmpeg.exe` 79.0 MB + `ffprobe.exe` 60.1 MB) | +139.2 MB |
+| **`AiFilmora-2.2.7-win-x64.exe` (NSIS)** | **152.5 MB** | **187.8 MB** | **+35.3 MB** |
+| `AiFilmora-2.2.7-portable-win-x64.exe` | not built | 152.2 MB | — |
+
+**What the user pays is +35 MB, not +139 MB.** The binaries are 139 MB on disk
+and 35 MB in the download, because the installer compresses them. The app's own
+assets (`app.asar`, 184 MB) are untouched by this change.
+
+The packaging config was **verified**, not assumed: the other five platforms'
+`ffprobe` binaries (275 MB of them) are absent from the package, and only
+`bin/win32/x64/ffprobe.exe` ships.
 
 ### Not verified
 
-- ❌ **A real FFmpeg was never run.** The command lines are constructed
-  correctly and the output is parsed correctly, but real FFmpeg's behaviour on
-  real footage is untested here. This applies to the encoder too: the stand-in
-  records the arguments, but it does not validate them against FFmpeg's own
-  parser.
 - ❌ **A real Whisper was never run.** The JSON shapes are handled correctly
   against whisper.cpp's documented format, but no model was transcribed.
-- ❌ `npm run dist` was not run; no packaged build was produced.
+- ❌ **The installer was built but never installed and launched.** The
+  artefacts are the right size and contain the right binaries; that the
+  installed app finds them at `app.asar.unpacked` is *implied* by the layout,
+  not observed on an installed copy.
+- ❌ **The packaged app was not exercised end to end.** The 118 checks run
+  against the source tree, with the binaries found in `node_modules` rather
+  than in `app.asar.unpacked`.
 
-To close these gaps, install FFmpeg and Whisper, then re-run
-`verify-sidecar.cjs` with `AIFIMORA_FFMPEG` / `AIFIMORA_FFPROBE` /
-`AIFIMORA_WHISPER` pointing at the real binaries — the suite uses whichever
-tools it finds.
+To close these gaps, install Whisper, then re-run `verify-sidecar.cjs` — the
+suite uses whichever tools it finds, and now finds real ones.
 
 ---
 
@@ -251,7 +313,7 @@ proxy (`rehydrateProxies()` in `js/media.js`) before anything uses it.
 |---|---|
 | **APP-006** — importing a file the browser cannot decode | The card is badged and dimmed with the reason (the Wave 0 behaviour) |
 | **APP-009** — the transcript panel | The sample transcript, now labelled as a sample instead of passed off as real |
-| **APP-037** — exporting a video | The capture is written as a WebM and the app says so in its own words: *"Quick preview export · WebM · 720p · with audio — a real MP4 needs the desktop app with FFmpeg."* The extension shown in the sheet is `.webm`, never `.mp4`. |
+| **APP-037** — exporting a video | The capture is written as a WebM and the app says so in its own words: *"Quick preview export · WebM · 720p · with audio — a real MP4 needs the desktop app with FFmpeg."* The extension shown in the sheet is `.webm`, never `.mp4`. **The desktop build now ships FFmpeg, so this fallback only applies to the browser build and to a build whose binaries are switched off.** |
 | Accurate duration / metadata | The browser's own probe, which is usually right and occasionally not |
 
 ---
@@ -259,19 +321,22 @@ proxy (`rehydrateProxies()` in `js/media.js`) before anything uses it.
 ## 8. Commands
 
 ```powershell
-# the sidecar suite (87 checks, includes a real Electron run)
+# the sidecar suite (118 checks, includes a real FFmpeg run and a real Electron run)
 node verify-sidecar.cjs
 
-# the focused Wave 0/1 suite (50 checks)
+# the focused Wave 0/1 suite (54 checks)
 node verify-wave0.cjs
 
 # the whole regression suite
 node verify-all.cjs 'docs\product\POST-CHANGE.md'
 
-# point the sidecar at real tools
+# point the sidecar at your own tools (they win over the bundled ones)
 $env:AIFIMORA_FFMPEG  = 'C:\ffmpeg\bin\ffmpeg.exe'
 $env:AIFIMORA_FFPROBE = 'C:\ffmpeg\bin\ffprobe.exe'
 $env:AIFIMORA_WHISPER = 'C:\whisper\whisper-cli.exe'
 $env:AIFIMORA_WHISPER_MODEL = 'C:\whisper\models\ggml-base.bin'
+
+# ...or make the bundled ones stand down
+$env:AIFIMORA_DISABLE_BUNDLED_TOOLS = '1'
 npm start
 ```

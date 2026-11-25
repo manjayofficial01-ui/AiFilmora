@@ -1,21 +1,27 @@
 /* verify-sidecar.cjs — proves the media sidecar works, or says why it cannot.
  *
- * No FFmpeg, ffprobe or Whisper is installed on this machine, and a test may
- * not install one on its own. So the suite drives the real sidecar against
- * stand-in tools: the process spawn, the command construction, the output
- * parsing, the IPC and the media:// delivery are all exercised for real —
- * only the binaries themselves are replaced.
+ * FFmpeg and ffprobe now ship with the app (the `ffmpeg-static` and
+ * `ffprobe-static` npm packages), so the suite runs **both** ways:
  *
- * What this proves: the plumbing.
- * What it cannot prove: that real FFmpeg behaves exactly like the stand-in.
- * The suites that assert the app still works without the sidecar prove the
- * other half — that nothing depends on FFmpeg being present.
+ *   - against STAND-IN tools, where the process spawn, the command
+ *     construction, the output parsing, the IPC and the media:// delivery
+ *     are exercised for real and only the binaries are replaced. This is
+ *     how the "tool is missing" paths are proved.
+ *   - against the REAL bundled binaries, which is how the encoder is
+ *     finally proved end to end: a real MP4 is written and probed by a
+ *     real ffprobe, and the codec, resolution and audio track in the file
+ *     are read back rather than assumed.
+ *
+ * Whisper is still not bundled (it needs a model file), so the speech
+ * engine remains verified against a stand-in only.
  *
  * Groups:
  *   1. discovery   — where the tools are looked for, and what is missing
  *   2. worker      — the sidecar itself, over newline-delimited JSON
  *   2b. encoder    — the `encode` op: the arguments, the probe of the
  *                     result, and the honest refusal when ffmpeg is absent
+ *   2c. real tools — the same encoder against the REAL bundled ffmpeg and
+ *                     ffprobe, not a stand-in
  *   3. manager     — the main-process bridge, request/response correlation
  *   4. electron    — the real Electron shell: IPC, media:// delivery, range
  *   5. browser     — the web build still works with no sidecar at all
@@ -309,6 +315,42 @@ function testDiscovery(stubs) {
     model: process.env.AIFIMORA_WHISPER_MODEL,
   };
 
+  // First, with no overrides at all: what the project finds for itself.
+  // A bundled static must resolve to the BINARY — the package's JavaScript
+  // entry point would be run as a script and fail in a way that looks like
+  // a broken FFmpeg rather than a broken lookup.
+  for (const k of ["AIFIMORA_FFMPEG", "AIFIMORA_FFPROBE"]) delete process.env[k];
+  const self = tools.discover();
+  const resolvesToBinary = ["ffmpeg", "ffprobe"].every((n) => {
+    const p = self[n];
+    if (!p) return true;                    // not installed here — nothing to judge
+    return !/\.(js|cjs|mjs)$/i.test(p);
+  });
+  ok("discovery: a bundled static resolves to the binary, not to a script", resolvesToBinary,
+    `${self.ffmpeg || "(none)"} | ${self.ffprobe || "(none)"}`);
+
+  // The packaged app must prefer the UNPACKED binary. A path that is still
+  // inside an asar cannot be executed, and Electron's filesystem will
+  // happily report such a file as existing, so offering it would mean the
+  // app tries to run something that is not a program.
+  const savedResources = process.resourcesPath;
+  try {
+    Object.defineProperty(process, "resourcesPath", { value: "C:\\app\\resources", configurable: true });
+    const cands = tools.staticCandidates("ffmpeg-static", ["ffmpeg.exe"]);
+    const archived = cands.filter((p) => /app\.asar[\\/]/i.test(p));
+    ok("discovery: the unpacked binary is preferred over the archived one",
+      cands.length > 0 && cands[0].includes("app.asar.unpacked") && archived.length === 0,
+      cands.join(" | "));
+
+    // A relative path is a path, not a list of characters.
+    const one = tools.staticCandidates("whisper-node", "whisper-cli.exe");
+    const split = one.filter((p) => !p.endsWith("whisper-cli.exe"));
+    ok("discovery: a single relative path is not split into characters",
+      one.length > 0 && split.length === 0, `${one.length} candidates: ${one.join(" | ")}`);
+  } finally {
+    Object.defineProperty(process, "resourcesPath", { value: savedResources, configurable: true });
+  }
+
   process.env.AIFIMORA_FFMPEG = stubs.ffmpeg;
   process.env.AIFIMORA_FFPROBE = stubs.probe;
   process.env.AIFIMORA_WHISPER = stubs.whisper;
@@ -323,7 +365,18 @@ function testDiscovery(stubs) {
   process.env.AIFIMORA_FFMPEG = path.join(path.dirname(stubs.ffmpeg), "nope.js");
   const bogus = tools.discover();
   ok("discovery: a missing override is not reported as a tool", bogus.ffmpeg !== process.env.AIFIMORA_FFMPEG, bogus.ffmpegSource);
-  ok("discovery: what is missing is named", Array.isArray(bogus.missing) && bogus.missing.length > 0, JSON.stringify(bogus.missing));
+
+  // With the bundled statics switched off, no tool may come from the npm
+  // packages any more. An explicit override still wins — that is by design —
+  // so the check is on the SOURCE, not on "is there a path at all".
+  process.env.AIFIMORA_DISABLE_BUNDLED_TOOLS = "1";
+  const bare = tools.discover();
+  ok("discovery: what is missing is named", Array.isArray(bare.missing) && bare.missing.length > 0, JSON.stringify(bare.missing));
+  const fromStatics = [bare.ffmpeg, bare.ffprobe].filter((p) => p && /node_modules[\\/]ff(mpeg|probe)-static/i.test(p));
+  ok("discovery: a bundled tool can be switched off",
+    fromStatics.length === 0 && bare.ffmpegSource !== "dependency" && bare.ffprobeSource !== "dependency",
+    `${bare.ffmpeg || "(none)"} ${bare.ffprobe || "(none)"}`);
+  delete process.env.AIFIMORA_DISABLE_BUNDLED_TOOLS;
 
   // Restore, then check the honest state of this machine.
   for (const [k, v] of Object.entries(saved)) {
@@ -406,8 +459,10 @@ async function testWorker(stubs, tmp) {
   w.kill();
 
   // The same worker with no tools at all must say so instead of pretending.
+  // The bundled statics are switched off, or the real binaries would answer.
   const bare = startWorker({
     AIFIMORA_FFMPEG: "", AIFIMORA_FFPROBE: "", AIFIMORA_WHISPER: "", AIFIMORA_WHISPER_MODEL: "",
+    AIFIMORA_DISABLE_BUNDLED_TOOLS: "1",
     AIFIMORA_SIDECAR_CACHE: path.join(tmp, "cache-bare"),
   });
   const bareProbe = await bare.call("analyze", { path: src });
@@ -531,14 +586,160 @@ async function testEncoder(stubs, tmp) {
 
   w.kill();
 
-  // With no tools at all the op must refuse rather than pretend.
+  // The same worker with no tools at all must say so instead of pretending.
   const bare = startWorker({
     AIFIMORA_FFMPEG: "", AIFIMORA_FFPROBE: "",
+    AIFIMORA_DISABLE_BUNDLED_TOOLS: "1",
     AIFIMORA_SIDECAR_CACHE: path.join(tmp, "enc-bare"),
   });
   const bareEnc = await bare.call("encode", { path: src, container: "mp4", codec: "h264" });
   ok("encoder: without ffmpeg it says ffmpeg is missing", bareEnc.ok === false && bareEnc.error.code === "no-ffmpeg", JSON.stringify(bareEnc.error));
   bare.kill();
+}
+
+/* ------------------------------------------------------------------ *
+ * 2c. The real tools
+ *
+ * The statics are bundled now, so the encoder can finally be run against a
+ * REAL FFmpeg rather than a stand-in. This is the group that closes the
+ * biggest "not verified" gap in the sidecar's history: the argument
+ * builder, the encoder selection, the probe of the written file and the
+ * AV1 fallback chain are all exercised against the real binaries.
+ *
+ * It runs only when a real ffmpeg/ffprobe is actually present; otherwise it
+ * says so and is skipped rather than faked.
+ * ------------------------------------------------------------------ */
+async function testRealTools(tmp) {
+  const tools = require(path.join(ROOT, "electron", "sidecar", "tools.cjs"));
+  const saved = {
+    ffmpeg: process.env.AIFIMORA_FFMPEG,
+    ffprobe: process.env.AIFIMORA_FFPROBE,
+    whisper: process.env.AIFIMORA_WHISPER,
+    model: process.env.AIFIMORA_WHISPER_MODEL,
+    off: process.env.AIFIMORA_DISABLE_BUNDLED_TOOLS,
+  };
+  // No overrides: this group is about what the build can find on its own.
+  for (const k of ["AIFIMORA_FFMPEG", "AIFIMORA_FFPROBE", "AIFIMORA_WHISPER", "AIFIMORA_WHISPER_MODEL"]) {
+    delete process.env[k];
+  }
+  delete process.env.AIFIMORA_DISABLE_BUNDLED_TOOLS;
+
+  const found = tools.discover();
+  const realFfmpeg = found.ffmpeg && !/stub/i.test(found.ffmpeg);
+  const realFfprobe = found.ffprobe && !/stub/i.test(found.ffprobe);
+  if (!realFfmpeg || !realFfprobe) {
+    ok("real tools: a real ffmpeg and ffprobe are available", false,
+      `ffmpeg=${found.ffmpeg || "(none)"} ffprobe=${found.ffprobe || "(none)"}`);
+    for (const [k, v] of Object.entries(saved)) {
+      if (v === undefined) delete process.env[k]; else process.env[k] = v;
+    }
+    return;
+  }
+  ok("real tools: a real ffmpeg and ffprobe are available", true, `${found.ffmpeg} | ${found.ffprobe}`);
+  ok("real tools: they are run directly, not through a script wrapper", found.ffmpegRunner === "direct" && found.ffprobeRunner === "direct",
+    `${found.ffmpegRunner}/${found.ffprobeRunner}`);
+
+  const svc = require(path.join(ROOT, "electron", "sidecar", "media-service.cjs"));
+  const cache = path.join(tmp, "real-cache");
+  fs.mkdirSync(cache, { recursive: true });
+
+  /* Build a real source: a test pattern with a real sine tone. */
+  const source = path.join(cache, "source.mp4");
+  const mk = await runTool(found.ffmpeg, found.ffmpegRunner, [
+    "-y", "-f", "lavfi", "-i", "testsrc=size=320x240:rate=25:duration=3",
+    "-f", "lavfi", "-i", "sine=frequency=440:duration=3",
+    "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k",
+    "-shortest", source,
+  ], 180000);
+  ok("real tools: a real source with video and sound was made", mk.ok && fs.existsSync(source),
+    mk.ok ? source : (mk.stderr || "").trim().split("\n").slice(-3).join(" "));
+
+  const probeSrc = await svc.handle({ id: "1", op: "analyze", params: { path: source } });
+  const ps = probeSrc.result || {};
+  ok("real tools: the real source probes as H.264 with an AAC track", probeSrc.ok && ps.video?.codec === "h264" && ps.hasAudio === true,
+    `${ps.video?.codec} ${ps.video?.width}x${ps.video?.height} audio=${ps.audio?.codec}`);
+
+  /* Now encode it for real, the way the export does. */
+  const w = startWorker({ AIFIMORA_SIDECAR_CACHE: cache });
+  const cases = [
+    { id: "mp4-h264", container: "mp4", codec: "h264", width: 1280, height: 720, fps: 30, audio: true,
+      expect: { codec: "h264", w: 1280, h: 720, audio: "aac" } },
+    { id: "mp4-hevc", container: "mp4", codec: "hevc", width: 640, height: 360, fps: 24, audio: true,
+      expect: { codec: "hevc", w: 640, h: 360, audio: "aac" } },
+    { id: "webm-vp9", container: "webm", codec: "vp9", width: 640, height: 360, fps: 25, audio: true,
+      expect: { codec: "vp9", w: 640, h: 360, audio: "opus" } },
+    { id: "mp4-av1", container: "mp4", codec: "av1", width: 320, height: 240, fps: 15, audio: false,
+      expect: { codec: "av1", w: 320, h: 240, audio: null } },
+    { id: "mov-prores", container: "mov", codec: "prores", width: 320, height: 240, fps: 25, audio: false,
+      expect: { codec: "prores", w: 320, h: 240, audio: null } },
+  ];
+  for (const c of cases) {
+    const res = await w.call("encode", {
+      path: source, container: c.container, codec: c.codec, width: c.width, height: c.height,
+      fps: c.fps, bitrateMbps: 8, audio: c.audio, audioBitrate: 128, hardware: "auto",
+    });
+    const e = res.result || {};
+    const v = e.probe?.video || {};
+    const a = e.probe?.audio || {};
+    ok(`real tools: ${c.id} is written and probed`, res.ok === true && !!e.path && fs.existsSync(e.path),
+      res.ok ? e.path : JSON.stringify(res.error || {}).slice(0, 200));
+    ok(`real tools: ${c.id} really is ${c.expect.codec} at ${c.expect.w}×${c.expect.h}`, v.codec === c.expect.codec && v.width === c.expect.w && v.height === c.expect.h,
+      `${v.codec} ${v.width}x${v.height}`);
+    if (c.expect.audio) {
+      ok(`real tools: ${c.id} really carries a ${c.expect.audio} track`, e.probe?.hasAudio === true && a.codec === c.expect.audio,
+        `audio=${a.codec}`);
+    } else {
+      ok(`real tools: ${c.id} really has no audio track`, e.probe?.hasAudio === false, `audio=${a.codec || "(none)"}`);
+    }
+    ok(`real tools: ${c.id} is reported without warnings`, (e.warnings || []).length === 0, JSON.stringify(e.warnings));
+  }
+
+  /* The AV1 chain: this build has libaom but not libsvtav1, so the fallback
+   * must have taken over — and the op must say which encoder ran. */
+  const av1 = await w.call("encode", {
+    path: source, container: "mp4", codec: "av1", width: 320, height: 240,
+    fps: 15, bitrateMbps: 4, audio: false, hardware: "auto",
+  });
+  const av1r = av1.result || {};
+  ok("real tools: the AV1 encoder that actually ran is named", !!av1r.encoder, `${av1r.encoder}`);
+
+  /* A GIF, with the two-pass palette. */
+  const gif = await w.call("encode", {
+    path: source, container: "gif", codec: "gif", width: 240, height: 180,
+    fps: 10, bitrateMbps: 4, audio: false, hardware: "auto",
+  });
+  const gr = gif.result || {};
+  ok("real tools: a GIF is written and probes as a GIF", gif.ok === true && gr.probe?.video?.codec === "gif",
+    JSON.stringify({ ok: gif.ok, codec: gr.probe?.video?.codec, err: gr.error }).slice(0, 200));
+
+  /* An MP3 (audio only). */
+  const mp3 = await w.call("encode", {
+    path: source, container: "mp3", codec: "mp3", width: 320, height: 240,
+    fps: 25, bitrateMbps: 8, audio: true, audioBitrate: 128, hardware: "auto",
+  });
+  const mr = mp3.result || {};
+  ok("real tools: an MP3 is written and probes as MP3 audio", mp3.ok === true && mr.probe?.audio?.codec === "mp3",
+    JSON.stringify({ ok: mp3.ok, codec: mr.probe?.audio?.codec, err: mr.error }).slice(0, 200));
+
+  w.kill();
+
+  for (const [k, v] of Object.entries(saved)) {
+    if (v === undefined) delete process.env[k]; else process.env[k] = v;
+  }
+}
+
+/** Run a discovered tool directly (the real binaries are native programs). */
+function runTool(toolPath, runner, args, timeout = 60000) {
+  return new Promise((resolve) => {
+    const child = spawn(toolPath, args, { windowsHide: true, stdio: ["ignore", "pipe", "pipe"] });
+    let out = "";
+    let err = "";
+    child.stdout.on("data", (d) => { out += d.toString(); });
+    child.stderr.on("data", (d) => { err += d.toString(); });
+    const timer = setTimeout(() => { try { child.kill(); } catch { /* gone */ } }, timeout);
+    child.on("error", (e) => { clearTimeout(timer); resolve({ ok: false, stdout: out, stderr: String(e?.message || e) }); });
+    child.on("close", (code) => { clearTimeout(timer); resolve({ ok: code === 0, code, stdout: out, stderr: err }); });
+  });
 }
 
 /* ------------------------------------------------------------------ *
@@ -831,6 +1032,9 @@ async function testBrowser(server) {
 
     console.log("\n— encoder —");
     await testEncoder(stubs, tmp);
+
+    console.log("\n— the real tools —");
+    await testRealTools(tmp);
 
     console.log("\n— manager —");
     await testManager(stubs, tmp);

@@ -2,7 +2,9 @@
 node_modules/
 
 # Build output (electron-builder, 800MB+ exes — rebuild with `npm run dist`)
-dist/
+# `dist*/` also covers the throwaway `dist-baseline/` used to measure the
+# packaged size with and without the bundled FFmpeg binaries.
+dist*/
 
 # Stale duplicate of the Filmora dump (1.6GB). Canonical folder is `assets/`.
 asset/

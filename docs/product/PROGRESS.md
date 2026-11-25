@@ -1,6 +1,6 @@
 # PROGRESS — AiFilmora
 
-**Last cycle:** 2026-11-25 · **Mode:** `teardown` + `modernize` build (master-application path), then a `/best-suggestion` audit, then **APP-037 "Real MP4 export"** (the audit's §4.1)
+**Last cycle:** 2026-11-25 · **Mode:** `teardown` + `modernize` build (master-application path), then a `/best-suggestion` audit, then **APP-037 "Real MP4 export"** (the audit's §4.1), then **bundling `ffmpeg-static` / `ffprobe-static`** (the open packaging decision)
 **Workspace:** `D:\000000 Lab\AiFimora` · **Branch:** `modernize/2026-11-25` (created this cycle, not pushed)
 **Base commit:** `ab3e97c` (AiFilmora 2.2.7) · **Cycle commits:** `a13c155`, `366afe4`, `1fb4aa1`, `30e2d67`, `6d3a48d`, `5d75f13`, `e66a206`, `533695d` (audit fixes), `063c186` (suite), `1f7aa54` (regression run), `83d95ff` (report), `cde3ffc` (cycle log), **`2a81a30` (APP-037 — the real export)**
 
@@ -15,9 +15,9 @@
 | Dev server | ✅ works | `node server.cjs` → `http://127.0.0.1:8765`, HTTP 200 |
 | App renders | ✅ | headless Chromium 1680×1000 → **0 console errors** |
 | Electron shell | ✅ **launches and runs** | Playwright `_electron.launch` → the window loads, `app://` serves assets, the sidecar starts as a `utilityProcess`. `verify-electron.cjs` is a **pre-existing** failure: it clicks `#frEmpty` twice and the second click times out because the modal is already closed. |
-| Media tools | ❌ **not installed** | No `ffmpeg`, `ffprobe` or `whisper` on this machine (`Get-Command` finds none; no common install dirs). Installing them is a user decision, so the sidecar **discovers** them and degrades honestly. |
-| Test suite | ✅ run | `verify-all.cjs` → 54 suites; `verify-wave0.cjs` → 34 checks; `verify-sidecar.cjs` → 49 checks |
-| Build / packaging | ❌ not run | `npm run dist` not invoked |
+| Media tools | ✅ **bundled with the app** | `ffmpeg-static@5.3.0` (FFmpeg 6.1.1) and `ffprobe-static@3.1.0` are now `dependencies`. The sidecar finds them in `node_modules` (dev) and in `resources/app.asar.unpacked/node_modules` (packaged). An explicit path (`AIFIMORA_FFMPEG`) still wins; `AIFIMORA_DISABLE_BUNDLED_TOOLS=1` makes the bundled ones stand down so a copy on `PATH` is used instead. |
+| Test suite | ✅ run | `verify-all.cjs` → 54 suites; `verify-wave0.cjs` → 54 checks; `verify-sidecar.cjs` → **118 checks** (was 87), including **27 against the real FFmpeg** |
+| Build / packaging | ✅ **run** | `npx electron-builder --dir` and `--win nsis` were run and measured. NSIS installer **187.8 MB** (152.5 MB without the bundled binaries → **+35.3 MB**); portable 152.2 MB; `win-unpacked` 591.6 MB. |
 | Network | ✅ | GitHub clone + fetch both succeeded |
 | Subagents | ✅ 6 used | `explore` ×4 (UI/design, AI-MCP, engine, self-audit) + `worker` ×2 (media-analysis, loudness) |
 
@@ -31,9 +31,9 @@
 | 3 Sketch | ✅ done | `SKETCH.md` — 5 wireframes + IA + data-model changes; `design/timeline-v2-mock.html` renders both states |
 | 4 Architecture | ✅ done | 4 new modules: `speed-ramp.js`, `media-analysis.js`, `waveform-render.js`, `loudness.js` — plus the media sidecar (`electron/sidecar/`) |
 | 5 Prototype | ✅ done | `design/timeline-v2-mock.html` — interactive mock, both states rendered and visually QA'd |
-| 6 Build | 🟡 **partial** | **Wave 0 complete (6/6). Wave 1: 3 of 4 done (filmstrip, waveform, real ASR + sidecar). APP-037 (the export) built this cycle. Waves 2–5 not started.** |
-| 7 Test/fix/retest | ✅ done | `verify-wave0.cjs` **50/50**; `verify-sidecar.cjs` **87/87** (incl. a real Electron run and the encoder round trip); full suite — see the verification table |
-| 8 Harden | 🟡 partial | **8 product bugs** (audit) **+ 2 more** (the export's frozen-frame tail and the operator-precedence bug in the export defaults) **+ 1 latent sidecar bug** (typed-array bytes decoded as base64) found and fixed |
+| 6 Build | 🟡 **partial** | **Wave 0 complete (6/6). Wave 1: 3 of 4 done (filmstrip, waveform, real ASR + sidecar). APP-037 (the export) built this cycle, and the bundled FFmpeg landed with it. Waves 2–5 not started.** |
+| 7 Test/fix/retest | ✅ done | `verify-wave0.cjs` **54/54**; `verify-sidecar.cjs` **118/118** (incl. a real Electron run, the encoder round trip **and a real FFmpeg 6.1.1 run**); full suite — see the verification table |
+| 8 Harden | 🟡 partial | **8 product bugs** (audit) **+ 2 more** (the export's frozen-frame tail and the operator-precedence bug in the export defaults) **+ 2 latent sidecar bugs** (typed-array bytes decoded as base64; the bundled static resolving to the package's `index.js` instead of the binary) found and fixed |
 | 9 Release | ⏭️ not started | |
 
 ## What was actually built this cycle
@@ -243,6 +243,89 @@ Wiring the presets to the six controls exposed a vocabulary mismatch: the preset
 
 Both were fixed by bridging the vocabularies (`CODEC_ALIAS`) and by giving the sheet the two options the encoder can really deliver — **ProRes** (`prores_ks`) and **15 fps** (the Animated GIF preset's own rate). Two new checks guard them, and both were **proven to fail without the fix**: the 4K preset reported `h264 3840x2160 30` and the ProRes preset reported `hevc mov`.
 
+## Bundling FFmpeg — the encoder ships with the app (2026-11-25)
+
+The last open decision from the previous cycle was a **packaging** one: bundle
+`ffmpeg-static` / `ffprobe-static`, or require a system install. The user chose
+**bundle**. This section records what that actually cost and what it closed.
+
+### What landed
+
+`npm install --save ffmpeg-static@5.3.0 ffprobe-static@3.1.0`. npm 11 skips
+install scripts by default, but these two packages ship their Windows binaries
+**inside the tarball**, so nothing was missing.
+
+`ffmpeg-static` puts a single 79 MB `ffmpeg.exe` at the package root.
+`ffprobe-static` puts a binary for **every platform** in `bin/<os>/<arch>/` —
+**335 MB** in `node_modules`. Only the Windows x64 one may ship.
+
+### The bug this found
+
+`staticCandidates()` used `require.resolve(pkg)`, which returns the package's
+**JavaScript entry point**, not the binary. The app would have resolved
+`node_modules/ffmpeg-static/index.js`, decided it was a tool, and then **run
+`index.js` as a script** — a failure that looks like a broken FFmpeg rather
+than a broken lookup.
+
+It is now resolved by path, in `node_modules` (dev) **and** in
+`resources/app.asar.unpacked/node_modules` (packaged — an executable inside an
+asar cannot be run), and the package's own export is consulted **last**, because
+in a packaged app it points *into* the archive.
+
+Two new checks guard it, and both were **proven to fail against the old code**
+by restoring it and re-running the suite:
+
+```
+FAIL  discovery: a bundled static resolves to the binary, not to a script
+      — node_modules\ffmpeg-static\index.js | node_modules\ffprobe-static\index.js
+FAIL  discovery: a bundled tool can be switched off
+```
+
+The old code also ignored `AIFIMORA_DISABLE_BUNDLED_TOOLS` entirely — so the
+"no tools" paths could not be exercised against a machine that has the
+bundled ones.
+
+### The encoder, verified against the real thing
+
+The long-standing caveat — *"a real FFmpeg was never executed"* — is **closed
+for ffmpeg and ffprobe**. `verify-sidecar.cjs` grew a group (**27 checks**) that
+runs the encoder against the **actual binaries**: a real source is built from
+`lavfi` (`testsrc` + `sine`), probed, and re-encoded for real — MP4/H.264+AAC,
+MP4/HEVC, WebM/VP9+Opus, MP4/AV1, MOV/ProRes, a two-pass GIF and an MP3 — each
+one **written and probed back**, with the codec, resolution and audio track
+asserted from the **file**, not from the request.
+
+The AV1 case is the one worth noting: this FFmpeg build has `libaom-av1` but
+**not** `libsvtav1`, so the fallback chain had to take over — and the op names
+the encoder that actually ran. The fallback stopped being theoretical.
+
+### What it costs — measured, not assumed
+
+A baseline build **without** the binaries was produced for comparison:
+
+| Artifact | Without | With | Delta |
+|---|---|---|---|
+| `dist/win-unpacked` | 452.1 MB | 591.6 MB | **+139.5 MB** |
+| `resources/app.asar` | 184.0 MB | 184.4 MB | +0.4 MB |
+| `resources/app.asar.unpacked` | — | 139.2 MB | +139.2 MB |
+| **`AiFilmora-2.2.7-win-x64.exe` (NSIS)** | **152.5 MB** | **187.8 MB** | **+35.3 MB** |
+| `AiFilmora-2.2.7-portable-win-x64.exe` | not built | 152.2 MB | — |
+
+**What the user pays is +35 MB, not +139 MB.** The binaries are 139 MB on disk
+and 35 MB in the download, because the installer compresses them.
+
+The packaging config was **verified**, not assumed: the other five platforms'
+`ffprobe` binaries (275 MB of them) are **absent** from the package. Only
+`bin/win32/x64/ffprobe.exe` ships.
+
+### What is still not proved
+
+The installer was built but **never installed and launched**. That the
+installed app finds the binaries at `app.asar.unpacked` is *implied* by the
+layout, not observed on an installed copy. And real-world footage — a genuine
+MXF from a camera — has not been pushed through it; the source used in the
+tests is generated by FFmpeg itself.
+
 ## Key findings
 
 1. Editroom's moat is **legibility**, not editing verbs — AiFilmora already had most of the verbs.
@@ -266,7 +349,9 @@ Both were fixed by bridging the vocabularies (`CODEC_ALIAS`) and by giving the s
 | Check | Result |
 |---|---|
 | `verify-wave0.cjs` | **54/54 pass**, 0 console errors (was 34/34; +20 this cycle) |
-| `verify-sidecar.cjs` | **87/87 pass** — discovery (7), the worker (21), **the encoder (26)**, the manager (10), **a real Electron run** (12), and the browser build (6) |
+| `verify-sidecar.cjs` | **118/118 pass** — discovery (11), the worker (21), **the encoder (28)**, **the real tools (27)**, the manager (10), **a real Electron run** (15), and the browser build (6) |
+| **The real tools (new)** | **27 checks against the actual FFmpeg 6.1.1 and ffprobe binaries.** A real source built from `lavfi` (`testsrc` + `sine`), probed as H.264+AAC; five real encodes (MP4/H.264, MP4/HEVC, WebM/VP9+Opus, MP4/AV1, MOV/ProRes) each **written and probed back** with the codec, resolution and audio track asserted from the file; the **AV1 fallback chain** (`libsvtav1` absent → `libaom-av1` took over, and the op names the encoder that ran); a real two-pass GIF; a real MP3 |
+| **The packaged build (new)** | `electron-builder --dir` and `--win nsis` were **run**. NSIS **187.8 MB** (baseline without the statics: **152.5 MB** → **+35.3 MB**); portable 152.2 MB; `win-unpacked` 591.6 MB; `app.asar.unpacked` 139.2 MB. The other five platforms' `ffprobe` binaries are **absent** from the package — verified by listing the asar. |
 | `verify-export22.cjs` | **9/9 pass** (was a print-only suite with no assertions at all). The export writes a file with real content, reports success, says what it produced, records the export in the undo history, and uses the extension this build can really deliver. |
 | Sidecar in Electron | The `utilityProcess` starts; the renderer reaches it over IPC; a file is probed (duration 12.5, codec `prores`); a registered file is served over `app://local/_media/<token>` with **206 + byte range**; an unregistered token is refused (404); **0 console errors** |
 | Conversion ladder | A ProRes source runs `remux` (not browser-safe → rejected) then `transcode` → **h264**, `browserSafe: true`. An audio-only AIFF is correctly called unplayable (raw PCM outside a WAV) and converts to AAC |
@@ -295,8 +380,8 @@ Both were fixed by bridging the vocabularies (`CODEC_ALIAS`) and by giving the s
 - ❌ **The AI tier still fabricates its output and charges credits for it.** APP-037 did not touch this (§2.5). The exit is now honest; the entry point is not.
 - ❌ **LUFS normalisation (APP-025) is not part of APP-037.** The mix bus exists and carries the timeline's sound, but the −14/−16/−23 LUFS targets are a separate roadmap item — `js/loudness.js` can drive them and the export does not yet.
 - ❌ **Caption burn-in is still not real.** The sheet mentions it; APP-037 did not implement it.
-- ❌ `npm run dist` was not run; no installer was produced or tested.
-- ❌ **No real FFmpeg, ffprobe or Whisper was ever executed.** None is installed on this machine, and installing system software needs the user's approval. The sidecar's spawn, command construction, output parsing, IPC and file delivery are all verified **against stand-in tools**; real binaries are not. See `docs/product/SIDECAR.md` §5.
+- ❌ **The installer was built but never installed and launched.** The artefacts are the right size and contain the right binaries; that the *installed* app finds them at `app.asar.unpacked` is implied by the layout, not observed on an installed copy. The packaged app was not exercised end to end — the 118 sidecar checks run against the source tree.
+- ❌ **No real Whisper was ever executed.** FFmpeg and ffprobe now ship and are exercised for real (27 checks); whisper.cpp is still not installed, so the JSON shapes are handled correctly against its documented format but **no model was transcribed**.
 - ❌ **The transcript was never run against real speech.** The whisper.cpp JSON shapes are parsed correctly; no model was transcribed.
 - ⚠️ `verify-electron.cjs` fails for a **pre-existing** reason, not a sidecar one: it clicks `#frEmpty` a second time after the first-run modal is already dismissed, so the click times out on a hidden element. The Electron shell itself launches and runs — `verify-sidecar.cjs` drives it end to end.
 - ❌ APP-010 (scene tags + semantic search) is not started.
@@ -306,7 +391,7 @@ Both were fixed by bridging the vocabularies (`CODEC_ALIAS`) and by giving the s
 - ❌ **The audit's five critical shortcomings are reported, not fixed.** Only §2.1 (the sidecar's output could not be played) was fixed in this cycle. Still open, and the highest-value work in the repo:
   - **§2.2 — autosave silently stops working.** Measured: the empty demo project is 1,167,019 bytes of which 99.4 % is base64 thumbnails — 22.3 % of the 5 MiB quota before a single real clip. The backup ring and the 50 undo snapshots deep-clone the same thumbnails. The fix (scrub `data:` thumbs, catch `QuotaExceededError` explicitly, move the backup ring to IndexedDB) is **not started**.
   - **§2.3 — the Electron renderer can write and read any file on disk.** `fs:writeFile` takes a renderer-controlled path; `media:register` accepts any existing path; there is no CSP. **Not fixed** — it is a security change that needs the user's sign-off on the threat model.
-  - **§2.4 — the export is silent, 720p, video-only WebM** while the sheet promises 4K H.265, and the six export controls are inert. **Fixed by APP-037 this cycle** — the sidecar encodes, the controls are bound, the mix bus carries the sound, the render ends when the timeline ends, and the fallback is labelled with what it really produced. **Not verified against a real FFmpeg**: none is installed here, so the encoder was exercised against a stand-in binary (see `docs/product/APP-037-EXPORT.md` §5).
+  - **§2.4 — the export is silent, 720p, video-only WebM** while the sheet promises 4K H.265, and the six export controls are inert. **Fixed by APP-037 this cycle** — the sidecar encodes, the controls are bound, the mix bus carries the sound, the render ends when the timeline ends, and the fallback is labelled with what it really produced. **And now verified against a real FFmpeg**: the binaries ship with the app and the encoder was exercised against FFmpeg 6.1.1 for real (27 checks, five container/codec combinations written and probed back). See `docs/product/APP-037-EXPORT.md` §5.
   - **§2.5 — the AI tier fabricates its output and charges credits for it.** **Not fixed**, beyond the transcript label that already landed.
 - ❌ `verify-icon-compact.cjs` fails on **7 stale expectations** (6 library tabs vs the 10 that exist, a deliberate `✕` close glyph, and five CSS metrics that no longer match the redesigned chrome). It was already failing on the base commit. Fixing it means deciding what the chrome *should* measure, so it was left alone rather than edited to match whatever the page currently does.
 - ❌ `verify-rebuild.cjs`, `verify-panzoom.cjs`, `verify-detach.cjs`, `verify-parity.cjs`, `verify-save-fallback.cjs`, `verify-save-location.cjs`, `verify-vol-split.cjs`, `verify-filmora-gaps.cjs`, `verify-filmora15.cjs` were **not triaged** — all pre-existing failures, none touched.
@@ -327,7 +412,7 @@ Both were fixed by bridging the vocabularies (`CODEC_ALIAS`) and by giving the s
 2. **Two loose ends from APP-037 itself**, both small: the export's **caption burn-in** is still not real, and the **LUFS targets** (APP-025) are not wired to the mix bus that now exists.
 3. Then **Fix & Polish** continues with the §2.3 Electron path containment and the CSP — a security change that needs the user's sign-off first.
 4. **APP-010** (scene tags + semantic library search) is still the one unfinished Wave 1 item, and the audit §3.2/§3.6 independently confirm it is table stakes rather than a nice-to-have.
-5. A **user decision** is still open and is not blocking: bundle `ffmpeg-static`/`ffprobe-static` as dependencies (~80 MB of binaries, a supply-chain choice) or require a system install. The sidecar works either way, and the browser build keeps working with neither. **This one now matters more than before** — without FFmpeg the app can only write the WebM preview, so the desktop build's real MP4 depends on it.
+5. ~~A **user decision** is still open~~ — **closed this cycle.** `ffmpeg-static` / `ffprobe-static` are bundled as dependencies; the desktop build writes a real MP4 with no system install, at a measured **+35.3 MB** on the installer.
 
 ## Repeat-run notes
 
