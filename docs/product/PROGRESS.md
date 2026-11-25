@@ -2,7 +2,7 @@
 
 **Last cycle:** 2026-11-25 · **Mode:** `teardown` + `modernize` build (master-application path), then a `/best-suggestion` audit, then **APP-037 "Real MP4 export"** (the audit's §4.1), then **bundling `ffmpeg-static` / `ffprobe-static`** (the open packaging decision)
 **Workspace:** `D:\000000 Lab\AiFimora` · **Branch:** `modernize/2026-11-25` (created this cycle, not pushed)
-**Base commit:** `ab3e97c` (AiFilmora 2.2.7) · **Cycle commits:** `a13c155`, `366afe4`, `1fb4aa1`, `30e2d67`, `6d3a48d`, `5d75f13`, `e66a206`, `533695d` (audit fixes), `063c186` (suite), `1f7aa54` (regression run), `83d95ff` (report), `cde3ffc` (cycle log), **`2a81a30` (APP-037 — the real export)**
+**Base commit:** `ab3e97c` (AiFilmora 2.2.7) · **Cycle commits:** `a13c155`, `366afe4`, `1fb4aa1`, `30e2d67`, `6d3a48d`, `5d75f13`, `e66a206`, `533695d` (audit fixes), `063c186` (suite), `1f7aa54` (regression run), `83d95ff` (report), `cde3ffc` (cycle log), **`2a81a30` (APP-037 — the real export)**, `f0a1e88` (cycle log), **`b4a2e56` (bundled FFmpeg/ffprobe)**
 
 ---
 
@@ -33,7 +33,7 @@
 | 5 Prototype | ✅ done | `design/timeline-v2-mock.html` — interactive mock, both states rendered and visually QA'd |
 | 6 Build | 🟡 **partial** | **Wave 0 complete (6/6). Wave 1: 3 of 4 done (filmstrip, waveform, real ASR + sidecar). APP-037 (the export) built this cycle, and the bundled FFmpeg landed with it. Waves 2–5 not started.** |
 | 7 Test/fix/retest | ✅ done | `verify-wave0.cjs` **54/54**; `verify-sidecar.cjs` **118/118** (incl. a real Electron run, the encoder round trip **and a real FFmpeg 6.1.1 run**); full suite — see the verification table |
-| 8 Harden | 🟡 partial | **8 product bugs** (audit) **+ 2 more** (the export's frozen-frame tail and the operator-precedence bug in the export defaults) **+ 2 latent sidecar bugs** (typed-array bytes decoded as base64; the bundled static resolving to the package's `index.js` instead of the binary) found and fixed |
+| 8 Harden | 🟡 partial | **8 product bugs** (audit) **+ 2 more** (the export's frozen-frame tail and the operator-precedence bug in the export defaults) **+ 4 latent sidecar bugs** (typed-array bytes decoded as base64; the bundled static resolving to the package's `index.js` instead of the binary; a path still inside an asar preferred over the unpacked copy; a single relative path split into characters) found and fixed |
 | 9 Release | ⏭️ not started | |
 
 ## What was actually built this cycle
